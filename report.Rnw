@@ -109,7 +109,8 @@ MxNet        &     &     &       &
 \subsection{Tensorflow}
 \subsubsection{Installation}
 <<>>= 
-install.packages("tensorflow")
+library(tensorflow)
+tf$constant("Hellow Tensorflow")
 @
 \section{Tutoriels}
 \ntodo[inline]{Encore à voir... on pourrait créer des tutoriels pour peut-être comparer}
