@@ -72,7 +72,6 @@
   \date{}
 \begin{document}
 \SweaveOpts{concordance=TRUE}
-
 \pagestyle{plain}
 
 \title{%
@@ -97,16 +96,21 @@ Les modèles d'apprentissage profond deviennent de plus en plus populaire.
 \ntodo[inline]{Dans méthodologie, il faut faire un brève description des méthodes.}
 
 \section{Revue des ressources R}
-\begin{table}
+\begin{table}[H]
 \centering
 \begin{tabular}{lllll}
-Package      & Pro & Con & Actif & URL   \\
-tensorflow R &     &     &       & Link  \\
+Package      & Pro & Con & Requirement & URL   \\
+tensorflow R &     &     & Anaconda installation      & Link  \\
 Kera R       &     &     &       &       \\
 MxNet        &     &     &       &      
 \end{tabular}
 \end{table}
 \ntodo[inline]{Ici on pourrait faire un tableau avec tous les packages et donner les pour et les contres}
+\subsection{Tensorflow}
+\subsubsection{Installation}
+<<>>= 
+install.packages("tensorflow")
+@
 \section{Tutoriels}
 \ntodo[inline]{Encore à voir... on pourrait créer des tutoriels pour peut-être comparer}
 \newpage
