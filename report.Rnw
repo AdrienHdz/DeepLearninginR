@@ -85,9 +85,8 @@
 \end{tabular}}
 \maketitle
 
-\section{Présentation du sujet}
-Les modèles d'apprentissage profond deviennent de plus en plus populaire.
-\ntodo[inline]{Rajoute de l'information sur le monde du deep learning . Rajouter le Hype Cycle 2019 sur Deep learning}
+\section{Introduction}
+In the first section of this paper, a literature review covers the neural networks and deep learners algorithms, focusing on different type of neural networks architecture; the purpose of adding multiple hidden layers and, ultimately, what are the challenges regarding the increase in computing time. Furthermore, in the methodology section, a list of deep learning projects are shown in order to understand some patterns and methods. Then, an exhaustive list of the R libraries allowing to build neural networks and deep learners models. Correspondingly, the advantages and disadvantages of each libraries, their capabilities as well as what you can expect when using them. To sum up, the last section will give concrete examples on how to implement the neural networks and deep learners models with these libraries, using real data.
 
 \section{Revue de littérature}
 \ntodo[inline]{expliquer les différent possibilité qu'il existe dans le monde deep learning (i.e. RNN, CNN , GNN , etc.). Si tu veux on peux expliquer les graphes aussi} 
