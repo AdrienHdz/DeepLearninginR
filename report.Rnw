@@ -79,7 +79,7 @@
   \large (MATH80619)}
 \author{\begin{tabular}{ll}
     Estefan Apablaza-Arancibia & 11271806\\
-        Adrien Hernandez & 11271806\\
+        Adrien Hernandez & 11269225\\
 
     
 \end{tabular}}
