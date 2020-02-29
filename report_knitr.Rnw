@@ -1,5 +1,8 @@
 \documentclass[6pt,letter]{article} 
-\usepackage{babel}
+
+%%%%%%%%%%%%%%%%%%%%
+%%%%%% Package %%%%%
+%%%%%%%%%%%%%%%%%%%%
 
 %\usepackage[latin1]{inputenc}
 \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
@@ -24,41 +27,21 @@
 \usepackage{color, colortbl, xcolor}
 \usepackage{booktabs,dcolumn} % for use with texreg in R
 \usepackage[bookmarks]{hyperref}
-\usepackage[backend=biber]{biblatex}
-
-\bibliography{global}
-\begin{Schunk}
-\begin{Soutput}
-[1] 2
-\end{Soutput}
-\end{Schunk}
-
-\hypersetup{
-    unicode=false,          
-    pdftoolbar=true,        
-    pdfmenubar=true,        
-    pdffitwindow=false,     % window fit to page when opened
-    pdfstartview={FitH},    % fits the width of the page to the window
-    pdftitle={004-Figures},    % title
-    pdfauthor={SRB},     % author
-    pdfsubject={Subject},   % subject of the document
-    pdfcreator={SRB},   % creator of the document
-    pdfproducer={SRB}, % producer of the document
-    pdfkeywords={}, % list of keywords
-    pdfnewwindow=true,      % links in new window
-    colorlinks=true,       % false: boxed links; true: colored links
-    linkcolor=black,          % color of internal links (change box color with linkbordercolor)
-    citecolor=blue,        % color of links to bibliography
-    filecolor=black,      % color of file links
-    urlcolor=cyan           % color of external links
-}
+\usepackage[backend=bibtex]{biblatex}
 \usepackage{wrapfig}
 \usepackage{todonotes}
 \usepackage{ctable}
 \usepackage{acronym}
 
 
-% my commands
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% Configuration %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliography{global}
+<<biber, eval=TRUE, include= FALSE, cache=FALSE, echo= FALSE >>=
+library('knitr')
+system (paste("biber", sub("\\.Rnw$","",current_input())))
+@
 \newcommand{\nd}{\noindent}
 \newcommand{\ntodo}[2][]{\todo[#1]{\thesubsubsection{}. #2}}
 
@@ -75,23 +58,10 @@
 \makeatother
 \lfoot{} \cfoot{ } \rfoot{{\small{\em Page \thepage \ of \pageref{LastPage}}}}
 
-
-
-
-\usepackage{tcolorbox}
-\usepackage{setspace}
-\usepackage{csquotes}
-\onehalfspacing
-
-
- \vspace{-8ex}
-  \date{}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%% BEGIN        %%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{Sweave}
 \begin{document}
-\input{report-concordance}
 \pagestyle{plain}
 \pagenumbering{gobble}
 
@@ -111,7 +81,6 @@
 \begin{acronym}
 \acro{API}{Application Programming Interface} 
 \end{acronym} 
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%% INTRODUCTION %%%%%%%%%%%%%%%%%%%%
@@ -154,12 +123,7 @@ We suggest reading this first chapter written by pioneers in the field: \url{htt
   \caption{feedforward neural networks}
   \label{fig:attention}
 \end{wrapfigure}
-\blockquote{The past is not a peaceful landscape lying there behind me, 
-a country in which I can stroll wherever I please, 
-and will gradually show me all its secret hills and dates. 
-As I was moving forward, so it was crumbling. 
-Some more text to make it longer than three lines. 
-Maybe it is long enough now.}
+
 
 "Deep feedforward networks, also called feedforward neural networks, or multilayer perceptrons (MLPs), are the quintessential deep learning models." \cite{Goodfellow-et-al-2016}
 
@@ -183,6 +147,7 @@ Deep Learning with R
 %%%%%%%%%%%%%%%%%% Description %%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%% of methods  %%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Description of methods}
 \ntodo[inline]{I think this section is more to explain, for example, the dataset with their end objective so when we are doing examples we just say we are going to use the CIFAR10 and the readers know we are doing a classification problem.}
 
@@ -205,28 +170,20 @@ According to the CRAN-R project website, we give a list of the different package
 \paragraph{How to install it}
 
 First step, is the installation and download of the Keras files from GitHub :
-\begin{Schunk}
-\begin{Sinput}
-> devtools::install_github("rstudio/keras")
-\end{Sinput}
-\end{Schunk}
+<<eval=FALSE, echo=TRUE, highlight=TRUE>>=
+devtools::install_github("rstudio/keras")
+@
 Then, we need to to install the package and import in the project :
-\begin{Schunk}
-\begin{Sinput}
-> library(keras)
-> install_keras()
-\end{Sinput}
-\begin{Soutput}
-Installation complete.
-\end{Soutput}
-\end{Schunk}
+<<>>=
+library(keras)
+install_keras()
+@
 When the "\textit{Installation complete.}" message appear you have a complete installation with CPU configure on the TensorFlow backend.
 If you want to take advantage of your GPU (Ensure that you have the hardware prerequisites) you will need to execute a different command as follows:
-\begin{Schunk}
-\begin{Sinput}
-> install_keras(tensorflow = "gpu")
-\end{Sinput}
-\end{Schunk}
+<<eval=FALSE, echo=TRUE, highlight=TRUE>>=
+install_keras(tensorflow = "gpu")
+@
+
 \paragraph{Tensorflow backend}
 
 
@@ -305,13 +262,13 @@ MxNet        &     &     &       &
 \ntodo[inline]{Il faut trouver des datasets intéressantes à utiliser avec les differents packages}
 
 
-
-\newpage
+\FloatBarrier 
+\clearpage 
+\pagestyle{plain}
+\ntodo[inline]{Find a way to remove page number from references}
 
 \printbibliography
 
 
 
 \end{document}
-
-
