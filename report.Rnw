@@ -1,4 +1,4 @@
-\documentclass[11pt,letter,french]{article} 
+\documentclass[6pt,letter]{article} 
 \usepackage{babel}
 
 %\usepackage[latin1]{inputenc}
@@ -47,24 +47,28 @@
 \usepackage{wrapfig}
 \usepackage{todonotes}
 \usepackage{ctable}
+\usepackage{acronym}
 
 
 % my commands
 \newcommand{\nd}{\noindent}
 \newcommand{\ntodo}[2][]{\todo[#1]{\thesubsubsection{}. #2}}
 
-% fancy header commands
-\renewcommand{\headrulewidth}{0.3pt}
+% Define the format of the report
+\renewcommand{\headrulewidth}{0.0pt}
 \renewcommand{\footrulewidth}{0.0pt}
 \setlength{\textheight}{9.00in}
 \setlength{\textwidth}{7.00in}
-\setlength{\topmargin}{-1.1in}
+\setlength{\topmargin}{-0.5in}
 \setlength{\evensidemargin}{-0.25in}
 \setlength{\oddsidemargin}{-0.25in}
-\renewcommand{\baselinestretch}{0.85}
+\renewcommand{\baselinestretch}{1.2}
 \makeatletter
 \makeatother
 \lfoot{} \cfoot{ } \rfoot{{\small{\em Page \thepage \ of \pageref{LastPage}}}}
+
+
+
 
 \usepackage{tcolorbox}
 \usepackage{setspace}
@@ -73,9 +77,13 @@
 
  \vspace{-8ex}
   \date{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% BEGIN        %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 \SweaveOpts{concordance=TRUE}
 \pagestyle{plain}
+\pagenumbering{gobble}
 
 \title{%
  Méthodes avancées en exploitation de donnée \\
@@ -87,9 +95,30 @@
     
 \end{tabular}}
 \maketitle
+\newpage
+\pagestyle{plain}
+\section*{List of Acronyms}
+\begin{acronym}
+\acro{API}{Application Programming Interface} 
+\end{acronym} 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% INTRODUCTION %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\pagestyle{fancy}
+\pagenumbering{arabic}
 \section{Introduction}
 In the first section of this paper, a literature review covers the neural networks and deep learners algorithms, focusing on different type of neural networks architecture; the purpose of adding multiple hidden layers and, ultimately, what are the challenges regarding the increase in computing time. Furthermore, in the methodology section, a list of deep learning projects are shown in order to understand some patterns and methods. Then, an exhaustive list of the R libraries allowing to build neural networks and deep learners models. Correspondingly, the advantages and disadvantages of each libraries, their capabilities as well as what you can expect when using them. To sum up, the last section will give concrete examples on how to implement the neural networks and deep learners models with these libraries, using real data.
+\ntodo[inline]{Très intéressant}
+\url{https://edu.kpfu.ru/pluginfile.php/419285/mod_resource/content/2/neural-networks-r.pdf}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%% Litterature %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%% Review      %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \ntodo[inline]{Add more detail about deep learning integration}
 
 \section{Litterature Review}
@@ -130,9 +159,15 @@ To get a detailed explanation of convolutional neural networks we recommand to r
 
 \ntodo[inline]{Recommend books for deep learning or maybe here the hype cyckle makes more sense}
 \subsection{How to integrate Deep Learning in R}
-Deep Learning with R \cite{deeplearningr}
+Deep Learning with R
 \ntodo[inline]{Recommend books for deep learning that implements R}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%% Description %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%% of methods  %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Description of methods}
+\ntodo[inline]{I think this section is more to explain, for example, the dataset with their end objective so when we are doing examples we just say we are going to use the CIFAR10 and the readers know we are doing a classification problem.}
 
 \section{Methodology}
 \ntodo[inline]{Give example of deep learning project pocedure}
@@ -142,17 +177,42 @@ Deep Learning with R \cite{deeplearningr}
 According to the CRAN-R project website, we give a list of the different packages known in R allowing to use simple and deep neural network algorithms. \newline \url{https://cran.r-project.org/web/views/MachineLearning.html}
 \subsection{Nnet}
 
-\textbf{Nnet} (Ripley and Venables, 2016) allows to quickly train and fit a feed-forward neural networks with one hidden layer. This package does not allow to use more that one hidden layer, and does not have any feature to find the optimal number of neurones in the hidden layer. It is up to the analyst to build a loop to test by cross-validation, for exemple, the optimal hyperparameter values.\url{https://cran.r-project.org/web/packages/nnet/nnet.pdf}\\
-\subsection{Popular packages}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%% Resources   %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%% available   %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Resources available in R}
+\todo[inline]{Like discuss, I think we should divide this section into two sections ; The most popular packages in deep learning adn the less popular but yet available package.}
+\subsection{\ac{API} packages}
 \subsubsection{Keras}
-\paragraph{Tensorflow}
-\paragraph{CNTK}
-\paragraph{Theano}
+\paragraph{How to install it}
+
+First step, is the installation and download of the Keras files from GitHub :
+<<a, eval=FALSE, echo=TRUE, highlight=TRUE>>=
+devtools::install_github("rstudio/keras")
+@
+Then, we need to to install the package and import in the project :
+<<>>=
+library(keras)
+install_keras()
+@
+When the "\textit{Installation complete.}" message appear you have a complete installation with CPU configure on the TensorFlow backend.
+If you want to take advantage of your GPU (Ensure that you have the hardware prerequisites) you will need to execute a different command as follows:
+<<a, eval=FALSE, echo=TRUE, highlight=TRUE>>=
+install_keras(tensorflow = "gpu")
+@
+\paragraph{Tensorflow backend}
+
+
+\paragraph{CNTK backend}
+\paragraph{Theano backend}
 
 %$https://keras.rstudio.com/$
 \subsubsection{Tensorlow}
 
-\section{Packages not popular}
+\subsubsection{rTorch}
+
+\subsection{R packages}
 
 \paragraph{RSNNS}
 
@@ -174,6 +234,12 @@ According to KD Nuggets, "Recurrent Neural Networks and Convolutional Neural Net
 %https://www.kdnuggets.com/2018/01/deep-learning-h2o-using-r.html
 
 
+\ntodo[inline]{Faire une recherche exhaustive des ressources disponibles en R pour faire des analyses liées à ce sujet. Par exemple: fonctions R de base, packages sur les différentes plate-formes (CRAN, )}
+According to the CRAN-R project website, we give a list of the different packages known in R allowing to use simple and deep neural network algorithms. \newline \url{https://cran.r-project.org/web/views/MachineLearning.html}
+\subsection{Nnet}
+
+\textbf{Nnet} (Ripley and Venables, 2016) allows to quickly train and fit a feed-forward neural networks with one hidden layer. This package does not allow to use more that one hidden layer, and does not have any feature to find the optimal number of neurones in the hidden layer. It is up to the analyst to build a loop to test by cross-validation, for exemple, the optimal hyperparameter values.\url{https://cran.r-project.org/web/packages/nnet/nnet.pdf}\\
+
 
 \textbf{Keras and tensorflow(backend)} (Falbel, 2019)\\
 
@@ -190,8 +256,8 @@ According to KD Nuggets, "Recurrent Neural Networks and Convolutional Neural Net
 
 \textbf{neuralnet} allows to plot the neural net (keras allows it too i think)\\
 
-\ntodo[inline]{Ce mec parle de la gestion de la memoire en R avec keras, qui me semble utilise des numpy array en backend ... à creuser mais peut etre interessant d'en parler car le gros probleme de R pour le deep learning c'est sa gestion de la memoire $https://community.rstudio.com/t/deep-learning-in-r-memory-allocation/17541$}
-
+\ntodo[inline]{Ce mec parle de la gestion de la memoire en R avec keras, qui me semble utilise des numpy array en backend ... à creuser mais peut etre interessant d'en parler car le gros probleme de R pour le deep learning c'est sa gestion de la memoire }
+\url{https://community.rstudio.com/t/deep-learning-in-r-memory-allocation/17541}
 
 \ntodo[inline]{Bonne ressource pour videos \url{https://www.youtube.com/user/westlandindia/videos}}
 \begin{table}
@@ -204,25 +270,22 @@ MxNet        &     &     &       &
 \end{tabular}
 \end{table}
 \ntodo[inline]{Ici on pourrait faire un tableau avec tous les packages et donner les pour et les contres, ADRIEN: Le tableau je suis pas trop fan sachant qu on doit ecrire 20 pages sur ces librairies}
-\section{Tutorials}
-\ntodo[inline]{Encore à voir... on pourrait créer des tutoriels pour peut-être comparer}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%% Examples    %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Examples}
+\ntodo[inline]{Encore à voiron pourrait créer des tutoriels pour peut-être comparer}
 \ntodo[inline]{Il faut trouver des datasets intéressantes à utiliser avec les differents packages}
 
 
-\newpage
-
-\bibliographystyle{IEEEtran} 
-
-\bibliography{deep} % Entries are in the "refs.bib" file
 
 \newpage
-\begin{appendix}
 
-\section{Code}
-\textbf{Exemple de code utilisant h20 mais ce n' est pas du deep learning donc il faura l'adapter}
 
-\ntodo[inline]{Le code doit aller ici ou faire un autre document. Il peut y avoir des bouts de code dans le texte si cela aide à la compréhension. Le code complet sera fourni à part dans un autre document (pas de limite de pages ici)}
-\end{appendix}
+
+
 
 \end{document}
+
 
