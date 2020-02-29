@@ -58,6 +58,9 @@ system (paste("biber", sub("\\.Rnw$","",current_input())))
 \makeatother
 \lfoot{} \cfoot{ } \rfoot{{\small{\em Page \thepage \ of \pageref{LastPage}}}}
 
+\newenvironment{conditions}
+  {\par\vspace{\abovedisplayskip}\noindent\begin{tabular}{>{$}l<{$} @{${}={}$} l}}
+  {\end{tabular}\par\vspace{\belowdisplayskip}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%% BEGIN        %%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -127,7 +130,22 @@ We suggest reading this first chapter written by pioneers in the field: \url{htt
 
 "Deep feedforward networks, also called feedforward neural networks, or multilayer perceptrons (MLPs), are the quintessential deep learning models." \cite{Goodfellow-et-al-2016}
 
-Feedforward neural networks models are inspired from biology and by the way the human brain works. In a neural network, each neuron takes input from other neurons, processes the information and then transmits outputs to next neurons. Artificial neural networks follow the same process as each neuron will perform the weighted sum of inputs and will add a bias as a degree of freedom. It will then apply a non-linear transformation before outputting the information. \ntodo[inline]{ajouter formule mathematique du neurone}. Thus, the information goes forward in the network; neurons transmit information from the input layers towards the output layer. It is important to know that in a feedfoward neural networks the neurons of a same layer are not connected to each other; they do not allow any feedback connections within a same layer. If we want to allow this process, we will be looking at recurrent neural networks.\\
+Feedforward neural networks models are inspired from biology and by the way the human brain works. In a neural network, each neuron takes input from other neurons, processes the information and then transmits outputs to next neurons. Artificial neural networks follow the same process as each neuron will perform the weighted sum of inputs and will add a bias as a degree of freedom. It will then apply a non-linear transformation before outputting the information. Thus, the information goes forward in the network; neurons transmit information from the input layers towards the output layer. It is important to know that in a feedfoward neural networks the neurons of a same layer are not connected to each other; they do not allow any feedback connections within a same layer. If we want to allow this process, we will be looking at recurrent neural networks.\\
+The equation a single neuron input is  
+\begin{equation}
+a(x) = b +\sum_{i}{w_i x_i}
+\end{equation}
+and the output
+\begin{equation}
+h(x) = g(a(x))
+\end{equation}
+where:
+\begin{conditions}
+ x     &  the input data \\
+ b     &  the bias term \\
+ w     &  the weight or parameter \\   
+ g(...) &  the activation function
+\end{conditions}
 To get a detailed explanation of the theory of feedforward neural network we recommand to read this chapter: \url{https://www.deeplearningbook.org/contents/mlp.html}\\
 To get a short but still useful summary we recommand this chapter: \url{https://www.dropbox.com/s/uh48e6wjs4w13t5/Chapter6.pdf?dl=0}
 
@@ -215,7 +233,7 @@ R users: prerequisite R installed. Add R to your PATH. install.packages("h2o")
 different syntax to work with h2o. read.csv = h2o.importFile. cbind = h2o.cbind. predict = h2o.predict. glm = h2o.glm, ...
 According to KD Nuggets, "Recurrent Neural Networks and Convolutional Neural Networks can be constructed using H2o's deep water project throught others libraries such as Caffe and TensorFlow". "Some of the features of H2o deep learning models are: Automatic Adaptive learning rate, Model regularization, Model checkpointing, Grid Search". Source: 
 %https://www.kdnuggets.com/2018/01/deep-learning-h2o-using-r.html
-
+$a(x) = b +\sum_{i}{w_i x_i}$
 
 \ntodo[inline]{Faire une recherche exhaustive des ressources disponibles en R pour faire des analyses liées à ce sujet. Par exemple: fonctions R de base, packages sur les différentes plate-formes (CRAN, )}
 According to the CRAN-R project website, we give a list of the different packages known in R allowing to use simple and deep neural network algorithms. \newline \url{https://cran.r-project.org/web/views/MachineLearning.html}
