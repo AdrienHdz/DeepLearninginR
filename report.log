@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7300 64-bit) (preloaded format=pdflatex 2020.2.18)  18 FEB 2020 19:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7300 64-bit) (preloaded format=pdflatex 2020.2.18)  29 FEB 2020 00:36
 entering extended mode
 **./report.tex
 (report.tex
@@ -6,8 +6,8 @@ LaTeX2e <2020-02-02> patch level 2
 L3 programming layer <2020-02-14>
 ("C:\Users\adrie\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\article.cls"
 Document Class: article 2019/12/20 v1.4l Standard LaTeX document class
-("C:\Users\adrie\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\size10.clo"
-File: size10.clo 2019/12/20 v1.4l Standard LaTeX file (size option)
+("C:\Users\adrie\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\size11.clo"
+File: size11.clo 2019/12/20 v1.4l Standard LaTeX file (size option)
 )
 \c@part=\count167
 \c@section=\count168
@@ -1066,47 +1066,46 @@ Package: fontenc 2020/02/11 v2.0o Standard LaTeX package
 )))
 
 LaTeX Warning: Unused global option(s):
-    [6pt,letter].
+    [letter].
 
-(report.aux)
+No file report.aux.
 \openout1 = `report.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 74.
-LaTeX Font Info:    ... okay on input line 74.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 74.
-LaTeX Font Info:    ... okay on input line 74.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 74.
-LaTeX Font Info:    ... okay on input line 74.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 74.
-LaTeX Font Info:    ... okay on input line 74.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 74.
-LaTeX Font Info:    ... okay on input line 74.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 74.
-LaTeX Font Info:    ... okay on input line 74.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 74.
-LaTeX Font Info:    ... okay on input line 74.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 74.
-LaTeX Font Info:    ... okay on input line 74.
-LaTeX Font Info:    Trying to load font information for T1+aer on input line 74
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Trying to load font information for T1+aer on input line 77
 .
-
 ("C:\Users\adrie\AppData\Local\Programs\MiKTeX 2.9\tex/latex/ae\t1aer.fd"
 File: t1aer.fd 1997/11/16 Font definitions for T1/aer.
 )
-LaTeX Info: Redefining \degres on input line 74.
-LaTeX Info: Redefining \dots on input line 74.
+LaTeX Info: Redefining \degres on input line 77.
+LaTeX Info: Redefining \dots on input line 77.
 
 
 Package french.ldf Warning: Please load the "natbib" package
-(french.ldf)                BEFORE babel/french; reported on input line 74.
+(french.ldf)                BEFORE babel/french; reported on input line 77.
 
 Package french.ldf Info: Setting StandardEnumerateEnv=true for
 (french.ldf)             compatibility with enumerate package,
-(french.ldf)             reported on input line 74.
-LaTeX Info: Redefining \up on input line 74.
+(french.ldf)             reported on input line 77.
+LaTeX Info: Redefining \up on input line 77.
 Package lastpage Info: Please have a look at the pageslts package at
 (lastpage)             https://www.ctan.org/pkg/pageslts
-(lastpage)             ! on input line 74.
+(lastpage)             ! on input line 77.
 
 ("C:\Users\adrie\AppData\Local\Programs\MiKTeX 2.9\tex/context/base/mkii\supp-p
 df.mkii"
@@ -1141,9 +1140,9 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: wrapfig package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package backref Info: ** backref set up for natbib ** on input line 74.
+Package backref Info: ** backref set up for natbib ** on input line 77.
 \AtBeginShipoutBox=\box78
-Package hyperref Info: Link coloring ON on input line 74.
+Package hyperref Info: Link coloring ON on input line 77.
 
 ("C:\Users\adrie\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref\nameref.s
 ty"
@@ -1159,82 +1158,241 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count335
 )
-LaTeX Info: Redefining \ref on input line 74.
-LaTeX Info: Redefining \pageref on input line 74.
-LaTeX Info: Redefining \nameref on input line 74.
- (report.out) (report.out)
+LaTeX Info: Redefining \ref on input line 77.
+LaTeX Info: Redefining \pageref on input line 77.
+LaTeX Info: Redefining \nameref on input line 77.
 \@outlinefile=\write8
 \openout8 = `report.out'.
 
-
-ABD: EveryShipout initializing macros (report-concordance.tex)
-LaTeX Font Info:    Trying to load font information for U+msa on input line 88.
+ ABD: EveryShipout initializing macros
+(report-concordance.tex)
+LaTeX Font Info:    Trying to load font information for U+msa on input line 91.
 
 
 ("C:\Users\adrie\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 88.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 91.
 
 ("C:\Users\adrie\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 Package hyperref Info: bookmark level for unknown todo defaults to 0 on input l
-ine 93.
+ine 94.
 
-Overfull \hbox (29.49998pt too wide) in paragraph at lines 93--93
+Overfull \hbox (29.49998pt too wide) in paragraph at lines 94--94
 [] 
  []
 
+<deep learning.PNG, id=31, 529.47812pt x 342.78062pt>
+File: deep learning.PNG Graphic file (type png)
+<use deep learning.PNG>
+Package pdftex.def Info: deep learning.PNG  used on input line 100.
+(pdftex.def)             Requested size: 202.3529pt x 131.0007pt.
+LaTeX Font Info:    Trying to load font information for T1+aett on input line 1
+07.
+("C:\Users\adrie\AppData\Local\Programs\MiKTeX 2.9\tex/latex/ae\t1aett.fd"
+File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
+)
+[1
 
-Overfull \hbox (29.49998pt too wide) in paragraph at lines 96--96
+{C:/Users/adrie/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map} <./deep lear
+ning.PNG>]
+Overfull \hbox (29.49998pt too wide) in paragraph at lines 108--108
 [] 
  []
 
-
-Overfull \hbox (29.49998pt too wide) in paragraph at lines 110--110
-[] 
- []
-
+<feedforward_neural_networks.png, id=51, 258.9675pt x 173.14688pt>
+File: feedforward_neural_networks.png Graphic file (type png)
+<use feedforward_neural_networks.png>
+Package pdftex.def Info: feedforward_neural_networks.png  used on input line 11
+4.
+(pdftex.def)             Requested size: 202.3529pt x 135.29973pt.
 
 Overfull \hbox (29.49998pt too wide) in paragraph at lines 121--121
 [] 
  []
 
-[1
-
-{C:/Users/adrie/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-Overfull \hbox (29.49998pt too wide) in paragraph at lines 126--126
+[2 <./feedforward_neural_networks.png>]
+Overfull \hbox (29.49998pt too wide) in paragraph at lines 128--128
 [] 
  []
 
 
+Overfull \hbox (29.49998pt too wide) in paragraph at lines 132--132
+[] 
+ []
+
+
+Package natbib Warning: Citation `deeplearningr' on page 3 undefined on input l
+ine 134.
+
+
+Overfull \hbox (29.49998pt too wide) in paragraph at lines 135--135
+[] 
+ []
+
+
+Overfull \hbox (29.49998pt too wide) in paragraph at lines 139--139
+[] 
+ []
+
+
+Overfull \hbox (29.49998pt too wide) in paragraph at lines 141--141
+[] 
+ []
+
+
+Overfull \hbox (29.49998pt too wide) in paragraph at lines 142--142
+[] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 146--147
+
+ []
+
+[3]
+Overfull \hbox (29.49998pt too wide) in paragraph at lines 160--160
+[] 
+ []
+
+
+Overfull \hbox (29.49998pt too wide) in paragraph at lines 164--164
+[] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 164--165
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 166--167
+
+ []
+
+[4]
+Underfull \hbox (badness 10000) in paragraph at lines 179--180
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 181--182
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 183--184
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 186--187
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 188--189
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 190--191
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 192--193
+
+ []
+
+
+Overfull \hbox (29.49998pt too wide) in paragraph at lines 194--194
+[] 
+ []
+
+
+Overfull \hbox (29.49998pt too wide) in paragraph at lines 197--197
+[] 
+ []
+
+
+Underfull \hbox (badness 1194) in paragraph at lines 207--207
+[][][]\T1/aer/m/n/10.95 5.0.0. Ici on pour-rait faire un ta-bleau avec tous les
+ pa-ckages et don-ner les pour et les contres, 
+ []
+
+
+Overfull \hbox (29.49998pt too wide) in paragraph at lines 207--207
+[] 
+ []
+
+
+Overfull \hbox (29.49998pt too wide) in paragraph at lines 209--209
+[] 
+ []
+
+[5]
+Overfull \hbox (29.49998pt too wide) in paragraph at lines 210--210
+[] 
+ []
+
+[6]
+No file report.bbl.
+
+Overfull \hbox (29.49998pt too wide) in paragraph at lines 225--225
+[] 
+ []
+
+
+Package lastpage Warning: Rerun to get the references right on input line 228.
+
+
 AED: lastpage setting LastPage
-[2]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 130.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 130.
- (report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 130.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 130.
-Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: 304F7B7F2947F0AB97F58BD507BCD852;479.
+[7]
+
+Package natbib Warning: There were undefined citations.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 228.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 228.
+(report.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 228.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 228.
+
+
+Package rerunfilecheck Warning: File `report.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `report.out':
+(rerunfilecheck)             Before: <no file>
+(rerunfilecheck)             After:  013C63DC4546E9D778DC63DD2E75BABA;976.
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
  ) 
 Here is how much of TeX's memory you used:
- 24876 strings out of 481556
- 478770 string characters out of 2913869
- 740716 words of memory out of 3000000
- 39542 multiletter control sequences out of 15000+200000
- 556979 words of font info for 80 fonts, out of 3000000 for 9000
+ 24973 strings out of 481556
+ 480367 string characters out of 2913869
+ 740126 words of memory out of 3000000
+ 39604 multiletter control sequences out of 15000+200000
+ 559284 words of font info for 82 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 68i,14n,83p,866b,879s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 68i,14n,83p,979b,984s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Users/adrie/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts
 /cm/cmb10.pfb><C:/Users/adrie/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/pub
-lic/amsfonts/cm/cmr10.pfb><C:/Users/adrie/AppData/Local/Programs/MiKTeX 2.9/fon
-ts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/adrie/AppData/Local/Programs/Mi
-KTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb>
-Output written on report.pdf (2 pages, 75406 bytes).
+lic/amsfonts/cm/cmcsc10.pfb><C:/Users/adrie/AppData/Local/Programs/MiKTeX 2.9/f
+onts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/adrie/AppData/Local/Programs
+/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/adrie/AppData/Lo
+cal/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/adri
+e/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C
+:/Users/adrie/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
+cmsy10.pfb><C:/Users/adrie/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public
+/amsfonts/cm/cmtt10.pfb>
+Output written on report.pdf (7 pages, 922045 bytes).
 PDF statistics:
- 105 PDF objects out of 1000 (max. 8388607)
- 18 named destinations out of 1000 (max. 500000)
- 185 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 169 PDF objects out of 1000 (max. 8388607)
+ 49 named destinations out of 1000 (max. 500000)
+ 123 words of extra memory for PDF output out of 10000 (max. 10000000)
 

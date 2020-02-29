@@ -1,4 +1,4 @@
-\documentclass[6pt,letter,french]{article} 
+\documentclass[11pt,letter,french]{article} 
 \usepackage{babel}
 
 %\usepackage[latin1]{inputenc}
@@ -67,6 +67,9 @@
 \lfoot{} \cfoot{ } \rfoot{{\small{\em Page \thepage \ of \pageref{LastPage}}}}
 
 \usepackage{tcolorbox}
+\usepackage{setspace}
+\onehalfspacing
+
 
  \vspace{-8ex}
   \date{}
@@ -88,23 +91,42 @@
 \section{Introduction}
 In the first section of this paper, a literature review covers the neural networks and deep learners algorithms, focusing on different type of neural networks architecture; the purpose of adding multiple hidden layers and, ultimately, what are the challenges regarding the increase in computing time. Furthermore, in the methodology section, a list of deep learning projects are shown in order to understand some patterns and methods. Then, an exhaustive list of the R libraries allowing to build neural networks and deep learners models. Correspondingly, the advantages and disadvantages of each libraries, their capabilities as well as what you can expect when using them. To sum up, the last section will give concrete examples on how to implement the neural networks and deep learners models with these libraries, using real data.
 \ntodo[inline]{Add more detail about deep learning integration}
-\ntodo[inline]{Très intéressant: }
-%$https://edu.kpfu.ru/pluginfile.php/419285/mod_resource/content/2/neural-networks-r.pdf$
+
 \section{Litterature Review}
-\subsection{What is Deep Learning?}
-\ntodo[inline]{Très très intéressant }
-%https://r2018-rennes.sciencesconf.org/data/pages/Deep_with_R_1.pdf
-- Livre chapitre 6 du livre deep learning (Yoshua Bengio)
--, des reseaux de neurones et du deep learning
-- Pourquoi on rajoute des couches, qu'est ce que ça implique, point de vue computationel (peut etre parler de la facon de comment R gere sa memoire avec la RAM).
-- les différents types de reseaux de neurones.
+\subsection{What is Deep Learning and why use it?}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{deep learning.PNG}
+     \caption{artificial intelligence vs machine learning vs deep learning}
+     \label{fig:simule}
+\end{figure}
+
+Deep learning is a subset field of articial intelligence and can be seen as a specific way of doing machine learning. Deep learning algorithms can be seen as feature representation learning. Indeed, by applying to the data multiple non-linear transformations through the use of hidden layers, deep learning models have their own trainable feature extration capability making it possible to learn specific features from the data without needing a specific human domain expert. This means that deep learning models won't require the features extraction step that is essential for classic machine learning models. However, increasing the models capacity by adding hidden layers, requires increasingly computing power and slow down the training process of the model. The choice of hyperparameters, programming languages and memory management will therefore be important criteria to take into account will building deep learning models\\
+Since the last decade, deep learning models have shown notable predictive power and have been revolutionizing an important number of domain such as computer vision, natural language understanding, fraud detection, health and much more.\\
+We suggest reading this first chapter written by pioneers in the field: \url{https://www.deeplearningbook.org/contents/intro.html}
+\ntodo[inline]{Très très intéressant:\url{https://r2018-rennes.sciencesconf.org/data/pages/Deep_with_R_1.pdf}}
+
+
 \subsubsection{Feed Forward Neural Network}
+\begin{wrapfigure}[11]{r}{0.4\textwidth}
+  \begin{center}
+    \includegraphics[width=0.4\textwidth]{feedforward_neural_networks.png}
+  \end{center}
+  \caption{feedforward neural networks}
+  \label{fig:attention}
+\end{wrapfigure}
+"Deep feedforward networks, also called feedforward neural networks, or multilayer perceptrons(MLPs), are the quintessential deep learning models." (Bengio, Deep Learning)
+
+Feedforward neural networks models are inspired from biology and by the way the human brain works. In a neural network, each neuron takes input from other neurons, processes the information and then transmits outputs to next neurons. Artificial neural networks follow the same process as each neuron will perform the weighted sum of inputs and will add a bias as a degree of freedom. It will then apply a non-linear transformation before outputting the information. \ntodo[inline]{ajouter formule mathematique du neurone}. Thus, the information goes forward in the network; neurons transmit information from the input layers towards the output layer. It is important to know that in a feedfoward neural networks the neurons of a same layer are not connected to each other; they do not allow any feedback connections within a same layer. If we want to allow this process, we will be looking at recurrent neural networks.\\
+To get a detailed explanation of the theory of feedforward neural network we recommand to read this chapter: \url{https://www.deeplearningbook.org/contents/mlp.html}\\
+To get a short but still useful summary we recommand this chapter: \url{https://www.dropbox.com/s/uh48e6wjs4w13t5/Chapter6.pdf?dl=0}
 
 \subsubsection{RNN}
-
+Recurrent neural networks are a type of neural networks architecture having proven state-of-art performance for solving tasks related to sequential data such as language traduction, generation or text classification. As a key differentiator from feedfoward neural networks, they include feedback loops connections and get an internal memory. One of their other advantage is to be able to handle input and ouput sequences that do not have the same length. TBC....
+\\ To get a detailed explanation of the theory of recurrent neural networks we recommand to read this chapter: \url{https://www.deeplearningbook.org/contents/rnn.html}
 \ntodo[inline]{expliquer les différent possibilité qu'il existe dans le monde deep learning (i.e. RNN, CNN , GNN , etc.). Si tu veux on peux expliquer les graphes aussi}
 \subsubsection{CNN}
-\subsection{Why use Deep learning?}
+To get a detailed explanation of convolutional neural networks we recommand to read this chapter: \url{https://www.deeplearningbook.org/contents/convnets.html}
 
 \ntodo[inline]{Recommend books for deep learning or maybe here the hype cyckle makes more sense}
 \subsection{How to integrate Deep Learning in R}
@@ -115,6 +137,7 @@ Deep Learning with R \cite{deeplearningr}
 \section{Methodology}
 \ntodo[inline]{Give example of deep learning project pocedure}
 \section{Available resources}
+\ntodo[inline]{Très intéressant:\url{https://edu.kpfu.ru/pluginfile.php/419285/mod_resource/content/2/neural-networks-r.pdf}}
 \ntodo[inline]{Faire une recherche exhaustive des ressources disponibles en R pour faire des analyses liées à ce sujet. Par exemple: fonctions R de base, packages sur les différentes plate-formes (CRAN, )}
 According to the CRAN-R project website, we give a list of the different packages known in R allowing to use simple and deep neural network algorithms. \newline \url{https://cran.r-project.org/web/views/MachineLearning.html}
 \subsection{Nnet}
