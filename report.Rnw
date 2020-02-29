@@ -12,7 +12,6 @@
 %\usepackage{subfig}   % for subfigure
 \usepackage{subcaption}  % an alternative package for sub figures
 \usepackage{comment}
-\usepackage[round]{natbib}   % omit 'round' option if you prefer square brackets
 \bibliographystyle{plainnat}
 \usepackage{setspace} %Spacing
 \usepackage{graphicx,graphics}
@@ -24,7 +23,15 @@
 \usepackage{appendix}
 \usepackage{color, colortbl, xcolor}
 \usepackage{booktabs,dcolumn} % for use with texreg in R
-\usepackage[pagebackref=true,bookmarks]{hyperref}
+\usepackage[bookmarks]{hyperref}
+\usepackage[backend=biber]{biblatex}
+
+\bibliography{global}
+<<biber, eval=TRUE, include= FALSE, cache=FALSE, echo= FALSE >>=
+library('knitr')
+system (paste("biber", sub("\\.Rnw$","",current_input())))
+@
+
 \hypersetup{
     unicode=false,          
     pdftoolbar=true,        
@@ -72,6 +79,7 @@
 
 \usepackage{tcolorbox}
 \usepackage{setspace}
+\usepackage{csquotes}
 \onehalfspacing
 
 
@@ -126,7 +134,7 @@ In the first section of this paper, a literature review covers the neural networ
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.4\textwidth]{deep learning.PNG}
-     \caption{artificial intelligence vs machine learning vs deep learning}
+     \caption{Artificial Intelligence vs Machine Learning vs Deep Learning}
      \label{fig:simule}
 \end{figure}
 
@@ -137,14 +145,21 @@ We suggest reading this first chapter written by pioneers in the field: \url{htt
 
 
 \subsubsection{Feed Forward Neural Network}
-\begin{wrapfigure}[11]{r}{0.4\textwidth}
+\begin{wrapfigure}[15]{r}{0.4\textwidth}
   \begin{center}
     \includegraphics[width=0.4\textwidth]{feedforward_neural_networks.png}
   \end{center}
   \caption{feedforward neural networks}
   \label{fig:attention}
 \end{wrapfigure}
-"Deep feedforward networks, also called feedforward neural networks, or multilayer perceptrons(MLPs), are the quintessential deep learning models." (Bengio, Deep Learning)
+\blockquote{The past is not a peaceful landscape lying there behind me, 
+a country in which I can stroll wherever I please, 
+and will gradually show me all its secret hills and dates. 
+As I was moving forward, so it was crumbling. 
+Some more text to make it longer than three lines. 
+Maybe it is long enough now.}
+
+"Deep feedforward networks, also called feedforward neural networks, or multilayer perceptrons (MLPs), are the quintessential deep learning models." \cite{Goodfellow-et-al-2016}
 
 Feedforward neural networks models are inspired from biology and by the way the human brain works. In a neural network, each neuron takes input from other neurons, processes the information and then transmits outputs to next neurons. Artificial neural networks follow the same process as each neuron will perform the weighted sum of inputs and will add a bias as a degree of freedom. It will then apply a non-linear transformation before outputting the information. \ntodo[inline]{ajouter formule mathematique du neurone}. Thus, the information goes forward in the network; neurons transmit information from the input layers towards the output layer. It is important to know that in a feedfoward neural networks the neurons of a same layer are not connected to each other; they do not allow any feedback connections within a same layer. If we want to allow this process, we will be looking at recurrent neural networks.\\
 To get a detailed explanation of the theory of feedforward neural network we recommand to read this chapter: \url{https://www.deeplearningbook.org/contents/mlp.html}\\
@@ -282,7 +297,7 @@ MxNet        &     &     &       &
 
 \newpage
 
-
+\printbibliography
 
 
 
