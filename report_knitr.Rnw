@@ -214,6 +214,8 @@ A list of the available resources with installation and examples tutorials can b
 According to the CRAN-R project website, we give a list of the different packages known in R allowing to use simple and deep neural network algorithms. \newline \url{https://cran.r-project.org/web/views/MachineLearning.html}
 
 \subsection{R packages}
+\url{http://www.parallelr.com/r-deep-neural-network-from-scratch/}
+\url{https://edu.kpfu.ru/pluginfile.php/419285/mod_resource/content/2/neural-networks-r.pdf}
 \subsubsection{\textbf{Neuralnet}}
 One of the easiest R package to use which perform, according to its CRAN description, "training of neural networks using the backpropagation, resilient backpropagation with (Riedmiller, 1994) or without weight backtracking (Riedmiller, 1993) or the modified globally convergent version by Anastasiadis et al. (2005). The package allows flexible settings through custom-choice of error and activation function. Furthermore, the calculation of generalized weights (Intrator O & Intrator N, 1993) is implemented." This package uses C/C++ in backend.
 
@@ -235,10 +237,17 @@ part of CRAN, \url{https://cran.r-project.org/web/packages/neuralnet/neuralnet.p
 \subsubsection{nnet}
 This package uses c/C++ in backend.
 
+\subsubsection{Kohonen SOM}
+
+\subsubsection{RNN}
+RNN in R can be implented through rnn, MxNetR and Tensorflow.
+
 \subsubsection{NeuralNetTools}
 for the garson algorithm.
 
 \subsubsection{RSNNS}
+
+\subsubsection{darch}
 
 
 Another package \textbf{RSNNS} (Bergmeir, 2019) allows to have access to a high view of the pakcage SNNS (Stuttgart Neural Network Simulator), containing several neural networks algorithms \ntodo[inline]{à creuser ce package}
@@ -249,15 +258,7 @@ For deep learning algorithms, \textbf{Deepnet} (Rong, 2014), allows to us neural
 
 Another package, \textbf{RcppDL} (Kou and Sugomori, 2014), allows a simple use of deep neural netowkrsm including denoising autoencoders, stacked denoising autoencoder, restricted Boltzmann machines and deep belief nets.\\
 
-\subsubsection{H2o} (LeDell, 2020) video qui explique h2o 
-%$https://www.youtube.com/watch?v=g7drhm_SdbQ$
-H2o is a "scalable open source machine learning platform that offers parallelized implementations of many supervised, unsupervised and fully automatic machine learning algorithms on clusters". This package allows to run H2o via its REST API through R and offers several advantages such as the ability ot know the computation time remaining when running a model.
-Prerequisites to launch H2o, 64 bit Java 6+ if you want to open a h2o model that s more than 1 GB. 
-R users: prerequisite R installed. Add R to your PATH. install.packages("h2o")
-different syntax to work with h2o. read.csv = h2o.importFile. cbind = h2o.cbind. predict = h2o.predict. glm = h2o.glm, ...
-According to KD Nuggets, "Recurrent Neural Networks and Convolutional Neural Networks can be constructed using H2o's deep water project throught others libraries such as Caffe and TensorFlow". "Some of the features of H2o deep learning models are: Automatic Adaptive learning rate, Model regularization, Model checkpointing, Grid Search". Source: 
-%https://www.kdnuggets.com/2018/01/deep-learning-h2o-using-r.html
-$a(x) = b +\sum_{i}{w_i x_i}$
+
 
 \ntodo[inline]{Faire une recherche exhaustive des ressources disponibles en R pour faire des analyses liées à ce sujet. Par exemple: fonctions R de base, packages sur les différentes plate-formes (CRAN, )}
 According to the CRAN-R project website, we give a list of the different packages known in R allowing to use simple and deep neural network algorithms. \newline \url{https://cran.r-project.org/web/views/MachineLearning.html}
@@ -304,14 +305,27 @@ install_keras(tensorflow = "gpu")
 
 \paragraph{Tensorflow backend}
 
-
 \paragraph{CNTK backend}
 \paragraph{Theano backend}
 
 %$https://keras.rstudio.com/$
-\subsubsection{Tensorlow}
+\subsubsection{Tensorflow}
+\url{https://srdas.github.io/DLBook/DeepLearningWithR.html#using-tensorflow}
+
+\subsubsection{MXNET}
+\url{https://srdas.github.io/DLBook/DeepLearningWithR.html#using-mxnet}
 
 \subsubsection{rTorch}
+
+\subsubsection{H2o} (LeDell, 2020) video qui explique h2o 
+%$https://www.youtube.com/watch?v=g7drhm_SdbQ$
+H2o is a "scalable open source machine learning platform that offers parallelized implementations of many supervised, unsupervised and fully automatic machine learning algorithms on clusters". This package allows to run H2o via its REST API through R and offers several advantages such as the ability ot know the computation time remaining when running a model.
+Prerequisites to launch H2o, 64 bit Java 6+ if you want to open a h2o model that s more than 1 GB. 
+R users: prerequisite R installed. Add R to your PATH. install.packages("h2o")
+different syntax to work with h2o. read.csv = h2o.importFile. cbind = h2o.cbind. predict = h2o.predict. glm = h2o.glm, ...
+According to KD Nuggets, "Recurrent Neural Networks and Convolutional Neural Networks can be constructed using H2o's deep water project throught others libraries such as Caffe and TensorFlow". "Some of the features of H2o deep learning models are: Automatic Adaptive learning rate, Model regularization, Model checkpointing, Grid Search". Source: 
+%https://www.kdnuggets.com/2018/01/deep-learning-h2o-using-r.html
+$a(x) = b +\sum_{i}{w_i x_i}$
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%% Examples    %%%%%%%%%%%%%%%%%%%%
