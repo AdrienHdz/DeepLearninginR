@@ -39,7 +39,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliography{global}
 <<biber, eval=TRUE, include= FALSE, cache=FALSE, echo= FALSE >>=
-library('kntr')
+library('knitr')
 system (paste("biber", sub("\\.Rnw$","",current_input())))
 @
 \newcommand{\nd}{\noindent}
