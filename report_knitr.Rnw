@@ -32,7 +32,7 @@
 \usepackage{todonotes}
 \usepackage{ctable}
 \usepackage{acronym}
-
+\usepackage{fancyvrb}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%% Configuration %%%%
@@ -200,7 +200,13 @@ A list of the available resources with installation and examples tutorials can b
 \ntodo[inline]{I think this section is more to explain, for example, the dataset with their end objective so when we are doing examples we just say we are going to use the CIFAR10 and the readers know we are doing a classification problem.}
 
 \section{Methodology}
-\ntodo[inline]{Give example of deep learning project pocedure}
+\subsection{Dataset}
+\subsubsection{FNN}
+\subsubsection{CNN}
+\subsubsection{RNN}
+\subsection{Benchmark}
+\subsubsection{Accuracy}
+\subsubsection{Time elapsed}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%% Resources   %%%%%%%%%%%%%%%%%%%%
@@ -208,7 +214,7 @@ A list of the available resources with installation and examples tutorials can b
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Available resources}
-\label{avail_ressour}
+\label{sec:avail_ressour}
 \ntodo[inline]{Très intéressant:\url{https://edu.kpfu.ru/pluginfile.php/419285/mod_resource/content/2/neural-networks-r.pdf}}
 \ntodo[inline]{Faire une recherche exhaustive des ressources disponibles en R pour faire des analyses liées à ce sujet. Par exemple: fonctions R de base, packages sur les différentes plate-formes (CRAN, )}
 According to the CRAN-R project website, we give a list of the different packages known in R allowing to use simple and deep neural network algorithms. \newline \url{https://cran.r-project.org/web/views/MachineLearning.html}
@@ -216,14 +222,16 @@ According to the CRAN-R project website, we give a list of the different package
 \subsection{R packages}
 \url{http://www.parallelr.com/r-deep-neural-network-from-scratch/}
 \url{https://edu.kpfu.ru/pluginfile.php/419285/mod_resource/content/2/neural-networks-r.pdf}
-\subsubsection{\textbf{Neuralnet}}
-One of the easiest R package to use which perform, according to its CRAN description, "training of neural networks using the backpropagation, resilient backpropagation with (Riedmiller, 1994) or without weight backtracking (Riedmiller, 1993) or the modified globally convergent version by Anastasiadis et al. (2005). The package allows flexible settings through custom-choice of error and activation function. Furthermore, the calculation of generalized weights (Intrator O & Intrator N, 1993) is implemented." This package uses C/C++ in backend.
+\subsubsection{Neuralnet}
+\paragraph{Description}
+One of the easiest R package to use which perform, according to its CRAN description, "training of neural networks using the backpropagation, resilient backpropagation with (Riedmiller, 1994) or without weight backtracking (Riedmiller, 1993) or the modified globally convergent version by Anastasiadis et al. (2005). The package allows flexible settings through custom-choice of error and activation function. Furthermore, the calculation of generalized weights (Intrator O \& Intrator N, 1993) is implemented." This package uses C\/C\+\+ in backend.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.45\textwidth]{neuralnet_package.png}
      \caption{Package neuralnet, CRAN}
 \end{figure}
+
 
 We can see that by default, the resilient backpropagation algorithm is used "rprop+" instead of regular backpropagation which is an algorithm not very used in practice as it is more tricky to implement. However, it brings two main advantages. The first one is that it increases the training speed. The second one is that it doesn't require nor learning rate value neither optimal momentum therm to train the model. Instead of having one unique learning rate, rprop+ will have one learning rate for each weight of the network where "each weight has a delta value that increases when the gradient doesn't change sign or decreases when the gradient does change sign" \url{https://jamesmccaffrey.wordpress.com/2017/08/01/neural-network-resilient-back-propagation/}. However, it does require by default a learning rate limit which specifies the limit where the algorithm stops increasing or decreasing the learning rate, and a learning rate factor that will change the rate according to if the model jumped over a local minima or if it is moving in the right direction.\\
 We can however decided to change the rprop+ for a standard backpropagation by changing for \textbf{algorithm = "backprop"}.\\
@@ -233,59 +241,75 @@ By default, the algorithm uses only 1 hidden neuron, it could be more benefitial
 
 One of the disadvantage of this package is that it requires some data preprocessing as it only works with numeric inputs. Therefore, factor variables will need to be transformed into dummies during the preprocessing phase. Moreover, it is recommended to normalize the data before using them as input in the neural networks in order to reduce the number of iretation of the algorithm.
 part of CRAN, \url{https://cran.r-project.org/web/packages/neuralnet/neuralnet.pdf}
-
+\paragraph{Pros}
+\paragraph{Cons}
 \subsubsection{nnet}
+\paragraph{Description}
+\paragraph{Pros}
+\paragraph{Cons}
 This package uses c/C++ in backend.
-
-\subsubsection{Kohonen SOM}
-
-\subsubsection{RNN}
-RNN in R can be implented through rnn, MxNetR and Tensorflow.
 
 \subsubsection{NeuralNetTools}
 for the garson algorithm.
+\paragraph{Description}
+\paragraph{Pros}
+\paragraph{Cons}
 
 \subsubsection{RSNNS}
+\paragraph{Description}
+\paragraph{Pros}
+\paragraph{Cons}
 
 \subsubsection{darch}
-
+\paragraph{Description}
+\paragraph{Pros}
+\paragraph{Cons}
 
 Another package \textbf{RSNNS} (Bergmeir, 2019) allows to have access to a high view of the pakcage SNNS (Stuttgart Neural Network Simulator), containing several neural networks algorithms \ntodo[inline]{à creuser ce package}
 
 \subsubsection{Deepnet}
+\paragraph{Description}
+\paragraph{Pros}
+\paragraph{Cons}
 
-For deep learning algorithms, \textbf{Deepnet} (Rong, 2014), allows to us neural networks with several hidden layers. This package contains interesting features such as neural networks having their neurones' weight automatically initialized by a DBN (deep belief network) or a stacked autoencoder. (\ntodo[inline]{il fait aussi Boltzmann machine, à voir ce que c'est})\\
+For deep learning algorithms, \textbf{Deepnet} (Rong, 2014), allows to us neural networks with several hidden layers. This package contains interesting features such as neural networks having their neurones' weight automatically initialized by a DBN (deep belief network) or a stacked autoencoder. (\ntodo[inline]{il fait aussi Boltzmann machine, à voir ce que c'est})
 
-Another package, \textbf{RcppDL} (Kou and Sugomori, 2014), allows a simple use of deep neural netowkrsm including denoising autoencoders, stacked denoising autoencoder, restricted Boltzmann machines and deep belief nets.\\
+Another package, \textbf{RcppDL} (Kou and Sugomori, 2014), allows a simple use of deep neural netowkrsm including denoising autoencoders, stacked denoising autoencoder, restricted Boltzmann machines and deep belief nets.
 
 
 
 \ntodo[inline]{Faire une recherche exhaustive des ressources disponibles en R pour faire des analyses liées à ce sujet. Par exemple: fonctions R de base, packages sur les différentes plate-formes (CRAN, )}
 According to the CRAN-R project website, we give a list of the different packages known in R allowing to use simple and deep neural network algorithms. \newline \url{https://cran.r-project.org/web/views/MachineLearning.html}
-\subsubsection{Nnet} (Ripley and Venables, 2016) allows to quickly train and fit a feed-forward neural networks with one hidden layer. This package does not allow to use more that one hidden layer, and does not have any feature to find the optimal number of neurones in the hidden layer. It is up to the analyst to build a loop to test by cross-validation, for exemple, the optimal hyperparameter values.\url{https://cran.r-project.org/web/packages/nnet/nnet.pdf}\\
+
+\subsubsection{Nnet} 
+\paragraph{Description}
+\paragraph{Pros}
+\paragraph{Cons}
+
+(Ripley and Venables, 2016) allows to quickly train and fit a feed-forward neural networks with one hidden layer. This package does not allow to use more that one hidden layer, and does not have any feature to find the optimal number of neurones in the hidden layer. It is up to the analyst to build a loop to test by cross-validation, for exemple, the optimal hyperparameter values.\url{https://cran.r-project.org/web/packages/nnet/nnet.pdf}
 
 
 \subsubsection{brnn}
+\paragraph{Description}
+\paragraph{Pros}
+\paragraph{Cons}
 
 \subsubsection{deepnlp}
+\paragraph{Description}
+\paragraph{Pros}
+\paragraph{Cons}
 
 \ntodo[inline]{Ce mec parle de la gestion de la memoire en R avec keras, qui me semble utilise des numpy array en backend ... à creuser mais peut etre interessant d'en parler car le gros probleme de R pour le deep learning c'est sa gestion de la memoire }
 \url{https://community.rstudio.com/t/deep-learning-in-r-memory-allocation/17541}
 
 \ntodo[inline]{Bonne ressource pour videos \url{https://www.youtube.com/user/westlandindia/videos}}
-\begin{table}
-\centering
-\begin{tabular}{lllll}
-Package      & Pro & Con & Actif & URL   \\
-tensorflow R &     &     &       & Link  \\
-Kera R       &     &     &       &       \\
-MxNet        &     &     &       &      
-\end{tabular}
-\end{table}
+
 \ntodo[inline]{Ici on pourrait faire un tableau avec tous les packages et donner les pour et les contres, ADRIEN: Le tableau je suis pas trop fan sachant qu on doit ecrire 20 pages sur ces librairies}
 
 \subsection{\ac{API} packages}
 \subsubsection{Keras}
+\paragraph{Description}
+
 \paragraph{How to install it}
 \ntodo[inline]{Très très intéressant:\url{https://r2018-rennes.sciencesconf.org/data/pages/Deep_with_R_1.pdf}}
 First step, is the installation and download of the Keras files from GitHub :
@@ -293,7 +317,7 @@ First step, is the installation and download of the Keras files from GitHub :
 devtools::install_github("rstudio/keras")
 @
 Then, we need to to install the package and import in the project :
-<<>>=
+<<echo=TRUE, message=FALSE>>=
 library(keras)
 install_keras()
 @
@@ -303,21 +327,32 @@ If you want to take advantage of your GPU (Ensure that you have the hardware pre
 install_keras(tensorflow = "gpu")
 @
 
-\paragraph{Tensorflow backend}
-
-\paragraph{CNTK backend}
-\paragraph{Theano backend}
-
+\subparagraph{Tensorflow backend}
+\subparagraph{CNTK backend}
+\subparagraph{Theano backend}
+\paragraph{Pros}
+\paragraph{Cons}
 %$https://keras.rstudio.com/$
 \subsubsection{Tensorflow}
+\paragraph{Description}
+\paragraph{Pros}
+\paragraph{Cons}
+
 \url{https://srdas.github.io/DLBook/DeepLearningWithR.html#using-tensorflow}
 
 \subsubsection{MXNET}
+\paragraph{Description}
+\paragraph{Pros}
+\paragraph{Cons}
 \url{https://srdas.github.io/DLBook/DeepLearningWithR.html#using-mxnet}
 
 \subsubsection{rTorch}
 
-\subsubsection{H2o} (LeDell, 2020) video qui explique h2o 
+\subsubsection{H2o} 
+\paragraph{Description}
+\paragraph{Pros}
+\paragraph{Cons}
+(LeDell, 2020) video qui explique h2o 
 %$https://www.youtube.com/watch?v=g7drhm_SdbQ$
 H2o is a "scalable open source machine learning platform that offers parallelized implementations of many supervised, unsupervised and fully automatic machine learning algorithms on clusters". This package allows to run H2o via its REST API through R and offers several advantages such as the ability ot know the computation time remaining when running a model.
 Prerequisites to launch H2o, 64 bit Java 6+ if you want to open a h2o model that s more than 1 GB. 
@@ -331,38 +366,26 @@ $a(x) = b +\sum_{i}{w_i x_i}$
 %%%%%%%%%%%%%%%%%% Examples    %%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Examples}
-\label{examples}
-\ntodo[inline]{Encore à voiron pourrait créer des tutoriels pour peut-être comparer}
-\ntodo[inline]{Il faut trouver des datasets intéressantes à utiliser avec les differents packages}
-\subsubsection{neuralnet package}
-<<>>=
-#Download and install the package
-install.packages("neuralnet")
-library(neuralnet)
-@
+\label{sec:examples}
+Parler des packages quon décider de tester et comparer.
+\subsection{Installation}
+Cette section est surtout pour les resources API, car les ressources R sont tout simplement
+\subsubsection{Keras}
 
-Let's practice with the Fisher's Iris dataset. We will start by splitting the data into a training test and a test set.
-<<>>=
-# Split data into training and test set
-train_idx <- sample(nrow(iris), 2/3 * nrow(iris))
-iris_train <- iris[train_idx, ]
-iris_test <- iris[-train_idx, ]
-@
+\subsection{\ac{FNN}}
+\subsubsection{Ressources}
+\VerbatimInput{fnn.r}
 
-Let's build our model for a multiclass classification and predict.
-<<>>=
-# Multiclass classification
-nn <- neuralnet((Species == "setosa") + (Species == "versicolor") + (Species == "virginica") 
-                ~ Petal.Length + Petal.Width, iris_train, hidden = c(3,2), linear.output =FALSE)
-pred <- predict(nn, iris_test)
-table(iris_test$Species, apply(pred, 1, which.max))
+\subsubsection{Compare}
 
-@
-Let's plot our model:
-<<>>=
-# Multiclass classification
-plot(nn)
-@
+\subsection{\ac{CNN}}
+\subsubsection{Ressources}
+\subsubsection{Compare}
+
+\subsection{\ac{RNN}}
+\subsubsection{Ressources}
+\subsubsection{Compare}
+
 
 \FloatBarrier 
 \clearpage 
