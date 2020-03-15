@@ -1,5 +1,8 @@
 \documentclass[6pt,letter]{article} 
-\usepackage{babel}
+
+%%%%%%%%%%%%%%%%%%%%
+%%%%%% Package %%%%%
+%%%%%%%%%%%%%%%%%%%%
 
 %\usepackage[latin1]{inputenc}
 \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
@@ -25,39 +28,21 @@
 \usepackage{booktabs,dcolumn} % for use with texreg in R
 \usepackage[bookmarks]{hyperref}
 \usepackage[backend=biber]{biblatex}
-
-\bibliography{global}
-<<biber, eval=TRUE, include= FALSE, cache=FALSE, echo= FALSE >>=
-library('knitr')
-system (paste("biber", sub("\\.Rnw$","",current_input())))
-@
-
-\hypersetup{
-    unicode=false,          
-    pdftoolbar=true,        
-    pdfmenubar=true,        
-    pdffitwindow=false,     % window fit to page when opened
-    pdfstartview={FitH},    % fits the width of the page to the window
-    pdftitle={004-Figures},    % title
-    pdfauthor={SRB},     % author
-    pdfsubject={Subject},   % subject of the document
-    pdfcreator={SRB},   % creator of the document
-    pdfproducer={SRB}, % producer of the document
-    pdfkeywords={}, % list of keywords
-    pdfnewwindow=true,      % links in new window
-    colorlinks=true,       % false: boxed links; true: colored links
-    linkcolor=black,          % color of internal links (change box color with linkbordercolor)
-    citecolor=blue,        % color of links to bibliography
-    filecolor=black,      % color of file links
-    urlcolor=cyan           % color of external links
-}
+\addbibresource{global.bib}
 \usepackage{wrapfig}
 \usepackage{todonotes}
 \usepackage{ctable}
 \usepackage{acronym}
+\usepackage{fancyvrb}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% Configuration %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% my commands
+<<biber, eval=TRUE, include= FALSE, cache=FALSE, echo= FALSE >>=
+system(paste("biber", sub("\\.Rnw$", "", current_input())))
+
+@
 \newcommand{\nd}{\noindent}
 \newcommand{\ntodo}[2][]{\todo[#1]{\thesubsubsection{}. #2}}
 
@@ -74,22 +59,13 @@ system (paste("biber", sub("\\.Rnw$","",current_input())))
 \makeatother
 \lfoot{} \cfoot{ } \rfoot{{\small{\em Page \thepage \ of \pageref{LastPage}}}}
 
-
-
-
-\usepackage{tcolorbox}
-\usepackage{setspace}
-\usepackage{csquotes}
-\onehalfspacing
-
-
- \vspace{-8ex}
-  \date{}
+\newenvironment{conditions}
+  {\par\vspace{\abovedisplayskip}\noindent\begin{tabular}{>{$}l<{$} @{${}={}$} l}}
+  {\end{tabular}\par\vspace{\belowdisplayskip}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%% BEGIN        %%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
-\SweaveOpts{concordance=TRUE}
 \pagestyle{plain}
 \pagenumbering{gobble}
 
@@ -108,8 +84,11 @@ system (paste("biber", sub("\\.Rnw$","",current_input())))
 \section*{List of Acronyms}
 \begin{acronym}
 \acro{API}{Application Programming Interface} 
-\end{acronym} 
+\acro{CNN}{Convulutional Neural Network} 
+\acro{FNN}{Feed-Forward Neural Network} 
+\acro{RNN}{Recurent Neural Network} 
 
+\end{acronym} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%% INTRODUCTION %%%%%%%%%%%%%%%%%%%%
@@ -119,188 +98,331 @@ system (paste("biber", sub("\\.Rnw$","",current_input())))
 \pagenumbering{arabic}
 \section{Introduction}
 In the first section of this paper, a literature review covers the neural networks and deep learners algorithms, focusing on different type of neural networks architecture; the purpose of adding multiple hidden layers and, ultimately, what are the challenges regarding the increase in computing time. Furthermore, in the methodology section, a list of deep learning projects are shown in order to understand some patterns and methods. Then, an exhaustive list of the R libraries allowing to build neural networks and deep learners models. Correspondingly, the advantages and disadvantages of each libraries, their capabilities as well as what you can expect when using them. To sum up, the last section will give concrete examples on how to implement the neural networks and deep learners models with these libraries, using real data.
-\ntodo[inline]{Très intéressant}
-\url{https://edu.kpfu.ru/pluginfile.php/419285/mod_resource/content/2/neural-networks-r.pdf}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%% Litterature %%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%% Review      %%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\ntodo[inline]{Add more detail about deep learning integration}
-
 \section{Litterature Review}
 \subsection{What is Deep Learning and why use it?}
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.4\textwidth]{deep learning.PNG}
+\begin{wrapfigure}[14]{r}{0.5\textwidth}
+  \begin{center}
+    \includegraphics[width=0.4\textwidth]{figure/deep learning.PNG}
+      \end{center}
      \caption{Artificial Intelligence vs Machine Learning vs Deep Learning}
      \label{fig:simule}
-\end{figure}
+\end{wrapfigure}
 
-Deep learning is a subset field of articial intelligence and can be seen as a specific way of doing machine learning. Deep learning algorithms can be seen as feature representation learning. Indeed, by applying to the data multiple non-linear transformations through the use of hidden layers, deep learning models have their own trainable feature extration capability making it possible to learn specific features from the data without needing a specific human domain expert. This means that deep learning models won't require the features extraction step that is essential for classic machine learning models. However, increasing the models capacity by adding hidden layers, requires increasingly computing power and slow down the training process of the model. The choice of hyperparameters, programming languages and memory management will therefore be important criteria to take into account will building deep learning models\\
+Deep learning is a subset field of articial intelligence and can be seen as a specific way of doing machine learning. Deep learning algorithms can be seen as feature representation learning. Indeed, by applying to the data multiple non-linear transformations through the use of hidden layers, deep learning models have their own trainable feature extration capability making it possible to learn specific features from the data without needing a specific human domain expert. This means that deep learning models won't require the features extraction step that is essential for classic machine learning models. However, increasing the models capacity by adding hidden layers, requires increasingly computing power and slow down the training process of the model. The choice of hyperparameters, programming languages and memory management will therefore be important criteria to take into account while building deep learning models\\
 Since the last decade, deep learning models have shown notable predictive power and have been revolutionizing an important number of domain such as computer vision, natural language understanding, fraud detection, health and much more.\\
-We suggest reading this first chapter written by pioneers in the field: \url{https://www.deeplearningbook.org/contents/intro.html}
-\ntodo[inline]{Très très intéressant:\url{https://r2018-rennes.sciencesconf.org/data/pages/Deep_with_R_1.pdf}}
+As a first glance in the subject, it is highly recommended it to read  a reference from pioneers in the field (\cite[Chapter 1]{Goodfellow-et-al-2016}).
 
 
 \subsubsection{Feed Forward Neural Network}
-\begin{wrapfigure}[15]{r}{0.4\textwidth}
+\begin{wrapfigure}[12]{R}{0.5\textwidth}
   \begin{center}
-    \includegraphics[width=0.4\textwidth]{feedforward_neural_networks.png}
+    \includegraphics[width=0.4\textwidth]{figure/feedforward_neural_networks.png}
   \end{center}
   \caption{feedforward neural networks}
   \label{fig:attention}
 \end{wrapfigure}
-\blockquote{The past is not a peaceful landscape lying there behind me, 
-a country in which I can stroll wherever I please, 
-and will gradually show me all its secret hills and dates. 
-As I was moving forward, so it was crumbling. 
-Some more text to make it longer than three lines. 
-Maybe it is long enough now.}
 
 "Deep feedforward networks, also called feedforward neural networks, or multilayer perceptrons (MLPs), are the quintessential deep learning models." \cite{Goodfellow-et-al-2016}
 
-Feedforward neural networks models are inspired from biology and by the way the human brain works. In a neural network, each neuron takes input from other neurons, processes the information and then transmits outputs to next neurons. Artificial neural networks follow the same process as each neuron will perform the weighted sum of inputs and will add a bias as a degree of freedom. It will then apply a non-linear transformation before outputting the information. \ntodo[inline]{ajouter formule mathematique du neurone}. Thus, the information goes forward in the network; neurons transmit information from the input layers towards the output layer. It is important to know that in a feedfoward neural networks the neurons of a same layer are not connected to each other; they do not allow any feedback connections within a same layer. If we want to allow this process, we will be looking at recurrent neural networks.\\
-To get a detailed explanation of the theory of feedforward neural network we recommand to read this chapter: \url{https://www.deeplearningbook.org/contents/mlp.html}\\
-To get a short but still useful summary we recommand this chapter: \url{https://www.dropbox.com/s/uh48e6wjs4w13t5/Chapter6.pdf?dl=0}
+\ac{FNN} models are inspired from biology and by the way the human brain works. In a neural network, each neuron takes input from other neurons, processes the information and then transmits outputs to next neurons. Artificial neural networks follow the same process as each neuron will perform the weighted sum of inputs and will add a bias as a degree of freedom. It will then apply a non-linear transformation before outputting the information. Thus, the information goes forward in the network; neurons transmit information from the input layers towards the output layer. It is important to know that in a feedfoward neural networks (fig. \ref{fig:attention}) the neurons of a same layer are not connected to each other; they do not allow any feedback connections within a same layer. If we want to allow this process, we will be looking at recurrent neural networks.
+
+The equation a neuron input is  
+\begin{equation}
+a(x) = b +\sum_{i}{w_i x_i}
+\end{equation}
+and the output
+\begin{equation}
+h(x) = g(a(x))
+\end{equation}
+where:
+\begin{conditions}
+ x     &  the input data \\
+ b     &  the bias term \\
+ w     &  the weight or parameter \\   
+ g(...) &  the activation function
+\end{conditions}
+
+Here, \textbf{the bias term  b} and \textbf{the weights or parameter w} will be learned by the model in order the minimize a cost function, through the use of the gradient descent method. Then, the network will use the backpropagation algorithm where the error is backpropagated from the output to the input layers and the bias and weighted are then updated accordingly.\\
+Regarding the \textbf{activation function g(...)}, the common practice is to use a ReLu (rectified linear unit) as the activation function for the neurons of the hidden layers. Regarding the neurons of the last layer, the activation function will be chosen accordingly to the task we want our model to perform:\\
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.45\textwidth]{figure/activation_function_output.png}
+     \caption{Activation functions: output units. HEC}
+     \label{fig:simule}
+\end{figure}
+
+A detailed explanation of the theory of feedforward neural network can be found in \cite[Chapter 6]{Goodfellow-et-al-2016}
+
+\subsubsection{\ac{CNN}}
+
+The \ac{CNN} are a modified architecture of \ac{FNN} that leverage the feature engineering that used to be hand maded by domain experts. This class of deep neural network are commonly use for image recognition and classification that can serve different applications such as facial recongnition, document analysis and speech recognition. The original \ac{FNN} are not suited analyzing large size images since the weights increase exponentially and, at the end, don't perfom very well.\\
+\begin{wrapfigure}[12]{r}{0.5\textwidth}
+  \begin{center}
+    \includegraphics[width=0.5\textwidth]{figure/CNN_process.png}
+  \end{center}
+  \caption{CNN, Deep Learning A-Z by SuperDataScience}
+  \label{fig:attention}
+\end{wrapfigure}
+A standard architecture of a CNN model is commonly represented this way: We start with an input image to which we are going to apply several kernels, a.k.a features detectors, in order to create feature maps that will form what we call a convolutional layer. A common practice is to apply the ReLu activation fonction to the convolutional layer output in order to increase the non linearity of the images before using the pooling method to create a pooling layer. The next step will be to combine all the pooled images from the pooling layer into one single vector, which is called flattening and will be the input of a FNN that will perform the desired task, for instance, classification. CNN parameters are trained with the backpropagation algorithm where the gradients are propagated from the output layer of the FFN to the input of the CNN in order to minimise a cost function, most of the time a categorical cross-entropy if we are performing a multi-class classification. 
+
+
+To get a detailed explanation of convolutional neural networks we recommand to read \cite[Chapter 9]{Goodfellow-et-al-2016}.\\
 
 \subsubsection{RNN}
-Recurrent neural networks are a type of neural networks architecture having proven state-of-art performance for solving tasks related to sequential data such as language traduction, generation or text classification. As a key differentiator from feedfoward neural networks, they include feedback loops connections and get an internal memory. One of their other advantage is to be able to handle input and ouput sequences that do not have the same length. TBC....
-\\ To get a detailed explanation of the theory of recurrent neural networks we recommand to read this chapter: \url{https://www.deeplearningbook.org/contents/rnn.html}
-\ntodo[inline]{expliquer les différent possibilité qu'il existe dans le monde deep learning (i.e. RNN, CNN , GNN , etc.). Si tu veux on peux expliquer les graphes aussi}
-\subsubsection{CNN}
-To get a detailed explanation of convolutional neural networks we recommand to read this chapter: \url{https://www.deeplearningbook.org/contents/convnets.html}
+Recurrent neural networks are a more advanced type of neural networks architecture having proven state-of-art performance for solving tasks related to sequential data such as Natural Language Processing (NLP), anomaly detection and event forecasting. As a key differentiator from feedfoward neural networks, is that RNNs use feedback loops connections instead of feedforward connections and get an internal memory. Indeed, that take as input each step of the sequantial data as well as what they have learned over time. One of their other advantage is to be able to handle input and ouput sequences with different sizes. "A recurrent neural network can be thought of as multiple copies of the same network, each passing a message to a successor" Olah.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.45\textwidth]{figure/RNN_process.png}
+     \caption{RNN, Understanding LSTM Networks by Olah}
+     \label{fig:simule}
+\end{figure}
 
-\ntodo[inline]{Recommend books for deep learning or maybe here the hype cyckle makes more sense}
+To get a detailed explanation of the theory of recurrent neural networks we recommand to read \cite[Chapter 10]{Goodfellow-et-al-2016}. We also recommand reading this blog post
+
 \subsection{How to integrate Deep Learning in R}
-Deep Learning with R
-\ntodo[inline]{Recommend books for deep learning that implements R}
-
+The integration of Deep learning in R can be separate in two part ; (1) The \ac{API} integration and (2) the standalone R packages. 
+\begin{enumerate}
+\item The \ac{API} will give the possibility to control externally through R an existing installation. In other words, a software translator for a already known software installation. This approach is not always trivial to install nor to manipulate but in long term will probably give the best flexibility in terms of Deep Learning projects.
+\item The standalone R packages will be packages that require no third party software in order to create the deep learning projects. This approach is relatively fast to install but is restraing in terms deep learning architecture.
+\end{enumerate}
+A list of the available resources with installation and examples tutorials can be found in section \ref{avail_ressour} and \ref{examples} .
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%% Description %%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%% of methods  %%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Description of methods}
-\ntodo[inline]{I think this section is more to explain, for example, the dataset with their end objective so when we are doing examples we just say we are going to use the CIFAR10 and the readers know we are doing a classification problem.}
-
 \section{Methodology}
-\ntodo[inline]{Give example of deep learning project pocedure}
-\section{Available resources}
-\ntodo[inline]{Très intéressant:\url{https://edu.kpfu.ru/pluginfile.php/419285/mod_resource/content/2/neural-networks-r.pdf}}
-\ntodo[inline]{Faire une recherche exhaustive des ressources disponibles en R pour faire des analyses liées à ce sujet. Par exemple: fonctions R de base, packages sur les différentes plate-formes (CRAN, )}
-According to the CRAN-R project website, we give a list of the different packages known in R allowing to use simple and deep neural network algorithms. \newline \url{https://cran.r-project.org/web/views/MachineLearning.html}
-\subsection{Nnet}
+This section is divided in two;  the dataset description and the benchmark type. The dataset description is mostly to describe what dataset is going to be use for the different type of deep learning algorithms. The second section will describe two indicators in order to compare results of similar algorithms. The first indicator is mostly about a simple accuracy base on the same training and validation dataset and second indicator is about the time it took to execute the same task on differents ressources.
+\subsection{Dataset}
+\subsubsection{FNN}
+For the \ac{FNN}, the training data will be the well known \textit{Iris} dataset. It contains four covariables and one categorical target variable.
+<<eval= TRUE, message = FALSE>>=
+library(datasets)
+data(iris)
+@
+
+\subsubsection{CNN}
+For the \ac{CNN}, the training data will also be a well known dataset called CIFAR-10. The CIFAR-10 dataset consists of 60000 32x32 colour images in 10 classes, with 6000 images per class. The easiest way in R to download this package is using the Keras API. The training dataset has 50 000 images in three color (Red-Green-Blue) that are 32 pixels by 32 pixels. The testing dataset has a total of 10 000 images
+<<eval= TRUE, message = FALSE>>=
+library(keras)
+cifar10 = dataset_cifar10()
+@
+
+\subsubsection{RNN}
+The dataset use to test an RNN is the IMDB Movie reviews sentiment classification. This pack
+<<eval= TRUE, message = FALSE>>=
+idmb = dataset_imdb(  path = "imdb.npz", num_words = NULL, skip_top = 0L, maxlen = NULL, 
+                      seed = 113L, start_char = 1L, oov_char = 2L, index_from = 3L)
+@
+
+\begin{comment}
+\subsection{Benchmark}
+\subsubsection{Accuracy}
+\subsubsection{Time elapsed}
+\end{comment}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%% Resources   %%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%% available   %%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Resources available in R}
-\todo[inline]{Like discuss, I think we should divide this section into two sections ; The most popular packages in deep learning adn the less popular but yet available package.}
-\subsection{\ac{API} packages}
-\subsubsection{Keras}
-\paragraph{How to install it}
 
+\section{Available resources}
+\label{sec:avail_ressour}
+Like explain earlier this section will be divided in two in order to really differantiate the R packages standalone of the ressources that add an application interface.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%% R Package   %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{R packages}
+\ntodo[inline]{à voir si on a encore de la place pour mettre un tableau récapitulatif}
+\subsubsection{Neuralnet}
+\paragraph{Description}
+One of the easiest R package to use which perform, according to its CRAN description, "training of neural networks using the backpropagation, resilient backpropagation with (Riedmiller, 1994) or without weight backtracking (Riedmiller, 1993) or the modified globally convergent version by Anastasiadis et al. (2005). The package allows flexible settings through custom-choice of error and activation function. Furthermore, the calculation of generalized weights (Intrator O \& Intrator N, 1993) is implemented." This package uses C\/C\+\+ in backend.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.45\textwidth]{figure/neuralnet_package.png}
+     \caption{Package neuralnet, CRAN}
+\end{figure}
+
+
+We can see that by default, the resilient backpropagation algorithm is used "rprop+" instead of regular backpropagation which is an algorithm not very used in practice as it is more tricky to implement. However, it brings two main advantages. The first one is that it increases the training speed. The second one is that it doesn't require nor learning rate value neither optimal momentum therm to train the model. Instead of having one unique learning rate, rprop+ will have one learning rate for each weight of the network where each weight has a delta value that increases when the gradient doesn't change sign or decreases when the gradient does change sign. However, it does require by default a learning rate limit which specifies the limit where the algorithm stops increasing or decreasing the learning rate, and a learning rate factor that will change the rate according to if the model jumped over a local minima or if it is moving in the right direction.\\
+We can however decided to change the rprop+ for a standard backpropagation by changing for \textbf{algorithm = "backprop"}.\\
+
+By default, the algorithm uses only 1 hidden neuron, it could be more benefitial to increase the number of neurons and hidden layers. To get 5 neurons per 2 hidden layers we could use \textbf{hidden = c(5,2)}.
+
+
+One of the disadvantage of this package is that it requires some data preprocessing as it only works with numeric inputs. Therefore, factor variables will need to be transformed into dummies during the preprocessing phase. Moreover, it is recommended to normalize the data before using them as input in the neural networks in order to reduce the number of iretation of the algorithm \cite{neuralnet2019}.
+
+\paragraph{Pros}
+\paragraph{Cons}
+\subsubsection{nnet}
+\paragraph{Description}
+\paragraph{Pros}
+\paragraph{Cons}
+This package uses c/C++ in backend.
+
+\subsubsection{NeuralNetTools}
+for the garson algorithm.
+\paragraph{Description}
+This package a mostly use ... \cite{NeuralNetTools2018}
+\paragraph{Pros}
+\paragraph{Cons}
+
+\subsubsection{RSNNS}
+\paragraph{Description}
+This package a mostly use ... \cite{RSNNS2019}
+\paragraph{Pros}
+\paragraph{Cons}
+
+\begin{comment}
+This package doesn't exist anymore
+\subsubsection{darch}
+\paragraph{Description}
+\paragraph{Pros}
+\paragraph{Cons}
+\end{comment}
+
+Another package \textbf{RSNNS} (Bergmeir, 2019) allows to have access to a high view of the pakcage SNNS (Stuttgart Neural Network Simulator), containing several neural networks algorithms 
+\ntodo[inline]{à creuser ce package}
+
+\subsubsection{Deepnet}
+\begin{comment}
+\url{http://www.parallelr.com/r-deep-neural-network-from-scratch/}
+\end{comment}
+\paragraph{Description}
+This package a mostly use ... \cite{deepnet2015}
+\paragraph{Pros}
+\paragraph{Cons}
+
+For deep learning algorithms, \textbf{Deepnet} (Rong, 2014), allows to us neural networks with several hidden layers. This package contains interesting features such as neural networks having their neurones' weight automatically initialized by a DBN (deep belief network) or a stacked autoencoder. (\ntodo[inline]{il fait aussi Boltzmann machine, à voir ce que c'est})
+
+Another package, \textbf{RcppDL} (Kou and Sugomori, 2014), allows a simple use of deep neural netowkrsm including denoising autoencoders, stacked denoising autoencoder, restricted Boltzmann machines and deep belief nets.
+
+\subsubsection{Nnet} 
+\paragraph{Description}
+This package allows to quickly train and fit a feed-forward neural networks with one hidden layer \cite{nnet2020}. This package does not allow to use more that one hidden layer, and does not have any feature to find the optimal number of neurones in the hidden layer. It is up to the analyst to build a loop to test by cross-validation, for exemple, the optimal hyperparameter values .
+
+\paragraph{Pros}
+\paragraph{Cons}
+
+
+
+\subsubsection{brnn}
+\paragraph{Description}
+This package a mostly use ... \cite{brnn2020}
+\paragraph{Pros}
+\paragraph{Cons}
+\begin{comment}
+looks deprecated
+\subsubsection{deepnlp}
+\paragraph{Description}
+\paragraph{Pros}
+\paragraph{Cons}
+\end{comment}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%  API  %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{\ac{API} packages}
+\ntodo[inline]{à voir si on a encore de la place pour mettre un tableau récapitulatif}
+\subsubsection{Keras}
+\paragraph{Description}
+This API is really popular in the Python world because it acts like a wrapper of more popular libraries. It might become hard to follow but Keras has multiple backends such as Tensorflow, Theano and MXNET. The \textit{Keras} \cite{keras2019} is mostly use to link the wrapper tool with R. The most useful reference one can get for this workflow is written by two major players ; \textit{Keras} creator and \textit{RStudio} creator. It explains in detail the best practices in order to use \textit{Keras} in R \cite{chollet2018deep}.
 First step, is the installation and download of the Keras files from GitHub :
-<<a, eval=FALSE, echo=TRUE, highlight=TRUE>>=
+<<eval=FALSE, echo=TRUE, highlight=TRUE>>=
 devtools::install_github("rstudio/keras")
 @
 Then, we need to to install the package and import in the project :
-<<>>=
+<<echo=FALSE, message=FALSE>>=
 library(keras)
 install_keras()
 @
 When the "\textit{Installation complete.}" message appear you have a complete installation with CPU configure on the TensorFlow backend.
 If you want to take advantage of your GPU (Ensure that you have the hardware prerequisites) you will need to execute a different command as follows:
-<<a, eval=FALSE, echo=TRUE, highlight=TRUE>>=
+<<eval=FALSE, echo=TRUE, highlight=TRUE>>=
 install_keras(tensorflow = "gpu")
 @
-\paragraph{Tensorflow backend}
+\paragraph{Pros}
+\paragraph{Cons}
+
+\subsubsection{Tensorflow}
+\paragraph{Description}
+This package is use ...\cite{tensorflow2019}
+\paragraph{Pros}
+\paragraph{Cons}
 
 
-\paragraph{CNTK backend}
-\paragraph{Theano backend}
-
-%$https://keras.rstudio.com/$
-\subsubsection{Tensorlow}
+\subsubsection{MXNET}
+\paragraph{Description}
+This package is use ...\cite{mxnet2020}
+\paragraph{Pros}
+\paragraph{Cons}
 
 \subsubsection{rTorch}
+This package is use ...\cite{rTorch2019}
 
-\subsection{R packages}
+\paragraph{Description}
+\paragraph{Pros}
+\paragraph{Cons}
 
-\paragraph{RSNNS}
-
-Another package \textbf{RSNNS} (Bergmeir, 2019) allows to have access to a high view of the pakcage SNNS (Stuttgart Neural Network Simulator), containing several neural networks algorithms \ntodo[inline]{à creuser ce package}
-
-\paragraph{Deepnet}
-
-For deep learning algorithms, \textbf{Deepnet} (Rong, 2014), allows to us neural networks with several hidden layers. This package contains interesting features such as neural networks having their neurones' weight automatically initialized by a DBN (deep belief network) or a stacked autoencoder. (\ntodo[inline]{il fait aussi Boltzmann machine, à voir ce que c'est})\\
-
-Another package, \textbf{RcppDL} (Kou and Sugomori, 2014), allows a simple use of deep neural netowkrsm including denoising autoencoders, stacked denoising autoencoder, restricted Boltzmann machines and deep belief nets.\\
-
-\textbf{H2o} (LeDell, 2020) video qui explique h2o 
-%$https://www.youtube.com/watch?v=g7drhm_SdbQ$
+\subsubsection{H2o} 
+\paragraph{Description}
 H2o is a "scalable open source machine learning platform that offers parallelized implementations of many supervised, unsupervised and fully automatic machine learning algorithms on clusters". This package allows to run H2o via its REST API through R and offers several advantages such as the ability ot know the computation time remaining when running a model.
 Prerequisites to launch H2o, 64 bit Java 6+ if you want to open a h2o model that s more than 1 GB. 
 R users: prerequisite R installed. Add R to your PATH. install.packages("h2o")
 different syntax to work with h2o. read.csv = h2o.importFile. cbind = h2o.cbind. predict = h2o.predict. glm = h2o.glm, ...
-According to KD Nuggets, "Recurrent Neural Networks and Convolutional Neural Networks can be constructed using H2o's deep water project throught others libraries such as Caffe and TensorFlow". "Some of the features of H2o deep learning models are: Automatic Adaptive learning rate, Model regularization, Model checkpointing, Grid Search". Source: 
+According to KD Nuggets, "Recurrent Neural Networks and Convolutional Neural Networks can be constructed using H2o's deep water project throught others libraries such as Caffe and TensorFlow". "Some of the features of H2o deep learning models are: Automatic Adaptive learning rate, Model regularization, Model checkpointing, Grid Search"
+
+This package is use ...\cite{h2o2020}
+
+\paragraph{Pros}
+\paragraph{Cons}
+
+\begin{comment}
+Take information and adress references
+(LeDell, 2020) video qui explique h2o 
+%$https://www.youtube.com/watch?v=g7drhm_SdbQ$
+. Source: 
 %https://www.kdnuggets.com/2018/01/deep-learning-h2o-using-r.html
-
-
-\ntodo[inline]{Faire une recherche exhaustive des ressources disponibles en R pour faire des analyses liées à ce sujet. Par exemple: fonctions R de base, packages sur les différentes plate-formes (CRAN, )}
-According to the CRAN-R project website, we give a list of the different packages known in R allowing to use simple and deep neural network algorithms. \newline \url{https://cran.r-project.org/web/views/MachineLearning.html}
-\subsection{Nnet}
-
-\textbf{Nnet} (Ripley and Venables, 2016) allows to quickly train and fit a feed-forward neural networks with one hidden layer. This package does not allow to use more that one hidden layer, and does not have any feature to find the optimal number of neurones in the hidden layer. It is up to the analyst to build a loop to test by cross-validation, for exemple, the optimal hyperparameter values.\url{https://cran.r-project.org/web/packages/nnet/nnet.pdf}\\
-
-
-\textbf{Keras and tensorflow(backend)} (Falbel, 2019)\\
-
-\textbf{CNTK-R (backend)}\\
-
-\textbf{Theano (backend)}\\
-
-%https://cran.rstudio.com/web/packages/keras/vignettes/backend.html$
-\textbf{brnn}\\
-
-\textbf{deepnlp}\\
-
-\textbf{brnn}\\
-
-\textbf{neuralnet} allows to plot the neural net (keras allows it too i think)\\
-
-\ntodo[inline]{Ce mec parle de la gestion de la memoire en R avec keras, qui me semble utilise des numpy array en backend ... à creuser mais peut etre interessant d'en parler car le gros probleme de R pour le deep learning c'est sa gestion de la memoire }
-\url{https://community.rstudio.com/t/deep-learning-in-r-memory-allocation/17541}
-
-\ntodo[inline]{Bonne ressource pour videos \url{https://www.youtube.com/user/westlandindia/videos}}
-\begin{table}
-\centering
-\begin{tabular}{lllll}
-Package      & Pro & Con & Actif & URL   \\
-tensorflow R &     &     &       & Link  \\
-Kera R       &     &     &       &       \\
-MxNet        &     &     &       &      
-\end{tabular}
-\end{table}
-\ntodo[inline]{Ici on pourrait faire un tableau avec tous les packages et donner les pour et les contres, ADRIEN: Le tableau je suis pas trop fan sachant qu on doit ecrire 20 pages sur ces librairies}
+\end{comment}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%% Examples    %%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Examples}
-\ntodo[inline]{Encore à voiron pourrait créer des tutoriels pour peut-être comparer}
-\ntodo[inline]{Il faut trouver des datasets intéressantes à utiliser avec les differents packages}
+\label{sec:examples}
+Parler des packages quon décider de tester et comparer.
+\subsection{Installation}
+Cette section est surtout pour les resources API, car les ressources R sont tout simplement
+\subsubsection{Keras}
+
+\subsection{\ac{FNN}}
+\subsubsection{Ressources}
+\VerbatimInput{fnn.r}
+
+\subsubsection{Compare}
+
+\subsection{\ac{CNN}}
+\subsubsection{Ressources}
+\subsubsection{Compare}
+
+\subsection{\ac{RNN}}
+\subsubsection{Ressources}
+\subsubsection{Compare}
 
 
-
-\newpage
+\FloatBarrier 
+\clearpage 
+\pagestyle{plain}
 
 \printbibliography
 
 
 
 \end{document}
-
-
