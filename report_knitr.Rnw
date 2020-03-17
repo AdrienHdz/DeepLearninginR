@@ -1,4 +1,4 @@
-\documentclass[6pt,letter]{article} 
+\documentclass[11pt,letter]{article} 
 
 %%%%%%%%%%%%%%%%%%%%
 %%%%%% Package %%%%%
@@ -216,95 +216,155 @@ A list of the available resources with installation and examples tutorials can b
 \section{Available resources}
 \label{sec:avail_ressour}
 \ntodo[inline]{Très intéressant:\url{https://edu.kpfu.ru/pluginfile.php/419285/mod_resource/content/2/neural-networks-r.pdf}}
-\ntodo[inline]{Faire une recherche exhaustive des ressources disponibles en R pour faire des analyses liées à ce sujet. Par exemple: fonctions R de base, packages sur les différentes plate-formes (CRAN, )}
 According to the CRAN-R project website, we give a list of the different packages known in R allowing to use simple and deep neural network algorithms. \newline \url{https://cran.r-project.org/web/views/MachineLearning.html}
 
 \subsection{R packages}
 \url{http://www.parallelr.com/r-deep-neural-network-from-scratch/}
 \url{https://edu.kpfu.ru/pluginfile.php/419285/mod_resource/content/2/neural-networks-r.pdf}
-\subsubsection{Neuralnet}
+\subsubsection{nnet package}
+\textbf{Keyword: FNN}
 \paragraph{Description}
-One of the easiest R package to use which perform, according to its CRAN description, "training of neural networks using the backpropagation, resilient backpropagation with (Riedmiller, 1994) or without weight backtracking (Riedmiller, 1993) or the modified globally convergent version by Anastasiadis et al. (2005). The package allows flexible settings through custom-choice of error and activation function. Furthermore, the calculation of generalized weights (Intrator O \& Intrator N, 1993) is implemented." This package uses C\/C\+\+ in backend.
+This package comes from the CRAN platform and allows to build and fit "FNN with a single hidden layer and multinomial log-linear models". This package uses C/C++ in backend.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.45\textwidth]{nnet_package.png}
+     \caption{Package nnet, CRAN}
+\end{figure}
+\paragraph{Pros}
+\begin{itemize}
+\item One of the easiest R package to build a quick FFN model.
+\end{itemize}
+\paragraph{Cons}
+\begin{itemize}
+\item It does not offer a lot of flexibility, and can only apply logistic sifmoid function for the hidden layer activation and cannot use tanH and ReLu.
+\item This package does not allow to use more that one hidden layer, and does not have any feature to find the optimal number of neurones in the hidden layer. It is up to the analyst to build a loop to test by cross-validation, for exemple, the optimal hyperparameter values.
+\item Cannot use classical backpropagation algorithm to train the network. It only uses the BFGS (Broyden-Fletcher-Goldfarb-Shanno) which is a Quasi-Newton method and therefore increases the number of computation to reach a local optima. However, applied on a small dataset with a model having only one hidden layer does not seem to be a problem.
+\item Does not have any function to plot the model.
+\end{itemize}
+
+\subsubsection{NeuralNetTools package}
+\textbf{Keywords: Visualization; Variable importance; Sensitivity}
+\paragraph{Description}
+This package is a complement to R's neural networks packages as it allows to visualize and perform analysis on neural network models. "Functions are available for plooting, quantifying variable importance, conducting a sensitivity analysis, and obtaining a simple list of model weights."
+\begin{figure}[H]
+  \begin{subfigure}{0.5\textwidth}
+    \centering\includegraphics[width=0.45\textwidth]{plotnet.png}
+    \caption{NeuralNetTools, plotnet function}
+  \end{subfigure}
+  \begin{subfigure}{0.5\textwidth}
+    \centering\includegraphics[width=0.45\textwidth]{garson_algorithm.png}
+    \caption{NeuralNetToolsm Input variables importance}
+  \end{subfigure}
+    \caption{Embedding dimension hyper parameter}
+\end{figure}
+
+\paragraph{Pros}
+\begin{itemize}
+\item Very easy to plot your neural network models with the function \textbf{plotnet(model)}.
+\item Visualize the input variables importance to the output prediction witht the Garson and olden algorithm.
+\item Perform sensitivity analysis on your neural networks model using the Lek profile method.
+\item Works with the models built from different packages: \textbf{caret, neuralnet, nnet, RSNSS}
+\item Can plot neural networks with pruned connections from the RSNSS package.
+\end{itemize}
+
+\paragraph{Cons}
+\begin{itemize}
+\item Does not provide any function for neural network model development.
+\item Is not optimized to visualize large neural networks models.
+\end{itemize}
+\subsubsection{Neuralnet package}
+\textbf{Keyword: FNN; Deep FNN}
+\paragraph{Description}
+According to its CRAN description, the package allows the "training of neural networks using the backpropagation, resilient backpropagation with (Riedmiller, 1994) or without weight backtracking (Riedmiller, 1993) or the modified globally convergent version by Anastasiadis et al. (2005). The package allows flexible settings through custom-choice of error and activation function. Furthermore, the calculation of generalized weights (Intrator O \& Intrator N, 1993) is implemented." This package uses C$\$/C\+\+ in backend.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.45\textwidth]{neuralnet_package.png}
+    \includegraphics[width=0.7\textwidth]{neuralnet_package.png}
      \caption{Package neuralnet, CRAN}
 \end{figure}
 
-
-We can see that by default, the resilient backpropagation algorithm is used "rprop+" instead of regular backpropagation which is an algorithm not very used in practice as it is more tricky to implement. However, it brings two main advantages. The first one is that it increases the training speed. The second one is that it doesn't require nor learning rate value neither optimal momentum therm to train the model. Instead of having one unique learning rate, rprop+ will have one learning rate for each weight of the network where "each weight has a delta value that increases when the gradient doesn't change sign or decreases when the gradient does change sign" \url{https://jamesmccaffrey.wordpress.com/2017/08/01/neural-network-resilient-back-propagation/}. However, it does require by default a learning rate limit which specifies the limit where the algorithm stops increasing or decreasing the learning rate, and a learning rate factor that will change the rate according to if the model jumped over a local minima or if it is moving in the right direction.\\
-We can however decided to change the rprop+ for a standard backpropagation by changing for \textbf{algorithm = "backprop"}.\\
-
-By default, the algorithm uses only 1 hidden neuron, it could be more benefitial to increase the number of neurons and hidden layers. To get 5 neurons per 2 hidden layers we could use \textbf{hidden = c(5,2)}.
-
-
-One of the disadvantage of this package is that it requires some data preprocessing as it only works with numeric inputs. Therefore, factor variables will need to be transformed into dummies during the preprocessing phase. Moreover, it is recommended to normalize the data before using them as input in the neural networks in order to reduce the number of iretation of the algorithm.
-part of CRAN, \url{https://cran.r-project.org/web/packages/neuralnet/neuralnet.pdf}
 \paragraph{Pros}
+\begin{itemize}
+\item Very easy to use and to build a quick FFN and deep FNN model.
+\item Allows to use several types of backpropagation algorithms. By default, the resilient backpropagation algorithm is used "rprop+" instead of regular backpropagation which is an algorithm not very used in practice as it is more tricky to implement. We can however decided to change the rprop+ for a standard backpropagation by changing for \textbf{algorithm = "backprop"}.
+\item Several hidden layers and neurons per layer can be added. By default, the algorithm uses only 1 hidden layer with 1 neuron, but it can be increased by addind the command line: \textbf{hidden = c(5,2)} to get 2 hidden layers of 5 neurons.
+\item Allows to easily plot and visualize the model and its parameters with the command line: \textbf{plot(model).}
+\end{itemize}
 \paragraph{Cons}
-\subsubsection{nnet}
+\begin{itemize}
+\item One of the disadvantage of this package is that it requires some data preprocessing as it only works with numeric inputs. Therefore, factor variables will need to be transformed into dummies during the preprocessing phase. 
+\item The package doesn't provide built-in normalization functions. Therefore, it is recommended to manually normalize the data before using them as input in the neural networks in order to reduce the number of iretation of the algorithm.
+\end{itemize}
+
+\subsubsection{Deepnet package}
+\textbf{Keywords: FNN; RBM; DBN; Autoencoder}
 \paragraph{Description}
+This package is available on the CRAN platform and has been written specifcally written for R. It allows "implement som deep learning architectures and neural network algorithms, including backpropagation, Restricted Boltzmann Machine (RBM), Deep Belief Network (DBN) and Deep autoencoder".
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{deepnet_package.png}
+     \caption{Package deepnet, CRAN}
+\end{figure}
 \paragraph{Pros}
+\begin{itemize}
+\item Allows to load benchmark datasets such as MNIST with the function load.mnist(dir)
+\item Allows to initialize the weights of a FNN with the Deep Belief Network algorithm (dbn.dnn.train()) or Stacked AutoEncoder algorithm (sae.dnn.train()).
+\item Allows to have an estimation of the probabilistic distribution of a dataset trough the use of the Restricted Boltzmann machine algorithm.
+\item Have more activation functions than the other R packages. Hidden Layers activation function can be linear, sigmoid or tanh. The output activation function can be linar, sigmoid or softmax.
+\end{itemize}
 \paragraph{Cons}
-This package uses c/C++ in backend.
+\begin{itemize}
+\item Does not support the ReLu activation function for hidden layers.
+\item Not the fastest package due to its implementation in R.
+\item Does not provide a lot of hyperparameters tuning options, and is not user-friendly.
+\end{itemize}
 
-\subsubsection{NeuralNetTools}
-for the garson algorithm.
+\subsubsection{brnn package}
+\textbf{Keywords: Bayesian Regularization; FNN}
 \paragraph{Description}
+This package available on the platform CRAN, allows to perform "Baeysian regularized neural networks inclusing both additive and dominance effects, and allows to takes advantage of multicore architectures via a parallel computing approach using openMP for the computations". (Pérez-Rodriguez, ...)
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.45\textwidth]{nnet_package.png}
+     \caption{Package nnet, CRAN}
+\end{figure}
 \paragraph{Pros}
+\begin{itemize}
+\item Allows to add Additive and Dominance effects in the neural networks models.
+\item Take advantage of multicore processors (only for UNIX-like systems).
+\item Allows to use a Gauss-Newton algorithm for optimization.
+\item The package is able to assign initial weights by using the Nguyen and Widrow algorithm.
+\item Include an algorithm to deal with ordinal data by using the function \textbf{brnn\_ordinal(x, ...)}
+\item It has a function to normalize and unnormalized the data.
+\end{itemize}
 \paragraph{Cons}
+\begin{itemize}
+\item Cannot use the classic backpropagation algorithm for optimization.
+\item The package fits a two layers neural networks and it is not possible to increase the number of hidden layers.
+\end{itemize}
 
-\subsubsection{RSNNS}
+\subsubsection{rnn package}
+\textbf{Keywords: RNN}
+\textbr{Installation:} You will need to install the "diges" package first through the function \textbf{install.packages("digest")} in order to download the rnn package.
 \paragraph{Description}
+Avaible from the CRAN platform, this package allows the "implementation of a Recurrent Neural Network architectures in native R, including Long-Short Term Memory (LSTM), Gated Recurrent Unit (GRU) and vanilla RNN. 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.45\textwidth]{rnn_package.png}
+     \caption{Package rnn, CRAN}
+\end{figure}
 \paragraph{Pros}
+\begin{itemize}
+\item Allows to run a demonstration of how RNN models work by using predefined values and allowing the user to see the impact of a changes in the model's hyperparameters by using the function \textbr{run.rnn\_demo()}
+\item Allows to plot the model's errors through all epochs.
+\item Allows to use LSTM and GRU models.
+\end{itemize}
 \paragraph{Cons}
-
-\subsubsection{darch}
-\paragraph{Description}
-\paragraph{Pros}
-\paragraph{Cons}
-
-Another package \textbf{RSNNS} (Bergmeir, 2019) allows to have access to a high view of the pakcage SNNS (Stuttgart Neural Network Simulator), containing several neural networks algorithms \ntodo[inline]{à creuser ce package}
-
-\subsubsection{Deepnet}
-\paragraph{Description}
-\paragraph{Pros}
-\paragraph{Cons}
-
-For deep learning algorithms, \textbf{Deepnet} (Rong, 2014), allows to us neural networks with several hidden layers. This package contains interesting features such as neural networks having their neurones' weight automatically initialized by a DBN (deep belief network) or a stacked autoencoder. (\ntodo[inline]{il fait aussi Boltzmann machine, à voir ce que c'est})
-
-Another package, \textbf{RcppDL} (Kou and Sugomori, 2014), allows a simple use of deep neural netowkrsm including denoising autoencoders, stacked denoising autoencoder, restricted Boltzmann machines and deep belief nets.
-
-
-
-\ntodo[inline]{Faire une recherche exhaustive des ressources disponibles en R pour faire des analyses liées à ce sujet. Par exemple: fonctions R de base, packages sur les différentes plate-formes (CRAN, )}
-According to the CRAN-R project website, we give a list of the different packages known in R allowing to use simple and deep neural network algorithms. \newline \url{https://cran.r-project.org/web/views/MachineLearning.html}
-
-\subsubsection{Nnet} 
-\paragraph{Description}
-\paragraph{Pros}
-\paragraph{Cons}
-
-(Ripley and Venables, 2016) allows to quickly train and fit a feed-forward neural networks with one hidden layer. This package does not allow to use more that one hidden layer, and does not have any feature to find the optimal number of neurones in the hidden layer. It is up to the analyst to build a loop to test by cross-validation, for exemple, the optimal hyperparameter values.\url{https://cran.r-project.org/web/packages/nnet/nnet.pdf}
-
-
-\subsubsection{brnn}
-\paragraph{Description}
-\paragraph{Pros}
-\paragraph{Cons}
-
-\subsubsection{deepnlp}
-\paragraph{Description}
-\paragraph{Pros}
-\paragraph{Cons}
-
-\ntodo[inline]{Ce mec parle de la gestion de la memoire en R avec keras, qui me semble utilise des numpy array en backend ... à creuser mais peut etre interessant d'en parler car le gros probleme de R pour le deep learning c'est sa gestion de la memoire }
-\url{https://community.rstudio.com/t/deep-learning-in-r-memory-allocation/17541}
+\begin{itemize}
+\item Uses R native, therefore it might not be the best package in terms of time computation.
+\end{itemize}
 
 \ntodo[inline]{Bonne ressource pour videos \url{https://www.youtube.com/user/westlandindia/videos}}
-
-\ntodo[inline]{Ici on pourrait faire un tableau avec tous les packages et donner les pour et les contres, ADRIEN: Le tableau je suis pas trop fan sachant qu on doit ecrire 20 pages sur ces librairies}
 
 \subsection{\ac{API} packages}
 \subsubsection{Keras}
@@ -314,6 +374,7 @@ According to the CRAN-R project website, we give a list of the different package
 \ntodo[inline]{Très très intéressant:\url{https://r2018-rennes.sciencesconf.org/data/pages/Deep_with_R_1.pdf}}
 First step, is the installation and download of the Keras files from GitHub :
 <<eval=FALSE, echo=TRUE, highlight=TRUE>>=
+install.packages("devtools")
 devtools::install_github("rstudio/keras")
 @
 Then, we need to to install the package and import in the project :
@@ -343,24 +404,44 @@ install_keras(tensorflow = "gpu")
 \subsubsection{MXNET}
 \paragraph{Description}
 \paragraph{Pros}
+\begin{itemize}
+\item Allows the use of multiple CPU and multiple GPU, but it requires to download the package Rtools and a c++ compiler.
+\item Very easy to use and has a flexible implementation of diffenent neural networks architectures and models.
+\item The models can be built layer per layer.
+\item Provide details and information about the learning progress during the training phase.
+\end{itemize}
 \paragraph{Cons}
+
 \url{https://srdas.github.io/DLBook/DeepLearningWithR.html#using-mxnet}
 
 \subsubsection{rTorch}
 
 \subsubsection{H2o} 
 \paragraph{Description}
-\paragraph{Pros}
-\paragraph{Cons}
-(LeDell, 2020) video qui explique h2o 
-%$https://www.youtube.com/watch?v=g7drhm_SdbQ$
 H2o is a "scalable open source machine learning platform that offers parallelized implementations of many supervised, unsupervised and fully automatic machine learning algorithms on clusters". This package allows to run H2o via its REST API through R and offers several advantages such as the ability ot know the computation time remaining when running a model.
-Prerequisites to launch H2o, 64 bit Java 6+ if you want to open a h2o model that s more than 1 GB. 
-R users: prerequisite R installed. Add R to your PATH. install.packages("h2o")
-different syntax to work with h2o. read.csv = h2o.importFile. cbind = h2o.cbind. predict = h2o.predict. glm = h2o.glm, ...
-According to KD Nuggets, "Recurrent Neural Networks and Convolutional Neural Networks can be constructed using H2o's deep water project throught others libraries such as Caffe and TensorFlow". "Some of the features of H2o deep learning models are: Automatic Adaptive learning rate, Model regularization, Model checkpointing, Grid Search". Source: 
-%https://www.kdnuggets.com/2018/01/deep-learning-h2o-using-r.html
-$a(x) = b +\sum_{i}{w_i x_i}$
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.65\textwidth]{h2o_package.png}
+     \caption{H2o package}
+\end{figure}
+\paragraph{How to install it}
+<<eval=FALSE, echo=TRUE, highlight=TRUE>>=
+install.packages("h2o")
+library(h2o)
+@
+\textbf{Prerequisites to launch H2o}, 64 bit Java 6+ if you want to open a h2o model that s more than 1 GB. 
+\paragraph{Pros}
+\begin{itemize}
+\item Very easy to use and includes a cross-validation feature and functions for grid search in order to optimize the model's hyperparameters.
+\item 
+\item Allows the use of multiple CPU.
+\item Provide an adaptive learning rate (ADADELTA) which improves the optimization process by having a different learning rate for each neuron.
+\item Provide details and information about the learning progress during the training phase.
+\end{itemize}
+\paragraph{Cons}
+\begin{itemize}
+\item Requires the latest version of Java.
+\end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%% Examples    %%%%%%%%%%%%%%%%%%%%
