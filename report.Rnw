@@ -308,11 +308,6 @@ This package is a complement to R's neural networks packages as it allows to vis
 \item Is not optimized to visualize large neural networks models.
 \end{itemize}
 
-%%%%%%%%%%%%%%%% RSNNS %%%%%%%%%%%%%%%% 
-
-
-%%%%%%%%%%%%%%%% darch %%%%%%%%%%%%%%%% 
-
 
 
 %%%%%%%%%%%%%%%% Deepnet %%%%%%%%%%%%%%%% 
@@ -393,27 +388,49 @@ Avaible from the CRAN platform, this package allows the "implementation of a Rec
 %%%%%%%%%%%%%%%%%%  API  %%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{API packages}
-\ntodo[inline]{à voir si on a encore de la place pour mettre un tableau récapitulatif}
 
 %%%%%%%%%%%%%%%% Keras %%%%%%%%%%%%%%%% 
 \subsubsection{Keras}
+\textbf{Keywords: FNN, CNN, RNN}
 \paragraph{Description}
 This API is really popular in the Python world because it acts like a wrapper of more popular libraries. It might become hard to follow but Keras has multiple backends such as Tensorflow, Theano and MXNET. The \textit{Keras} \cite{keras2019} is mostly use to link the wrapper tool with R. The most useful reference one can get for this workflow is written by two major players ; \textit{Keras} creator and \textit{RStudio} creator. It explains in detail the best practices in order to use \textit{Keras} in R \cite{chollet2018deep}.
 
 \paragraph{Pros}
+\begin{itemize}
+\item Give a lot of flexibility since can basically be use to create all type of deep learning algorithms.
+\item Easy and fast prototyping
+\item Construct models exactly the same way as in python with a minimalist philosphy.
+\item Give the possibility to save everything on the workspace (model, training history, etc.)
+\end{itemize}
 \paragraph{Cons}
+\begin{itemize}
+\item It is an encapsulation of a program inside a python environment.
+\item For some, it might be to high level and limit the customization.
+\item It can only work on top Tensorflow, CNTK and Theano backend.
+\end{itemize}
 
 %%%%%%%%%%%%%%%% Tensorflow %%%%%%%%%%%%%%%% 
 \subsubsection{Tensorflow}
+\textbf{Keywords: FNN, CNN, RNN}
 \paragraph{Description}
-This package is use ...\cite{tensorflow2019}
+This library was created by Google and written in $C++$ and python. It is pretty well known in the python enviromnent. Recently, a R package was created to interface this popular library \cite{tensorflow2019}."'TensorFlow' was originally developed by researchers and engineers working on the Google Brain Team within Google's Machine Intelligence research organization for the purposes of conducting machine learning and deep neural networks research."
 \paragraph{Pros}
-\paragraph{Cons}
+\begin{itemize}
+\item Well documented with a lot of tutorials online.
+\item Pre trained models accessible
+\end{itemize}
 
+\paragraph{Cons}
+\begin{itemize}
+\item Struggles with poor results for speed.
+\item Not a trivial since it is consider a low-level coding
+\end{itemize}
 
 %%%%%%%%%%%%%%%% MXNET %%%%%%%%%%%%%%%% 
-\subsubsection{MXNET}
+\subsubsection{MXNet}
+\textbf{Keywords: FNN, CNN, RNN}
 \paragraph{Description}
+MXNet is a DL framework open source created by Apache. The framework is mostly backed by Intel, Microsoft and MIT. There is a manual\cite{mxnet2020} but itsn't part of the CRAN database.
 \paragraph{Pros}
 \begin{itemize}
 \item Allows the use of multiple CPU and multiple GPU, but it requires to download the package Rtools and a c++ compiler.
@@ -422,18 +439,28 @@ This package is use ...\cite{tensorflow2019}
 \item Provide details and information about the learning progress during the training phase.
 \end{itemize}
 \paragraph{Cons}
+\begin{itemize}
+\item It has a smaller community compared to other popular framework.
+\item A package more use in the industrial projects and not so much in the research community.
+\end{itemize}
 
-\url{https://srdas.github.io/DLBook/DeepLearningWithR.html#using-mxnet}
 
 %%%%%%%%%%%%%%%% rTorch %%%%%%%%%%%%%%%% 
 \subsubsection{rTorch}
-This package is use ...\cite{rTorch2019}
+The rTorch CRAN package is to interface the popular open source machine learning library PyTorch\cite{rTorch2019}. The PyTorch was developed by Facebook AI Research lab (FAIR) and all the original features are available in rTorch.
 
 \paragraph{Description}
 \paragraph{Pros}
+\begin{itemize}
+\item Multiple pre-trained model available 
+\item Simple and easy to use 
+\end{itemize}
 \paragraph{Cons}
-
+\begin{itemize}
+\item It is an encapsulation of a program inside a python environment.
+\end{itemize}
 %%%%%%%%%%%%%%%% H2o %%%%%%%%%%%%%%%% 
+\subsubsection{H2o}
 \paragraph{Description}
 H2o is a "scalable open source machine learning platform that offers parallelized implementations of many supervised, unsupervised and fully automatic machine learning algorithms on clusters". This package allows to run H2o via its REST API through R and offers several advantages such as the ability ot know the computation time remaining when running a model.
 \begin{figure}[h]
