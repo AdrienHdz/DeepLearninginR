@@ -1,4 +1,4 @@
-\documentclass[6pt,letter]{article}\usepackage[]{graphicx}\usepackage[]{color}
+\documentclass[letter]{article}\usepackage[]{graphicx}\usepackage[]{color}
 % maxwidth is the original width if it is less than linewidth
 % otherwise use linewidth (to make sure the graphics do not exceed the margin)
 \makeatletter
@@ -99,7 +99,7 @@
 \setlength{\topmargin}{-0.5in}
 \setlength{\evensidemargin}{-0.25in}
 \setlength{\oddsidemargin}{-0.25in}
-\renewcommand{\baselinestretch}{1.2}
+\renewcommand{\baselinestretch}{1.5}
 \makeatletter
 \makeatother
 \lfoot{} \cfoot{ } \rfoot{{\small{\em Page \thepage \ of \pageref{LastPage}}}}
@@ -214,6 +214,7 @@ A standard architecture of a CNN model is commonly represented this way: We star
 To get a detailed explanation of convolutional neural networks we recommand to read \cite[Chapter 9]{Goodfellow-et-al-2016}.\\
 
 \subsubsection{RNN}
+\ntodo[inline]{Add more info about this topics}
 Recurrent neural networks are a more advanced type of neural networks architecture having proven state-of-art performance for solving tasks related to sequential data such as Natural Language Processing (NLP), anomaly detection and event forecasting. As a key differentiator from feedfoward neural networks, is that RNNs use feedback loops connections instead of feedforward connections and get an internal memory. Indeed, that take as input each step of the sequantial data as well as what they have learned over time. One of their other advantage is to be able to handle input and ouput sequences with different sizes. "A recurrent neural network can be thought of as multiple copies of the same network, each passing a message to a successor" Olah.
 \begin{figure}[h]
     \centering
@@ -224,7 +225,7 @@ Recurrent neural networks are a more advanced type of neural networks architectu
 
 To get a detailed explanation of the theory of recurrent neural networks we recommand to read \cite[Chapter 10]{Goodfellow-et-al-2016}. We also recommand reading this blog post \url{https://colah.github.io/posts/2015-08-Understanding-LSTMs/}
 
-\subsection{How to integrate Deep Learning in R}
+\subsection{Deep Learning integration in R}
 The integration of Deep learning in R can be separate in two part ; (1) The API integration and (2) the standalone R packages. 
 \begin{enumerate}
 \item The API will give the possibility to control externally through R an existing installation. In other words, a software translator for a already known software installation. This approach is not always trivial to install nor to manipulate but in long term will probably give the best flexibility in terms of Deep Learning projects.
@@ -238,55 +239,11 @@ A list of the available resources with installation and examples tutorials can b
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Methodology}
 This section is divided in two;  the dataset description and the benchmark type. The dataset description is mostly to describe what dataset is going to be use for the different type of deep learning algorithms. The second section will describe two indicators in order to compare results of similar algorithms. The first indicator is mostly about a simple accuracy base on the same training and validation dataset and second indicator is about the time it took to execute the same task on differents ressources.
+\subsection{Workflow}
+E
 \subsection{Dataset}
 \subsubsection{FNN}
 For the FNN, the training data will be the well known \textit{Iris} dataset. It contains four covariables and one categorical target variable.
-
-
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlkwd{library}\hlstd{(datasets)}
-\hlstd{library}
-\hlkwd{data}\hlstd{(iris)}
-\hlkwd{set.seed}\hlstd{(}\hlnum{123}\hlstd{)}
-\hlstd{iris}\hlopt{$}\hlstd{Species} \hlkwb{=} \hlkwd{sapply}\hlstd{(}\hlkwd{as.character}\hlstd{(iris}\hlopt{$}\hlstd{Species),}
-                      \hlstd{switch,} \hlstr{"setosa"} \hlstd{=} \hlnum{1}\hlstd{,} \hlstr{"versicolor"} \hlstd{=} \hlnum{2}\hlstd{,} \hlstr{"virginica"} \hlstd{=} \hlnum{3}\hlstd{,} \hlkwc{USE.NAMES} \hlstd{= F)}
-\hlstd{spec} \hlkwb{=} \hlkwd{c}\hlstd{(}\hlkwc{train} \hlstd{=} \hlnum{.7}\hlstd{,}\hlkwc{test} \hlstd{=} \hlnum{.3}\hlstd{)}
-\hlstd{g} \hlkwb{=} \hlkwd{sample}\hlstd{(}\hlkwd{cut}\hlstd{(}\hlkwd{seq}\hlstd{(}\hlkwd{nrow}\hlstd{(iris)),}\hlkwd{nrow}\hlstd{(iris)}\hlopt{*}\hlkwd{cumsum}\hlstd{(}\hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,spec)),}\hlkwc{labels} \hlstd{=} \hlkwd{names}\hlstd{(spec)))}
-\hlstd{data_df} \hlkwb{=} \hlkwd{split}\hlstd{(iris, g)}
-\hlstd{X} \hlkwb{=} \hlkwd{c}\hlstd{()}
-\hlstd{Y} \hlkwb{=} \hlkwd{c}\hlstd{()}
-\hlstd{X}\hlopt{$}\hlstd{train} \hlkwb{=} \hlkwd{as.matrix}\hlstd{(data_df}\hlopt{$}\hlstd{train[,}\hlopt{-}\hlkwd{ncol}\hlstd{(data_df}\hlopt{$}\hlstd{train)])}
-\hlstd{X}\hlopt{$}\hlstd{test} \hlkwb{=} \hlkwd{as.matrix}\hlstd{(data_df}\hlopt{$}\hlstd{test[,}\hlopt{-}\hlkwd{ncol}\hlstd{(data_df}\hlopt{$}\hlstd{test)])}
-\hlstd{Y}\hlopt{$}\hlstd{train} \hlkwb{=} \hlkwd{as.matrix}\hlstd{(data_df}\hlopt{$}\hlstd{train[,}\hlkwd{ncol}\hlstd{(data_df}\hlopt{$}\hlstd{train)])}
-\hlstd{Y}\hlopt{$}\hlstd{test} \hlkwb{=} \hlkwd{as.matrix}\hlstd{(data_df}\hlopt{$}\hlstd{test[,}\hlkwd{ncol}\hlstd{(data_df}\hlopt{$}\hlstd{test)],)}
-\end{alltt}
-\end{kframe}
-\end{knitrout}
-
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlkwd{print}\hlstd{(}\hlkwd{head}\hlstd{(X}\hlopt{$}\hlstd{train))}
-\end{alltt}
-\begin{verbatim}
-##    Sepal.Length Sepal.Width Petal.Length Petal.Width
-## 1           5.1         3.5          1.4         0.2
-## 2           4.9         3.0          1.4         0.2
-## 4           4.6         3.1          1.5         0.2
-## 7           4.6         3.4          1.4         0.3
-## 8           5.0         3.4          1.5         0.2
-## 10          4.9         3.1          1.5         0.1
-\end{verbatim}
-\begin{alltt}
-\hlkwd{print}\hlstd{(}\hlkwd{head}\hlstd{(Y}\hlopt{$}\hlstd{train))}
-\end{alltt}
-\begin{verbatim}
-## [1] 0 0 0 0 0 0
-\end{verbatim}
-\end{kframe}
-\end{knitrout}
 
 \subsubsection{CNN}
 For the CNN, the training data will also be a well known dataset called CIFAR-10. The CIFAR-10 dataset consists of 60000 32x32 colour images in 10 classes, with 6000 images per class. The easiest way in R to download this package is using the Keras API. The training dataset has 50 000 images in three color (Red-Green-Blue) that are 32 pixels by 32 pixels. The testing dataset has a total of 10 000 images
@@ -310,11 +267,19 @@ The dataset use to test an RNN is the IMDB Movie reviews sentiment classificatio
 \end{kframe}
 \end{knitrout}
 
-\begin{comment}
-\subsection{Benchmark}
+
+\subsection{Characteristic}
 \subsubsection{Accuracy}
+\ntodo[inline]{Add more info about this topics}
+
+Classification rate for.
+
 \subsubsection{Time elapsed}
-\end{comment}
+\ntodo[inline]{Add more info about this topics}
+
+Not generalised but gives an idea about the training time.
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%% Resources   %%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%% available   %%%%%%%%%%%%%%%%%%%%
@@ -331,7 +296,6 @@ Like explain earlier this section will be divided in two in order to really diff
 
 %%%%%%%%%%%%%%%% Neuralnet %%%%%%%%%%%%%%%% 
 \subsubsection{Neuralnet package}
-\textbf{Keyword: FNN; Deep FNN}
 \paragraph{Description}
 According to its CRAN description, the package allows the "training of neural networks using the backpropagation, resilient backpropagation with (Riedmiller, 1994) or without weight backtracking (Riedmiller, 1993) or the modified globally convergent version by Anastasiadis et al. (2005). The package allows flexible settings through custom-choice of error and activation function. Furthermore, the calculation of generalized weights (Intrator O \& Intrator N, 1993) is implemented." This package uses $C/C++$ in backend.
 
@@ -356,7 +320,6 @@ According to its CRAN description, the package allows the "training of neural ne
 
 %%%%%%%%%%%%%%%% nnet %%%%%%%%%%%%%%%% 
 \subsubsection{nnet package}
-\textbf{Keyword: FNN}
 \paragraph{Description}
 This package comes from the CRAN platform and allows to build and fit "FNN with a single hidden layer and multinomial log-linear models". This package uses C/C++ in backend.
 \begin{figure}[h]
@@ -379,7 +342,6 @@ This package comes from the CRAN platform and allows to build and fit "FNN with 
 %%%%%%%%%%%%%%%% NeuralNetTools %%%%%%%%%%%%%%%% 
 
 \subsubsection{NeuralNetTools package}
-\textbf{Keywords: Visualization; Variable importance; Sensitivity}
 \paragraph{Description}
 This package is a complement to R's neural networks packages as it allows to visualize and perform analysis on neural network models. "Functions are available for plooting, quantifying variable importance, conducting a sensitivity analysis, and obtaining a simple list of model weights."
 \begin{figure}[H]
@@ -413,7 +375,6 @@ This package is a complement to R's neural networks packages as it allows to vis
 
 %%%%%%%%%%%%%%%% Deepnet %%%%%%%%%%%%%%%% 
 \subsubsection{Deepnet package}
-\textbf{Keywords: FNN; RBM; DBN; Autoencoder}
 \paragraph{Description}
 This package is available on the CRAN platform and has been written specifcally written for R. It allows "implement som deep learning architectures and neural network algorithms, including backpropagation, Restricted Boltzmann Machine (RBM), Deep Belief Network (DBN) and Deep autoencoder".
 \begin{figure}[h]
@@ -440,7 +401,6 @@ This package is available on the CRAN platform and has been written specifcally 
 
 %%%%%%%%%%%%%%%% brnn %%%%%%%%%%%%%%%% 
 \subsubsection{brnn package}
-\textbf{Keywords: Bayesian Regularization; FNN}
 \paragraph{Description}
 This package available on the platform CRAN, allows to perform "Baeysian regularized neural networks inclusing both additive and dominance effects, and allows to takes advantage of multicore architectures via a parallel computing approach using openMP for the computations". (Pérez-Rodriguez, ...)
 \begin{figure}[h]
@@ -465,7 +425,6 @@ This package available on the platform CRAN, allows to perform "Baeysian regular
 
 %%%%%%%%%%%%%%%% rnn %%%%%%%%%%%%%%%% 
 \subsubsection{rnn package}
-\textbf{Keywords: RNN}
 \textbf{Installation:} You will need to install the diges package first through the function \textbf{install.packages(digest)} in order to download the rnn package.
 \paragraph{Description}
 Avaible from the CRAN platform, this package allows the "implementation of a Recurrent Neural Network architectures in native R, including Long-Short Term Memory (LSTM), Gated Recurrent Unit (GRU) and vanilla RNN. 
@@ -492,7 +451,6 @@ Avaible from the CRAN platform, this package allows the "implementation of a Rec
 
 %%%%%%%%%%%%%%%% Keras %%%%%%%%%%%%%%%% 
 \subsubsection{Keras}
-\textbf{Keywords: FNN, CNN, RNN}
 \paragraph{Description}
 This API is really popular in the Python world because it acts like a wrapper of more popular libraries. It might become hard to follow but Keras has multiple backends such as Tensorflow, Theano and MXNET. The \textit{Keras} \cite{keras2019} is mostly use to link the wrapper tool with R. The most useful reference one can get for this workflow is written by two major players ; \textit{Keras} creator and \textit{RStudio} creator. It explains in detail the best practices in order to use \textit{Keras} in R \cite{chollet2018deep}.
 
@@ -512,7 +470,6 @@ This API is really popular in the Python world because it acts like a wrapper of
 
 %%%%%%%%%%%%%%%% Tensorflow %%%%%%%%%%%%%%%% 
 \subsubsection{Tensorflow}
-\textbf{Keywords: FNN, CNN, RNN}
 \paragraph{Description}
 This library was created by Google and written in $C++$ and python. It is pretty well known in the python enviromnent. Recently, a R package was created to interface this popular library \cite{tensorflow2019}."'TensorFlow' was originally developed by researchers and engineers working on the Google Brain Team within Google's Machine Intelligence research organization for the purposes of conducting machine learning and deep neural networks research."
 \paragraph{Pros}
@@ -529,7 +486,6 @@ This library was created by Google and written in $C++$ and python. It is pretty
 
 %%%%%%%%%%%%%%%% MXNET %%%%%%%%%%%%%%%% 
 \subsubsection{MXNet}
-\textbf{Keywords: FNN, CNN, RNN}
 \paragraph{Description}
 MXNet is a DL framework open source created by Apache. The framework is mostly backed by Intel, Microsoft and MIT. There is a manual\cite{mxnet2020} but itsn't part of the CRAN database.
 \paragraph{Pros}
@@ -548,17 +504,15 @@ MXNet is a DL framework open source created by Apache. The framework is mostly b
 
 %%%%%%%%%%%%%%%% rTorch %%%%%%%%%%%%%%%% 
 \subsubsection{rTorch}
-The rTorch CRAN package is to interface the popular open source machine learning library PyTorch\cite{rTorch2019}. The PyTorch was developed by Facebook AI Research lab (FAIR) and all the original features are available in rTorch.
-
 \paragraph{Description}
+The rTorch CRAN package is to interface the popular open source machine learning library PyTorch\cite{rTorch2019}. The PyTorch was developed by Facebook AI Research lab (FAIR) and all the original features are available in rTorch.
 \paragraph{Pros}
 \begin{itemize}
-\item Multiple pre-trained model available 
-\item Simple and easy to use 
+\item Large amount of functions to manipulate tensors.
 \end{itemize}
 \paragraph{Cons}
 \begin{itemize}
-\item It is an encapsulation of a program inside a python environment.
+\item Doesn't have training capabilities since it is only for manipulations.
 \end{itemize}
 %%%%%%%%%%%%%%%% H2o %%%%%%%%%%%%%%%% 
 \subsubsection{H2o}
@@ -589,6 +543,7 @@ H2o is a "scalable open source machine learning platform that offers parallelize
 %%%%%%%%%%%%%%%%%% Examples    %%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Examples}
+
 \label{sec:examples}
 In order to give concrete deep learning examples, four resources were selected for tutorials; Keras using Tensorflow backend, H2O, rTorch and MXNET.
 
@@ -622,6 +577,29 @@ If you want to take advantage of your GPU (Ensure that you have the hardware pre
 \end{kframe}
 \end{knitrout}
 \subsubsection{FNN}
+
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{library}\hlstd{(datasets)}
+\hlstd{library}
+\hlkwd{data}\hlstd{(iris)}
+\hlkwd{set.seed}\hlstd{(}\hlnum{123}\hlstd{)}
+\hlstd{iris}\hlopt{$}\hlstd{Species} \hlkwb{=} \hlkwd{sapply}\hlstd{(}\hlkwd{as.character}\hlstd{(iris}\hlopt{$}\hlstd{Species),}
+                      \hlstd{switch,} \hlstr{"setosa"} \hlstd{=} \hlnum{1}\hlstd{,} \hlstr{"versicolor"} \hlstd{=} \hlnum{2}\hlstd{,} \hlstr{"virginica"} \hlstd{=} \hlnum{3}\hlstd{,} \hlkwc{USE.NAMES} \hlstd{= F)}
+\hlstd{spec} \hlkwb{=} \hlkwd{c}\hlstd{(}\hlkwc{train} \hlstd{=} \hlnum{.7}\hlstd{,}\hlkwc{test} \hlstd{=} \hlnum{.3}\hlstd{)}
+\hlstd{g} \hlkwb{=} \hlkwd{sample}\hlstd{(}\hlkwd{cut}\hlstd{(}\hlkwd{seq}\hlstd{(}\hlkwd{nrow}\hlstd{(iris)),}\hlkwd{nrow}\hlstd{(iris)}\hlopt{*}\hlkwd{cumsum}\hlstd{(}\hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,spec)),}\hlkwc{labels} \hlstd{=} \hlkwd{names}\hlstd{(spec)))}
+\hlstd{data_df} \hlkwb{=} \hlkwd{split}\hlstd{(iris, g)}
+\hlstd{X} \hlkwb{=} \hlkwd{c}\hlstd{()}
+\hlstd{Y} \hlkwb{=} \hlkwd{c}\hlstd{()}
+\hlstd{X}\hlopt{$}\hlstd{train} \hlkwb{=} \hlkwd{as.matrix}\hlstd{(data_df}\hlopt{$}\hlstd{train[,}\hlopt{-}\hlkwd{ncol}\hlstd{(data_df}\hlopt{$}\hlstd{train)])}
+\hlstd{X}\hlopt{$}\hlstd{test} \hlkwb{=} \hlkwd{as.matrix}\hlstd{(data_df}\hlopt{$}\hlstd{test[,}\hlopt{-}\hlkwd{ncol}\hlstd{(data_df}\hlopt{$}\hlstd{test)])}
+\hlstd{Y}\hlopt{$}\hlstd{train} \hlkwb{=} \hlkwd{as.matrix}\hlstd{(data_df}\hlopt{$}\hlstd{train[,}\hlkwd{ncol}\hlstd{(data_df}\hlopt{$}\hlstd{train)])}
+\hlstd{Y}\hlopt{$}\hlstd{test} \hlkwb{=} \hlkwd{as.matrix}\hlstd{(data_df}\hlopt{$}\hlstd{test[,}\hlkwd{ncol}\hlstd{(data_df}\hlopt{$}\hlstd{test)],)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
@@ -665,7 +643,7 @@ This package of the possibility to store the training history :
 
 
 {\ttfamily\noindent\itshape\color{messagecolor}{\#\# `geom\_smooth()` using formula 'y \textasciitilde{} x'}}\end{kframe}
-\includegraphics[width=4in]{figure/unnamed-chunk-10-1} 
+\includegraphics[width=4in]{figure/unnamed-chunk-9-1} 
 
 \end{knitrout}
 
@@ -687,6 +665,194 @@ and the time it took to train is :
 \end{knitrout}
 
 \subsubsection{CNN}
+The first step consists of loading the CIFAR-10 dataset and creating a train and a test set.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{cifar10} \hlkwb{=} \hlkwd{dataset_cifar10}\hlstd{()}
+\hlcom{# RGB values are usually encoded between 0 and 255.}
+\hlcom{# A good practice is to scale them to a value from 0 and 1 b dividing the RGB values by 255.}
+\hlstd{X_train} \hlkwb{<-} \hlstd{cifar_10}\hlopt{$}\hlstd{train}\hlopt{$}\hlstd{x}\hlopt{/}\hlnum{255}
+\hlstd{X_test} \hlkwb{<-} \hlstd{cifar_10}\hlopt{$}\hlstd{test}\hlopt{$}\hlstd{x}\hlopt{/}\hlnum{255}
+
+\hlcom{# cifar_10 class labels ranging from 0 to 9 are downloaded as integer}
+\hlcom{# We will use the keras function "to_categorical" to encode them as one-hot.}
+\hlstd{Y_train} \hlkwb{<-} \hlkwd{to_categorical}\hlstd{(cifar_10}\hlopt{$}\hlstd{train}\hlopt{$}\hlstd{y,} \hlkwc{num_classes} \hlstd{=} \hlnum{10}\hlstd{)}
+\hlstd{Y_test} \hlkwb{<-} \hlkwd{to_categorical}\hlstd{(cifar_10}\hlopt{$}\hlstd{test}\hlopt{$}\hlstd{y,} \hlkwc{num_classes} \hlstd{=} \hlnum{10}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+To get an understanding of our data we can plot the 6 first images with a for loop.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{par}\hlstd{(}\hlkwc{mfcol}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,}\hlnum{3}\hlstd{))}
+\hlkwd{par}\hlstd{(}\hlkwc{mar}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,} \hlnum{0}\hlstd{,} \hlnum{1}\hlstd{,} \hlnum{0}\hlstd{),} \hlkwc{xaxs} \hlstd{=} \hlstr{'i'}\hlstd{,} \hlkwc{yaxs}\hlstd{=}\hlstr{'i'}\hlstd{)}
+\hlkwa{for} \hlstd{(i} \hlkwa{in} \hlnum{1}\hlopt{:}\hlnum{6}\hlstd{) \{}
+  \hlkwd{plot}\hlstd{(}\hlkwd{as.raster}\hlstd{(X_train[i,,,]))}
+\hlstd{\}}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=50mm,scale=0.5] {figure/Cifar_10_data_images.png}
+\end{figure}
+We can now start to implement our CNN model!
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# Model implementation}
+\hlstd{model} \hlkwb{<-} \hlkwd{keras_model_sequential}\hlstd{()}
+
+\hlstd{model} \hlopt{%>%}
+  \hlcom{# We start with a first 2D convolutional layer, having a kernel of size 3x3.}
+  \hlcom{# We use padding = same, meaning that our output tensor will have the same dimensions as our }
+  \hlcom{#input tensor.}
+  \hlcom{# Our input_shape is the dimension of each of our image. Here we have a 32x32x3 image (RGB).}
+  \hlcom{# For black and white images use only 1 dimension (e.g. 32x32x1)}
+  \hlkwd{layer_conv_2d}\hlstd{(}\hlkwc{filter} \hlstd{=} \hlnum{32}\hlstd{,} \hlkwc{kernel_size} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{3}\hlstd{,}\hlnum{3}\hlstd{),} \hlkwc{padding} \hlstd{=} \hlstr{"same"}\hlstd{,}\hlkwc{input_shape} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{32}\hlstd{,} \hlnum{32}\hlstd{,} \hlnum{3}\hlstd{))} \hlopt{%>%}
+  \hlkwd{layer_activation}\hlstd{(}\hlstr{"relu"}\hlstd{)} \hlopt{%>%}
+  \hlkwd{layer_batch_normalization}\hlstd{()} \hlopt{%>%}
+
+  \hlcom{# We use a 2nd convolutional layer where we increase the number of kernel by 2 (32 -> 64)}
+  \hlkwd{layer_conv_2d}\hlstd{(}\hlkwc{filter} \hlstd{=} \hlnum{64}\hlstd{,} \hlkwc{kernel_size} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{3}\hlstd{,}\hlnum{3}\hlstd{))} \hlopt{%>%}
+  \hlkwd{layer_activation}\hlstd{(}\hlstr{"relu"}\hlstd{)} \hlopt{%>%}
+  \hlkwd{layer_batch_normalization}\hlstd{()} \hlopt{%>%}
+
+  \hlcom{# We then use a maxpooling layer in order to reduce the dimentionnality of the }
+  \hlcom{#convolutional layer.}
+  \hlkwd{layer_max_pooling_2d}\hlstd{(}\hlkwc{pool_size} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,}\hlnum{2}\hlstd{))} \hlopt{%>%}
+  \hlkwd{layer_dropout}\hlstd{(}\hlnum{0.25}\hlstd{)} \hlopt{%>%}
+
+  \hlcom{# We then flatten the maxpooling layer into a vector that will be feed into a FNN.}
+  \hlcom{# We set the first layer of our FNN to have 256 hidden neurons.}
+  \hlkwd{layer_flatten}\hlstd{()} \hlopt{%>%}
+  \hlkwd{layer_dense}\hlstd{(}\hlnum{256}\hlstd{)} \hlopt{%>%}
+  \hlkwd{layer_activation}\hlstd{(}\hlstr{"relu"}\hlstd{)} \hlopt{%>%}
+  \hlcom{#layer_batch_normalization() %>%}
+  \hlkwd{layer_dropout}\hlstd{(}\hlnum{0.5}\hlstd{)} \hlopt{%>%}
+
+  \hlcom{# We set the output layer of our FNN to have 10 neurons, one for each of the 10 class we }
+  \hlcom{#want to predict. We use softmax in order to scale all the output values betwen 0 and 1, }
+  \hlcom{#and that the sum of all of them is equal to 1.}
+  \hlkwd{layer_dense}\hlstd{(}\hlnum{10}\hlstd{)} \hlopt{%>%}
+  \hlkwd{layer_activation}\hlstd{(}\hlstr{"softmax"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+Our model will have 3,709,002 parameters and can be visualized:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{summary}(model)
+
+Model: \hlstr{"sequential_12"}
+______________________________________________________________________________
+\hlkwd{Layer} (type)                       Output Shape                   Param \hlcom{#     }
+==============================================================================
+\hlkwd{conv2d_54} (Conv2D)                 (None, 32, 32, 32)             896         
+______________________________________________________________________________
+\hlkwd{activation_76} (Activation)         (None, 32, 32, 32)             0           
+______________________________________________________________________________
+\hlkwd{batch_normalization_52} (\hlkwd{BatchNorma} (None, 32, 32, 32)             128         
+______________________________________________________________________________
+\hlkwd{conv2d_55} (Conv2D)                 (None, 30, 30, 64)             18496       
+______________________________________________________________________________
+\hlkwd{activation_77} (Activation)         (None, 30, 30, 64)             0           
+______________________________________________________________________________
+\hlkwd{batch_normalization_53} (\hlkwd{BatchNorma} (None, 30, 30, 64)             256         
+______________________________________________________________________________
+\hlkwd{max_pooling2d_26} (MaxPooling2D)    (None, 15, 15, 64)             0           
+______________________________________________________________________________
+\hlkwd{dropout_38} (Dropout)               (None, 15, 15, 64)             0           
+______________________________________________________________________________
+\hlkwd{flatten_12} (Flatten)               (None, 14400)                  0           
+______________________________________________________________________________
+\hlkwd{dense_24} (Dense)                   (None, 256)                    3686656     
+______________________________________________________________________________
+\hlkwd{activation_78} (Activation)         (None, 256)                    0           
+______________________________________________________________________________
+\hlkwd{dropout_39} (Dropout)               (None, 256)                    0           
+______________________________________________________________________________
+\hlkwd{dense_25} (Dense)                   (None, 10)                     2570        
+______________________________________________________________________________
+\hlkwd{activation_79} (Activation)         (None, 10)                     0           
+==============================================================================
+Total params: 3,709,002
+Trainable params: 3,708,810
+Non-trainable params: 192
+______________________________________________________________________________
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+We then set our hyperparameters to use RMSprop as the optimizater with a learning rate of 1e-3 and a decay of 1e-6. We set our batch size to 64 to use train our model with 64 images per iteration. We set epoch to 10, our model will go trough the entire training set 10 times. 20\% of the training set will be used as validation set, in order to tune the parameters without biais.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{opt} \hlkwb{<-} \hlkwd{optimizer_rmsprop}\hlstd{(}\hlkwc{lr} \hlstd{=} \hlnum{1e-3}\hlstd{,} \hlkwc{decay} \hlstd{=} \hlnum{1e-6}\hlstd{)}
+
+\hlstd{batch_size} \hlkwb{<-} \hlnum{64}
+\hlstd{epochs} \hlkwb{<-} \hlnum{10}
+\hlstd{validation} \hlkwb{<-} \hlnum{0.2}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+We will us as loss function the categorical\_crossentropy that works very well with our softmax activaction function in order to peform multi label classification. We will look at the accuracy as the final metric to check the performance of our model on the test dataset.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{model} \hlopt{%>%}
+    \hlkwd{compile}\hlstd{(}\hlkwc{loss} \hlstd{=} \hlstr{"categorical_crossentropy"}\hlstd{,}
+            \hlkwc{optimizer} \hlstd{= opt,} \hlkwc{metrics} \hlstd{=} \hlstr{"accuracy"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+Now, we will train our model, and we will store it into a list called \textbf{history}. 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{history} \hlkwb{<-} \hlstd{model} \hlopt{%>%} \hlkwd{fit}\hlstd{(}
+    \hlstd{X_train, Y_train,}
+    \hlkwc{batch_size} \hlstd{= batch_size,}
+    \hlkwc{epochs} \hlstd{= epochs,}
+    \hlkwc{validation_split} \hlstd{= validation,}
+    \hlkwc{shuffle} \hlstd{=} \hlnum{TRUE}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+By default keras plot our model loss and accuracy per epoch on the training set and on the validation set.\\
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.7]{figure/CNN_keras_graph.png}
+\end{figure}
+Then, we will evaluate our model performance on our test set.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+model %>% \hlkwd{evaluate}(X_test, Y_test,verbose = 0)
+
+$loss
+[1] 1.091844
+
+$accuracy
+[1] 0.6255
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+We can see that our accuracy is 62.55\%.\\
+
+In order to predict with our model on a new dataset, we can you Keras\'s \textbf{predict\_classes} function.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{Y_predicted} \hlkwb{<-} \hlstd{model} \hlopt{%>%} \hlkwd{predict_classes}\hlstd{(X_test)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
 \subsubsection{RNN}
 
 %%%%%%%%%%%%%%%% H2o %%%%%%%%%%%%%%%% 
@@ -822,13 +988,16 @@ and the time it took to train is :
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
-\subsubsection{CNN}
-\subsubsection{RNN}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%% Discussion  %%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Discussion}
+\subsection{FNN}
+\subsection{CNN}
+\subsection{RNN}
+\section{RNN}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%% Biblio      %%%%%%%%%%%%%%%%%%%%

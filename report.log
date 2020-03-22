@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/W32TeX) (preloaded format=xelatex 2020.3.17)  22 MAR 2020 12:13
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/W32TeX) (preloaded format=xelatex 2020.3.17)  22 MAR 2020 15:35
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -936,7 +936,7 @@ tim
 )
 
 LaTeX Warning: Unused global option(s):
-    [6pt,letter].
+    [letter].
 
 (./report.aux
 
@@ -1029,6 +1029,7 @@ File: figure/feedforward_neural_networks.png Graphic file (type bmp)
  [1]
 File: figure/activation_function_output.png Graphic file (type bmp)
 <figure/activation_function_output.png>
+ [2]
 File: figure/CNN_process.png Graphic file (type bmp)
 <figure/CNN_process.png>
 
@@ -1036,151 +1037,220 @@ Underfull \hbox (badness 10000) in paragraph at lines 203--210
 
  []
 
-[2]
+
 Underfull \hbox (badness 10000) in paragraph at lines 214--215
 
  []
 
+[3]
+Package hyperref Info: bookmark level for unknown todo defaults to 0 on input l
+ine 217.
+
+Overfull \hbox (29.49998pt too wide) in paragraph at lines 217--217
+[] 
+ []
+
 File: figure/RNN_process.png Graphic file (type bmp)
 <figure/RNN_process.png>
-[3]
 
-LaTeX Warning: Reference `avail_ressour' on page 4 undefined on input line 233.
-
+LaTeX Warning: Reference `avail_ressour' on page 4 undefined on input line 234.
 
 
-LaTeX Warning: Reference `examples' on page 4 undefined on input line 233.
 
-
-Package xcolor Warning: Incompatible color definition on input line 247.
-
-LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 249.
-
-Package xcolor Warning: Incompatible color definition on input line 269.
+LaTeX Warning: Reference `examples' on page 4 undefined on input line 234.
 
 [4]
 
-Package xcolor Warning: Incompatible color definition on input line 294.
+Package xcolor Warning: Incompatible color definition on input line 251.
+
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 253.
+
+Package xcolor Warning: Incompatible color definition on input line 262.
 
 
-Package xcolor Warning: Incompatible color definition on input line 305.
+Overfull \hbox (29.49998pt too wide) in paragraph at lines 273--273
+[] 
+ []
 
-Excluding 'comment' comment.
-Package hyperref Info: bookmark level for unknown todo defaults to 0 on input l
-ine 330.
 
-Overfull \hbox (29.49998pt too wide) in paragraph at lines 330--330
+Overfull \hbox (29.49998pt too wide) in paragraph at lines 278--278
+[] 
+ []
+
+[5]
+Overfull \hbox (29.49998pt too wide) in paragraph at lines 295--295
 [] 
  []
 
 File: figure/neuralnet_package.png Graphic file (type bmp)
 <figure/neuralnet_package.png>
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[5]
+[6]
 File: figure/nnet_package.png Graphic file (type bmp)
 <figure/nnet_package.png>
- [6]
+ [7]
 File: figure/plotnet.png Graphic file (type bmp)
 <figure/plotnet.png>
 File: figure/garson_algorithm.png Graphic file (type bmp)
 <figure/garson_algorithm.png>
 
-Overfull \hbox (2.21999pt too wide) in paragraph at lines 386--394
+Overfull \hbox (2.21999pt too wide) in paragraph at lines 348--356
 []$[]$ $[]$ 
  []
 
 File: figure/deepnet_package.png Graphic file (type bmp)
 <figure/deepnet_package.png>
-[7]
+[8]
 File: figure/brnn_package.png Graphic file (type bmp)
 <figure/brnn_package.png>
- [8]
-Overfull \hbox (47.50227pt too wide) in paragraph at lines 468--470
-\TU/lmr/bx/n/10 Keywords: RNN Installation: \TU/lmr/m/n/10 You will need to ins
-tall the diges package first through the function \TU/lmr/bx/n/10 install.packa
-ges(digest)
- []
-
+ [9]
 File: figure/rnn_package.png Graphic file (type bmp)
 <figure/rnn_package.png>
-[9] [10]
+ [10] [11]
+Overfull \hbox (2.35895pt too wide) in paragraph at lines 508--509
+ []\TU/lmr/bx/n/10 Description[] \TU/lmr/m/n/10 The rTorch CRAN package is to i
+nterface the popular open source machine learning library PyTorch[[]].
+ []
+
 File: figure/h2o_package.png Graphic file (type bmp)
 <figure/h2o_package.png>
- [11]
-
-Package xcolor Warning: Incompatible color definition on input line 600.
-
-
-Package xcolor Warning: Incompatible color definition on input line 608.
-
-
-Package xcolor Warning: Incompatible color definition on input line 618.
-
-
-Package xcolor Warning: Incompatible color definition on input line 626.
-
 [12]
 
-Package xcolor Warning: Incompatible color definition on input line 661.
+Package xcolor Warning: Incompatible color definition on input line 555.
 
 
-Package xcolor Warning: Incompatible color definition on input line 667.
+Package xcolor Warning: Incompatible color definition on input line 563.
 
-File: figure/unnamed-chunk-10-1.pdf Graphic file (type pdf)
-<use figure/unnamed-chunk-10-1.pdf>
 
-Package xcolor Warning: Incompatible color definition on input line 674.
+Package xcolor Warning: Incompatible color definition on input line 573.
 
 [13]
 
-Package xcolor Warning: Incompatible color definition on input line 682.
+Package xcolor Warning: Incompatible color definition on input line 583.
 
 
-Package xcolor Warning: Incompatible color definition on input line 696.
+Package xcolor Warning: Incompatible color definition on input line 604.
 
 
-Package xcolor Warning: Incompatible color definition on input line 708.
+Underfull \vbox (badness 1158) detected at line 634
+ []
 
 [14]
 
-Package xcolor Warning: Incompatible color definition on input line 743.
+Package xcolor Warning: Incompatible color definition on input line 639.
 
 
-Package xcolor Warning: Incompatible color definition on input line 751.
+Package xcolor Warning: Incompatible color definition on input line 645.
+
+File: figure/unnamed-chunk-9-1.pdf Graphic file (type pdf)
+<use figure/unnamed-chunk-9-1.pdf>
+
+Package xcolor Warning: Incompatible color definition on input line 652.
 
 
-Package xcolor Warning: Incompatible color definition on input line 766.
+Package xcolor Warning: Incompatible color definition on input line 660.
+
+[15]
+
+Package xcolor Warning: Incompatible color definition on input line 670.
 
 
-Package xcolor Warning: Incompatible color definition on input line 777.
+Package xcolor Warning: Incompatible color definition on input line 687.
+
+File: figure/Cifar_10_data_images.png Graphic file (type bmp)
+<figure/Cifar_10_data_images.png>
+
+Package xcolor Warning: Incompatible color definition on input line 703.
 
 
-Overfull \hbox (55.86pt too wide) in paragraph at lines 779--779
+Overfull \hbox (13.86pt too wide) in paragraph at lines 714--714
+[]  []\TU/lmtt/b/n/10 layer_conv_2d[][]\TU/lmtt/m/n/10 ([][]filter[] []=[] []32
+[][],[] []kernel_size[] []=[] []\TU/lmtt/b/n/10 c[][]\TU/lmtt/m/n/10 ([][]3[][]
+,[][]3[][]),[] []padding[] []=[] []"same"[][],[][]input_shape[] []=[] []\TU/lmt
+t/b/n/10 c[][]\TU/lmtt/m/n/10 ([][]32[][],[] []32[][],[] []3[][]))[] []%>%[][] 
+
+ []
+
+[16]
+
+Package xcolor Warning: Incompatible color definition on input line 746.
+
+
+Underfull \vbox (badness 4366) detected at line 787
+ []
+
+[17]
+
+Package xcolor Warning: Incompatible color definition on input line 792.
+
+[18]
+
+Package xcolor Warning: Incompatible color definition on input line 804.
+
+
+Package xcolor Warning: Incompatible color definition on input line 814.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 825--826
+
+ []
+
+File: figure/CNN_keras_graph.png Graphic file (type bmp)
+<figure/CNN_keras_graph.png>
+
+Package xcolor Warning: Incompatible color definition on input line 833.
+
+[19]
+Underfull \hbox (badness 10000) in paragraph at lines 845--846
+
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 849.
+
+
+Package xcolor Warning: Incompatible color definition on input line 862.
+
+
+Package xcolor Warning: Incompatible color definition on input line 874.
+
+[20]
+
+Package xcolor Warning: Incompatible color definition on input line 909.
+
+
+Package xcolor Warning: Incompatible color definition on input line 917.
+
+
+Package xcolor Warning: Incompatible color definition on input line 932.
+
+
+Package xcolor Warning: Incompatible color definition on input line 943.
+
+[21]
+Overfull \hbox (55.86pt too wide) in paragraph at lines 945--945
 [][]\TU/lmtt/b/n/10 install.packages[][]\TU/lmtt/m/n/10 ([][]"https://s3.ca-cen
 tral-1.amazonaws.com/jeremiedb/share/mxnet/CPU/mxnet.zip"[][],[] []repos[] []=[
 ] []\TU/lmtt/b/n/10 NULL[][]\TU/lmtt/m/n/10 )[][] 
  []
 
-[15]
 
-Package xcolor Warning: Incompatible color definition on input line 811.
+Package xcolor Warning: Incompatible color definition on input line 977.
 
 
-Package xcolor Warning: Incompatible color definition on input line 819.
+Package xcolor Warning: Incompatible color definition on input line 985.
 
-[16] (./report.bbl) 
+[22] [23] (./report.bbl) 
 AED: lastpage setting LastPage
-[17]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 839.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 839.
+[24]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1008.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1008.
  (./report.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 839.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 839.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1008.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1008.
+
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: C6C0F4855516F0DA6CD7E9ADBE3C9E3D;2840.
+(rerunfilecheck)             Checksum: 7B48A215BFEF8DFC352A6791D1643FEE;3166.
 
 
 LaTeX Warning: There were undefined references.
@@ -1190,12 +1260,12 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 24494 strings out of 481765
- 450402 string characters out of 5934263
- 697512 words of memory out of 5000000
- 40990 multiletter control sequences out of 15000+600000
+ 24512 strings out of 481765
+ 450881 string characters out of 5934263
+ 701641 words of memory out of 5000000
+ 41006 multiletter control sequences out of 15000+600000
  539154 words of font info for 65 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 68i,14n,83p,991b,848s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 68i,14n,83p,991b,850s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on report.pdf (18 pages).
+Output written on report.pdf (25 pages).
