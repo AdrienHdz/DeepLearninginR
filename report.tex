@@ -241,12 +241,50 @@ This section is divided in two;  the dataset description and the benchmark type.
 \subsection{Dataset}
 \subsubsection{FNN}
 For the FNN, the training data will be the well known \textit{Iris} dataset. It contains four covariables and one categorical target variable.
+
+
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlkwd{library}\hlstd{(datasets)}
+\hlstd{library}
 \hlkwd{data}\hlstd{(iris)}
+\hlkwd{set.seed}\hlstd{(}\hlnum{123}\hlstd{)}
+\hlstd{iris}\hlopt{$}\hlstd{Species} \hlkwb{=} \hlkwd{sapply}\hlstd{(}\hlkwd{as.character}\hlstd{(iris}\hlopt{$}\hlstd{Species),}
+                      \hlstd{switch,} \hlstr{"setosa"} \hlstd{=} \hlnum{1}\hlstd{,} \hlstr{"versicolor"} \hlstd{=} \hlnum{2}\hlstd{,} \hlstr{"virginica"} \hlstd{=} \hlnum{3}\hlstd{,} \hlkwc{USE.NAMES} \hlstd{= F)}
+\hlstd{spec} \hlkwb{=} \hlkwd{c}\hlstd{(}\hlkwc{train} \hlstd{=} \hlnum{.7}\hlstd{,}\hlkwc{test} \hlstd{=} \hlnum{.3}\hlstd{)}
+\hlstd{g} \hlkwb{=} \hlkwd{sample}\hlstd{(}\hlkwd{cut}\hlstd{(}\hlkwd{seq}\hlstd{(}\hlkwd{nrow}\hlstd{(iris)),}\hlkwd{nrow}\hlstd{(iris)}\hlopt{*}\hlkwd{cumsum}\hlstd{(}\hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,spec)),}\hlkwc{labels} \hlstd{=} \hlkwd{names}\hlstd{(spec)))}
+\hlstd{data_df} \hlkwb{=} \hlkwd{split}\hlstd{(iris, g)}
+\hlstd{X} \hlkwb{=} \hlkwd{c}\hlstd{()}
+\hlstd{Y} \hlkwb{=} \hlkwd{c}\hlstd{()}
+\hlstd{X}\hlopt{$}\hlstd{train} \hlkwb{=} \hlkwd{as.matrix}\hlstd{(data_df}\hlopt{$}\hlstd{train[,}\hlopt{-}\hlkwd{ncol}\hlstd{(data_df}\hlopt{$}\hlstd{train)])}
+\hlstd{X}\hlopt{$}\hlstd{test} \hlkwb{=} \hlkwd{as.matrix}\hlstd{(data_df}\hlopt{$}\hlstd{test[,}\hlopt{-}\hlkwd{ncol}\hlstd{(data_df}\hlopt{$}\hlstd{test)])}
+\hlstd{Y}\hlopt{$}\hlstd{train} \hlkwb{=} \hlkwd{as.matrix}\hlstd{(data_df}\hlopt{$}\hlstd{train[,}\hlkwd{ncol}\hlstd{(data_df}\hlopt{$}\hlstd{train)])}
+\hlstd{Y}\hlopt{$}\hlstd{test} \hlkwb{=} \hlkwd{as.matrix}\hlstd{(data_df}\hlopt{$}\hlstd{test[,}\hlkwd{ncol}\hlstd{(data_df}\hlopt{$}\hlstd{test)],)}
 \end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{print}\hlstd{(}\hlkwd{head}\hlstd{(X}\hlopt{$}\hlstd{train))}
+\end{alltt}
+\begin{verbatim}
+##    Sepal.Length Sepal.Width Petal.Length Petal.Width
+## 1           5.1         3.5          1.4         0.2
+## 2           4.9         3.0          1.4         0.2
+## 4           4.6         3.1          1.5         0.2
+## 7           4.6         3.4          1.4         0.3
+## 8           5.0         3.4          1.5         0.2
+## 10          4.9         3.1          1.5         0.1
+\end{verbatim}
+\begin{alltt}
+\hlkwd{print}\hlstd{(}\hlkwd{head}\hlstd{(Y}\hlopt{$}\hlstd{train))}
+\end{alltt}
+\begin{verbatim}
+## [1] 0 0 0 0 0 0
+\end{verbatim}
 \end{kframe}
 \end{knitrout}
 
@@ -539,10 +577,12 @@ H2o is a "scalable open source machine learning platform that offers parallelize
 \item Allows the use of multiple CPU.
 \item Provide an adaptive learning rate (ADADELTA) which improves the optimization process by having a different learning rate for each neuron.
 \item Provide details and information about the learning progress during the training phase.
+\item Really fast computation training
 \end{itemize}
 \paragraph{Cons}
 \begin{itemize}
 \item Requires the latest version of Java.
+\item The deep learning package has a huge amount of parameters, however, it doesn't give all the capability of other resources.
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -582,6 +622,70 @@ If you want to take advantage of your GPU (Ensure that you have the hardware pre
 \end{kframe}
 \end{knitrout}
 \subsubsection{FNN}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{library}\hlstd{(keras)}
+
+\hlcom{# create model}
+\hlstd{model_keras} \hlkwb{=} \hlkwd{keras_model_sequential}\hlstd{()}
+\hlstd{model_keras} \hlopt{%>%}
+  \hlkwd{layer_dense}\hlstd{(}\hlkwc{units} \hlstd{=} \hlnum{8}\hlstd{,} \hlkwc{activation} \hlstd{=} \hlstr{'relu'}\hlstd{,} \hlkwc{input_shape} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{4}\hlstd{))} \hlopt{%>%}
+  \hlkwd{layer_dense}\hlstd{(}\hlkwc{units} \hlstd{=} \hlnum{3}\hlstd{,} \hlkwc{activation} \hlstd{=} \hlstr{'softmax'}\hlstd{)}
+\hlcom{# Compile model}
+\hlstd{model_keras} \hlopt{%>%} \hlkwd{compile}\hlstd{(}
+  \hlkwc{loss} \hlstd{=} \hlstr{'categorical_crossentropy'}\hlstd{,}
+  \hlkwc{optimizer} \hlstd{=} \hlkwd{optimizer_adam}\hlstd{(),}
+  \hlkwc{metrics} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{'accuracy'}\hlstd{)}
+\hlstd{)}
+\hlstd{start_time} \hlkwb{<-} \hlkwd{Sys.time}\hlstd{()}
+\hlstd{history} \hlkwb{<-} \hlstd{model_keras} \hlopt{%>%} \hlkwd{fit}\hlstd{(}
+  \hlkwd{as.matrix}\hlstd{(X}\hlopt{$}\hlstd{train),}\hlkwd{to_categorical}\hlstd{(Y}\hlopt{$}\hlstd{train),}
+   \hlkwc{epochs}\hlstd{=}\hlnum{200}\hlstd{,} \hlkwc{batch_size}\hlstd{=}\hlnum{5}\hlstd{)}
+\hlstd{end_time} \hlkwb{<-} \hlkwd{Sys.time}\hlstd{()}
+
+\hlcom{#Benchmark}
+\hlstd{time_fnn_keras} \hlkwb{=} \hlstd{end_time} \hlopt{-} \hlstd{start_time}
+\hlstd{model_keras} \hlopt{%>%} \hlkwd{evaluate}\hlstd{(X}\hlopt{$}\hlstd{test,} \hlkwd{to_categorical}\hlstd{(Y}\hlopt{$}\hlstd{test))}
+\hlstd{model_keras} \hlopt{%>%} \hlkwd{predict}\hlstd{(X}\hlopt{$}\hlstd{test,} \hlkwd{to_categorical}\hlstd{(Y}\hlopt{$}\hlstd{test))}
+
+\hlstd{preds} \hlkwb{=} \hlkwd{predict}\hlstd{(model_keras,}\hlkwd{as.array}\hlstd{(X}\hlopt{$}\hlstd{test))}
+\hlstd{pred.label.keras} \hlkwb{<-} \hlkwd{max.col}\hlstd{((preds))} \hlopt{-} \hlnum{1}
+\hlnum{1}\hlopt{-}\hlkwd{mean}\hlstd{(pred.label.keras} \hlopt{!=} \hlkwd{as.vector}\hlstd{(data_df}\hlopt{$}\hlstd{test}\hlopt{$}\hlstd{Species))}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+This package of the possibility to store the training history :
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{plot}\hlstd{(history)}
+\end{alltt}
+
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# `geom\_smooth()` using formula 'y \textasciitilde{} x'}}\end{kframe}
+\includegraphics[width=4in]{figure/unnamed-chunk-10-1} 
+
+\end{knitrout}
+
+The accuracy of this resources is
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+## [1] 0.9333333
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+and the time it took to train is :
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+## Time difference of 1.213505 mins
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
 \subsubsection{CNN}
 \subsubsection{RNN}
 
@@ -593,26 +697,131 @@ If you want to take advantage of your GPU (Ensure that you have the hardware pre
 \begin{alltt}
 \hlkwd{install.packages}\hlstd{(}\hlstr{"h2o"}\hlstd{)}
 \hlkwd{library}\hlstd{(h2o)}
+\hlkwd{h2o.init}\hlstd{()}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
+By default, H2O Deep Learning uses an adaptive learning rate (ADADELTA) for its stochastic gradient descent optimization.
 \textbf{Prerequisites to launch H2o}, 64 bit Java 6+ if you want to open a h2o model that s more than 1 GB. 
 \subsubsection{FNN}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{library}\hlstd{(h2o)}
+\hlkwd{h2o.init}\hlstd{()}
+\hlcom{# Identify predictors and response}
+
+
+\hlstd{h2o_df_train} \hlkwb{=} \hlkwd{as.h2o}\hlstd{(data_df}\hlopt{$}\hlstd{train)}
+\hlstd{h2o_df_test} \hlkwb{=} \hlkwd{as.h2o}\hlstd{(data_df}\hlopt{$}\hlstd{test)}
+
+\hlstd{y} \hlkwb{<-} \hlstr{"Species"}
+\hlstd{x} \hlkwb{<-} \hlkwd{setdiff}\hlstd{(}\hlkwd{names}\hlstd{(h2o_df_train), y)}
+\hlcom{# For binary classification, response should be a factor}
+\hlstd{h2o_df_train[,y]} \hlkwb{<-} \hlkwd{as.factor}\hlstd{(h2o_df_train[,y])}
+\hlstd{h2o_df_test[,y]} \hlkwb{<-} \hlkwd{as.factor}\hlstd{(h2o_df_test[,y])}
+
+\hlstd{start_time} \hlkwb{<-} \hlkwd{Sys.time}\hlstd{()}
+\hlstd{model_h2o} \hlkwb{<-} \hlkwd{h2o.deeplearning}\hlstd{(}\hlkwc{x} \hlstd{= x,}
+                              \hlkwc{y} \hlstd{= y,}
+                              \hlkwc{training_frame} \hlstd{= h2o_df_train,}
+                              \hlkwc{epochs} \hlstd{=} \hlnum{200}\hlstd{,}
+                              \hlkwc{seed}\hlstd{=}\hlnum{123}\hlstd{)}
+\hlstd{end_time} \hlkwb{<-} \hlkwd{Sys.time}\hlstd{()}
+\hlstd{time_fnn_h2o} \hlkwb{=} \hlstd{end_time} \hlopt{-} \hlstd{start_time}
+
+\hlkwd{summary}\hlstd{(model_h2o)}
+
+\hlstd{perf} \hlkwb{<-} \hlkwd{h2o.performance}\hlstd{(model_h2o,} \hlkwd{as.h2o}\hlstd{(data_df}\hlopt{$}\hlstd{test))}
+\hlstd{pred} \hlkwb{<-} \hlkwd{h2o.predict}\hlstd{(model_h2o,} \hlkwd{as.h2o}\hlstd{(data_df}\hlopt{$}\hlstd{test))}
+\hlnum{1}\hlopt{-}\hlkwd{mean}\hlstd{(}\hlkwd{as.vector}\hlstd{(pred}\hlopt{$}\hlstd{predict)} \hlopt{!=} \hlkwd{as.vector}\hlstd{(data_df}\hlopt{$}\hlstd{test}\hlopt{$}\hlstd{Species))}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+The accuracy of this resources is
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+## [1] 0.9333333
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+and the time it took to train is :
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+## Time difference of 7.731083 secs
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 \subsubsection{CNN}
 \subsubsection{RNN}
 
-
-%%%%%%%%%%%%%%%% rTorch %%%%%%%%%%%%%%%% 
-\subsection{rTorch}
-\subsubsection{Installation}
-\subsubsection{FNN}
-\subsubsection{CNN}
-\subsubsection{RNN}
 
 %%%%%%%%%%%%%%%% MXNET %%%%%%%%%%%%%%%% 
 \subsection{MXNET}
 \subsubsection{Installation}
+For CPU :
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{install.packages}\hlstd{(}\hlstr{"https://s3.ca-central-1.amazonaws.com/jeremiedb/share/mxnet/CPU/mxnet.zip"}\hlstd{,}
+                 \hlkwc{repos} \hlstd{=} \hlkwa{NULL}\hlstd{)}
+\hlkwd{library}\hlstd{(mxnet)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
 \subsubsection{FNN}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{install.packages}\hlstd{(}\hlstr{"https://s3.ca-central-1.amazonaws.com/jeremiedb/share/mxnet/CPU/mxnet.zip"}\hlstd{,} \hlkwc{repos} \hlstd{=} \hlkwa{NULL}\hlstd{)}
+\hlkwd{library}\hlstd{(mxnet)}
+\hlstd{data} \hlkwb{<-} \hlkwd{mx.symbol.Variable}\hlstd{(}\hlstr{"data"}\hlstd{)}
+\hlstd{fc1} \hlkwb{<-} \hlkwd{mx.symbol.FullyConnected}\hlstd{(data,} \hlkwc{name}\hlstd{=}\hlstr{"fc1"}\hlstd{,} \hlkwc{num_hidden}\hlstd{=}\hlnum{8}\hlstd{)}
+\hlstd{act1} \hlkwb{<-} \hlkwd{mx.symbol.Activation}\hlstd{(fc1,} \hlkwc{name}\hlstd{=}\hlstr{"relu1"}\hlstd{,} \hlkwc{act_type}\hlstd{=}\hlstr{"relu"}\hlstd{)}
+\hlstd{fc2} \hlkwb{<-} \hlkwd{mx.symbol.FullyConnected}\hlstd{(act1,} \hlkwc{name}\hlstd{=}\hlstr{"fc2"}\hlstd{,} \hlkwc{num_hidden}\hlstd{=}\hlnum{3}\hlstd{)}
+\hlstd{softmax} \hlkwb{<-} \hlkwd{mx.symbol.SoftmaxOutput}\hlstd{(fc2,} \hlkwc{name}\hlstd{=}\hlstr{"sm"}\hlstd{)}
+\hlkwd{mx.set.seed}\hlstd{(}\hlnum{123}\hlstd{)}
+
+\hlstd{start_time} \hlkwb{<-} \hlkwd{Sys.time}\hlstd{()}
+\hlstd{model_mx} \hlkwb{<-} \hlkwd{mx.model.FeedForward.create}\hlstd{(}
+  \hlstd{softmax,}
+  \hlkwc{X}\hlstd{=}\hlkwd{as.array}\hlstd{(X}\hlopt{$}\hlstd{train),}
+  \hlkwc{y}\hlstd{=}\hlkwd{as.numeric}\hlstd{(Y}\hlopt{$}\hlstd{train),}
+  \hlkwc{ctx}\hlstd{=}\hlkwd{mx.cpu}\hlstd{(),}
+  \hlkwc{num.round}\hlstd{=}\hlnum{200}\hlstd{,}
+  \hlkwc{verbose} \hlstd{=} \hlnum{TRUE}\hlstd{,}
+  \hlkwc{eval.metric} \hlstd{= mx.metric.accuracy,}
+  \hlkwc{array.batch.size}\hlstd{=}\hlnum{5}\hlstd{)}
+\hlstd{end_time} \hlkwb{<-} \hlkwd{Sys.time}\hlstd{()}
+\hlstd{time_fnn_mxnet} \hlkwb{=} \hlstd{end_time} \hlopt{-} \hlstd{start_time}
+
+
+\hlstd{preds} \hlkwb{=} \hlkwd{predict}\hlstd{(model_mx,}\hlkwd{as.array}\hlstd{(X}\hlopt{$}\hlstd{test),}\hlkwc{array.layout} \hlstd{=} \hlstr{"rowmajor"}\hlstd{)}
+\hlkwd{summary}\hlstd{(model_mx)}
+\hlstd{pred.label.mxnet} \hlkwb{<-} \hlkwd{max.col}\hlstd{(}\hlkwd{t}\hlstd{(preds))} \hlopt{-} \hlnum{1}
+\hlnum{1}\hlopt{-}\hlkwd{mean}\hlstd{(pred.label.mxnet} \hlopt{!=} \hlkwd{as.vector}\hlstd{(data_df}\hlopt{$}\hlstd{test}\hlopt{$}\hlstd{Species))}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+The accuracy of this resources is
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+## [1] 0.9333333
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+and the time it took to train is :
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+## Time difference of 6.597001 secs
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 \subsubsection{CNN}
 \subsubsection{RNN}
 

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/W32TeX) (preloaded format=xelatex 2020.3.17)  18 MAR 2020 22:30
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/W32TeX) (preloaded format=xelatex 2020.3.17)  22 MAR 2020 12:13
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1052,46 +1052,53 @@ LaTeX Warning: Reference `avail_ressour' on page 4 undefined on input line 233.
 LaTeX Warning: Reference `examples' on page 4 undefined on input line 233.
 
 
-Package xcolor Warning: Incompatible color definition on input line 245.
+Package xcolor Warning: Incompatible color definition on input line 247.
 
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 247.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 249.
 
-Package xcolor Warning: Incompatible color definition on input line 256.
+Package xcolor Warning: Incompatible color definition on input line 269.
+
+[4]
+
+Package xcolor Warning: Incompatible color definition on input line 294.
 
 
-Package xcolor Warning: Incompatible color definition on input line 267.
+Package xcolor Warning: Incompatible color definition on input line 305.
 
 Excluding 'comment' comment.
 Package hyperref Info: bookmark level for unknown todo defaults to 0 on input l
-ine 292.
+ine 330.
 
-Overfull \hbox (29.49998pt too wide) in paragraph at lines 292--292
+Overfull \hbox (29.49998pt too wide) in paragraph at lines 330--330
 [] 
  []
 
-[4]
 File: figure/neuralnet_package.png Graphic file (type bmp)
 <figure/neuralnet_package.png>
- [5]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[5]
 File: figure/nnet_package.png Graphic file (type bmp)
 <figure/nnet_package.png>
+ [6]
 File: figure/plotnet.png Graphic file (type bmp)
 <figure/plotnet.png>
 File: figure/garson_algorithm.png Graphic file (type bmp)
 <figure/garson_algorithm.png>
 
-Overfull \hbox (2.21999pt too wide) in paragraph at lines 348--356
+Overfull \hbox (2.21999pt too wide) in paragraph at lines 386--394
 []$[]$ $[]$ 
  []
 
-[6]
 File: figure/deepnet_package.png Graphic file (type bmp)
 <figure/deepnet_package.png>
+[7]
 File: figure/brnn_package.png Graphic file (type bmp)
 <figure/brnn_package.png>
- [7]
-Overfull \hbox (47.50227pt too wide) in paragraph at lines 430--432
+ [8]
+Overfull \hbox (47.50227pt too wide) in paragraph at lines 468--470
 \TU/lmr/bx/n/10 Keywords: RNN Installation: \TU/lmr/m/n/10 You will need to ins
 tall the diges package first through the function \TU/lmr/bx/n/10 install.packa
 ges(digest)
@@ -1099,33 +1106,81 @@ ges(digest)
 
 File: figure/rnn_package.png Graphic file (type bmp)
 <figure/rnn_package.png>
-[8] [9]
+[9] [10]
 File: figure/h2o_package.png Graphic file (type bmp)
 <figure/h2o_package.png>
- [10]
+ [11]
 
-Package xcolor Warning: Incompatible color definition on input line 560.
-
-
-Package xcolor Warning: Incompatible color definition on input line 568.
-
-[11]
-
-Package xcolor Warning: Incompatible color definition on input line 578.
+Package xcolor Warning: Incompatible color definition on input line 600.
 
 
-Package xcolor Warning: Incompatible color definition on input line 592.
+Package xcolor Warning: Incompatible color definition on input line 608.
 
-[12] (./report.bbl) 
-AED: lastpage setting LastPage
+
+Package xcolor Warning: Incompatible color definition on input line 618.
+
+
+Package xcolor Warning: Incompatible color definition on input line 626.
+
+[12]
+
+Package xcolor Warning: Incompatible color definition on input line 661.
+
+
+Package xcolor Warning: Incompatible color definition on input line 667.
+
+File: figure/unnamed-chunk-10-1.pdf Graphic file (type pdf)
+<use figure/unnamed-chunk-10-1.pdf>
+
+Package xcolor Warning: Incompatible color definition on input line 674.
+
 [13]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 630.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 630.
+
+Package xcolor Warning: Incompatible color definition on input line 682.
+
+
+Package xcolor Warning: Incompatible color definition on input line 696.
+
+
+Package xcolor Warning: Incompatible color definition on input line 708.
+
+[14]
+
+Package xcolor Warning: Incompatible color definition on input line 743.
+
+
+Package xcolor Warning: Incompatible color definition on input line 751.
+
+
+Package xcolor Warning: Incompatible color definition on input line 766.
+
+
+Package xcolor Warning: Incompatible color definition on input line 777.
+
+
+Overfull \hbox (55.86pt too wide) in paragraph at lines 779--779
+[][]\TU/lmtt/b/n/10 install.packages[][]\TU/lmtt/m/n/10 ([][]"https://s3.ca-cen
+tral-1.amazonaws.com/jeremiedb/share/mxnet/CPU/mxnet.zip"[][],[] []repos[] []=[
+] []\TU/lmtt/b/n/10 NULL[][]\TU/lmtt/m/n/10 )[][] 
+ []
+
+[15]
+
+Package xcolor Warning: Incompatible color definition on input line 811.
+
+
+Package xcolor Warning: Incompatible color definition on input line 819.
+
+[16] (./report.bbl) 
+AED: lastpage setting LastPage
+[17]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 839.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 839.
  (./report.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 630.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 630.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 839.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 839.
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: 2A4D0C2EA0865482AA101A944B7DCA3A;3157.
+(rerunfilecheck)             Checksum: C6C0F4855516F0DA6CD7E9ADBE3C9E3D;2840.
 
 
 LaTeX Warning: There were undefined references.
@@ -1135,12 +1190,12 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 24485 strings out of 481765
- 450147 string characters out of 5934263
- 695512 words of memory out of 5000000
- 40984 multiletter control sequences out of 15000+600000
- 539146 words of font info for 64 fonts, out of 8000000 for 9000
+ 24494 strings out of 481765
+ 450402 string characters out of 5934263
+ 697512 words of memory out of 5000000
+ 40990 multiletter control sequences out of 15000+600000
+ 539154 words of font info for 65 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  68i,14n,83p,991b,848s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on report.pdf (14 pages).
+Output written on report.pdf (18 pages).

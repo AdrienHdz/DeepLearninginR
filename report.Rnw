@@ -190,9 +190,32 @@ This section is divided in two;  the dataset description and the benchmark type.
 \subsection{Dataset}
 \subsubsection{FNN}
 For the FNN, the training data will be the well known \textit{Iris} dataset. It contains four covariables and one categorical target variable.
+<<eval= TRUE, message = FALSE,echo=FALSE>>=
+load("C:/Users/apabl/Desktop/Git/DeepLearninginR/DeepLearninginR/FNN_save.RData")
+
+@
+
 <<eval= FALSE, message = FALSE>>=
 library(datasets)
+library
 data(iris)
+set.seed(123)
+iris$Species = sapply(as.character(iris$Species), 
+                      switch, "setosa" = 1, "versicolor" = 2, "virginica" = 3, USE.NAMES = F)
+spec = c(train = .7,test = .3)
+g = sample(cut(seq(nrow(iris)),nrow(iris)*cumsum(c(0,spec)),labels = names(spec)))
+data_df = split(iris, g)
+X = c()
+Y = c()
+X$train = as.matrix(data_df$train[,-ncol(data_df$train)])
+X$test = as.matrix(data_df$test[,-ncol(data_df$test)])
+Y$train = as.matrix(data_df$train[,ncol(data_df$train)])
+Y$test = as.matrix(data_df$test[,ncol(data_df$test)],)
+@
+
+<<>>=
+print(head(X$train))
+print(head(Y$train))
 @
 
 \subsubsection{CNN}
@@ -476,10 +499,12 @@ H2o is a "scalable open source machine learning platform that offers parallelize
 \item Allows the use of multiple CPU.
 \item Provide an adaptive learning rate (ADADELTA) which improves the optimization process by having a different learning rate for each neuron.
 \item Provide details and information about the learning progress during the training phase.
+\item Really fast computation training
 \end{itemize}
 \paragraph{Cons}
 \begin{itemize}
 \item Requires the latest version of Java.
+\item The deep learning package has a huge amount of parameters, however, it doesn't give all the capability of other resources.
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -507,6 +532,50 @@ If you want to take advantage of your GPU (Ensure that you have the hardware pre
 install_keras(tensorflow = "gpu")
 @
 \subsubsection{FNN}
+<<eval=FALSE>>=
+library(keras)
+
+# create model
+model_keras = keras_model_sequential()
+model_keras %>% 
+  layer_dense(units = 8, activation = 'relu', input_shape = c(4)) %>% 
+  layer_dense(units = 3, activation = 'softmax')
+# Compile model
+model_keras %>% compile(
+  loss = 'categorical_crossentropy',
+  optimizer = optimizer_adam(),
+  metrics = c('accuracy')
+)
+start_time <- Sys.time()
+history <- model_keras %>% fit(
+  as.matrix(X$train),to_categorical(Y$train), 
+   epochs=200, batch_size=5)
+end_time <- Sys.time()
+
+#Benchmark
+time_fnn_keras = end_time - start_time
+model_keras %>% evaluate(X$test, to_categorical(Y$test))
+model_keras %>% predict(X$test, to_categorical(Y$test))
+
+preds = predict(model_keras,as.array(X$test))
+pred.label.keras <- max.col((preds)) - 1
+1-mean(pred.label.keras != as.vector(data_df$test$Species))
+@
+
+This package of the possibility to store the training history :
+<<eval=TRUE, echo=TRUE,out.width='4in'>>=
+plot(history)
+@
+
+The accuracy of this resources is
+<<eval=TRUE, echo=FALSE>>=
+1-mean(pred.label.keras != as.vector(data_df$test$Species))
+@
+and the time it took to train is :
+<<eval=TRUE, echo=FALSE>>=
+time_fnn_keras
+@
+
 \subsubsection{CNN}
 \subsubsection{RNN}
 
@@ -516,24 +585,101 @@ install_keras(tensorflow = "gpu")
 <<eval=FALSE, echo=TRUE>>=
 install.packages("h2o")
 library(h2o)
+h2o.init()
 @
+By default, H2O Deep Learning uses an adaptive learning rate (ADADELTA) for its stochastic gradient descent optimization.
 \textbf{Prerequisites to launch H2o}, 64 bit Java 6+ if you want to open a h2o model that s more than 1 GB. 
 \subsubsection{FNN}
+<<eval=FALSE>>=
+library(h2o)
+h2o.init()
+# Identify predictors and response
+
+
+h2o_df_train = as.h2o(data_df$train)
+h2o_df_test = as.h2o(data_df$test)
+
+y <- "Species"
+x <- setdiff(names(h2o_df_train), y)
+# For binary classification, response should be a factor
+h2o_df_train[,y] <- as.factor(h2o_df_train[,y])
+h2o_df_test[,y] <- as.factor(h2o_df_test[,y])
+
+start_time <- Sys.time()
+model_h2o <- h2o.deeplearning(x = x, 
+                              y = y,
+                              training_frame = h2o_df_train,
+                              epochs = 200,
+                              seed=123)
+end_time <- Sys.time()
+time_fnn_h2o = end_time - start_time
+
+summary(model_h2o)
+
+perf <- h2o.performance(model_h2o, as.h2o(data_df$test))
+pred <- h2o.predict(model_h2o, as.h2o(data_df$test))
+1-mean(as.vector(pred$predict) != as.vector(data_df$test$Species))
+@
+The accuracy of this resources is
+<<eval=TRUE, echo=FALSE>>=
+acc_h2o
+@
+and the time it took to train is :
+<<eval=TRUE, echo=FALSE>>=
+time_fnn_h2o
+@
 \subsubsection{CNN}
 \subsubsection{RNN}
 
-
-%%%%%%%%%%%%%%%% rTorch %%%%%%%%%%%%%%%% 
-\subsection{rTorch}
-\subsubsection{Installation}
-\subsubsection{FNN}
-\subsubsection{CNN}
-\subsubsection{RNN}
 
 %%%%%%%%%%%%%%%% MXNET %%%%%%%%%%%%%%%% 
 \subsection{MXNET}
 \subsubsection{Installation}
+For CPU :
+<<eval=FALSE>>=
+install.packages("https://s3.ca-central-1.amazonaws.com/jeremiedb/share/mxnet/CPU/mxnet.zip", 
+                 repos = NULL)
+library(mxnet)
+@
+
 \subsubsection{FNN}
+<<eval=FALSE>>=
+install.packages("https://s3.ca-central-1.amazonaws.com/jeremiedb/share/mxnet/CPU/mxnet.zip", repos = NULL)
+library(mxnet)
+data <- mx.symbol.Variable("data")
+fc1 <- mx.symbol.FullyConnected(data, name="fc1", num_hidden=8)
+act1 <- mx.symbol.Activation(fc1, name="relu1", act_type="relu")
+fc2 <- mx.symbol.FullyConnected(act1, name="fc2", num_hidden=3)
+softmax <- mx.symbol.SoftmaxOutput(fc2, name="sm")
+mx.set.seed(123)
+
+start_time <- Sys.time()
+model_mx <- mx.model.FeedForward.create(
+  softmax, 
+  X=as.array(X$train),
+  y=as.numeric(Y$train),
+  ctx=mx.cpu(), 
+  num.round=200,
+  verbose = TRUE,
+  eval.metric = mx.metric.accuracy, 
+  array.batch.size=5)
+end_time <- Sys.time()
+time_fnn_mxnet = end_time - start_time
+
+
+preds = predict(model_mx,as.array(X$test),array.layout = "rowmajor")
+summary(model_mx)
+pred.label.mxnet <- max.col(t(preds)) - 1
+1-mean(pred.label.mxnet != as.vector(data_df$test$Species))
+@
+The accuracy of this resources is
+<<eval=TRUE, echo=FALSE>>=
+1-mean(pred.label.mxnet != as.vector(data_df$test$Species))
+@
+and the time it took to train is :
+<<eval=TRUE, echo=FALSE>>=
+time_fnn_mxnet
+@
 \subsubsection{CNN}
 \subsubsection{RNN}
 
