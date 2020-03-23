@@ -240,7 +240,8 @@ A list of the available resources with installation and examples tutorials can b
 \section{Methodology}
 This section is divided in two;  the dataset description and the benchmark type. The dataset description is mostly to describe what dataset is going to be use for the different type of deep learning algorithms. The second section will describe two indicators in order to compare results of similar algorithms. The first indicator is mostly about a simple accuracy base on the same training and validation dataset and second indicator is about the time it took to execute the same task on differents ressources.
 \subsection{Workflow}
-E
+\ntodo[inline]{Add more info about this topics}
+
 \subsection{Dataset}
 \subsubsection{FNN}
 For the FNN, the training data will be the well known \textit{Iris} dataset. It contains four covariables and one categorical target variable.
@@ -854,6 +855,98 @@ In order to predict with our model on a new dataset, we can you Keras\'s \textbf
 \end{knitrout}
 
 \subsubsection{RNN}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{library}\hlstd{(keras)}
+\hlkwd{library}\hlstd{(dplyr)}
+\hlkwd{library}\hlstd{(ggplot2)}
+\hlkwd{library}\hlstd{(purrr)}
+\hlcom{# This is in order to limit the number of words }
+\hlstd{max_features} \hlkwb{=} \hlnum{5000}
+\hlcom{# cut texts after this number of words (among top max_features most common words)}
+\hlstd{maxlen} \hlkwb{=} \hlnum{40}
+\hlcom{# Loads the dataset which is already split in train and test}
+\hlstd{imdb} \hlkwb{<-} \hlkwd{dataset_imdb}\hlstd{(}\hlkwc{num_words} \hlstd{= max_features)}
+\hlcom{# Seperate the labels and the data for train and test}
+\hlkwd{c}\hlstd{(train_data, train_labels)} \hlopt{%<-%} \hlstd{imdb}\hlopt{$}\hlstd{train}
+\hlkwd{c}\hlstd{(test_data, test_labels)} \hlopt{%<-%} \hlstd{imdb}\hlopt{$}\hlstd{test}
+\hlcom{# This is the word index which can be interprate as a dictionnary betweend index to words}
+\hlcom{# (e.g.) the word "modestly" is represented by the index 20608}
+\hlcom{# by default this word to index contains 88584 words}
+\hlstd{word_index} \hlkwb{<-} \hlkwd{dataset_imdb_word_index}\hlstd{()}
+\hlkwd{length}\hlstd{(word_index)}
+\hlcom{# Convert this word to index List to a more friendly data frame}
+\hlstd{word_index_df} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(}
+  \hlkwc{word} \hlstd{=} \hlkwd{names}\hlstd{(word_index),}
+  \hlkwc{idx} \hlstd{=} \hlkwd{unlist}\hlstd{(word_index,} \hlkwc{use.names} \hlstd{=} \hlnum{FALSE}\hlstd{),}
+  \hlkwc{stringsAsFactors} \hlstd{=} \hlnum{FALSE}
+\hlstd{)}
+
+\hlcom{# The first 4 indices are reserved for 4 different specials keys}
+\hlcom{# PAD:    This is to fill a sequence that is shorter than Max lenght}
+\hlcom{# START:  This is to fill a sequence that is shorter than Max lenght}
+\hlcom{# PAD:    This is to fill a sequence that is shorter than Max lenght}
+\hlcom{# UNK:    This if for an unkown words that are not part of vocabulary}
+\hlcom{# UNUSED: This if for an unused word part of the vocabulary}
+
+\hlstd{word_index_df} \hlkwb{<-} \hlstd{word_index_df} \hlopt{%>%} \hlkwd{mutate}\hlstd{(}\hlkwc{idx} \hlstd{= idx} \hlopt{+} \hlnum{3}\hlstd{)}
+\hlstd{word_index_df} \hlkwb{<-} \hlstd{word_index_df} \hlopt{%>%}
+  \hlkwd{add_row}\hlstd{(}\hlkwc{word} \hlstd{=} \hlstr{"<PAD>"}\hlstd{,} \hlkwc{idx} \hlstd{=} \hlnum{0}\hlstd{)}\hlopt{%>%}
+  \hlkwd{add_row}\hlstd{(}\hlkwc{word} \hlstd{=} \hlstr{"<START>"}\hlstd{,} \hlkwc{idx} \hlstd{=} \hlnum{1}\hlstd{)}\hlopt{%>%}
+  \hlkwd{add_row}\hlstd{(}\hlkwc{word} \hlstd{=} \hlstr{"<UNK>"}\hlstd{,} \hlkwc{idx} \hlstd{=} \hlnum{2}\hlstd{)}\hlopt{%>%}
+  \hlkwd{add_row}\hlstd{(}\hlkwc{word} \hlstd{=} \hlstr{"<UNUSED>"}\hlstd{,} \hlkwc{idx} \hlstd{=} \hlnum{3}\hlstd{)}
+\hlcom{# Sort the rows by index}
+\hlstd{word_index_df} \hlkwb{<-} \hlstd{word_index_df} \hlopt{%>%} \hlkwd{arrange}\hlstd{(idx)}
+\hlcom{# A function that will decode a id an return the full review}
+\hlstd{decode_review} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{text}\hlstd{)\{}
+  \hlkwd{paste}\hlstd{(}\hlkwd{map}\hlstd{(text,} \hlkwa{function}\hlstd{(}\hlkwc{number}\hlstd{) word_index_df} \hlopt{%>%}
+              \hlkwd{filter}\hlstd{(idx} \hlopt{==} \hlstd{number)} \hlopt{%>%}
+              \hlkwd{select}\hlstd{(word)} \hlopt{%>%}
+              \hlkwd{pull}\hlstd{()),}
+        \hlkwc{collapse} \hlstd{=} \hlstr{" "}\hlstd{)}
+\hlstd{\}}
+
+
+\hlkwd{decode_review}\hlstd{(train_data[[}\hlnum{5}\hlstd{]])}
+
+\hlcom{# This function is built in the Keras environmet and as the name indicates it}
+\hlcom{# is use for padding sequences such as our reviews. after this is done all the}
+\hlcom{# review will have the same lenght. The shorter ones will be filled with the token}
+\hlcom{# <pad>. This applies to the train and test data.}
+\hlstd{train_data_pad} \hlkwb{<-} \hlkwd{pad_sequences}\hlstd{(}
+  \hlstd{train_data,}
+  \hlkwc{value} \hlstd{= word_index_df} \hlopt{%>%} \hlkwd{filter}\hlstd{(word} \hlopt{==} \hlstr{"<PAD>"}\hlstd{)} \hlopt{%>%} \hlkwd{select}\hlstd{(idx)} \hlopt{%>%} \hlkwd{pull}\hlstd{(),}
+  \hlkwc{padding} \hlstd{=} \hlstr{"post"}\hlstd{,}
+  \hlkwc{maxlen} \hlstd{= maxlen}
+\hlstd{)}
+
+\hlstd{test_data_pad} \hlkwb{<-} \hlkwd{pad_sequences}\hlstd{(}
+  \hlstd{test_data,}
+  \hlkwc{value} \hlstd{= word_index_df} \hlopt{%>%} \hlkwd{filter}\hlstd{(word} \hlopt{==} \hlstr{"<PAD>"}\hlstd{)} \hlopt{%>%} \hlkwd{select}\hlstd{(idx)} \hlopt{%>%} \hlkwd{pull}\hlstd{(),}
+  \hlkwc{padding} \hlstd{=} \hlstr{"post"}\hlstd{,}
+  \hlkwc{maxlen} \hlstd{= maxlen}
+\hlstd{)}
+
+\hlstd{model} \hlkwb{<-} \hlkwd{keras_model_sequential}\hlstd{()}
+\hlstd{model} \hlopt{%>%}
+  \hlkwd{layer_embedding}\hlstd{(}\hlkwc{input_dim} \hlstd{= max_features,} \hlkwc{output_dim} \hlstd{=} \hlnum{256}\hlstd{)} \hlopt{%>%}
+  \hlkwd{layer_lstm}\hlstd{(}\hlkwc{units} \hlstd{=} \hlnum{128}\hlstd{,}
+             \hlkwc{input_shape} \hlstd{=} \hlnum{256}\hlstd{,}
+             \hlkwc{batch_size} \hlstd{=} \hlnum{256}\hlstd{)}\hlopt{%>%}
+  \hlkwd{layer_dropout}\hlstd{(}\hlkwc{rate} \hlstd{=} \hlnum{0.2}\hlstd{)} \hlopt{%>%}
+  \hlkwd{layer_dense}\hlstd{(}\hlkwc{units} \hlstd{=} \hlnum{1}\hlstd{,} \hlkwc{activation} \hlstd{=} \hlstr{"sigmoid"}\hlstd{)}
+
+\hlstd{model} \hlopt{%>%} \hlkwd{summary}\hlstd{()}
+
+\hlstd{model} \hlopt{%>%} \hlkwd{compile}\hlstd{(}
+  \hlkwc{optimizer} \hlstd{=} \hlstr{'adam'}\hlstd{,}
+  \hlkwc{loss} \hlstd{=} \hlstr{'binary_crossentropy'}\hlstd{,}
+  \hlkwc{metrics} \hlstd{=} \hlkwd{list}\hlstd{(}\hlstr{'accuracy'}\hlstd{)}
+\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
 
 %%%%%%%%%%%%%%%% H2o %%%%%%%%%%%%%%%% 
 \subsection{H2O}
