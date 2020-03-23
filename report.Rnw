@@ -212,14 +212,11 @@ idmb = dataset_imdb(  path = "imdb.npz", num_words = NULL, skip_top = 0L, maxlen
 
 \subsection{Characteristic}
 \subsubsection{Accuracy}
-\ntodo[inline]{Add more info about this topics}
+For the different type of deep learning algorithm a simple misclassification error rate will be use as the accuracy.
 
-Classification rate for.
 
 \subsubsection{Time elapsed}
-\ntodo[inline]{Add more info about this topics}
-
-Not generalised but gives an idea about the training time.
+A elapsed time was also provided to give an idea of the training time. Ensure not to generalised this characteristic since it depends on the data, the computer, the seed, etc.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
