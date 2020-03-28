@@ -318,12 +318,15 @@ This package is a complement to R's neural networks packages as it allows to vis
 %%%%%%%%%%%%%%%% Deepnet %%%%%%%%%%%%%%%% 
 \subsubsection{Deepnet package}
 \paragraph{Description}
-This package is available on the CRAN platform and has been written specifcally written for R. It allows to "implement some deep learning architectures and neural network algorithms, including backpropagation, Restricted Boltzmann Machine (RBM), Deep Belief Network (DBN) and Deep autoencoder".
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.7\textwidth]{figure/deepnet_package.png}
-     \caption{Package deepnet, CRAN}
-\end{figure}
+This package is available on the CRAN platform and has been written specifcally written for R. It allows to "implement some deep learning architectures and neural network algorithms, including backpropagation, Restricted Boltzmann Machine (RBM), Deep Belief Network (DBN) and Deep autoencoder".\\
+\textit{Important default parameters of a deep FNN model with weights initialized by DBN:}
+<<eval= FALSE, message = FALSE>>=
+dbn.dnn.train(X, Y, hidden=c(5), activationfun="sigm", learningrate=0.5,
+              momentum=0.5, learningrate_scale=1, output="softmax",
+              numepochs = 3, batchsize = 100, hidden_dropout = 0, 
+              visible_dropout = 0, cd = 1))
+@
+
 \paragraph{Pros}
 \begin{itemize}
 \item Allows to load benchmark datasets such as MNIST with the function load.mnist(dir)
@@ -341,12 +344,13 @@ This package is available on the CRAN platform and has been written specifcally 
 %%%%%%%%%%%%%%%% brnn %%%%%%%%%%%%%%%% 
 \subsubsection{brnn package}
 \paragraph{Description}
-This package available on the platform CRAN, allows to perform "Baeysian regularized neural networks inclusing both additive and dominance effects, and allows to takes advantage of multicore architectures via a parallel computing approach using openMP for the computations". (Pérez-Rodriguez, ...)
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.45\textwidth]{figure/brnn_package.png}
-     \caption{Package nnet, CRAN}
-\end{figure}
+This package available on the platform CRAN, allows to perform "Baeysian regularized neural networks inclusing both additive and dominance effects, and allows to takes advantage of multicore architectures via a parallel computing approach using openMP for the computations". (Pérez-Rodriguez, ...)\\
+\textit{Important default parameters of the brnn function:}
+<<eval= FALSE, message = FALSE>>=
+brnn(X,Y,neurons=2,normalize=TRUE,epochs=1000,mu=0.005,mu_dec=0.1,
+mu_inc=10,mu_max=1e10,min_grad=1e-10,change = 0.001,cores=1,
+verbose=FALSE,Monte_Carlo = FALSE,tol = 1e-06, samples = 40,...)
+@
 \paragraph{Pros}
 \begin{itemize}
 \item Allows to add Additive and Dominance effects in the neural networks models.
