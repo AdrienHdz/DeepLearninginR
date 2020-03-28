@@ -212,14 +212,11 @@ idmb = dataset_imdb(  path = "imdb.npz", num_words = NULL, skip_top = 0L, maxlen
 
 \subsection{Characteristic}
 \subsubsection{Accuracy}
-\ntodo[inline]{Add more info about this topics}
+For the different type of deep learning algorithm a simple misclassification error rate will be use as the accuracy.
 
-Classification rate for.
 
 \subsubsection{Time elapsed}
-\ntodo[inline]{Add more info about this topics}
-
-Not generalised but gives an idea about the training time.
+A elapsed time was also provided to give an idea of the training time. Ensure not to generalised this characteristic since it depends on the data, the computer, the seed, etc.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -494,14 +491,20 @@ In order to give concrete deep learning examples, four resources were selected f
 %%%%%%%%%%%%%%%% Keras %%%%%%%%%%%%%%%% 
 \subsection{Keras}
 \subsubsection{Installation}
-First step, is the installation and download of the Keras files from GitHub :
+\paragraph{Windows} \textit{The only supported installation method on Windows is "conda". It means you should install install Anaconda version 3.x before doing these steps.}
+
+\textbf{First step}, is the installation and download of the Keras files from GitHub :
 <<eval=FALSE, echo=TRUE, highlight=TRUE>>=
 devtools::install_github("rstudio/keras")
 @
-Then, we need to to install the package and import in the project :
+Then, we need to install the package and import in the project :
 <<eval=FALSE,echo=TRUE, message=FALSE>>=
 library(keras)
-install_keras()
+install_keras(method = c("auto", "virtualenv", "conda"),
+  conda = "auto", 
+  version = "default", 
+  tensorflow = "default",
+  extra_packages = c("tensorflow-hub"))
 @
 When the "\textit{Installation complete.}" message appear you have a complete installation with CPU configure on the TensorFlow backend.
 If you want to take advantage of your GPU (Ensure that you have the hardware prerequisites) you will need to execute a different command as follows:
@@ -510,8 +513,9 @@ install_keras(tensorflow = "gpu")
 @
 \subsubsection{FNN}
 
-
+The dataset iris dont exist direc
 <<eval= FALSE, message = FALSE>>=
+
 library(datasets)
 library
 data(iris)
@@ -726,6 +730,96 @@ Y_predicted <- model %>% predict_classes(X_test)
 @
 
 \subsubsection{RNN}
+<<eval=FALSE, echo=TRUE>>=
+
+library(keras)
+library(dplyr)
+library(ggplot2)
+library(purrr)
+# This is in order to limit the number of words 
+max_features = 5000
+# cut texts after this number of words (among top max_features most common words)
+maxlen = 40
+# Loads the dataset which is already split in train and test
+imdb <- dataset_imdb(num_words = max_features)
+# Seperate the labels and the data for train and test
+c(train_data, train_labels) %<-% imdb$train
+c(test_data, test_labels) %<-% imdb$test
+# This is the word index which can be interprate as a dictionnary betweend index to words
+# (e.g.) the word "modestly" is represented by the index 20608
+# by default this word to index contains 88584 words
+word_index <- dataset_imdb_word_index()
+length(word_index)
+# Convert this word to index List to a more friendly data frame
+word_index_df <- data.frame(
+  word = names(word_index),
+  idx = unlist(word_index, use.names = FALSE),
+  stringsAsFactors = FALSE
+)
+
+# The first 4 indices are reserved for 4 different specials keys
+# PAD:    This is to fill a sequence that is shorter than Max lenght
+# START:  This is to fill a sequence that is shorter than Max lenght
+# PAD:    This is to fill a sequence that is shorter than Max lenght
+# UNK:    This if for an unkown words that are not part of vocabulary
+# UNUSED: This if for an unused word part of the vocabulary
+
+word_index_df <- word_index_df %>% mutate(idx = idx + 3)
+word_index_df <- word_index_df %>%
+  add_row(word = "<PAD>", idx = 0)%>%
+  add_row(word = "<START>", idx = 1)%>%
+  add_row(word = "<UNK>", idx = 2)%>%
+  add_row(word = "<UNUSED>", idx = 3)
+# Sort the rows by index
+word_index_df <- word_index_df %>% arrange(idx)
+# A function that will decode a id an return the full review
+decode_review <- function(text){
+  paste(map(text, function(number) word_index_df %>%
+              filter(idx == number) %>%
+              select(word) %>% 
+              pull()),
+        collapse = " ")
+}
+
+
+decode_review(train_data[[5]])
+
+# This function is built in the Keras environmet and as the name indicates it
+# is use for padding sequences such as our reviews. after this is done all the
+# review will have the same lenght. The shorter ones will be filled with the token
+# <pad>. This applies to the train and test data.
+train_data_pad <- pad_sequences(
+  train_data,
+  value = word_index_df %>% filter(word == "<PAD>") %>% select(idx) %>% pull(),
+  padding = "post",
+  maxlen = maxlen
+)
+
+test_data_pad <- pad_sequences(
+  test_data,
+  value = word_index_df %>% filter(word == "<PAD>") %>% select(idx) %>% pull(),
+  padding = "post",
+  maxlen = maxlen
+)
+
+model <- keras_model_sequential()
+model %>% 
+  layer_embedding(input_dim = max_features, output_dim = 256) %>%
+  layer_lstm(units = 128,
+             input_shape = 256,
+             batch_size = 256)%>%
+  layer_dropout(rate = 0.2) %>%
+  layer_dense(units = 1, activation = "sigmoid")
+
+model %>% summary()
+
+model %>% compile(
+  optimizer = 'adam',
+  loss = 'binary_crossentropy',
+  metrics = list('accuracy')
+)
+
+@
 
 %%%%%%%%%%%%%%%% H2o %%%%%%%%%%%%%%%% 
 \subsection{H2O}
