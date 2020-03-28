@@ -155,7 +155,6 @@ The CNN are a modified architecture of FNN that leverage the feature engineering
     \includegraphics[width=0.5\textwidth]{figure/CNN_process.png}
   \end{center}
   \caption{CNN, Deep Learning A-Z by SuperDataScience}
-  \label{fig:attention}
 \end{wrapfigure}
 A standard architecture of a CNN model is commonly represented this way: We start with an input image to which we are going to apply several kernels, a.k.a features detectors, in order to create feature maps that will form what we call a convolutional layer. A common practice is to apply the ReLu activation fonction to the convolutional layer output in order to increase the non linearity of the images before using the pooling method to create a pooling layer. The next step will be to combine all the pooled images from the pooling layer into one single vector, which is called flattening and will be the input of a FNN that will perform the desired task, for instance, classification. CNN parameters are trained with the backpropagation algorithm where the gradients are propagated from the output layer of the FFN to the input of the CNN in order to minimise a cost function, most of the time a categorical cross-entropy if we are performing a multi-class classification. 
 
@@ -212,11 +211,14 @@ idmb = dataset_imdb(  path = "imdb.npz", num_words = NULL, skip_top = 0L, maxlen
 
 \subsection{Characteristic}
 \subsubsection{Accuracy}
-For the different type of deep learning algorithm a simple misclassification error rate will be use as the accuracy.
+\ntodo[inline]{Add more info about this topics}
 
+Classification rate for.
 
 \subsubsection{Time elapsed}
-A elapsed time was also provided to give an idea of the training time. Ensure not to generalised this characteristic since it depends on the data, the computer, the seed, etc.
+\ntodo[inline]{Add more info about this topics}
+
+Not generalised but gives an idea about the training time.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -228,28 +230,45 @@ A elapsed time was also provided to give an idea of the training time. Ensure no
 \label{sec:avail_ressour}
 Like explain earlier this section will be divided in two in order to really differantiate the R packages standalone of the ressources that add an application interface.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%% R Package   %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%% R Packages   %%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{R packages}
 \ntodo[inline]{à voir si on a encore de la place pour mettre un tableau récapitulatif}
 
 %%%%%%%%%%%%%%%% Neuralnet %%%%%%%%%%%%%%%% 
-\subsubsection{Neuralnet package}
+\subsubsection{\textbf{Neuralnet package}}
 \paragraph{Description}
 According to its CRAN description, the package allows the "training of neural networks using the backpropagation, resilient backpropagation with (Riedmiller, 1994) or without weight backtracking (Riedmiller, 1993) or the modified globally convergent version by Anastasiadis et al. (2005). The package allows flexible settings through custom-choice of error and activation function. Furthermore, the calculation of generalized weights (Intrator O \& Intrator N, 1993) is implemented." This package uses $C/C++$ in backend.
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.7\textwidth]{figure/neuralnet_package.png}
-     \caption{Package neuralnet, CRAN}
-\end{figure}
+\textit{Important default parameters of a FNN model with the neuralnet package:}
+<<eval= FALSE, message = FALSE>>=
+#' @param formula, 
+#' @param Y~X1+...+Xn, 
+#' @param hidden = 1, 
+#' @param threshold = 0.01, 
+#' @param stepmax = 1e+05, 
+#' @param rep = 1,
+#' @param algorithm = "rprop+",
+#' @param err.fct = "sse", 
+#' @param act.fct = "logistic", 
+#' @param linear.output = TRUE
+#' @return a neuralnet model.
+#' @examples
+#' add(1, 1)
+#' add(10, 1)
+
+neuralnet(formula, Y~X1+...+Xn, hidden = 1, threshold = 0.01, stepmax = 1e+05, rep = 1,
+          startweights = NULL, learningrate.limit = NULL, algorithm = "rprop+",
+          err.fct = "sse", act.fct = "logistic", linear.output = TRUE)
+@
 
 \paragraph{Pros}
 \begin{itemize}
 \item Very easy to use and to build a quick FFN and deep FNN model.
 \item Allows to use several types of backpropagation algorithms. By default, the resilient backpropagation algorithm is used "rprop+" instead of regular backpropagation which is an algorithm not very used in practice as it is more tricky to implement. We can however decided to change the rprop+ for a standard backpropagation by changing for \textbf{algorithm = "backprop"}.
-\item Several hidden layers and neurons per layer can be added. By default, the algorithm uses only 1 hidden layer with 1 neuron, but it can be increased by addind the command line: \textbf{hidden = c(5,2)} to get 2 hidden layers of 5 neurons.
+\item Several hidden layers and neurons per layer can be added. By default, the algorithm uses only 1 hidden layer with 1 neuron, but it can be increased by addind the command line: \textbf{hidden = c(3,3)} to get 2 hidden layers of 3 neurons each.
 \item Allows to easily plot and visualize the model and its parameters with the command line: \textbf{plot(model).}
+\item Allows to use custome activation functions.
 \end{itemize}
 \paragraph{Cons}
 \begin{itemize}
@@ -258,14 +277,15 @@ According to its CRAN description, the package allows the "training of neural ne
 \end{itemize}
 
 %%%%%%%%%%%%%%%% nnet %%%%%%%%%%%%%%%% 
-\subsubsection{nnet package}
+\subsubsection{\textbf{nnet package}}
 \paragraph{Description}
 This package comes from the CRAN platform and allows to build and fit "FNN with a single hidden layer and multinomial log-linear models". This package uses C/C++ in backend.
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.45\textwidth]{figure/nnet_package.png}
-     \caption{Package nnet, CRAN}
-\end{figure}
+
+\textit{Important default parameters of a FNN model with the neuralnet package:}
+<<eval= FALSE, message = FALSE>>=
+nnet(X, Y, size, linout=FALSE, entropy=FALSE, softmax=FALSE, maxit = 100, decay = 0)
+@
+
 \paragraph{Pros}
 \begin{itemize}
 \item One of the easiest R package to build a quick FFN model.
@@ -280,7 +300,7 @@ This package comes from the CRAN platform and allows to build and fit "FNN with 
 
 %%%%%%%%%%%%%%%% NeuralNetTools %%%%%%%%%%%%%%%% 
 
-\subsubsection{NeuralNetTools package}
+\subsubsection{\textbf{NeuralNetTools package}}
 \paragraph{Description}
 This package is a complement to R's neural networks packages as it allows to visualize and perform analysis on neural network models. "Functions are available for plooting, quantifying variable importance, conducting a sensitivity analysis, and obtaining a simple list of model weights."
 \begin{figure}[H]
@@ -290,7 +310,7 @@ This package is a complement to R's neural networks packages as it allows to vis
   \end{subfigure}
   \begin{subfigure}{0.5\textwidth}
     \centering\includegraphics[width=0.45\textwidth]{figure/garson_algorithm.png}
-    \caption{NeuralNetToolsm Input variables importance}
+    \caption{NeuralNetTools, Input variables importance}
   \end{subfigure}
     \caption{Embedding dimension hyper parameter}
 \end{figure}
@@ -310,17 +330,18 @@ This package is a complement to R's neural networks packages as it allows to vis
 \item Is not optimized to visualize large neural networks models.
 \end{itemize}
 
-
-
 %%%%%%%%%%%%%%%% Deepnet %%%%%%%%%%%%%%%% 
 \subsubsection{Deepnet package}
 \paragraph{Description}
-This package is available on the CRAN platform and has been written specifcally written for R. It allows "implement som deep learning architectures and neural network algorithms, including backpropagation, Restricted Boltzmann Machine (RBM), Deep Belief Network (DBN) and Deep autoencoder".
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.7\textwidth]{figure/deepnet_package.png}
-     \caption{Package deepnet, CRAN}
-\end{figure}
+This package is available on the CRAN platform and has been written specifcally written for R. It allows to "implement some deep learning architectures and neural network algorithms, including backpropagation, Restricted Boltzmann Machine (RBM), Deep Belief Network (DBN) and Deep autoencoder".\\
+\textit{Important default parameters of a deep FNN model with weights initialized by DBN:}
+<<eval= FALSE, message = FALSE>>=
+dbn.dnn.train(X, Y, hidden=c(5), activationfun="sigm", learningrate=0.5,
+              momentum=0.5, learningrate_scale=1, output="softmax",
+              numepochs = 3, batchsize = 100, hidden_dropout = 0, 
+              visible_dropout = 0, cd = 1))
+@
+
 \paragraph{Pros}
 \begin{itemize}
 \item Allows to load benchmark datasets such as MNIST with the function load.mnist(dir)
@@ -335,18 +356,16 @@ This package is available on the CRAN platform and has been written specifcally 
 \item Does not provide a lot of hyperparameters tuning options, and is not user-friendly.
 \end{itemize}
 
-
-%%%%%%%%%%%%%%%% Nnet %%%%%%%%%%%%%%%% 
-
 %%%%%%%%%%%%%%%% brnn %%%%%%%%%%%%%%%% 
 \subsubsection{brnn package}
 \paragraph{Description}
-This package available on the platform CRAN, allows to perform "Baeysian regularized neural networks inclusing both additive and dominance effects, and allows to takes advantage of multicore architectures via a parallel computing approach using openMP for the computations". (Pérez-Rodriguez, ...)
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.45\textwidth]{figure/brnn_package.png}
-     \caption{Package nnet, CRAN}
-\end{figure}
+This package available on the platform CRAN, allows to perform "Baeysian regularized neural networks inclusing both additive and dominance effects, and allows to takes advantage of multicore architectures via a parallel computing approach using openMP for the computations". (Pérez-Rodriguez, ...)\\
+\textit{Important default parameters of the brnn function:}
+<<eval= FALSE, message = FALSE>>=
+brnn(X,Y,neurons=2,normalize=TRUE,epochs=1000,mu=0.005,mu_dec=0.1,
+mu_inc=10,mu_max=1e10,min_grad=1e-10,change = 0.001,cores=1,
+verbose=FALSE,Monte_Carlo = FALSE,tol = 1e-06, samples = 40,...)
+@
 \paragraph{Pros}
 \begin{itemize}
 \item Allows to add Additive and Dominance effects in the neural networks models.
@@ -366,12 +385,14 @@ This package available on the platform CRAN, allows to perform "Baeysian regular
 \subsubsection{rnn package}
 \textbf{Installation:} You will need to install the diges package first through the function \textbf{install.packages(digest)} in order to download the rnn package.
 \paragraph{Description}
-Avaible from the CRAN platform, this package allows the "implementation of a Recurrent Neural Network architectures in native R, including Long-Short Term Memory (LSTM), Gated Recurrent Unit (GRU) and vanilla RNN. 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.45\textwidth]{figure/rnn_package.png}
-     \caption{Package rnn, CRAN}
-\end{figure}
+Avaible from the CRAN platform, this package allows the "implementation of a Recurrent Neural Network architectures in native R, including Long-Short Term Memory (LSTM), Gated Recurrent Unit (GRU) and vanilla RNN." 
+\textit{Important default parameters of the rnn function:}
+<<eval= FALSE, message = FALSE>>=
+brnn(X,Y,neurons=2,normalize=TRUE,epochs=1000,mu=0.005,mu_dec=0.1,
+mu_inc=10,mu_max=1e10,min_grad=1e-10,change = 0.001,cores=1,
+verbose=FALSE,Monte_Carlo = FALSE,tol = 1e-06, samples = 40,...)
+@
+
 \paragraph{Pros}
 \begin{itemize}
 \item Allows to run a demonstration of how RNN models work by using predefined values and allowing the user to see the impact of a changes in the model's hyperparameters by using the function \textbf{run.rnn\_demo()}
@@ -483,28 +504,88 @@ H2o is a "scalable open source machine learning platform that offers parallelize
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Examples}
 <<eval= TRUE, message = FALSE,echo=FALSE>>=
-load("C:/Users/apabl/Desktop/Git/DeepLearninginR/DeepLearninginR/FNN_save.RData")
+load("C:/Users/adrie/OneDrive/Desktop/Git/Deep_learning_r/DeepLearninginR/FNN_save.RData")
 @
 \label{sec:examples}
-In order to give concrete deep learning examples, four resources were selected for tutorials; Keras using Tensorflow backend, H2O, rTorch and MXNET.
+In order to give concrete deep learning examples, four resources were selected for tutorials; Neuralnet, Keras using Tensorflow backend, H2O, rTorch and MXNET.
+%%%%%%%%%%%%%%%% Neuralnet %%%%%%%%%%%%%%%% 
+\subsection{Neuralnet}
+\subsubsection{Installation}
+Neuralnet is available on the CRAN and can be easily downloaded and loaded as follow:
+<<eval=FALSE, echo=TRUE, highlight=TRUE>>=
+install.packages("neuralnet")
+library(neuralnet)
+
+# We will load the data from the library dataset
+install.packages("dataset")
+library(dataset)
+@
+
+Then we split our data into a training set and a test set.
+<<eval=FALSE, echo=TRUE, highlight=TRUE>>=
+# 70% of the data will be used to train the model
+# 30% of the data will be used to test the model performance
+n=nrow(iris)
+size.train=floor(n*0.7); size.test=floor(n*0.3) 
+
+# We use this seed to be able to get the same training and test set everytime
+set.seed(123) 
+# Definition of the observations ID assigned to the train and test data
+id.train=sample(1:n,size.train,replace=FALSE) 
+id.test=sample(setdiff(1:n,id.train),size.test,replace=FALSE) 
+
+# We create the training and test dataset
+iris_train=iris[id.train,]; iris_test=iris[id.test,] 
+@
+Then, we will build a deep FNN with 2 hidden layers of 3 neurons. As hyperparameters, we will use only 1 epoch, we will use the standard backpropagation algorithm and therefore the learning rate has to be specified.  We will use a logistic activation function.
+<<eval=FALSE, echo=TRUE, highlight=TRUE>>=
+neuralnet_model <- neuralnet((Species=="setosa") +
+                               (Species=="versicolor") +
+                               (Species=="virginica") ~
+                               Sepal.Length+Sepal.Width+
+                               Petal.Length+Petal.Width,
+                            rep = 1, data = iris_train,
+                            algorithm = "backprop",
+                            learningrate = 0.01,
+                            linear.output = FALSE, hidden = c(3, 3),
+                            stepmax = 1000000, act.fct = "logistic")
+@
+We can easily plot our model to visualize its architecture:
+<<eval=TRUE, echo=TRUE, highlight=TRUE>>=
+plot(neuralnet_model)
+@
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.6] {figure/neuralnet_model.png}
+\end{figure}
+The model visualization allows to see if our model corresponds to the hyperparameters we used during training. However, this is not opitimized for models that use a high number of hidden layers and neurons.\\
+
+Finally, to see our model performance on the test dataset, we can use the \textbf{predict} function.
+<<eval=TRUE, echo=TRUE, highlight=TRUE>>=
+neuralnet_prediction <- predict(neuralnet_model, iris_test)
+table(iris_test$Species, apply(neuralnet_prediction, 1, which.max))
+@
+
+The accuracy of this resources is
+<<eval=TRUE, echo=FALSE>>=
+44/45
+@
+and the time it took to train is :
+<<eval=TRUE, echo=FALSE>>=
+time_fnn_neuralnet
+@
 
 %%%%%%%%%%%%%%%% Keras %%%%%%%%%%%%%%%% 
 \subsection{Keras}
 \subsubsection{Installation}
-\paragraph{Windows} \textit{The only supported installation method on Windows is "conda". It means you should install install Anaconda version 3.x before doing these steps.}
-
-\textbf{First step}, is the installation and download of the Keras files from GitHub :
+First step, is the installation and download of the Keras files from GitHub :
 <<eval=FALSE, echo=TRUE, highlight=TRUE>>=
 devtools::install_github("rstudio/keras")
 @
-Then, we need to install the package and import in the project :
+Then, we need to to install the package and import in the project :
 <<eval=FALSE,echo=TRUE, message=FALSE>>=
 library(keras)
-install_keras(method = c("auto", "virtualenv", "conda"),
-  conda = "auto", 
-  version = "default", 
-  tensorflow = "default",
-  extra_packages = c("tensorflow-hub"))
+install_keras()
 @
 When the "\textit{Installation complete.}" message appear you have a complete installation with CPU configure on the TensorFlow backend.
 If you want to take advantage of your GPU (Ensure that you have the hardware prerequisites) you will need to execute a different command as follows:
@@ -513,9 +594,8 @@ install_keras(tensorflow = "gpu")
 @
 \subsubsection{FNN}
 
-The dataset iris dont exist direc
-<<eval= FALSE, message = FALSE>>=
 
+<<eval= FALSE, message = FALSE>>=
 library(datasets)
 library
 data(iris)
@@ -579,6 +659,7 @@ time_fnn_keras
 \subsubsection{CNN}
 The first step consists of loading the CIFAR-10 dataset and creating a train and a test set.
 <<eval= FALSE, message = FALSE>>=
+library(keras)
 cifar10 = dataset_cifar10()
 # RGB values are usually encoded between 0 and 255.
 # A good practice is to scale them to a value from 0 and 1 b dividing the RGB values by 255.
@@ -730,96 +811,6 @@ Y_predicted <- model %>% predict_classes(X_test)
 @
 
 \subsubsection{RNN}
-<<eval=FALSE, echo=TRUE>>=
-
-library(keras)
-library(dplyr)
-library(ggplot2)
-library(purrr)
-# This is in order to limit the number of words 
-max_features = 5000
-# cut texts after this number of words (among top max_features most common words)
-maxlen = 40
-# Loads the dataset which is already split in train and test
-imdb <- dataset_imdb(num_words = max_features)
-# Seperate the labels and the data for train and test
-c(train_data, train_labels) %<-% imdb$train
-c(test_data, test_labels) %<-% imdb$test
-# This is the word index which can be interprate as a dictionnary betweend index to words
-# (e.g.) the word "modestly" is represented by the index 20608
-# by default this word to index contains 88584 words
-word_index <- dataset_imdb_word_index()
-length(word_index)
-# Convert this word to index List to a more friendly data frame
-word_index_df <- data.frame(
-  word = names(word_index),
-  idx = unlist(word_index, use.names = FALSE),
-  stringsAsFactors = FALSE
-)
-
-# The first 4 indices are reserved for 4 different specials keys
-# PAD:    This is to fill a sequence that is shorter than Max lenght
-# START:  This is to fill a sequence that is shorter than Max lenght
-# PAD:    This is to fill a sequence that is shorter than Max lenght
-# UNK:    This if for an unkown words that are not part of vocabulary
-# UNUSED: This if for an unused word part of the vocabulary
-
-word_index_df <- word_index_df %>% mutate(idx = idx + 3)
-word_index_df <- word_index_df %>%
-  add_row(word = "<PAD>", idx = 0)%>%
-  add_row(word = "<START>", idx = 1)%>%
-  add_row(word = "<UNK>", idx = 2)%>%
-  add_row(word = "<UNUSED>", idx = 3)
-# Sort the rows by index
-word_index_df <- word_index_df %>% arrange(idx)
-# A function that will decode a id an return the full review
-decode_review <- function(text){
-  paste(map(text, function(number) word_index_df %>%
-              filter(idx == number) %>%
-              select(word) %>% 
-              pull()),
-        collapse = " ")
-}
-
-
-decode_review(train_data[[5]])
-
-# This function is built in the Keras environmet and as the name indicates it
-# is use for padding sequences such as our reviews. after this is done all the
-# review will have the same lenght. The shorter ones will be filled with the token
-# <pad>. This applies to the train and test data.
-train_data_pad <- pad_sequences(
-  train_data,
-  value = word_index_df %>% filter(word == "<PAD>") %>% select(idx) %>% pull(),
-  padding = "post",
-  maxlen = maxlen
-)
-
-test_data_pad <- pad_sequences(
-  test_data,
-  value = word_index_df %>% filter(word == "<PAD>") %>% select(idx) %>% pull(),
-  padding = "post",
-  maxlen = maxlen
-)
-
-model <- keras_model_sequential()
-model %>% 
-  layer_embedding(input_dim = max_features, output_dim = 256) %>%
-  layer_lstm(units = 128,
-             input_shape = 256,
-             batch_size = 256)%>%
-  layer_dropout(rate = 0.2) %>%
-  layer_dense(units = 1, activation = "sigmoid")
-
-model %>% summary()
-
-model %>% compile(
-  optimizer = 'adam',
-  loss = 'binary_crossentropy',
-  metrics = list('accuracy')
-)
-
-@
 
 %%%%%%%%%%%%%%%% H2o %%%%%%%%%%%%%%%% 
 \subsection{H2O}
