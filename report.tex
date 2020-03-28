@@ -206,7 +206,6 @@ The CNN are a modified architecture of FNN that leverage the feature engineering
     \includegraphics[width=0.5\textwidth]{figure/CNN_process.png}
   \end{center}
   \caption{CNN, Deep Learning A-Z by SuperDataScience}
-  \label{fig:attention}
 \end{wrapfigure}
 A standard architecture of a CNN model is commonly represented this way: We start with an input image to which we are going to apply several kernels, a.k.a features detectors, in order to create feature maps that will form what we call a convolutional layer. A common practice is to apply the ReLu activation fonction to the convolutional layer output in order to increase the non linearity of the images before using the pooling method to create a pooling layer. The next step will be to combine all the pooled images from the pooling layer into one single vector, which is called flattening and will be the input of a FNN that will perform the desired task, for instance, classification. CNN parameters are trained with the backpropagation algorithm where the gradients are propagated from the output layer of the FFN to the input of the CNN in order to minimise a cost function, most of the time a categorical cross-entropy if we are performing a multi-class classification. 
 
@@ -240,7 +239,8 @@ A list of the available resources with installation and examples tutorials can b
 \section{Methodology}
 This section is divided in two;  the dataset description and the benchmark type. The dataset description is mostly to describe what dataset is going to be use for the different type of deep learning algorithms. The second section will describe two indicators in order to compare results of similar algorithms. The first indicator is mostly about a simple accuracy base on the same training and validation dataset and second indicator is about the time it took to execute the same task on differents ressources.
 \subsection{Workflow}
-E
+\ntodo[inline]{Add more info about this topics}
+
 \subsection{Dataset}
 \subsubsection{FNN}
 For the FNN, the training data will be the well known \textit{Iris} dataset. It contains four covariables and one categorical target variable.
@@ -289,28 +289,34 @@ Not generalised but gives an idea about the training time.
 \label{sec:avail_ressour}
 Like explain earlier this section will be divided in two in order to really differantiate the R packages standalone of the ressources that add an application interface.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%% R Package   %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%% R Packages   %%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{R packages}
 \ntodo[inline]{à voir si on a encore de la place pour mettre un tableau récapitulatif}
 
 %%%%%%%%%%%%%%%% Neuralnet %%%%%%%%%%%%%%%% 
-\subsubsection{Neuralnet package}
+\subsubsection{\textbf{Neuralnet package}}
 \paragraph{Description}
 According to its CRAN description, the package allows the "training of neural networks using the backpropagation, resilient backpropagation with (Riedmiller, 1994) or without weight backtracking (Riedmiller, 1993) or the modified globally convergent version by Anastasiadis et al. (2005). The package allows flexible settings through custom-choice of error and activation function. Furthermore, the calculation of generalized weights (Intrator O \& Intrator N, 1993) is implemented." This package uses $C/C++$ in backend.
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.7\textwidth]{figure/neuralnet_package.png}
-     \caption{Package neuralnet, CRAN}
-\end{figure}
+\textit{Important default parameters of a FNN model with the neuralnet package:}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{neuralnet}\hlstd{(formula, Y}\hlopt{~}\hlstd{X1}\hlopt{+}\hlstd{...}\hlopt{+}\hlstd{Xn,} \hlkwc{hidden} \hlstd{=} \hlnum{1}\hlstd{,} \hlkwc{threshold} \hlstd{=} \hlnum{0.01}\hlstd{,} \hlkwc{stepmax} \hlstd{=} \hlnum{1e+05}\hlstd{,} \hlkwc{rep} \hlstd{=} \hlnum{1}\hlstd{,}
+          \hlkwc{startweights} \hlstd{=} \hlkwa{NULL}\hlstd{,} \hlkwc{learningrate.limit} \hlstd{=} \hlkwa{NULL}\hlstd{,} \hlkwc{algorithm} \hlstd{=} \hlstr{"rprop+"}\hlstd{,}
+          \hlkwc{err.fct} \hlstd{=} \hlstr{"sse"}\hlstd{,} \hlkwc{act.fct} \hlstd{=} \hlstr{"logistic"}\hlstd{,} \hlkwc{linear.output} \hlstd{=} \hlnum{TRUE}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
 
 \paragraph{Pros}
 \begin{itemize}
 \item Very easy to use and to build a quick FFN and deep FNN model.
 \item Allows to use several types of backpropagation algorithms. By default, the resilient backpropagation algorithm is used "rprop+" instead of regular backpropagation which is an algorithm not very used in practice as it is more tricky to implement. We can however decided to change the rprop+ for a standard backpropagation by changing for \textbf{algorithm = "backprop"}.
-\item Several hidden layers and neurons per layer can be added. By default, the algorithm uses only 1 hidden layer with 1 neuron, but it can be increased by addind the command line: \textbf{hidden = c(5,2)} to get 2 hidden layers of 5 neurons.
+\item Several hidden layers and neurons per layer can be added. By default, the algorithm uses only 1 hidden layer with 1 neuron, but it can be increased by addind the command line: \textbf{hidden = c(3,3)} to get 2 hidden layers of 3 neurons each.
 \item Allows to easily plot and visualize the model and its parameters with the command line: \textbf{plot(model).}
+\item Allows to use custome activation functions.
 \end{itemize}
 \paragraph{Cons}
 \begin{itemize}
@@ -319,14 +325,19 @@ According to its CRAN description, the package allows the "training of neural ne
 \end{itemize}
 
 %%%%%%%%%%%%%%%% nnet %%%%%%%%%%%%%%%% 
-\subsubsection{nnet package}
+\subsubsection{\textbf{nnet package}}
 \paragraph{Description}
 This package comes from the CRAN platform and allows to build and fit "FNN with a single hidden layer and multinomial log-linear models". This package uses C/C++ in backend.
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.45\textwidth]{figure/nnet_package.png}
-     \caption{Package nnet, CRAN}
-\end{figure}
+
+\textit{Important default parameters of a FNN model with the neuralnet package:}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{nnet}\hlstd{(X, Y, size,} \hlkwc{linout}\hlstd{=}\hlnum{FALSE}\hlstd{,} \hlkwc{entropy}\hlstd{=}\hlnum{FALSE}\hlstd{,} \hlkwc{softmax}\hlstd{=}\hlnum{FALSE}\hlstd{,} \hlkwc{maxit} \hlstd{=} \hlnum{100}\hlstd{,} \hlkwc{decay} \hlstd{=} \hlnum{0}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
 \paragraph{Pros}
 \begin{itemize}
 \item One of the easiest R package to build a quick FFN model.
@@ -341,7 +352,7 @@ This package comes from the CRAN platform and allows to build and fit "FNN with 
 
 %%%%%%%%%%%%%%%% NeuralNetTools %%%%%%%%%%%%%%%% 
 
-\subsubsection{NeuralNetTools package}
+\subsubsection{\textbf{NeuralNetTools package}}
 \paragraph{Description}
 This package is a complement to R's neural networks packages as it allows to visualize and perform analysis on neural network models. "Functions are available for plooting, quantifying variable importance, conducting a sensitivity analysis, and obtaining a simple list of model weights."
 \begin{figure}[H]
@@ -351,7 +362,7 @@ This package is a complement to R's neural networks packages as it allows to vis
   \end{subfigure}
   \begin{subfigure}{0.5\textwidth}
     \centering\includegraphics[width=0.45\textwidth]{figure/garson_algorithm.png}
-    \caption{NeuralNetToolsm Input variables importance}
+    \caption{NeuralNetTools, Input variables importance}
   \end{subfigure}
     \caption{Embedding dimension hyper parameter}
 \end{figure}
@@ -371,12 +382,10 @@ This package is a complement to R's neural networks packages as it allows to vis
 \item Is not optimized to visualize large neural networks models.
 \end{itemize}
 
-
-
 %%%%%%%%%%%%%%%% Deepnet %%%%%%%%%%%%%%%% 
 \subsubsection{Deepnet package}
 \paragraph{Description}
-This package is available on the CRAN platform and has been written specifcally written for R. It allows "implement som deep learning architectures and neural network algorithms, including backpropagation, Restricted Boltzmann Machine (RBM), Deep Belief Network (DBN) and Deep autoencoder".
+This package is available on the CRAN platform and has been written specifcally written for R. It allows to "implement some deep learning architectures and neural network algorithms, including backpropagation, Restricted Boltzmann Machine (RBM), Deep Belief Network (DBN) and Deep autoencoder".
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{figure/deepnet_package.png}
@@ -395,9 +404,6 @@ This package is available on the CRAN platform and has been written specifcally 
 \item Not the fastest package due to its implementation in R.
 \item Does not provide a lot of hyperparameters tuning options, and is not user-friendly.
 \end{itemize}
-
-
-%%%%%%%%%%%%%%%% Nnet %%%%%%%%%%%%%%%% 
 
 %%%%%%%%%%%%%%%% brnn %%%%%%%%%%%%%%%% 
 \subsubsection{brnn package}
@@ -545,7 +551,108 @@ H2o is a "scalable open source machine learning platform that offers parallelize
 \section{Examples}
 
 \label{sec:examples}
-In order to give concrete deep learning examples, four resources were selected for tutorials; Keras using Tensorflow backend, H2O, rTorch and MXNET.
+In order to give concrete deep learning examples, four resources were selected for tutorials; Neuralnet, Keras using Tensorflow backend, H2O, rTorch and MXNET.
+%%%%%%%%%%%%%%%% Neuralnet %%%%%%%%%%%%%%%% 
+\subsection{Neuralnet}
+\subsubsection{Installation}
+Neuralnet is available on the CRAN and can be easily downloaded and loaded as follow:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{install.packages}\hlstd{(}\hlstr{"neuralnet"}\hlstd{)}
+\hlkwd{library}\hlstd{(neuralnet)}
+
+\hlcom{# We will load the data from the library dataset}
+\hlkwd{install.packages}\hlstd{(}\hlstr{"dataset"}\hlstd{)}
+\hlkwd{library}\hlstd{(dataset)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+Then we split our data into a training set and a test set.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# 70% of the data will be used to train the model}
+\hlcom{# 30% of the data will be used to test the model performance}
+\hlstd{n}\hlkwb{=}\hlkwd{nrow}\hlstd{(iris)}
+\hlstd{size.train}\hlkwb{=}\hlkwd{floor}\hlstd{(n}\hlopt{*}\hlnum{0.7}\hlstd{); size.test}\hlkwb{=}\hlkwd{floor}\hlstd{(n}\hlopt{*}\hlnum{0.3}\hlstd{)}
+
+\hlcom{# We use this seed to be able to get the same training and test set everytime}
+\hlkwd{set.seed}\hlstd{(}\hlnum{123}\hlstd{)}
+\hlcom{# Definition of the observations ID assigned to the train and test data}
+\hlstd{id.train}\hlkwb{=}\hlkwd{sample}\hlstd{(}\hlnum{1}\hlopt{:}\hlstd{n,size.train,}\hlkwc{replace}\hlstd{=}\hlnum{FALSE}\hlstd{)}
+\hlstd{id.test}\hlkwb{=}\hlkwd{sample}\hlstd{(}\hlkwd{setdiff}\hlstd{(}\hlnum{1}\hlopt{:}\hlstd{n,id.train),size.test,}\hlkwc{replace}\hlstd{=}\hlnum{FALSE}\hlstd{)}
+
+\hlcom{# We create the training and test dataset}
+\hlstd{iris_train}\hlkwb{=}\hlstd{iris[id.train,]; iris_test}\hlkwb{=}\hlstd{iris[id.test,]}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+Then, we will build a deep FNN with 2 hidden layers of 3 neurons. As hyperparameters, we will use only 1 epoch, we will use the standard backpropagation algorithm and therefore the learning rate has to be specified.  We will use a logistic activation function.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{neuralnet_model} \hlkwb{<-} \hlkwd{neuralnet}\hlstd{((Species}\hlopt{==}\hlstr{"setosa"}\hlstd{)} \hlopt{+}
+                               \hlstd{(Species}\hlopt{==}\hlstr{"versicolor"}\hlstd{)} \hlopt{+}
+                               \hlstd{(Species}\hlopt{==}\hlstr{"virginica"}\hlstd{)} \hlopt{~}
+                               \hlstd{Sepal.Length}\hlopt{+}\hlstd{Sepal.Width}\hlopt{+}
+                               \hlstd{Petal.Length}\hlopt{+}\hlstd{Petal.Width,}
+                            \hlkwc{rep} \hlstd{=} \hlnum{1}\hlstd{,} \hlkwc{data} \hlstd{= iris_train,}
+                            \hlkwc{algorithm} \hlstd{=} \hlstr{"backprop"}\hlstd{,}
+                            \hlkwc{learningrate} \hlstd{=} \hlnum{0.01}\hlstd{,}
+                            \hlkwc{linear.output} \hlstd{=} \hlnum{FALSE}\hlstd{,} \hlkwc{hidden} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{3}\hlstd{,} \hlnum{3}\hlstd{),}
+                            \hlkwc{stepmax} \hlstd{=} \hlnum{1000000}\hlstd{,} \hlkwc{act.fct} \hlstd{=} \hlstr{"logistic"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+We can easily plot our model to visualize its architecture:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{plot}\hlstd{(neuralnet_model)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.6] {figure/neuralnet_model.png}
+\end{figure}
+The model visualization allows to see if our model corresponds to the hyperparameters we used during training. However, this is not opitimized for models that use a high number of hidden layers and neurons.\\
+
+Finally, to see our model performance on the test dataset, we can use the \textbf{predict} function.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{neuralnet_prediction} \hlkwb{<-} \hlkwd{predict}\hlstd{(neuralnet_model, iris_test)}
+\hlkwd{table}\hlstd{(iris_test}\hlopt{$}\hlstd{Species,} \hlkwd{apply}\hlstd{(neuralnet_prediction,} \hlnum{1}\hlstd{, which.max))}
+\end{alltt}
+\begin{verbatim}
+##             
+##               1  2  3
+##   setosa     14  0  0
+##   versicolor  0 17  1
+##   virginica   0  0 13
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+The accuracy of this resources is
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+## [1] 0.9777778
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+and the time it took to train is :
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+## Time difference of 2.623371 secs
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 
 %%%%%%%%%%%%%%%% Keras %%%%%%%%%%%%%%%% 
 \subsection{Keras}
@@ -640,10 +747,8 @@ This package of the possibility to store the training history :
 \begin{alltt}
 \hlkwd{plot}\hlstd{(history)}
 \end{alltt}
-
-
-{\ttfamily\noindent\itshape\color{messagecolor}{\#\# `geom\_smooth()` using formula 'y \textasciitilde{} x'}}\end{kframe}
-\includegraphics[width=4in]{figure/unnamed-chunk-9-1} 
+\end{kframe}
+\includegraphics[width=4in]{figure/unnamed-chunk-18-1} 
 
 \end{knitrout}
 
@@ -651,7 +756,7 @@ The accuracy of this resources is
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{verbatim}
-## [1] 0.9333333
+## [1] 0.9555556
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -659,7 +764,7 @@ and the time it took to train is :
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{verbatim}
-## Time difference of 1.213505 mins
+## Time difference of 38.43885 secs
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -669,6 +774,7 @@ The first step consists of loading the CIFAR-10 dataset and creating a train and
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
+\hlkwd{library}\hlstd{(keras)}
 \hlstd{cifar10} \hlkwb{=} \hlkwd{dataset_cifar10}\hlstd{()}
 \hlcom{# RGB values are usually encoded between 0 and 255.}
 \hlcom{# A good practice is to scale them to a value from 0 and 1 b dividing the RGB values by 255.}
@@ -916,7 +1022,7 @@ and the time it took to train is :
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{verbatim}
-## Time difference of 7.731083 secs
+## Time difference of 12.48498 secs
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -976,7 +1082,7 @@ The accuracy of this resources is
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{verbatim}
-## [1] 0.9333333
+## [1] 0
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -984,7 +1090,7 @@ and the time it took to train is :
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{verbatim}
-## Time difference of 6.597001 secs
+## Time difference of 3.174453 secs
 \end{verbatim}
 \end{kframe}
 \end{knitrout}

@@ -116,9 +116,48 @@ pred.label.mxnet <- max.col(t(preds)) - 1
 1-mean(pred.label.mxnet != as.vector(data_df$test$Species))
 
 
+#############################
+############ Neuralnet
+#############################
+
+library(neuralnet)
+library(dataset)
+data("iris")
+# On divise le dataset en 70% training et 30 % testing 
+n=nrow(iris) 
+size.train=floor(n*0.7) 
+size.test=floor(n*0.3) 
+
+# Définition des ID des observations assignées aux train et test data 
+set.seed(123) # specification de la seed pour que les résultats puissent être reproduits exactement 
+id.train=sample(1:n,size.train,replace=FALSE) 
+id.test=sample(setdiff(1:n,id.train),size.test,replace=FALSE) 
+
+# Division de l'échantillon 
+iris_train=iris[id.train,] 
+iris_test=iris[id.test,] 
+
+start_time <- Sys.time()
+neuralnet_model <- neuralnet((Species=="setosa") +
+                               (Species=="versicolor") +
+                               (Species=="virginica") ~
+                               Sepal.Length+Sepal.Width+
+                               Petal.Length+Petal.Width,
+                            rep = 1, data = iris_train,
+                            algorithm = "backprop",
+                            learningrate = 0.01,
+                            linear.output = FALSE, hidden = c(3, 3),
+                            stepmax = 1000000, act.fct = "logistic")
+end_time <- Sys.time()
+time_fnn_neuralnet = end_time - start_time
+plot(neuralnet_model)
+
+neuralnet_prediction <- predict(neuralnet_model, iris_test)
+neural_net_CM <- table(iris_test$Species, apply(neuralnet_prediction, 1, which.max))
+
 ############# SAVE WORKSPACE
 
-save.image("C:/Users/apabl/Desktop/Git/DeepLearninginR/DeepLearninginR/FNN_save.RData")
+save.image("C:/Users/adrie/OneDrive/Desktop/Git/Deep_learning_r/DeepLearninginR/FNN_save.RData")
 
 
 
