@@ -2,13 +2,6 @@
 save.image("C:/Users/apabl/Desktop/Git/DeepLearninginR/DeepLearninginR/RNN_save.RData")
 
 
-library(lda)
-data(cora.vocab)
-data(cora.documents)
-data(cora.links)
-data(cora.titles)
-
-
 #############################
 ############ KERAS
 #############################
@@ -16,20 +9,27 @@ library(keras)
 library(dplyr)
 library(ggplot2)
 library(purrr)
+word_index <- dataset_imdb_word_index()
+length(word_index)
 # This is in order to limit the number of words 
-max_features = 5000
+max_features = length(word_index)
+
 # cut texts after this number of words (among top max_features most common words)
-maxlen = 40
+maxlen = 45
 # Loads the dataset which is already split in train and test
-imdb <- dataset_imdb(num_words = max_features)
+# For some reason there is a bug. When adding the parameter Max len the function don't
+# return test data if not above maxlen 180 
+imdb <- dataset_imdb(maxlen = maxlen )
+imdb_hack <- dataset_imdb(maxlen = 150 )
+imdb$test
 # Seperate the labels and the data for train and test
 c(train_data, train_labels) %<-% imdb$train
-c(test_data, test_labels) %<-% imdb$test
+c(test_data, test_labels) %<-% imdb_hack$test
+
 # This is the word index which can be interprate as a dictionnary betweend index to words
 # (e.g.) the word "modestly" is represented by the index 20608
 # by default this word to index contains 88584 words
-word_index <- dataset_imdb_word_index()
-length(word_index)
+max_features
 # Convert this word to index List to a more friendly data frame
 word_index_df <- data.frame(
   word = names(word_index),
@@ -68,28 +68,29 @@ decode_review(train_data[[5]])
 # is use for padding sequences such as our reviews. after this is done all the
 # review will have the same lenght. The shorter ones will be filled with the token
 # <pad>. This applies to the train and test data.
-train_data_pad <- pad_sequences(
+train_pad <- pad_sequences(
   train_data,
   value = word_index_df %>% filter(word == "<PAD>") %>% select(idx) %>% pull(),
   padding = "post",
   maxlen = maxlen
 )
 
-test_data_pad <- pad_sequences(
+test_pad <- pad_sequences(
   test_data,
   value = word_index_df %>% filter(word == "<PAD>") %>% select(idx) %>% pull(),
   padding = "post",
   maxlen = maxlen
 )
 
+
 model <- keras_model_sequential()
 model %>% 
-  layer_embedding(input_dim = max_features, output_dim = 256) %>%
-  layer_lstm(units = 128,
-             input_shape = 256,
-             batch_size = 256)%>%
-  layer_dropout(rate = 0.2) %>%
-  layer_dense(units = 1, activation = "sigmoid")
+  layer_embedding(input_dim = max_features, output_dim = 32) %>%
+  layer_lstm(units = 24,
+             input_shape = 32,
+             batch_size = 8)%>%
+  layer_dropout(rate = 0.1) %>%
+  layer_dense(units = 1, activation = "relu")
 
 model %>% summary()
 
@@ -101,26 +102,28 @@ model %>% compile(
 
 
 #Create a validation dataset
+n = as.integer(round(nrow(train_pad)*0.7))
+x_val <- train_pad[1:n, ]
+partial_x_train <- train_pad[(n+1):nrow(train_pad), ]
 
-x_val <- train_data_pad[1:10000, ]
-partial_x_train <- train_data_pad[10001:nrow(train_data_pad), ]
+y_val <- train_labels[1:n]
+partial_y_train <- train_labels[(n+1):length(train_labels)]
 
-y_val <- train_labels[1:10000]
-partial_y_train <- train_labels[10001:length(train_labels)]
+
 start_time <- Sys.time()
 history_rnn_keras <- model %>% fit(
   partial_x_train,
   partial_y_train,
-  epochs = 2,
+  epochs = 20,
   validation_data = list(x_val, y_val),
 )
 end_time <- Sys.time()
 time_rnn_keras = end_time - start_time
 
-results <- model %>% evaluate(test_data_pad, test_labels)
+results <- model %>% evaluate(test_pad, test_labels)
+results
 
 
 
-####### CORA
-#install.packages("lda")
+
 
