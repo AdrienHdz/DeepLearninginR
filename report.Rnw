@@ -491,14 +491,20 @@ In order to give concrete deep learning examples, four resources were selected f
 %%%%%%%%%%%%%%%% Keras %%%%%%%%%%%%%%%% 
 \subsection{Keras}
 \subsubsection{Installation}
-First step, is the installation and download of the Keras files from GitHub :
+\paragraph{Windows} \textit{The only supported installation method on Windows is "conda". It means you should install install Anaconda version 3.x before doing these steps.}
+
+\textbf{First step}, is the installation and download of the Keras files from GitHub :
 <<eval=FALSE, echo=TRUE, highlight=TRUE>>=
 devtools::install_github("rstudio/keras")
 @
-Then, we need to to install the package and import in the project :
+Then, we need to install the package and import in the project :
 <<eval=FALSE,echo=TRUE, message=FALSE>>=
 library(keras)
-install_keras()
+install_keras(method = c("auto", "virtualenv", "conda"),
+  conda = "auto", 
+  version = "default", 
+  tensorflow = "default",
+  extra_packages = c("tensorflow-hub"))
 @
 When the "\textit{Installation complete.}" message appear you have a complete installation with CPU configure on the TensorFlow backend.
 If you want to take advantage of your GPU (Ensure that you have the hardware prerequisites) you will need to execute a different command as follows:
@@ -507,8 +513,9 @@ install_keras(tensorflow = "gpu")
 @
 \subsubsection{FNN}
 
-
+The dataset iris dont exist direc
 <<eval= FALSE, message = FALSE>>=
+
 library(datasets)
 library
 data(iris)

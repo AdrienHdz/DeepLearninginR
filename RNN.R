@@ -1,5 +1,14 @@
 
 save.image("C:/Users/apabl/Desktop/Git/DeepLearninginR/DeepLearninginR/RNN_save.RData")
+
+
+library(lda)
+data(cora.vocab)
+data(cora.documents)
+data(cora.links)
+data(cora.titles)
+
+
 #############################
 ############ KERAS
 #############################
@@ -105,9 +114,13 @@ history_rnn_keras <- model %>% fit(
   epochs = 2,
   validation_data = list(x_val, y_val),
 )
+end_time <- Sys.time()
+time_rnn_keras = end_time - start_time
 
 results <- model %>% evaluate(test_data_pad, test_labels)
 
 
 
+####### CORA
+#install.packages("lda")
 

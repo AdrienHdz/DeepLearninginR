@@ -271,14 +271,11 @@ The dataset use to test an RNN is the IMDB Movie reviews sentiment classificatio
 
 \subsection{Characteristic}
 \subsubsection{Accuracy}
-\ntodo[inline]{Add more info about this topics}
+For the different type of deep learning algorithm a simple misclassification error rate will be use as the accuracy.
 
-Classification rate for.
 
 \subsubsection{Time elapsed}
-\ntodo[inline]{Add more info about this topics}
-
-Not generalised but gives an idea about the training time.
+A elapsed time was also provided to give an idea of the training time. Ensure not to generalised this characteristic since it depends on the data, the computer, the seed, etc.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -551,7 +548,9 @@ In order to give concrete deep learning examples, four resources were selected f
 %%%%%%%%%%%%%%%% Keras %%%%%%%%%%%%%%%% 
 \subsection{Keras}
 \subsubsection{Installation}
-First step, is the installation and download of the Keras files from GitHub :
+\paragraph{Windows} \textit{The only supported installation method on Windows is "conda". It means you should install install Anaconda version 3.x before doing these steps.}
+
+\textbf{First step}, is the installation and download of the Keras files from GitHub :
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
@@ -559,12 +558,16 @@ First step, is the installation and download of the Keras files from GitHub :
 \end{alltt}
 \end{kframe}
 \end{knitrout}
-Then, we need to to install the package and import in the project :
+Then, we need to install the package and import in the project :
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlkwd{library}\hlstd{(keras)}
-\hlkwd{install_keras}\hlstd{()}
+\hlkwd{install_keras}\hlstd{(}\hlkwc{method} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{"auto"}\hlstd{,} \hlstr{"virtualenv"}\hlstd{,} \hlstr{"conda"}\hlstd{),}
+  \hlkwc{conda} \hlstd{=} \hlstr{"auto"}\hlstd{,}
+  \hlkwc{version} \hlstd{=} \hlstr{"default"}\hlstd{,}
+  \hlkwc{tensorflow} \hlstd{=} \hlstr{"default"}\hlstd{,}
+  \hlkwc{extra_packages} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{"tensorflow-hub"}\hlstd{))}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -579,7 +582,7 @@ If you want to take advantage of your GPU (Ensure that you have the hardware pre
 \end{knitrout}
 \subsubsection{FNN}
 
-
+The dataset iris dont exist direc
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
