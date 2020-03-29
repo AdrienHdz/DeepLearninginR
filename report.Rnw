@@ -49,7 +49,7 @@
 \setlength{\topmargin}{-0.5in}
 \setlength{\evensidemargin}{-0.25in}
 \setlength{\oddsidemargin}{-0.25in}
-\renewcommand{\baselinestretch}{1.5}
+\renewcommand{\baselinestretch}{1.2}
 \makeatletter
 \makeatother
 \lfoot{} \cfoot{ } \rfoot{{\small{\em Page \thepage \ of \pageref{LastPage}}}}
@@ -110,7 +110,8 @@
 \pagestyle{fancy}
 \pagenumbering{arabic}
 \section{Introduction}
-In the first section of this paper, a literature review covers the neural networks and deep learners algorithms, focusing on different types of neural networks architectures and describing for which kind of data and tasks each neural network architecture has been designed for. Furthermore, in the methodology section, a list of deep learning projects are shown in order to understand some patterns and methods. Then, an exhaustive list of the R libraries allowing to build neural networks and deep learners models. Correspondingly, the advantages and disadvantages of each libraries, their capabilities as well as what you can expect when using them. To sum up, the last section will give concrete examples on how to implement the neural networks and deep learners models with these libraries, using real data.
+These days, "deep learning" buzz word is part of multiple repositories projects and companies around the world. Most projects are build around the programming language python. That being said it will be intersting to see if this trend is viable in the R studio environment.
+To start, a literature review covers the neural networks and deep learners algorithms, focusing on different types of neural networks architectures and describing for which kind tasks each neural network architecture has been designed for. Furthermore, the methodology section will try to describe briefly the workflow of deeps learning training and predictions, the dataset that could be use for different algorithms and finally some characterstic use to compare different packages. Then, an exhaustive list of the R libraries allowing to build neural networks and deep learners models. Correspondingly, the advantages and disadvantages of each libraries, their capabilities as well as what you can expect when using them. To sum up, the last section will give concrete examples on how to implement the neural networks and deep learners models with these libraries, using the example data of the methodology section.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%% Litterature %%%%%%%%%%%%%%%%%%%%
@@ -123,7 +124,7 @@ In the first section of this paper, a literature review covers the neural networ
   \begin{center}
     \includegraphics[width=0.4\textwidth]{figure/deep learning.PNG}
       \end{center}
-     \caption{Artificial Intelligence vs Machine Learning vs Deep Learning}
+     \caption{Artificial Intelligence vs Machine Learning vs Deep Learning \cite{aivsdeepvsml}}
      \label{fig:simule}
 \end{wrapfigure}
 
@@ -165,7 +166,7 @@ where:
   \begin{center}
     \includegraphics[width=0.45\textwidth]{figure/activation_function_output.png}
       \end{center}
-     \caption{Activation functions: output units. HEC}
+     \caption{Activation functions: output units. \cite[slide 24]{nnheca2019}}
      \label{fig:activation}
 \end{wrapfigure}
 Here, \textbf{the bias term  b} and \textbf{the weights or parameter w} will be learned by the model in order the minimize a cost function, through the use of the gradient descent method. Then, the network will use the backpropagation algorithm where the error is backpropagated from the output to the input layers and the bias and weighted are then updated accordingly.\\
@@ -178,7 +179,7 @@ A detailed explanation of the theory of feedforward neural network can be found 
 \subsubsection{CNN}
 
 The CNN are a modified architecture of FNN that leverage the feature engineering that used to be hand maded by domain experts. This class of deep neural network are commonly used for image recognition and classification that can serve different applications such as facial recongnition, document analysis and speech recognition. The original FNN are not suited analyzing large size images since the weights increase exponentially and, at the end, don't perfom very well.\\
-\begin{wrapfigure}[7]{r}{0.6\textwidth}
+\begin{wrapfigure}[8]{r}{0.5\textwidth}
   \begin{center}
     \includegraphics[width=0.5\textwidth]{figure/CNN_process.png}
   \end{center}
@@ -197,8 +198,7 @@ CNN parameters are trained with the \textbf{backpropagation} algorithm where the
 To get a detailed explanation of convolutional neural networks we recommand to read \cite[Chapter 9]{Goodfellow-et-al-2016}.\\
 
 \subsubsection{RNN}
-\ntodo[inline]{Add more info about this topics}
-Recurrent neural networks are a more advanced type of neural networks architecture having proven state-of-art performance for solving tasks related to sequential data such as Natural Language Processing (NLP), anomaly detection and event forecasting. As a key differentiator from feedfoward neural networks, is that RNNs use feedback loops connections instead of feedforward connections and get an internal memory. Indeed, that take as input each step of the sequantial data as well as what they have learned over time. One of their other advantage is to be able to handle input and ouput sequences with different sizes. "A recurrent neural network can be thought of as multiple copies of the same network, each passing a message to a successor" Olah.
+Recurrent neural networks are a more advanced type of deep learning architecture having proven state-of-art performance for solving tasks related to sequential data such as Natural Language Processing (NLP), anomaly detection and event forecasting. As a key differentiator from feedfoward neural networks, is that RNNs use feedback loops connections instead of feedforward connections and get an internal memory. Indeed, that take as input each step of the sequantial data as well as what they have learned over time. One of their other advantage is to be able to handle input and ouput sequences with different sizes. "A recurrent neural network can be thought of as multiple copies of the same network, each passing a message to a successor" Olah.
 \begin{wrapfigure}[12]{r}{0.5\textwidth}
     \begin{center}
     \includegraphics[width=0.45\textwidth]{figure/RNN_process.png}
@@ -210,15 +210,16 @@ Recurrent neural networks are a more advanced type of neural networks architectu
 A standard architecture of a RNN model is commonly
 represented this way:
 \begin{itemize}
-\item We will train our algorithm by using as input x a part of the sequence of our data. For example, if our data is the sentence : \textbf{I am learning deep learning}, then our x1 will be "I", and our x2 will be "am", etc.
+\item The training uses the input \textit{x} as part of the data sequence or vector. For example, if our data is \textbf{x = "I am learning deep learning"}, then our $x_1$ will be "I", and our $x_2$ will be "am", etc.
 \item We will also use a second input which is the hidden state of the previous cell of our network. This means that in this network our neurons are connected by a feedback loop. This will allow our network to capture the "temporal" information of our data and gives it a memory. 
 \end{itemize}
 
-RNN parameters, that is this case are shared throught the network, are trained with the \textbf{backpropagation through time} algorithm where the gradients are propagated from the output layer of the RNN in order to minimise a cost function, most of the time a categorical cross-entropy if we are performing a multi-class classification. 
+RNN parameters are trained with the \textbf{backpropagation through time} algorithm where the gradients are propagated from the output layer of the RNN in order to minimise a cost function, most of the time a categorical cross-entropy if we are performing a multi-class classification for example. However, a simple RNN network will suffer of gradient vanishing or exploding because the sequence lengths. State-of-art algorithms such as GRU or LSTM exists to tackle this problem.  
 
-To get a detailed explanation of the theory of recurrent neural networks we recommand to read \cite[Chapter 10]{Goodfellow-et-al-2016}. We also recommand reading this blog post \url{https://colah.github.io/posts/2015-08-Understanding-LSTMs/}
+A detailed explanation of recurrent neural networks can be found in the  \cite[Chapter 10]{Goodfellow-et-al-2016}. We also recommand reading this blog post \cite{olah_2015}.
 
 \subsection{Deep Learning integration in R}
+\label{sec:deepinR}
 The integration of Deep learning in R can be separate in two part ; (1) The API integration and (2) the standalone R packages. 
 \begin{enumerate}
 \item The API will give the possibility to control externally through R an existing installation. In other words, a software translator for a already known software installation. This approach is not always trivial to install nor to manipulate but in long term will probably give the best flexibility in terms of Deep Learning projects.
@@ -243,19 +244,19 @@ The workflow of a deep learning project in R we recommand to follow is described
 \end{itemize}
 \subsection{Dataset}
 \subsubsection{FNN}
-For the FNN, the training data will be the well known \textit{Iris} dataset. It contains four covariables and one categorical target variable.
+For the FNN, the training data will be the well known \textit{Iris} dataset. It contains four covariables (Length and Width of Sepal and Petals) and one categorical target variable representing 3 type iris species ((\textit{Iris setosa}, \textit{Iris virginica} and \textit{Iris versicolor})).  This dataset of 50 observations is pretty well known and is perfect to show a small example of FNN. 
 
 \subsubsection{CNN}
 For the CNN, the training data will also be a well known dataset called CIFAR-10. The CIFAR-10 dataset consists of 60000 32x32 colour images in 10 classes, with 6000 images per class. The easiest way in R to download this package is using the Keras API. The training dataset has 50 000 images in three color (Red-Green-Blue) that are 32 pixels by 32 pixels. The testing dataset has a total of 10 000 images
 
 \subsubsection{RNN}
-The dataset use to test an RNN is the IMDB Movie reviews sentiment classification. This pack
+The dataset use to test an RNN is the IMDB Movie reviews for sentiment classification. The reason to use this dataset is that Keras API also offers a complete bundle (of 25 000 reviews for training and another 25 000 for testing) with multiple parameter to help you get started with sentimen classification using RNN. Each review is classify as "1" (good) or "0" (bad) and the word index is already done. The total word vocabulary is 88 000 words.
 
 
 
 \subsection{Characteristic}
 \subsubsection{Accuracy}
-The accuracy is not really important for this tutorial however it might come handy for users that want to compare models. 
+As the purpose of this tutorial is to learn to build the architecture of neural networks in R, we will not focus on accuracy measurement.However, it might come handy for users to have a tool or starting point therefore an extensive readin of this source \cite{perfomancelink} is highly recommend.
 Since for all three algorithms (FNN , CNN and RNN) it is mostly a classification models the accuracy will be $1-classification_{error}$.
 \subsubsection{Time elapsed}
 Sometime the training timing can be a deal breaker for some users. This charactersitic is calculated from a simple R package ,that being said it is really important to not generalised the tutorials results. It is simply to give an idea about the training time since it depends on multiple factor (e.g. Computer characterstics such as memory , CPU, etc.).
@@ -268,7 +269,7 @@ Sometime the training timing can be a deal breaker for some users. This characte
 
 \section{Available resources}
 \label{sec:avail_ressour}
-Like explain earlier this section will be divided in two in order to really differantiate the R packages standalone of the ressources that add an application interface.
+As mentioned in the section \ref{sec:deepinR}, we will firstly introduce the most important R packages coming from the CRAN platform for deep learning. Then, we will give an overview of the different API packages available. For each R package (not API based), we give a description as well as a visual example of how to build a neural network model with it. Moreover, we highlight the most important Pros and Cons, although we highly suggest you to read the packages official documentation that we also provide.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%% R Packages   %%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -278,14 +279,14 @@ Like explain earlier this section will be divided in two in order to really diff
 %%%%%%%%%%%%%%%% Neuralnet %%%%%%%%%%%%%%%% 
 \subsubsection{\textbf{Neuralnet package}}
 \paragraph{Description}
-According to its CRAN description, the package allows the "training of neural networks using the backpropagation, resilient backpropagation with (Riedmiller, 1994) or without weight backtracking (Riedmiller, 1993) or the modified globally convergent version by Anastasiadis et al. (2005). The package allows flexible settings through custom-choice of error and activation function. Furthermore, the calculation of generalized weights (Intrator O \& Intrator N, 1993) is implemented." This package uses $C/C++$ in backend.
+According to its CRAN description, the package allows the "training of neural networks using the backpropagation, resilient backpropagation with (Riedmiller, 1994) or without weight backtracking (Riedmiller, 1993) or the modified globally convergent version by Anastasiadis et al. (2005). The package allows flexible settings through custom-choice of error and activation function. Furthermore, the calculation of generalized weights (Intrator O \& Intrator N, 1993) is implemented." This package uses $C/C++$ in backend. More information can be found on the package source \cite{neuralnet2019}.
 
 \textit{Important default parameters of a FNN model with the neuralnet package:}
 \begin{figure}[H]
   \begin{subfigure}{0.5\textwidth}
     <<eval= FALSE, message = FALSE>>=
     neuralnet(formula, 
-          Y~X1+...+Xn, 
+          data = Y~X1+...+Xn, 
           hidden = 1, 
           threshold = 0.01, 
           stepmax = 1e+05, 
@@ -302,17 +303,35 @@ According to its CRAN description, the package allows the "training of neural ne
   \end{subfigure}
   \begin{subfigure}{0.5\textwidth}
     \centering
-    <<eval= FALSE, message = FALSE>>=
-    #' @param formula
-    #' @param Y~X1+...+Xn 
-    #' @param hidden = 1
-    #' @param threshold = 0.01
-    #' @param stepmax = 1e+05
-    #' @param rep = 1
-    #' @param algorithm = "rprop+"
-    #' @param err.fct = "sse"
-    #' @param act.fct = "logistic"
-    #' @param linear.output = TRUE
+    <<eval= FALSE, message = FALSE, comment="#">>=
+    #' @param formula : a symbolic description of 
+    #         the model to be fitted.
+    #' @param data : a data frame containing the 
+    #         variables specified in formula.
+    #' @param hidden : a vector of integers 
+    #         specifying the number of hidden 
+    #         neurons (vertices) in each layer.
+    #' @param threshold : a numeric valuethe 
+    #         threshold for the partial 
+    #         derivatives of the error function 
+    #         as stopping criteria.
+    #' @param stepmax : the maximum steps for 
+    #         the training of the neural network.
+    #' @param rep : the number of repetitions 
+    #         for the neural network’s training.
+    #' @param algorithm : a string containing 
+    #         the algorithm type to calculate the 
+    #         neural network.
+    #' @param err.fct : a differentiable function 
+    #         that is used for the calculation of 
+    #         the error
+    #' @param act.fct : a differentiable function 
+    #         that is #used for smoothing the result 
+    #         of the cross product of the covariate 
+    #         or neurons and the weights.
+    #' @param linear.output :  If act.fct should not
+    #         be applied to the output neurons set 
+    #         linear output to TRUE, otherwise to FALSE.
     #' @return a neuralnet model
     @
     \caption{Parameters}
@@ -338,7 +357,7 @@ According to its CRAN description, the package allows the "training of neural ne
 %%%%%%%%%%%%%%%% nnet %%%%%%%%%%%%%%%% 
 \subsubsection{\textbf{nnet package}}
 \paragraph{Description}
-This package comes from the CRAN platform and allows to build and fit "FNN with a single hidden layer and multinomial log-linear models". This package uses C/C++ in backend.
+This package comes from the CRAN platform and allows to build and fit "FNN with a single hidden layer and multinomial log-linear models". This package uses C/C++ in backend. More information can be found on the package source \cite{nnet2020}.
 
 \textit{Important default parameters of a FNN model with the neuralnet package:}
 \begin{figure}[H]
@@ -358,14 +377,16 @@ This package comes from the CRAN platform and allows to build and fit "FNN with 
   \begin{subfigure}{0.5\textwidth}
     \centering
     <<eval= FALSE, message = FALSE>>=
-  #' @param X = 
-  #' @param Y = 
-  #' @param size = 
-  #' @param linout = 
-  #' @param entropy = 
-  #' @param softmax = 
-  #' @param maxit = 
-  #' @param decay = 
+  #' @param X : x values for examples
+  #' @param Y : target values for examples
+  #' @param size : number of units in the hidden 
+  #         layer
+  #' @param linout : switch for linear output 
+  #         units
+  #' @param entropy : switch for entropy
+  #' @param softmax : switch for softmax
+  #' @param maxit : maximum number of iterations
+  #' @param decay : parameter for weight decay
   #' @return a nnet model
     @
     \caption{Parameters}
@@ -390,7 +411,7 @@ This package comes from the CRAN platform and allows to build and fit "FNN with 
 
 \subsubsection{\textbf{NeuralNetTools package}}
 \paragraph{Description}
-This package is a complement to R's neural networks packages as it allows to visualize and perform analysis on neural network models. "Functions are available for plooting, quantifying variable importance, conducting a sensitivity analysis, and obtaining a simple list of model weights."
+This package is a complement to R's neural networks packages as it allows to visualize and perform analysis on neural network models. "Functions are available for plooting, quantifying variable importance, conducting a sensitivity analysis, and obtaining a simple list of model weights." More information can be found on the package source \cite{NeuralNetTools2018}.
 
 
 \begin{figure}[H]
@@ -402,7 +423,7 @@ This package is a complement to R's neural networks packages as it allows to vis
     \centering\includegraphics[width=0.45\textwidth]{figure/garson_algorithm.png}
     \caption{NeuralNetTools, Input variables importance}
   \end{subfigure}
-    \caption{Embedding dimension hyper parameter}
+    \caption{Embedding dimension hyper parameter \cite{Ciaburro2017NeuralNW}}
 \end{figure}
 
 \paragraph{Pros}
@@ -423,7 +444,7 @@ This package is a complement to R's neural networks packages as it allows to vis
 %%%%%%%%%%%%%%%% Deepnet %%%%%%%%%%%%%%%% 
 \subsubsection{Deepnet package}
 \paragraph{Description}
-This package is available on the CRAN platform and has been written specifcally written for R. It allows to "implement some deep learning architectures and neural network algorithms, including backpropagation, Restricted Boltzmann Machine (RBM), Deep Belief Network (DBN) and Deep autoencoder".\\
+This package is available on the CRAN platform and has been written specifcally written for R. It allows to "implement some deep learning architectures and neural network algorithms, including backpropagation, Restricted Boltzmann Machine (RBM), Deep Belief Network (DBN) and Deep autoencoder". More information can be found on the package source \cite{deepnet2015}.\\
 \textit{Important default parameters of a deep FNN model with weights initialized by DBN:}
 \begin{figure}[H]
   \begin{subfigure}{0.5\textwidth}
@@ -438,7 +459,7 @@ This package is available on the CRAN platform and has been written specifcally 
                   batchsize = 100, 
                   hidden_dropout = 0, 
                   visible_dropout = 0, 
-                  cd = 1)
+                  )
 
 
     @
@@ -447,19 +468,26 @@ This package is available on the CRAN platform and has been written specifcally 
   \begin{subfigure}{0.5\textwidth}
     \centering
     <<eval= FALSE, message = FALSE>>=
-    #' @param X :
-    #' @param Y :
-    #' @param hidden :
-    #' @param activationfun : 
-    #' @param learningrate :
-    #' @param momentum :
-    #' @param learningrate_scale :
-    #' @param output :
-    #' @param numepochs :
-    #' @param batchsize :
-    #' @param hidden_dropout :
-    #' @param visible_dropout :
-    #' @param cd :
+    #' @param X : matrix of x values for examples
+    #' @param Y : vector or matrix of target values 
+    #         for examples
+    #' @param hidden : vector for number of units 
+    #         of hidden layers
+    #' @param activationfun : activation function 
+    #         of hidden unit 
+    #' @param learningrate : learning rate for 
+    #         gradient descent
+    #' @param momentum : momentum for gradient descent
+    #' @param learningrate_scale :learning rate will be          #         mutiplied after every iteration
+    #' @param output : function of output unit, can be
+    #         "sigm","linear" or "softmax".
+    #' @param numepochs : number of iteration 
+    #         for samples
+    #' @param batchsize : size of mini-batch
+    #' @param hidden_dropout : drop out fraction for
+    #         hidden layer
+    #' @param visible_dropout : drop out fraction 
+    #         for input layer
     #' @return a dbn model
     @
     \caption{Parameters}
@@ -484,12 +512,12 @@ This package is available on the CRAN platform and has been written specifcally 
 %%%%%%%%%%%%%%%% brnn %%%%%%%%%%%%%%%% 
 \subsubsection{brnn package}
 \paragraph{Description}
-This package available on the platform CRAN, allows to perform "Baeysian regularized neural networks inclusing both additive and dominance effects, and allows to takes advantage of multicore architectures via a parallel computing approach using openMP for the computations". (Pérez-Rodriguez, ...)\\
+This package available on the platform CRAN, allows to perform "Baeysian regularized neural networks inclusing both additive and dominance effects, and allows to takes advantage of multicore architectures via a parallel computing approach using openMP for the computations" \cite{brnnarticle} therefore the package is written in R but uses the API OpenMP for faster calculation. More information can be found on the package source \cite{brnn2020}\\
 \textit{Important default parameters of the brnn function:}
 \begin{figure}[H]
   \begin{subfigure}{0.5\textwidth}
 <<eval= FALSE, message = FALSE>>=
-brnn(X,Y,
+brnn(formula=  y ~ x1 + x2,
       neurons=2,
       normalize=TRUE,
       epochs=1000,
@@ -500,32 +528,32 @@ brnn(X,Y,
       min_grad=1e-10,
       change = 0.001,
       cores=1,
-      verbose=FALSE,
-      Monte_Carlo = FALSE
-      ,tol = 1e-06, 
-      samples = 40)
+      verbose=FALSE
+     )
 @
     \caption{Training function}
   \end{subfigure}
   \begin{subfigure}{0.5\textwidth}
     \centering
     <<eval= FALSE, message = FALSE>>=
-    #' @param X,
-    #' @param Y
-    #' @param neurons=2
-    #' @param normalize=TRUE
-    #' @param epochs=1000
-    #' @param mu=0.005
-    #' @param mu_dec=0.1
-    #' @param mu_inc=10
-    #' @param mu_max=1e10
-    #' @param min_grad=1e-10
-    #' @param change = 0.001
-    #' @param cores=1,
-    #' @param verbose=FALSE
-    #' @param Monte_Carlo = FALSE
-    #' @param tol = 1e-06
-    #' @param samples = 40
+    #' @param formula : A formula of the form 
+    #         y ~ x1 + x2
+    #' @param neurons : the number of neurons
+    #' @param normalize : normalize inputs and output
+    #' @param epochs : maximum number of epochs
+    #' @param mu : positive number that controls 
+    #         the behaviour of the Gauss-Newton
+    #         optimization
+    #' @param mu_dec : the mu decrease ratio
+    #' @param mu_inc : the mu increase ratio
+    #' @param mu_max : maximum mu before training 
+    #         is stopped
+    #' @param min_grad : minimum gradient
+    #' @param change : The program will stop
+    #         if the maximum
+    #' @param cores : Number of cpu cores to
+    #         use for calculations
+    #' @param verbose : print iteration history
     #' @return a brnn model
     @
     \caption{Parameters}
@@ -552,52 +580,39 @@ brnn(X,Y,
 %%%%%%%%%%%%%%%% rnn %%%%%%%%%%%%%%%% 
 \subsubsection{rnn package}
 \paragraph{Description}
-Avaible from the CRAN platform, this package allows the "implementation of a Recurrent Neural Network architectures in native R, including Long-Short Term Memory (LSTM), Gated Recurrent Unit (GRU) and vanilla RNN." 
+Avaible from the CRAN platform, this package allows the "implementation of a Recurrent Neural Network architectures in native R, including Long-Short Term Memory (LSTM), Gated Recurrent Unit (GRU) and vanilla RNN." More information can be found on the package source \cite{rnn2019}
+
 \textit{Important default parameters of the rnn function:}
 
 \begin{figure}[H]
   \begin{subfigure}{0.5\textwidth}
 <<eval= FALSE, message = FALSE>>=
-brnn(X,Y,
-     neurons=2,
-     normalize=TRUE,
-     epochs=1000,
-     mu=0.005,
-     mu_dec=0.1,
-     mu_inc=10,
-     mu_max=1e10,
-     min_grad=1e-10,
-     change = 0.001,
-     cores=1,
-     verbose=FALSE,
-     Monte_Carlo = FALSE,tol = 1e-06, samples = 40,...)
+# train the model
+model <- trainr(Y=data_y,
+                X=data_x,
+                learningrate = 0.1,
+                hidden_dim = 10,
+                batch_size = 100,
+                numepochs = 10)
 @
     \caption{Training function}
   \end{subfigure}
   \begin{subfigure}{0.5\textwidth}
     \centering
     <<eval= FALSE, message = FALSE>>=
-    #' @param X,
-    #' @param Y
-    #' @param neurons=2
-    #' @param normalize=TRUE
-    #' @param epochs=1000
-    #' @param mu=0.005
-    #' @param mu_dec=0.1
-    #' @param mu_inc=10
-    #' @param mu_max=1e10
-    #' @param min_grad=1e-10
-    #' @param change = 0.001
-    #' @param cores=1,
-    #' @param verbose=FALSE
-    #' @param Monte_Carlo = FALSE
-    #' @param tol = 1e-06
-    #' @param samples = 40
-    #' @return a brnn model
+    #' @param X : array of input values
+    #' @param Y : array of output values
+    #' @param learningrate : learning rate to be 
+    #         applied for weight iteration
+    #' @param hidden_dim : dimension of hidden layer 
+    #' @param batch_size : number of samples used at
+    #         each weight iteration
+    #' @param numepochs : number of iteration
+    #' @return a rnn model
     @
     \caption{Parameters}
   \end{subfigure}
-    \caption{nnet package}
+    \caption{rnn package}
 \end{figure}
 
 
@@ -621,7 +636,7 @@ brnn(X,Y,
 %%%%%%%%%%%%%%%% Keras %%%%%%%%%%%%%%%% 
 \subsubsection{Keras}
 \paragraph{Description}
-This API is really popular in the Python world because it acts like a wrapper of more popular libraries. It might become hard to follow but Keras has multiple backends such as Tensorflow, Theano and MXNET. The \textit{Keras} \cite{keras2019} is mostly use to link the wrapper tool with R. The most useful reference one can get for this workflow is written by two major players ; \textit{Keras} creator and \textit{RStudio} creator. It explains in detail the best practices in order to use \textit{Keras} in R \cite{chollet2018deep}.
+This API is really popular in the Python world because it acts like a wrapper of more popular libraries. It might become hard to follow but Keras has multiple backends such as Tensorflow, Theano and MXNET. The \textit{Keras} is mostly use to link the wrapper tool with R. The most useful reference one can get for this workflow is written by two major players ; \textit{Keras} creator and \textit{RStudio} creator. It explains in detail the best practices in order to use \textit{Keras} in R \cite{chollet2018deep}. More information can be found on the package source \cite{keras2019}.
 
 \paragraph{Pros}
 \begin{itemize}
@@ -641,7 +656,7 @@ This API is really popular in the Python world because it acts like a wrapper of
 %%%%%%%%%%%%%%%% Tensorflow %%%%%%%%%%%%%%%% 
 \subsubsection{Tensorflow}
 \paragraph{Description}
-This library was created by Google and written in $C++$ and python. It is pretty well known in the python enviromnent. Recently, a R package was created to interface this popular library \cite{tensorflow2019}."'TensorFlow' was originally developed by researchers and engineers working on the Google Brain Team within Google's Machine Intelligence research organization for the purposes of conducting machine learning and deep neural networks research."
+This library was created by Google and written in $C++$ and python. It is pretty well known in the python enviromnent. Recently, a R package was created to interface this popular library ."'TensorFlow' was originally developed by researchers and engineers working on the Google Brain Team within Google's Machine Intelligence research organization for the purposes of conducting machine learning and deep neural networks research." More information can be found on the package source \cite{tensorflow2019}.
 \paragraph{Pros}
 \begin{itemize}
 \item Well documented with a lot of tutorials online.
@@ -657,7 +672,7 @@ This library was created by Google and written in $C++$ and python. It is pretty
 %%%%%%%%%%%%%%%% MXNET %%%%%%%%%%%%%%%% 
 \subsubsection{MXNet}
 \paragraph{Description}
-MXNet is a DL framework open source created by Apache. The framework is mostly backed by Intel, Microsoft and MIT. There is a manual\cite{mxnet2020} but itsn't part of the CRAN database.
+MXNet is an open source Deep Learning framework created by Apache. The framework is mostly backed by Intel, Microsoft and MIT. It offers multiple features and capabilities and is also available in multiple programming languages. The core application is written in C++. It was created with the intention of being scalable and distributed in the cloud. There is a manual but itsn't part of the CRAN database. More information can be found on the package source \cite{mxnet2020}.
 \paragraph{Pros}
 \begin{itemize}
 \item Allows the use of multiple CPU and multiple GPU, but it requires to download the package Rtools and a c++ compiler.
@@ -675,20 +690,22 @@ MXNet is a DL framework open source created by Apache. The framework is mostly b
 %%%%%%%%%%%%%%%% rTorch %%%%%%%%%%%%%%%% 
 \subsubsection{rTorch}
 \paragraph{Description}
-The rTorch CRAN package is to interface the popular open source machine learning library PyTorch\cite{rTorch2019}. The PyTorch was developed by Facebook AI Research lab (FAIR) and all the original features are available in rTorch.
+The rTorch CRAN package is to interface the popular open source machine learning library PyTorch. It was developed by Facebook AI Research lab (FAIR). In reality, this provide access to famous python librairies such as numpy (as a method called np) or torchvision. More information can be found on the package source \cite{rTorch2019}.
 \paragraph{Pros}
 \begin{itemize}
-\item Large amount of functions to manipulate tensors.
+\item Large amount of mathematical functions to manipulate tensors.
+\item Access to popular python librairies (numpy and torchvision) through the package
 \end{itemize}
 \paragraph{Cons}
 \begin{itemize}
 \item Doesn't have training capabilities since it is only for manipulations.
+\item Limited amount of concrete examples.
 \end{itemize}
 %%%%%%%%%%%%%%%% H2o %%%%%%%%%%%%%%%% 
 \subsubsection{h2o}
 \paragraph{Description}
-H2o is a "scalable open source machine learning platform that offers parallelized implementations of many supervised, unsupervised and fully automatic machine learning algorithms on clusters". This package \cite{h2o2020} allows to run H2o via its REST API through R and offers several advantages such as the ability ot know the computation time remaining when running a model.
-
+H2o is a "scalable open source machine learning platform that offers parallelized implementations of many supervised, unsupervised and fully automatic machine learning algorithms on clusters". This package allows to run H2o via its REST API through R and offers several advantages such as the ability ot know the computation time remaining when running a model.
+More information can be found on the package source \cite{h2o2020}.
 
 
 \begin{figure}[H]
@@ -736,9 +753,11 @@ h2o.deeplearning(X = x,
 \section{Examples}
 <<eval= TRUE, message = FALSE,echo=FALSE>>=
 load(paste0(getwd(),"/FNN_save.RData"))
+load(paste0(getwd(),"/FNN_save_2.RData"))
+
 @
 \label{sec:examples}
-In order to give concrete deep learning examples, four resources were selected for tutorials; Neuralnet, Keras using Tensorflow backend, H2O, rTorch and MXNET.
+In order to give concrete deep learning examples multiple resources were selected for tutorials such as Neuralnet, Keras using Tensorflow backend, H2O and MXNET. However, not all the packages presented in the section \ref{sec:avail_ressour} were tested. Some these packages didn't have a strong community and were not trivial to implement. 
 %%%%%%%%%%%%%%%% Neuralnet %%%%%%%%%%%%%%%% 
 \subsection{Neuralnet}
 \subsubsection{Installation}

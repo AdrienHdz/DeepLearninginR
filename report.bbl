@@ -1,9 +1,21 @@
-\begin{thebibliography}{7}
+\begin{thebibliography}{19}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[aiv()]{aivsdeepvsml}
+What is the difference between ai, machine learning and deep learning?
+\newblock
+  \url{https://www.geospatialworld.net/blogs/difference-between-ai%EF%BB%BF-machine-learning-and-deep-learning/}.
+\newblock Accessed: 2020-02-15.
+
+\bibitem[per()]{perfomancelink}
+Various ways to evaluate a machine learning model’s performance.
+\newblock
+  \url{https://towardsdatascience.com/various-ways-to-evaluate-a-machine-learning-models-performance-230449055f15}.
+\newblock Accessed: 2020-03-25.
 
 \bibitem[Alfonso R.~Reyes(2019)]{rTorch2019}
 JJ~Allaire Alfonso R.~Reyes, Daniel~Falbel.
@@ -24,12 +36,32 @@ JJ~Allaire and Daniel Falbel.
   \url{https://cran.r-project.org/web/packages/tensorflow/tensorflow.pdf}.
 \newblock R package version 2.0.0.
 
+\bibitem[Beck(2018)]{NeuralNetTools2018}
+Marcus~W. Beck.
+\newblock \emph{NeuralNetTools: Visualization and Analysis Tools for Neural
+  Networks}, 2018.
+\newblock URL
+  \url{https://cran.r-project.org/web/packages/NeuralNetTools/NeuralNetTools.pdf}.
+\newblock R package version 1.5.2.
+
+\bibitem[Charlin()]{nnheca2019}
+Laurent Charlin.
+\newblock University Lecture.
+\newblock URL
+  \url{http://www.cs.toronto.edu/~lcharlin/courses/80-629/slides_nn.pdf}.
+
 \bibitem[Chollet and Allaire(2018)]{chollet2018deep}
 F.~Chollet and J.J. Allaire.
 \newblock \emph{Deep Learning with R}.
 \newblock Manning Publications, 2018.
 \newblock ISBN 9781617295546.
 \newblock URL \url{https://books.google.ca/books?id=xnIRtAEACAAJ}.
+
+\bibitem[Ciaburro and Venkateswaran(2017)]{Ciaburro2017NeuralNW}
+Giuseppe Ciaburro and Balaji Venkateswaran.
+\newblock \emph{Neural Networks with R: Smart models using CNN, RNN, deep
+  learning, and artificial intelligence principles}.
+\newblock 2017.
 
 \bibitem[Goodfellow et~al.(2016)Goodfellow, Bengio, and
   Courville]{Goodfellow-et-al-2016}
@@ -44,6 +76,54 @@ H2o.ai.
   Platform}, 2019.
 \newblock URL \url{https://cran.r-project.org/web/packages/h2o/h2o.pdf}.
 \newblock R package version 3.28.0.4.
+
+\bibitem[Olah(2015)]{olah_2015}
+Christopher Olah.
+\newblock colah's blog, Aug 2015.
+\newblock URL \url{https://colah.github.io/posts/2015-08-Understanding-LSTMs/}.
+
+\bibitem[Pérez-Rodríguez et~al.(2013)Pérez-Rodríguez, Gianola, Weigel,
+  Rosa, and Crossa]{brnnarticle}
+Paulino Pérez-Rodríguez, Daniel Gianola, Kent Weigel, Guilherme Rosa, and
+  Jose Crossa.
+\newblock Technical note: An r package for fitting bayesian regularized neural
+  networks with applications in animal breeding.
+\newblock \emph{Journal of animal science}, 05 2013.
+\newblock \doi{10.2527/jas.2012-6162}.
+
+\bibitem[Quast and Fichou(2019)]{rnn2019}
+Bastiaan Quast and Dimitri Fichou.
+\newblock \emph{Implementation of a Recurrent Neural Network architectures in
+  native R}, 2019.
+\newblock URL \url{https://cran.r-project.org/web/packages/rnn/rnn.pdf}.
+\newblock R package version 0.9.8.
+
+\bibitem[Ripley and Venables(2020)]{nnet2020}
+Brian Ripley and William Venables.
+\newblock \emph{nnet: Feed-Forward Neural Networks and Multinomial Log-Linear
+  Models}, 2020.
+\newblock URL \url{https://cran.r-project.org/web/packages/nnet/nnet.pdf}.
+\newblock R package version 7.3-13.
+
+\bibitem[Rodriguez and Gianola(2020)]{brnn2020}
+Paulino~Perez Rodriguez and Daniel Gianola.
+\newblock \emph{brnn: Bayesian Regularization for Feed-Forward Neural
+  Networks}, 2020.
+\newblock URL \url{https://cran.r-project.org/web/packages/brnn/brnn.pdf}.
+\newblock R package version 0.8.
+
+\bibitem[Rong(2015)]{deepnet2015}
+Xiao Rong.
+\newblock \emph{deepnet: Deep learning toolkit in R}, 2015.
+\newblock URL \url{https://cran.r-project.org/web/packages/deepnet/index.html}.
+\newblock R package version 0.2.
+
+\bibitem[Stefan~Fritsch and Wright(2019)]{neuralnet2019}
+Frauke~Guenther Stefan~Fritsch and Marvin~N. Wright.
+\newblock \emph{neuralnet: Training of Neural Networks}, 2019.
+\newblock URL
+  \url{https://cran.r-project.org/web/packages/neuralnet/neuralnet.pdf}.
+\newblock R package version 1.44.2.
 
 \bibitem[Tianqi~Chen(2020)]{mxnet2020}
 Tong He Anirudh~Acharya Tianqi~Chen, Qiang~Kou.
