@@ -63,17 +63,42 @@
 \begin{document}
 \pagestyle{plain}
 \pagenumbering{gobble}
+\begin{titlepage}
+   \begin{center}
+       \vspace*{1cm}
+ 
+       \textbf{Advanced Statistical Learning\\ (MATH80619)}
+ 
+       \vspace{0.5cm}
+        Deep Learning in R \\
+        \vspace{2.5cm}
+        Presented to\\
+        Denis Larocque \\ & \\ Aurélie Labbe
+        
+       \vspace{5.5cm}
+        by\\
+        \vspace{0.5cm}
 
-\title{%
- Méthodes avancées en exploitation de donnée \\
-  \large (MATH80619)}
-\author{\begin{tabular}{ll}
-    Estefan Apablaza-Arancibia & 11271806\\
-        Adrien Hernandez & 11269225\\
 
-    
-\end{tabular}}
-\maketitle
+\begin{tabular}{ll}
+    Estefan Apablaza-Arancibia & (11271806) \\
+    Adrien Hernandez  & (11269225)\\ 
+\end{tabular}
+ 
+       \vfill
+ 
+       Master of Science (M. SC.)
+ 
+       \vspace{0.8cm}
+ 
+       \includegraphics[width=0.4\textwidth]{figure/hec_logo.jpg}
+ 
+       Data Science \& Business Analytics\\
+       Québec, Canada\\
+       \today{}
+ 
+   \end{center}
+\end{titlepage}
 \newpage
 \pagestyle{plain}
 
@@ -523,15 +548,56 @@ brnn(X,Y,
 
 %%%%%%%%%%%%%%%% rnn %%%%%%%%%%%%%%%% 
 \subsubsection{rnn package}
-\textbf{Installation:} You will need to install the diges package first through the function \textbf{install.packages(digest)} in order to download the rnn package.
 \paragraph{Description}
 Avaible from the CRAN platform, this package allows the "implementation of a Recurrent Neural Network architectures in native R, including Long-Short Term Memory (LSTM), Gated Recurrent Unit (GRU) and vanilla RNN." 
 \textit{Important default parameters of the rnn function:}
+
+\begin{figure}[H]
+  \begin{subfigure}{0.5\textwidth}
 <<eval= FALSE, message = FALSE>>=
-brnn(X,Y,neurons=2,normalize=TRUE,epochs=1000,mu=0.005,mu_dec=0.1,
-mu_inc=10,mu_max=1e10,min_grad=1e-10,change = 0.001,cores=1,
-verbose=FALSE,Monte_Carlo = FALSE,tol = 1e-06, samples = 40,...)
+brnn(X,Y,
+     neurons=2,
+     normalize=TRUE,
+     epochs=1000,
+     mu=0.005,
+     mu_dec=0.1,
+     mu_inc=10,
+     mu_max=1e10,
+     min_grad=1e-10,
+     change = 0.001,
+     cores=1,
+     verbose=FALSE,
+     Monte_Carlo = FALSE,tol = 1e-06, samples = 40,...)
 @
+    \caption{Training function}
+  \end{subfigure}
+  \begin{subfigure}{0.5\textwidth}
+    \centering
+    <<eval= FALSE, message = FALSE>>=
+    #' @param X,
+    #' @param Y
+    #' @param neurons=2
+    #' @param normalize=TRUE
+    #' @param epochs=1000
+    #' @param mu=0.005
+    #' @param mu_dec=0.1
+    #' @param mu_inc=10
+    #' @param mu_max=1e10
+    #' @param min_grad=1e-10
+    #' @param change = 0.001
+    #' @param cores=1,
+    #' @param verbose=FALSE
+    #' @param Monte_Carlo = FALSE
+    #' @param tol = 1e-06
+    #' @param samples = 40
+    #' @return a brnn model
+    @
+    \caption{Parameters}
+  \end{subfigure}
+    \caption{nnet package}
+\end{figure}
+
+
 
 \paragraph{Pros}
 \begin{itemize}
