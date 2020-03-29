@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 This is XeTeX, Version 3.14159265-2.6-0.999992 (MiKTeX 2.9.7300 64-bit) (preloaded format=xelatex 2020.3.20)  28 MAR 2020 21:12
+=======
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/W32TeX) (preloaded format=xelatex 2020.3.17)  28 MAR 2020 21:40
+>>>>>>> Stashed changes
 entering extended mode
 **./report.tex
 (report.tex
@@ -1111,9 +1115,12 @@ LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
 Overfull \hbox (29.49998pt too wide) in paragraph at lines 266--266
 [] 
  []
+<<<<<<< Updated upstream
 
 
 LaTeX Warning: Reference `LastPage' on page 5 undefined on input line 285.
+=======
+>>>>>>> Stashed changes
 
 [5]
 Overfull \hbox (29.49998pt too wide) in paragraph at lines 286--286
@@ -1130,9 +1137,12 @@ Package xcolor Warning: Incompatible color definition on input line 319.
 Overfull \hbox (2.21999pt too wide) in paragraph at lines 295--337
 []$[]$ $[]$ 
  []
+<<<<<<< Updated upstream
 
 
 LaTeX Warning: Reference `LastPage' on page 6 undefined on input line 346.
+=======
+>>>>>>> Stashed changes
 
 [6]
 
@@ -1145,9 +1155,12 @@ Package xcolor Warning: Incompatible color definition on input line 381.
 Overfull \hbox (2.21999pt too wide) in paragraph at lines 362--397
 []$[]$ $[]$ 
  []
+<<<<<<< Updated upstream
 
 
 LaTeX Warning: Reference `LastPage' on page 7 undefined on input line 409.
+=======
+>>>>>>> Stashed changes
 
 [7]
 File: figure/plotnet.png Graphic file (type bmp)
@@ -1156,6 +1169,20 @@ File: figure/garson_algorithm.png Graphic file (type bmp)
 <figure/garson_algorithm.png>
 
 Overfull \hbox (2.21999pt too wide) in paragraph at lines 421--429
+<<<<<<< Updated upstream
+=======
+[]$[]$ $[]$ 
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 455.
+
+
+Package xcolor Warning: Incompatible color definition on input line 476.
+
+
+Overfull \hbox (2.21999pt too wide) in paragraph at lines 453--497
+>>>>>>> Stashed changes
 []$[]$ $[]$ 
  []
 
@@ -1176,6 +1203,7 @@ LaTeX Warning: Reference `LastPage' on page 8 undefined on input line 498.
 [8]
 
 Package xcolor Warning: Incompatible color definition on input line 522.
+<<<<<<< Updated upstream
 
 
 Package xcolor Warning: Incompatible color definition on input line 547.
@@ -1196,10 +1224,38 @@ Package xcolor Warning: Incompatible color definition on input line 598.
 LaTeX Warning: Reference `LastPage' on page 10 undefined on input line 598.
 
 [10]
+=======
+
+
+Package xcolor Warning: Incompatible color definition on input line 547.
+
+
+Overfull \hbox (2.21999pt too wide) in paragraph at lines 520--571
+[]$[]$ $[]$ 
+ []
+
+[9]
+
+Package xcolor Warning: Incompatible color definition on input line 597.
+
+[10] [11]
+Overfull \hbox (2.35895pt too wide) in paragraph at lines 678--679
+ []\TU/lmr/bx/n/10 Description[] \TU/lmr/m/n/10 The rTorch CRAN package is to i
+nterface the popular open source machine learning library PyTorch[[]].
+ []
+
+[12]
+
+Package xcolor Warning: Incompatible color definition on input line 697.
+>>>>>>> Stashed changes
 
 Package natbib Warning: Citation `keras2019' on page 11 undefined on input line
  626.
 
+<<<<<<< Updated upstream
+=======
+Package xcolor Warning: Incompatible color definition on input line 712.
+>>>>>>> Stashed changes
 
 Package natbib Warning: Citation `chollet2018deep' on page 11 undefined on inpu
 t line 626.
@@ -1208,9 +1264,16 @@ t line 626.
 Package natbib Warning: Citation `tensorflow2019' on page 11 undefined on input
  line 645.
 
+<<<<<<< Updated upstream
+=======
+Overfull \hbox (2.21999pt too wide) in paragraph at lines 695--724
+[]$[]$ $[]$ 
+ []
+>>>>>>> Stashed changes
 
 LaTeX Warning: Reference `LastPage' on page 11 undefined on input line 646.
 
+<<<<<<< Updated upstream
 [11]
 
 Package natbib Warning: Citation `mxnet2020' on page 12 undefined on input line
@@ -1229,9 +1292,16 @@ File: figure/h2o_package.png Graphic file (type bmp)
 
 
 LaTeX Warning: Reference `LastPage' on page 13 undefined on input line 711.
+=======
+Package xcolor Warning: Incompatible color definition on input line 747.
 
 [13]
 
+Package xcolor Warning: Incompatible color definition on input line 750.
+>>>>>>> Stashed changes
+
+
+<<<<<<< Updated upstream
 Package xcolor Warning: Incompatible color definition on input line 725.
 
 
@@ -1249,15 +1319,45 @@ Package xcolor Warning: Incompatible color definition on input line 776.
 
 
 Package xcolor Warning: Incompatible color definition on input line 782.
+=======
+Overfull \hbox (171.36pt too wide) in paragraph at lines 750--751
+[]\TU/lmtt/m/n/10 ## Warning in readChar(con, 5L, useBytes = TRUE): cannot open
+ compressed file './Deep_learning_r/DeepLearninginR/FNN_save.RData',
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 752.
+
+
+Package xcolor Warning: Incompatible color definition on input line 761.
+
+
+Package xcolor Warning: Incompatible color definition on input line 775.
+
+
+Package xcolor Warning: Incompatible color definition on input line 795.
+
+[14]
+
+Package xcolor Warning: Incompatible color definition on input line 812.
+
+
+Package xcolor Warning: Incompatible color definition on input line 818.
+>>>>>>> Stashed changes
 
 File: figure/neuralnet_model.png Graphic file (type bmp)
 <figure/neuralnet_model.png>
 
+<<<<<<< Updated upstream
 Underfull \hbox (badness 10000) in paragraph at lines 788--789
+=======
+Underfull \hbox (badness 10000) in paragraph at lines 824--825
+>>>>>>> Stashed changes
 
  []
 
 
+<<<<<<< Updated upstream
 Package xcolor Warning: Incompatible color definition on input line 792.
 
 
@@ -1268,18 +1368,41 @@ Package xcolor Warning: Incompatible color definition on input line 803.
 
 
 Overfull \hbox (15.61pt too wide) in paragraph at lines 803--803
+=======
+Package xcolor Warning: Incompatible color definition on input line 828.
+
+
+Package xcolor Warning: Incompatible color definition on input line 834.
+
+
+Package xcolor Warning: Incompatible color definition on input line 839.
+
+
+Overfull \hbox (15.61pt too wide) in paragraph at lines 839--839
+>>>>>>> Stashed changes
 []\TU/lmtt/b/n/10 ## Error in table(iris_test$Species, apply(neuralnet_predicti
 on, 1, which.max)): object 'iris_test'
  []
 
 
+<<<<<<< Updated upstream
 Package xcolor Warning: Incompatible color definition on input line 808.
 
 
 LaTeX Warning: Reference `LastPage' on page 15 undefined on input line 808.
+=======
+Package xcolor Warning: Incompatible color definition on input line 844.
 
 [15]
 
+Package xcolor Warning: Incompatible color definition on input line 852.
+
+
+Package xcolor Warning: Incompatible color definition on input line 855.
+>>>>>>> Stashed changes
+
+
+<<<<<<< Updated upstream
 Package xcolor Warning: Incompatible color definition on input line 816.
 
 
@@ -1293,8 +1416,24 @@ Package xcolor Warning: Incompatible color definition on input line 835.
 
 
 Package xcolor Warning: Incompatible color definition on input line 845.
+=======
+Package xcolor Warning: Incompatible color definition on input line 863.
 
 
+Package xcolor Warning: Incompatible color definition on input line 871.
+
+
+Package xcolor Warning: Incompatible color definition on input line 881.
+
+
+Package xcolor Warning: Incompatible color definition on input line 891.
+
+
+Package xcolor Warning: Incompatible color definition on input line 912.
+>>>>>>> Stashed changes
+
+
+<<<<<<< Updated upstream
 Package xcolor Warning: Incompatible color definition on input line 855.
 
 
@@ -1302,24 +1441,56 @@ Package xcolor Warning: Incompatible color definition on input line 876.
 
 
 LaTeX Warning: Reference `LastPage' on page 16 undefined on input line 876.
+=======
+Package xcolor Warning: Incompatible color definition on input line 947.
+
+
+Package xcolor Warning: Incompatible color definition on input line 953.
+
+
+Overfull \hbox (14.11pt too wide) in paragraph at lines 953--953
+[]\TU/lmtt/b/n/10 ## Error in .External2(C_savehistory, file): 'savehistory' ca
+n only be used in Rgui and Rterm[] 
+ []
+>>>>>>> Stashed changes
 
 [16]
 
+<<<<<<< Updated upstream
 Package xcolor Warning: Incompatible color definition on input line 911.
+=======
+Package xcolor Warning: Incompatible color definition on input line 958.
+>>>>>>> Stashed changes
 
 File: figure/unnamed-chunk-25-1.pdf Graphic file (type pdf)
 <use figure/unnamed-chunk-25-1.pdf>
 
+<<<<<<< Updated upstream
 LaTeX Warning: Reference `LastPage' on page 17 undefined on input line 920.
+=======
+Package xcolor Warning: Incompatible color definition on input line 961.
+>>>>>>> Stashed changes
 
 [17]
 
+<<<<<<< Updated upstream
 Package xcolor Warning: Incompatible color definition on input line 922.
 
 
 Package xcolor Warning: Incompatible color definition on input line 930.
+=======
+Overfull \hbox (20.86pt too wide) in paragraph at lines 961--961
+[]\TU/lmtt/b/n/10 ## Error in mean(pred.label.keras != as.vector(data_df$test$S
+pecies)): object 'pred.label.keras' not
+ []
 
 
+Package xcolor Warning: Incompatible color definition on input line 965.
+>>>>>>> Stashed changes
+
+[17]
+
+<<<<<<< Updated upstream
 Package xcolor Warning: Incompatible color definition on input line 940.
 
 
@@ -1327,16 +1498,32 @@ Package xcolor Warning: Incompatible color definition on input line 958.
 
 
 LaTeX Warning: Reference `LastPage' on page 18 undefined on input line 958.
-
-[18]
-File: figure/Cifar_10_data_images.png Graphic file (type bmp)
-<figure/Cifar_10_data_images.png>
+=======
+Package xcolor Warning: Incompatible color definition on input line 968.
 
 
 Package xcolor Warning: Incompatible color definition on input line 974.
 
 
+Package xcolor Warning: Incompatible color definition on input line 992.
+>>>>>>> Stashed changes
+
+[18]
+File: figure/Cifar_10_data_images.png Graphic file (type bmp)
+<figure/Cifar_10_data_images.png>
+
+<<<<<<< Updated upstream
+
+Package xcolor Warning: Incompatible color definition on input line 974.
+
+
 Overfull \hbox (13.86pt too wide) in paragraph at lines 985--985
+=======
+Package xcolor Warning: Incompatible color definition on input line 1008.
+
+[18]
+Overfull \hbox (13.86pt too wide) in paragraph at lines 1019--1019
+>>>>>>> Stashed changes
 []  []\TU/lmtt/b/n/10 layer_conv_2d[][]\TU/lmtt/m/n/10 ([][]filter[] []=[] []32
 [][],[] []kernel_size[] []=[] []\TU/lmtt/b/n/10 c[][]\TU/lmtt/m/n/10 ([][]3[][]
 ,[][]3[][]),[] []padding[] []=[] []"same"[][],[][]input_shape[] []=[] []\TU/lmt
@@ -1344,6 +1531,7 @@ t/b/n/10 c[][]\TU/lmtt/m/n/10 ([][]32[][],[] []32[][],[] []3[][]))[] []%>%[][]
 
  []
 
+<<<<<<< Updated upstream
 
 LaTeX Warning: Reference `LastPage' on page 19 undefined on input line 1013.
 
@@ -1353,81 +1541,162 @@ Package xcolor Warning: Incompatible color definition on input line 1017.
 
 
 Underfull \vbox (badness 4467) detected at line 1058
+=======
+
+Underfull \vbox (badness 10000) detected at line 1047
+>>>>>>> Stashed changes
  []
 
 
+<<<<<<< Updated upstream
 LaTeX Warning: Reference `LastPage' on page 20 undefined on input line 1058.
 
 [20]
 
 Package xcolor Warning: Incompatible color definition on input line 1063.
 
+=======
+Package xcolor Warning: Incompatible color definition on input line 1051.
+
+
+Underfull \vbox (badness 3168) detected at line 1092
+ []
+
+[20]
+
+Package xcolor Warning: Incompatible color definition on input line 1097.
+>>>>>>> Stashed changes
 
 Package xcolor Warning: Incompatible color definition on input line 1075.
 
+<<<<<<< Updated upstream
+=======
+Package xcolor Warning: Incompatible color definition on input line 1109.
+>>>>>>> Stashed changes
 
 LaTeX Warning: Reference `LastPage' on page 21 undefined on input line 1081.
 
+<<<<<<< Updated upstream
 [21]
 
 Package xcolor Warning: Incompatible color definition on input line 1085.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 1096--1097
+=======
+Package xcolor Warning: Incompatible color definition on input line 1119.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1130--1131
+>>>>>>> Stashed changes
 
  []
 
 File: figure/CNN_keras_graph.png Graphic file (type bmp)
 <figure/CNN_keras_graph.png>
 
+<<<<<<< Updated upstream
 Package xcolor Warning: Incompatible color definition on input line 1104.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 1116--1117
+=======
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1138.
+
+[21]
+Underfull \hbox (badness 10000) in paragraph at lines 1150--1151
+>>>>>>> Stashed changes
 
  []
 
 
+<<<<<<< Updated upstream
 Package xcolor Warning: Incompatible color definition on input line 1120.
 
 
 LaTeX Warning: Reference `LastPage' on page 22 undefined on input line 1120.
+=======
+Package xcolor Warning: Incompatible color definition on input line 1154.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1167.
+>>>>>>> Stashed changes
 
 [22]
 
+<<<<<<< Updated upstream
 Package xcolor Warning: Incompatible color definition on input line 1133.
+=======
+Package xcolor Warning: Incompatible color definition on input line 1179.
+>>>>>>> Stashed changes
 
 
+<<<<<<< Updated upstream
 Package xcolor Warning: Incompatible color definition on input line 1145.
+=======
+Package xcolor Warning: Incompatible color definition on input line 1214.
 
+>>>>>>> Stashed changes
 
+Package xcolor Warning: Incompatible color definition on input line 1217.
+
+<<<<<<< Updated upstream
 LaTeX Warning: Reference `LastPage' on page 23 undefined on input line 1176.
 
 [23]
 
 Package xcolor Warning: Incompatible color definition on input line 1180.
+=======
 
+Package xcolor Warning: Incompatible color definition on input line 1221.
 
+>>>>>>> Stashed changes
+
+Package xcolor Warning: Incompatible color definition on input line 1224.
+
+<<<<<<< Updated upstream
 Package xcolor Warning: Incompatible color definition on input line 1188.
+=======
+>>>>>>> Stashed changes
 
+Package xcolor Warning: Incompatible color definition on input line 1235.
 
+<<<<<<< Updated upstream
 Package xcolor Warning: Incompatible color definition on input line 1203.
+=======
+[23]
+>>>>>>> Stashed changes
 
+Package xcolor Warning: Incompatible color definition on input line 1246.
 
+<<<<<<< Updated upstream
 Package xcolor Warning: Incompatible color definition on input line 1214.
 
 
 Overfull \hbox (55.86pt too wide) in paragraph at lines 1216--1216
+=======
+
+Overfull \hbox (55.86pt too wide) in paragraph at lines 1248--1248
+>>>>>>> Stashed changes
 [][]\TU/lmtt/b/n/10 install.packages[][]\TU/lmtt/m/n/10 ([][]"https://s3.ca-cen
 tral-1.amazonaws.com/jeremiedb/share/mxnet/CPU/mxnet.zip"[][],[] []repos[] []=[
 ] []\TU/lmtt/b/n/10 NULL[][]\TU/lmtt/m/n/10 )[][] 
  []
 
+[24]
 
+<<<<<<< Updated upstream
 LaTeX Warning: Reference `LastPage' on page 24 undefined on input line 1244.
+=======
+Package xcolor Warning: Incompatible color definition on input line 1280.
+>>>>>>> Stashed changes
 
 [24]
 
+<<<<<<< Updated upstream
 Package xcolor Warning: Incompatible color definition on input line 1248.
 
 
@@ -1446,6 +1715,33 @@ AED: lastpage setting LastPage
 [26]
 
 Package natbib Warning: There were undefined citations.
+=======
+Package xcolor Warning: Incompatible color definition on input line 1283.
+
+
+Overfull \hbox (20.86pt too wide) in paragraph at lines 1283--1283
+[]\TU/lmtt/b/n/10 ## Error in mean(pred.label.mxnet != as.vector(data_df$test$S
+pecies)): object 'pred.label.mxnet' not
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 1287.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1290.
+
+[25] (./report.bbl) 
+AED: lastpage setting LastPage
+[26]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1309.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1309.
+ (./report.aux)
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1309.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1309.
+
+Package rerunfilecheck Info: File `report.out' has not changed.
+(rerunfilecheck)             Checksum: A6D8BEE860C9FECF8DA2005635A11984;3297.
+>>>>>>> Stashed changes
 
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1279.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 1279.
@@ -1475,6 +1771,7 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
+<<<<<<< Updated upstream
  24394 strings out of 414613
  432646 string characters out of 2906988
  704987 words of memory out of 3000000
@@ -1482,5 +1779,14 @@ Here is how much of TeX's memory you used:
  539162 words of font info for 66 fonts, out of 3000000 for 9000
  1348 hyphenation exceptions out of 8191
  68i,14n,83p,993b,850s stack positions out of 5000i,500n,10000p,200000b,50000s
+=======
+ 24480 strings out of 481765
+ 450008 string characters out of 5934263
+ 701614 words of memory out of 5000000
+ 40980 multiletter control sequences out of 15000+600000
+ 539154 words of font info for 65 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 68i,14n,83p,991b,850s stack positions out of 5000i,500n,10000p,200000b,80000s
+>>>>>>> Stashed changes
 
 Output written on report.pdf (27 pages).

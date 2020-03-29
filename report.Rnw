@@ -228,7 +228,7 @@ Like explain earlier this section will be divided in two in order to really diff
 %%%%%%%%%%%%%%%%%% R Packages   %%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{R packages}
-\ntodo[inline]{à voir si on a encore de la place pour mettre un tableau récapitulatif}
+
 
 %%%%%%%%%%%%%%%% Neuralnet %%%%%%%%%%%%%%%% 
 \subsubsection{\textbf{Neuralnet package}}
@@ -489,10 +489,6 @@ brnn(X,Y,
 \end{figure}
 
 
-<<eval= FALSE, message = FALSE>>=
-
-
-@
 \paragraph{Pros}
 \begin{itemize}
 \item Allows to add Additive and Dominance effects in the neural networks models.
@@ -602,19 +598,40 @@ The rTorch CRAN package is to interface the popular open source machine learning
 \item Doesn't have training capabilities since it is only for manipulations.
 \end{itemize}
 %%%%%%%%%%%%%%%% H2o %%%%%%%%%%%%%%%% 
-\subsubsection{H2o}
+\subsubsection{h2o}
 \paragraph{Description}
-H2o is a "scalable open source machine learning platform that offers parallelized implementations of many supervised, unsupervised and fully automatic machine learning algorithms on clusters". This package allows to run H2o via its REST API through R and offers several advantages such as the ability ot know the computation time remaining when running a model.
-\begin{figure}[h]
+H2o is a "scalable open source machine learning platform that offers parallelized implementations of many supervised, unsupervised and fully automatic machine learning algorithms on clusters". This package \cite{h2o2020} allows to run H2o via its REST API through R and offers several advantages such as the ability ot know the computation time remaining when running a model.
+
+
+
+\begin{figure}[H]
+  \begin{subfigure}{0.5\textwidth}
+<<eval= FALSE, message = FALSE>>=
+h2o.deeplearning(X = x, 
+                  Y = y,
+                  training_frame = train_data,
+                  epochs = no_epoch,
+                  seed=123)
+@
+    \caption{Training function}
+  \end{subfigure}
+  \begin{subfigure}{0.5\textwidth}
     \centering
-    \includegraphics[width=0.65\textwidth]{figure/h2o_package.png}
-     \caption{H2o package}
+    <<eval= FALSE, message = FALSE>>=
+    #' @param X,
+    #' @param Y
+    #' @param training_frame=2
+    #' @param epochs=TRUE
+    #' @return a h2o connections to the model
+    @
+    \caption{Parameters}
+  \end{subfigure}
+    \caption{h2o package}
 \end{figure}
 
 \paragraph{Pros}
 \begin{itemize}
 \item Very easy to use and includes a cross-validation feature and functions for grid search in order to optimize the model's hyperparameters.
-\item 
 \item Allows the use of multiple CPU.
 \item Provide an adaptive learning rate (ADADELTA) which improves the optimization process by having a different learning rate for each neuron.
 \item Provide details and information about the learning progress during the training phase.
@@ -631,7 +648,7 @@ H2o is a "scalable open source machine learning platform that offers parallelize
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Examples}
 <<eval= TRUE, message = FALSE,echo=FALSE>>=
-load("C:/Users/adrie/OneDrive/Desktop/Git/Deep_learning_r/DeepLearninginR/FNN_save.RData")
+load("./Deep_learning_r/DeepLearninginR/FNN_save.RData")
 @
 \label{sec:examples}
 In order to give concrete deep learning examples, four resources were selected for tutorials; Neuralnet, Keras using Tensorflow backend, H2O, rTorch and MXNET.
@@ -940,7 +957,7 @@ Y_predicted <- model %>% predict_classes(X_test)
 \subsubsection{RNN}
 
 %%%%%%%%%%%%%%%% H2o %%%%%%%%%%%%%%%% 
-\subsection{H2O}
+\subsection{h2o}
 \subsubsection{Installation}
 <<eval=FALSE, echo=TRUE>>=
 install.packages("h2o")

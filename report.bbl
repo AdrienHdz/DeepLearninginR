@@ -1,4 +1,4 @@
-\begin{thebibliography}{6}
+\begin{thebibliography}{7}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -37,6 +37,13 @@ Ian Goodfellow, Yoshua Bengio, and Aaron Courville.
 \newblock \emph{Deep Learning}.
 \newblock MIT Press, 2016.
 \newblock URL \url{http://www.deeplearningbook.org}.
+
+\bibitem[H2o.ai(2019)]{h2o2020}
+H2o.ai.
+\newblock \emph{h2o: R Interface for the H2O Scalable Machine Learning
+  Platform}, 2019.
+\newblock URL \url{https://cran.r-project.org/web/packages/h2o/h2o.pdf}.
+\newblock R package version 3.28.0.4.
 
 \bibitem[Tianqi~Chen(2020)]{mxnet2020}
 Tong He Anirudh~Acharya Tianqi~Chen, Qiang~Kou.

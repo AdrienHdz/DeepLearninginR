@@ -536,6 +536,7 @@ This package available on the platform CRAN, allows to perform "Baeysian regular
       \hlkwc{Monte_Carlo} \hlstd{=} \hlnum{FALSE}
       \hlstd{,}\hlkwc{tol} \hlstd{=} \hlnum{1e-06}\hlstd{,}
       \hlkwc{samples} \hlstd{=} \hlnum{40}\hlstd{)}
+<<<<<<< Updated upstream
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -566,13 +567,48 @@ This package available on the platform CRAN, allows to perform "Baeysian regular
 \end{alltt}
 \end{kframe}
 \end{knitrout}
+=======
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+    \caption{Training function}
+  \end{subfigure}
+  \begin{subfigure}{0.5\textwidth}
+    \centering
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{#' @param X,}
+\hlcom{#' @param Y}
+\hlcom{#' @param neurons=2}
+\hlcom{#' @param normalize=TRUE}
+\hlcom{#' @param epochs=1000}
+\hlcom{#' @param mu=0.005}
+\hlcom{#' @param mu_dec=0.1}
+\hlcom{#' @param mu_inc=10}
+\hlcom{#' @param mu_max=1e10}
+\hlcom{#' @param min_grad=1e-10}
+\hlcom{#' @param change = 0.001}
+\hlcom{#' @param cores=1,}
+\hlcom{#' @param verbose=FALSE}
+\hlcom{#' @param Monte_Carlo = FALSE}
+\hlcom{#' @param tol = 1e-06}
+\hlcom{#' @param samples = 40}
+\hlcom{#' @return a brnn model}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+>>>>>>> Stashed changes
     \caption{Parameters}
   \end{subfigure}
     \caption{nnet package}
 \end{figure}
 
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 \paragraph{Pros}
 \begin{itemize}
 \item Allows to add Additive and Dominance effects in the neural networks models.
@@ -686,13 +722,43 @@ The rTorch CRAN package is to interface the popular open source machine learning
 \item Doesn't have training capabilities since it is only for manipulations.
 \end{itemize}
 %%%%%%%%%%%%%%%% H2o %%%%%%%%%%%%%%%% 
-\subsubsection{H2o}
+\subsubsection{h2o}
 \paragraph{Description}
-H2o is a "scalable open source machine learning platform that offers parallelized implementations of many supervised, unsupervised and fully automatic machine learning algorithms on clusters". This package allows to run H2o via its REST API through R and offers several advantages such as the ability ot know the computation time remaining when running a model.
-\begin{figure}[h]
+H2o is a "scalable open source machine learning platform that offers parallelized implementations of many supervised, unsupervised and fully automatic machine learning algorithms on clusters". This package \cite{h2o2020} allows to run H2o via its REST API through R and offers several advantages such as the ability ot know the computation time remaining when running a model.
+
+
+
+\begin{figure}[H]
+  \begin{subfigure}{0.5\textwidth}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{h2o.deeplearning}\hlstd{(}\hlkwc{X} \hlstd{= x,}
+                  \hlkwc{Y} \hlstd{= y,}
+                  \hlkwc{training_frame} \hlstd{= train_data,}
+                  \hlkwc{epochs} \hlstd{= no_epoch,}
+                  \hlkwc{seed}\hlstd{=}\hlnum{123}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+    \caption{Training function}
+  \end{subfigure}
+  \begin{subfigure}{0.5\textwidth}
     \centering
-    \includegraphics[width=0.65\textwidth]{figure/h2o_package.png}
-     \caption{H2o package}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{#' @param X,}
+\hlcom{#' @param Y}
+\hlcom{#' @param training_frame=2}
+\hlcom{#' @param epochs=TRUE}
+\hlcom{#' @return a h2o connections to the model}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+    \caption{Parameters}
+  \end{subfigure}
+    \caption{h2o package}
 \end{figure}
 
 \paragraph{Pros}
@@ -714,6 +780,14 @@ H2o is a "scalable open source machine learning platform that offers parallelize
 %%%%%%%%%%%%%%%%%% Examples    %%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Examples}
+<<<<<<< Updated upstream
+=======
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning in readChar(con, 5L, useBytes = TRUE): cannot open compressed file './Deep\_learning\_r/DeepLearninginR/FNN\_save.RData', probable reason 'No such file or directory'}}
+>>>>>>> Stashed changes
 
 \label{sec:examples}
 In order to give concrete deep learning examples, four resources were selected for tutorials; Neuralnet, Keras using Tensorflow backend, H2O, rTorch and MXNET.
@@ -1127,7 +1201,7 @@ In order to predict with our model on a new dataset, we can you Keras\'s \textbf
 \subsubsection{RNN}
 
 %%%%%%%%%%%%%%%% H2o %%%%%%%%%%%%%%%% 
-\subsection{H2O}
+\subsection{h2o}
 \subsubsection{Installation}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
