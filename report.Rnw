@@ -196,10 +196,6 @@ For the FNN, the training data will be the well known \textit{Iris} dataset. It 
 
 \subsubsection{CNN}
 For the CNN, the training data will also be a well known dataset called CIFAR-10. The CIFAR-10 dataset consists of 60000 32x32 colour images in 10 classes, with 6000 images per class. The easiest way in R to download this package is using the Keras API. The training dataset has 50 000 images in three color (Red-Green-Blue) that are 32 pixels by 32 pixels. The testing dataset has a total of 10 000 images
-<<eval= FALSE, message = FALSE>>=
-library(keras)
-cifar10 = dataset_cifar10()
-@
 
 \subsubsection{RNN}
 The dataset use to test an RNN is the IMDB Movie reviews sentiment classification. This pack
@@ -208,12 +204,10 @@ The dataset use to test an RNN is the IMDB Movie reviews sentiment classificatio
 
 \subsection{Characteristic}
 \subsubsection{Accuracy}
-\ntodo[inline]{Add more info about this topics}
-
-Classification rate for.
-
+The accuracy is not really important for this tutorial however it might come handy for users that want to compare models. 
+Since for all three algorithms (FNN , CNN and RNN) it is mostly a classification models the accuracy will be $1-classification_{error}$.
 \subsubsection{Time elapsed}
-Not generalised but gives an idea about the training time.
+Sometime the training timing can be a deal breaker for some users. This charactersitic is calculated from a simple R package ,that being said it is really important to not generalised the tutorials results. It is simply to give an idea about the training time since it depends on multiple factor (e.g. Computer characterstics such as memory , CPU, etc.).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -648,7 +642,7 @@ h2o.deeplearning(X = x,
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Examples}
 <<eval= TRUE, message = FALSE,echo=FALSE>>=
-load("./Deep_learning_r/DeepLearninginR/FNN_save.RData")
+load(paste0(getwd(),"/FNN_save.RData"))
 @
 \label{sec:examples}
 In order to give concrete deep learning examples, four resources were selected for tutorials; Neuralnet, Keras using Tensorflow backend, H2O, rTorch and MXNET.
