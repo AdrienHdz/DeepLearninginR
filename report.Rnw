@@ -1,4 +1,4 @@
-\documentclass[letter]{article} 
+\documentclass[letter,8pt]{article} 
 
 %%%%%%%%%%%%%%%%%%%%
 %%%%%% Package %%%%%
@@ -73,7 +73,7 @@
         Deep Learning in R \\
         \vspace{2.5cm}
         Presented to\\
-        Denis Larocque \\ & \\ Aurélie Labbe
+        Denis Larocque \\ Aurélie Labbe
         
        \vspace{5.5cm}
         by\\
@@ -119,7 +119,7 @@ In the first section of this paper, a literature review covers the neural networ
 
 \section{Litterature Review}
 \subsection{What is Deep Learning and why use it?}
-\begin{wrapfigure}[14]{r}{0.5\textwidth}
+\begin{wrapfigure}[11]{r}{0.5\textwidth}
   \begin{center}
     \includegraphics[width=0.4\textwidth]{figure/deep learning.PNG}
       \end{center}
@@ -133,7 +133,7 @@ As a first glance in the subject, it is highly recommended it to read  a referen
 
 
 \subsubsection{Feed Forward Neural Network}
-\begin{wrapfigure}[12]{R}{0.5\textwidth}
+\begin{wrapfigure}[11]{R}{0.5\textwidth}
   \begin{center}
     \includegraphics[width=0.4\textwidth]{figure/feedforward_neural_networks.png}
   \end{center}
@@ -161,21 +161,24 @@ where:
  g(...) &  the activation function
 \end{conditions}
 
-Here, \textbf{the bias term  b} and \textbf{the weights or parameter w} will be learned by the model in order the minimize a cost function, through the use of the gradient descent method. Then, the network will use the backpropagation algorithm where the error is backpropagated from the output to the input layers and the bias and weighted are then updated accordingly.\\
-Regarding the \textbf{activation function g(...)}, the common practice is to use a ReLu (rectified linear unit) as the activation function for the neurons of the hidden layers. Regarding the neurons of the last layer, the activation function will be chosen accordingly to the task we want our model to perform:\\
-\begin{figure}[h]
-    \centering
+\begin{wrapfigure}[13]{r}{0.5\textwidth}
+  \begin{center}
     \includegraphics[width=0.45\textwidth]{figure/activation_function_output.png}
+      \end{center}
      \caption{Activation functions: output units. HEC}
      \label{fig:activation}
-\end{figure}
+\end{wrapfigure}
+Here, \textbf{the bias term  b} and \textbf{the weights or parameter w} will be learned by the model in order the minimize a cost function, through the use of the gradient descent method. Then, the network will use the backpropagation algorithm where the error is backpropagated from the output to the input layers and the bias and weighted are then updated accordingly.\\
+Regarding the \textbf{activation function g(...)}, the common practice is to use a ReLu (rectified linear unit) as the activation function for the neurons of the hidden layers. Regarding the neurons of the last layer, the activation function will be chosen accordingly to the task we want our model to perform:
+
+
 
 A detailed explanation of the theory of feedforward neural network can be found in \cite[Chapter 6]{Goodfellow-et-al-2016}
 
 \subsubsection{CNN}
 
 The CNN are a modified architecture of FNN that leverage the feature engineering that used to be hand maded by domain experts. This class of deep neural network are commonly used for image recognition and classification that can serve different applications such as facial recongnition, document analysis and speech recognition. The original FNN are not suited analyzing large size images since the weights increase exponentially and, at the end, don't perfom very well.\\
-\begin{wrapfigure}[12]{r}{0.5\textwidth}
+\begin{wrapfigure}[7]{r}{0.6\textwidth}
   \begin{center}
     \includegraphics[width=0.5\textwidth]{figure/CNN_process.png}
   \end{center}
@@ -1038,7 +1041,133 @@ Y_predicted <- model %>% predict_classes(X_test)
 @
 
 \subsubsection{RNN}
+<<eval=FALSE, echo=TRUE>>=
+library(keras)
+library(dplyr)
+library(ggplot2)
+library(purrr)
+word_index <- dataset_imdb_word_index()
+length(word_index)
+# This is in order to limit the number of words 
+max_features = length(word_index)
 
+# cut texts after this number of words (among top max_features most common words)
+maxlen = 45
+# Loads the dataset which is already split in train and test
+# For some reason there is a bug. When adding the parameter Max len the function don't
+# return test data if not above maxlen 180 
+imdb <- dataset_imdb(maxlen = maxlen )
+imdb_hack <- dataset_imdb(maxlen = 150 )
+imdb$test
+# Seperate the labels and the data for train and test
+c(train_data, train_labels) %<-% imdb$train
+c(test_data, test_labels) %<-% imdb_hack$test
+
+# This is the word index which can be interprate as a dictionnary betweend index to words
+# (e.g.) the word "modestly" is represented by the index 20608
+# by default this word to index contains 88584 words
+max_features
+# Convert this word to index List to a more friendly data frame
+word_index_df <- data.frame(
+  word = names(word_index),
+  idx = unlist(word_index, use.names = FALSE),
+  stringsAsFactors = FALSE
+)
+
+# The first 4 indices are reserved for 4 different specials keys
+# PAD:    This is to fill a sequence that is shorter than Max lenght
+# START:  This is to fill a sequence that is shorter than Max lenght
+# PAD:    This is to fill a sequence that is shorter than Max lenght
+# UNK:    This if for an unkown words that are not part of vocabulary
+# UNUSED: This if for an unused word part of the vocabulary
+
+word_index_df <- word_index_df %>% mutate(idx = idx + 3)
+word_index_df <- word_index_df %>%
+  add_row(word = "<PAD>", idx = 0)%>%
+  add_row(word = "<START>", idx = 1)%>%
+  add_row(word = "<UNK>", idx = 2)%>%
+  add_row(word = "<UNUSED>", idx = 3)
+# Sort the rows by index
+word_index_df <- word_index_df %>% arrange(idx)
+# A function that will decode a id an return the full review
+decode_review <- function(text){
+  paste(map(text, function(number) word_index_df %>%
+              filter(idx == number) %>%
+              select(word) %>% 
+              pull()),
+        collapse = " ")
+}
+@
+
+<<eval= TRUE, message = FALSE,echo=FALSE>>=
+load(paste0(getwd(),"/RNN_save.RData"))
+@
+<<eval=FALSE, echo=TRUE>>=
+> decode_review(train_data[[5]])
+[1] "<START> real cool smart movie i loved sheedy's colors especially the purple car alice drummond is wise and wonderful as stella i liked sheedy's reference to how her face had gotten fatter the roadside dance scene is brilliant really liked this one"
+@
+
+<<eval=FALSE, echo=TRUE>>=
+# This function is built in the Keras environmet and as the name indicates it
+# is use for padding sequences such as our reviews. after this is done all the
+# review will have the same lenght. The shorter ones will be filled with the token
+# <pad>. This applies to the train and test data.
+train_pad <- pad_sequences(
+  train_data,
+  value = word_index_df %>% filter(word == "<PAD>") %>% select(idx) %>% pull(),
+  padding = "post",
+  maxlen = maxlen
+)
+
+test_pad <- pad_sequences(
+  test_data,
+  value = word_index_df %>% filter(word == "<PAD>") %>% select(idx) %>% pull(),
+  padding = "post",
+  maxlen = maxlen
+)
+
+
+model <- keras_model_sequential()
+model %>% 
+  layer_embedding(input_dim = max_features, output_dim = 32) %>%
+  layer_lstm(units = 24,
+             input_shape = 32,
+             batch_size = 8)%>%
+  layer_dropout(rate = 0.1) %>%
+  layer_dense(units = 1, activation = "relu")
+
+model %>% summary()
+
+model %>% compile(
+  optimizer = 'adam',
+  loss = 'binary_crossentropy',
+  metrics = list('accuracy')
+)
+
+
+#Create a validation dataset
+n = as.integer(round(nrow(train_pad)*0.7))
+x_val <- train_pad[1:n, ]
+partial_x_train <- train_pad[(n+1):nrow(train_pad), ]
+
+y_val <- train_labels[1:n]
+partial_y_train <- train_labels[(n+1):length(train_labels)]
+
+
+start_time <- Sys.time()
+history_rnn_keras <- model %>% fit(
+  partial_x_train,
+  partial_y_train,
+  epochs = 20,
+  validation_data = list(x_val, y_val),
+)
+end_time <- Sys.time()
+time_rnn_keras = end_time - start_time
+
+results <- model %>% evaluate(test_pad, test_labels)
+results
+
+@
 %%%%%%%%%%%%%%%% H2o %%%%%%%%%%%%%%%% 
 \subsection{h2o}
 \subsubsection{Installation}
