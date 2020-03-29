@@ -85,7 +85,7 @@
 \pagestyle{fancy}
 \pagenumbering{arabic}
 \section{Introduction}
-In the first section of this paper, a literature review covers the neural networks and deep learners algorithms, focusing on different type of neural networks architecture; the purpose of adding multiple hidden layers and, ultimately, what are the challenges regarding the increase in computing time. Furthermore, in the methodology section, a list of deep learning projects are shown in order to understand some patterns and methods. Then, an exhaustive list of the R libraries allowing to build neural networks and deep learners models. Correspondingly, the advantages and disadvantages of each libraries, their capabilities as well as what you can expect when using them. To sum up, the last section will give concrete examples on how to implement the neural networks and deep learners models with these libraries, using real data.
+In the first section of this paper, a literature review covers the neural networks and deep learners algorithms, focusing on different types of neural networks architectures and describing for which kind of data and tasks each neural network architecture has been designed for. Furthermore, in the methodology section, a list of deep learning projects are shown in order to understand some patterns and methods. Then, an exhaustive list of the R libraries allowing to build neural networks and deep learners models. Correspondingly, the advantages and disadvantages of each libraries, their capabilities as well as what you can expect when using them. To sum up, the last section will give concrete examples on how to implement the neural networks and deep learners models with these libraries, using real data.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%% Litterature %%%%%%%%%%%%%%%%%%%%
@@ -149,14 +149,21 @@ A detailed explanation of the theory of feedforward neural network can be found 
 
 \subsubsection{CNN}
 
-The CNN are a modified architecture of FNN that leverage the feature engineering that used to be hand maded by domain experts. This class of deep neural network are commonly use for image recognition and classification that can serve different applications such as facial recongnition, document analysis and speech recognition. The original FNN are not suited analyzing large size images since the weights increase exponentially and, at the end, don't perfom very well.\\
+The CNN are a modified architecture of FNN that leverage the feature engineering that used to be hand maded by domain experts. This class of deep neural network are commonly used for image recognition and classification that can serve different applications such as facial recongnition, document analysis and speech recognition. The original FNN are not suited analyzing large size images since the weights increase exponentially and, at the end, don't perfom very well.\\
 \begin{wrapfigure}[12]{r}{0.5\textwidth}
   \begin{center}
     \includegraphics[width=0.5\textwidth]{figure/CNN_process.png}
   \end{center}
   \caption{CNN, Deep Learning A-Z by SuperDataScience}
 \end{wrapfigure}
-A standard architecture of a CNN model is commonly represented this way: We start with an input image to which we are going to apply several kernels, a.k.a features detectors, in order to create feature maps that will form what we call a convolutional layer. A common practice is to apply the ReLu activation fonction to the convolutional layer output in order to increase the non linearity of the images before using the pooling method to create a pooling layer. The next step will be to combine all the pooled images from the pooling layer into one single vector, which is called flattening and will be the input of a FNN that will perform the desired task, for instance, classification. CNN parameters are trained with the backpropagation algorithm where the gradients are propagated from the output layer of the FFN to the input of the CNN in order to minimise a cost function, most of the time a categorical cross-entropy if we are performing a multi-class classification. 
+A standard architecture of a CNN model is commonly represented this way:
+\begin{itemize}
+\item We start with an input image to which we are going to apply several kernels, a.k.a features detectors, in order to create feature maps that will form what we call a convolutional layer. 
+\item A common practice is to apply the ReLu activation fonction to the convolutional layer output in order to increase the non linearity of the images.
+\item Then we use the pooling method to create a pooling layer.
+\item The next step will be to combine all the pooled images from the pooling layer into one single vector, which is called flattening and will be the input of a FNN that will perform the desired task, for instance, classification. 
+\end{itemize}
+CNN parameters are trained with the \textbf{backpropagation} algorithm where the gradients are propagated from the output layer of the FFN to the input of the CNN in order to minimise a cost function, most of the time a categorical cross-entropy if we are performing a multi-class classification. 
 
 
 To get a detailed explanation of convolutional neural networks we recommand to read \cite[Chapter 9]{Goodfellow-et-al-2016}.\\
@@ -164,12 +171,22 @@ To get a detailed explanation of convolutional neural networks we recommand to r
 \subsubsection{RNN}
 \ntodo[inline]{Add more info about this topics}
 Recurrent neural networks are a more advanced type of neural networks architecture having proven state-of-art performance for solving tasks related to sequential data such as Natural Language Processing (NLP), anomaly detection and event forecasting. As a key differentiator from feedfoward neural networks, is that RNNs use feedback loops connections instead of feedforward connections and get an internal memory. Indeed, that take as input each step of the sequantial data as well as what they have learned over time. One of their other advantage is to be able to handle input and ouput sequences with different sizes. "A recurrent neural network can be thought of as multiple copies of the same network, each passing a message to a successor" Olah.
-\begin{figure}[h]
-    \centering
+\begin{wrapfigure}[12]{r}{0.5\textwidth}
+    \begin{center}
     \includegraphics[width=0.45\textwidth]{figure/RNN_process.png}
+    \end{center}
      \caption{RNN, Understanding LSTM Networks by Olah}
      \label{fig:rnn_process}
-\end{figure}
+\end{wrapfigure}
+
+A standard architecture of a RNN model is commonly
+represented this way:
+\begin{itemize}
+\item We will train our algorithm by using as input x a part of the sequence of our data. For example, if our data is the sentence : \textbf{I am learning deep learning}, then our x1 will be "I", and our x2 will be "am", etc.
+\item We will also use a second input which is the hidden state of the previous cell of our network. This means that in this network our neurons are connected by a feedback loop. This will allow our network to capture the "temporal" information of our data and gives it a memory. 
+\end{itemize}
+
+RNN parameters, that is this case are shared throught the network, are trained with the \textbf{backpropagation through time} algorithm where the gradients are propagated from the output layer of the RNN in order to minimise a cost function, most of the time a categorical cross-entropy if we are performing a multi-class classification. 
 
 To get a detailed explanation of the theory of recurrent neural networks we recommand to read \cite[Chapter 10]{Goodfellow-et-al-2016}. We also recommand reading this blog post \url{https://colah.github.io/posts/2015-08-Understanding-LSTMs/}
 
@@ -188,8 +205,14 @@ A list of the available resources with installation and examples tutorials can b
 \section{Methodology}
 This section is divided in two;  the dataset description and the benchmark type. The dataset description is mostly to describe what dataset is going to be use for the different type of deep learning algorithms. The second section will describe two indicators in order to compare results of similar algorithms. The first indicator is mostly about a simple accuracy base on the same training and validation dataset and second indicator is about the time it took to execute the same task on differents ressources.
 \subsection{Workflow}
-\ntodo[inline]{Add more info about this topics}
-
+The workflow of a deep learning project in R we recommand to follow is described below:
+\begin{itemize}
+\item Collection, pre-processing and cleaning of the data in order to make them ready to train the model. Partition the data into a training set and a validation/test set (Most of the time 80\% of the data goes to training and 20\% goes to testing). You can use cross-valiation if you don't have enough data, but it shouldn't be the case in most of the deep learning projects.
+\item Choose the right model according to the task you want to perform. Some models have been especially created in order to perform well on a specific task, for example, CNN have been created to solve images classification related tasks.
+\item Train the selected models with your training data by checking at the same time how your validation accuracy (or another metric that corresponds the best to your task) is evolving through the training process.
+\item Modify your models' hyperparameters and experiment changes in the model architecture in order to improve your model accuracy.
+\item Evaluate and compare your models on the test data.
+\end{itemize}
 \subsection{Dataset}
 \subsubsection{FNN}
 For the FNN, the training data will be the well known \textit{Iris} dataset. It contains four covariables and one categorical target variable.
