@@ -258,14 +258,7 @@ For the CNN, the training data will also be a well known dataset called CIFAR-10
 
 \subsubsection{RNN}
 The dataset use to test an RNN is the IMDB Movie reviews sentiment classification. This pack
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlstd{idmb} \hlkwb{=} \hlkwd{dataset_imdb}\hlstd{(}  \hlkwc{path} \hlstd{=} \hlstr{"imdb.npz"}\hlstd{,} \hlkwc{num_words} \hlstd{=} \hlkwa{NULL}\hlstd{,} \hlkwc{skip_top} \hlstd{=} \hlnum{0L}\hlstd{,} \hlkwc{maxlen} \hlstd{=} \hlkwa{NULL}\hlstd{,}
-                      \hlkwc{seed} \hlstd{=} \hlnum{113L}\hlstd{,} \hlkwc{start_char} \hlstd{=} \hlnum{1L}\hlstd{,} \hlkwc{oov_char} \hlstd{=} \hlnum{2L}\hlstd{,} \hlkwc{index_from} \hlstd{=} \hlnum{3L}\hlstd{)}
-\end{alltt}
-\end{kframe}
-\end{knitrout}
+
 
 
 \subsection{Characteristic}
@@ -275,8 +268,6 @@ The dataset use to test an RNN is the IMDB Movie reviews sentiment classificatio
 Classification rate for.
 
 \subsubsection{Time elapsed}
-\ntodo[inline]{Add more info about this topics}
-
 Not generalised but gives an idea about the training time.
 
 
@@ -300,32 +291,52 @@ Like explain earlier this section will be divided in two in order to really diff
 According to its CRAN description, the package allows the "training of neural networks using the backpropagation, resilient backpropagation with (Riedmiller, 1994) or without weight backtracking (Riedmiller, 1993) or the modified globally convergent version by Anastasiadis et al. (2005). The package allows flexible settings through custom-choice of error and activation function. Furthermore, the calculation of generalized weights (Intrator O \& Intrator N, 1993) is implemented." This package uses $C/C++$ in backend.
 
 \textit{Important default parameters of a FNN model with the neuralnet package:}
+\begin{figure}[H]
+  \begin{subfigure}{0.5\textwidth}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlcom{#' Add together two numbers.}
-\hlcom{#' }
-\hlcom{#' @param formula, }
-\hlcom{#' @param Y~X1+...+Xn, }
-\hlcom{#' @param hidden = 1, }
-\hlcom{#' @param threshold = 0.01, }
-\hlcom{#' @param stepmax = 1e+05, }
-\hlcom{#' @param rep = 1,}
-\hlcom{#' @param algorithm = "rprop+",}
-\hlcom{#' @param err.fct = "sse", }
-\hlcom{#' @param act.fct = "logistic", }
-\hlcom{#' @param linear.output = TRUE}
-\hlcom{#' @return a neuralnet model.}
-\hlcom{#' @examples}
-\hlcom{#' add(1, 1)}
-\hlcom{#' add(10, 1)}
-
-\hlkwd{neuralnet}\hlstd{(formula, Y}\hlopt{~}\hlstd{X1}\hlopt{+}\hlstd{...}\hlopt{+}\hlstd{Xn,} \hlkwc{hidden} \hlstd{=} \hlnum{1}\hlstd{,} \hlkwc{threshold} \hlstd{=} \hlnum{0.01}\hlstd{,} \hlkwc{stepmax} \hlstd{=} \hlnum{1e+05}\hlstd{,} \hlkwc{rep} \hlstd{=} \hlnum{1}\hlstd{,}
-          \hlkwc{startweights} \hlstd{=} \hlkwa{NULL}\hlstd{,} \hlkwc{learningrate.limit} \hlstd{=} \hlkwa{NULL}\hlstd{,} \hlkwc{algorithm} \hlstd{=} \hlstr{"rprop+"}\hlstd{,}
-          \hlkwc{err.fct} \hlstd{=} \hlstr{"sse"}\hlstd{,} \hlkwc{act.fct} \hlstd{=} \hlstr{"logistic"}\hlstd{,} \hlkwc{linear.output} \hlstd{=} \hlnum{TRUE}\hlstd{)}
+\hlkwd{neuralnet}\hlstd{(formula,}
+      \hlstd{Y}\hlopt{~}\hlstd{X1}\hlopt{+}\hlstd{...}\hlopt{+}\hlstd{Xn,}
+      \hlkwc{hidden} \hlstd{=} \hlnum{1}\hlstd{,}
+      \hlkwc{threshold} \hlstd{=} \hlnum{0.01}\hlstd{,}
+      \hlkwc{stepmax} \hlstd{=} \hlnum{1e+05}\hlstd{,}
+      \hlkwc{rep} \hlstd{=} \hlnum{1}\hlstd{,}
+      \hlkwc{startweights} \hlstd{=} \hlkwa{NULL}\hlstd{,}
+      \hlkwc{learningrate.limit} \hlstd{=} \hlkwa{NULL}\hlstd{,}
+      \hlkwc{algorithm} \hlstd{=} \hlstr{"rprop+"}\hlstd{,}
+      \hlkwc{err.fct} \hlstd{=} \hlstr{"sse"}\hlstd{,}
+      \hlkwc{act.fct} \hlstd{=} \hlstr{"logistic"}\hlstd{,}
+      \hlkwc{linear.output} \hlstd{=} \hlnum{TRUE}\hlstd{)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
+    \caption{Training function}
+  \end{subfigure}
+  \begin{subfigure}{0.5\textwidth}
+    \centering
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{#' @param formula}
+\hlcom{#' @param Y~X1+...+Xn }
+\hlcom{#' @param hidden = 1}
+\hlcom{#' @param threshold = 0.01}
+\hlcom{#' @param stepmax = 1e+05}
+\hlcom{#' @param rep = 1}
+\hlcom{#' @param algorithm = "rprop+"}
+\hlcom{#' @param err.fct = "sse"}
+\hlcom{#' @param act.fct = "logistic"}
+\hlcom{#' @param linear.output = TRUE}
+\hlcom{#' @return a neuralnet model}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+    \caption{Parameters}
+  \end{subfigure}
+    \caption{Neuralnet package}
+\end{figure}
+
 
 \paragraph{Pros}
 \begin{itemize}
@@ -347,13 +358,45 @@ According to its CRAN description, the package allows the "training of neural ne
 This package comes from the CRAN platform and allows to build and fit "FNN with a single hidden layer and multinomial log-linear models". This package uses C/C++ in backend.
 
 \textit{Important default parameters of a FNN model with the neuralnet package:}
+\begin{figure}[H]
+  \begin{subfigure}{0.5\textwidth}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{nnet}\hlstd{(X, Y, size,} \hlkwc{linout}\hlstd{=}\hlnum{FALSE}\hlstd{,} \hlkwc{entropy}\hlstd{=}\hlnum{FALSE}\hlstd{,} \hlkwc{softmax}\hlstd{=}\hlnum{FALSE}\hlstd{,} \hlkwc{maxit} \hlstd{=} \hlnum{100}\hlstd{,} \hlkwc{decay} \hlstd{=} \hlnum{0}\hlstd{)}
+\hlkwd{nnet}\hlstd{(X, Y,}
+     \hlstd{size,}
+     \hlkwc{linout}\hlstd{=}\hlnum{FALSE}\hlstd{,}
+     \hlkwc{entropy}\hlstd{=}\hlnum{FALSE}\hlstd{,}
+     \hlkwc{softmax}\hlstd{=}\hlnum{FALSE}\hlstd{,}
+     \hlkwc{maxit} \hlstd{=} \hlnum{100}\hlstd{,}
+     \hlkwc{decay} \hlstd{=} \hlnum{0}\hlstd{)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
+    \caption{Training function}
+  \end{subfigure}
+  \begin{subfigure}{0.5\textwidth}
+    \centering
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+  \hlcom{#' @param X = }
+  \hlcom{#' @param Y = }
+  \hlcom{#' @param size = }
+  \hlcom{#' @param linout = }
+  \hlcom{#' @param entropy = }
+  \hlcom{#' @param softmax = }
+  \hlcom{#' @param maxit = }
+  \hlcom{#' @param decay = }
+  \hlcom{#' @return a nnet model}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+    \caption{Parameters}
+  \end{subfigure}
+    \caption{nnet package}
+\end{figure}
+
 
 \paragraph{Pros}
 \begin{itemize}
@@ -372,6 +415,8 @@ This package comes from the CRAN platform and allows to build and fit "FNN with 
 \subsubsection{\textbf{NeuralNetTools package}}
 \paragraph{Description}
 This package is a complement to R's neural networks packages as it allows to visualize and perform analysis on neural network models. "Functions are available for plooting, quantifying variable importance, conducting a sensitivity analysis, and obtaining a simple list of model weights."
+
+
 \begin{figure}[H]
   \begin{subfigure}{0.5\textwidth}
     \centering\includegraphics[width=0.45\textwidth]{figure/plotnet.png}
@@ -404,16 +449,53 @@ This package is a complement to R's neural networks packages as it allows to vis
 \paragraph{Description}
 This package is available on the CRAN platform and has been written specifcally written for R. It allows to "implement some deep learning architectures and neural network algorithms, including backpropagation, Restricted Boltzmann Machine (RBM), Deep Belief Network (DBN) and Deep autoencoder".\\
 \textit{Important default parameters of a deep FNN model with weights initialized by DBN:}
+\begin{figure}[H]
+  \begin{subfigure}{0.5\textwidth}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{dbn.dnn.train}(X, Y, hidden=\hlkwd{c}(5), activationfun=\hlstr{"sigm"}, learningrate=0.5,
-              momentum=0.5, learningrate_scale=1, output=\hlstr{"softmax"},
-              numepochs = 3, batchsize = 100, hidden_dropout = 0, 
-              visible_dropout = 0, cd = 1))
+\hlkwd{dbn.dnn.train}\hlstd{(X, Y,} \hlkwc{hidden}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{5}\hlstd{),}
+              \hlkwc{activationfun}\hlstd{=}\hlstr{"sigm"}\hlstd{,}
+              \hlkwc{learningrate}\hlstd{=}\hlnum{0.5}\hlstd{,}
+              \hlkwc{momentum}\hlstd{=}\hlnum{0.5}\hlstd{,}
+              \hlkwc{learningrate_scale}\hlstd{=}\hlnum{1}\hlstd{,}
+              \hlkwc{output}\hlstd{=}\hlstr{"softmax"}\hlstd{,}
+              \hlkwc{numepochs} \hlstd{=} \hlnum{3}\hlstd{,}
+              \hlkwc{batchsize} \hlstd{=} \hlnum{100}\hlstd{,}
+              \hlkwc{hidden_dropout} \hlstd{=} \hlnum{0}\hlstd{,}
+              \hlkwc{visible_dropout} \hlstd{=} \hlnum{0}\hlstd{,}
+              \hlkwc{cd} \hlstd{=} \hlnum{1}\hlstd{)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
+    \caption{Training function}
+  \end{subfigure}
+  \begin{subfigure}{0.5\textwidth}
+    \centering
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{#' @param X :}
+\hlcom{#' @param Y :}
+\hlcom{#' @param hidden :}
+\hlcom{#' @param activationfun : }
+\hlcom{#' @param learningrate :}
+\hlcom{#' @param momentum :}
+\hlcom{#' @param learningrate_scale :}
+\hlcom{#' @param output :}
+\hlcom{#' @param numepochs :}
+\hlcom{#' @param batchsize :}
+\hlcom{#' @param hidden_dropout :}
+\hlcom{#' @param visible_dropout :}
+\hlcom{#' @param cd :}
+\hlcom{#' @return a dbn model}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+    \caption{Parameters}
+  \end{subfigure}
+    \caption{Deepnet}
+\end{figure}
 
 \paragraph{Pros}
 \begin{itemize}
@@ -434,15 +516,63 @@ This package is available on the CRAN platform and has been written specifcally 
 \paragraph{Description}
 This package available on the platform CRAN, allows to perform "Baeysian regularized neural networks inclusing both additive and dominance effects, and allows to takes advantage of multicore architectures via a parallel computing approach using openMP for the computations". (Pérez-Rodriguez, ...)\\
 \textit{Important default parameters of the brnn function:}
+\begin{figure}[H]
+  \begin{subfigure}{0.5\textwidth}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{brnn}\hlstd{(X,Y,}\hlkwc{neurons}\hlstd{=}\hlnum{2}\hlstd{,}\hlkwc{normalize}\hlstd{=}\hlnum{TRUE}\hlstd{,}\hlkwc{epochs}\hlstd{=}\hlnum{1000}\hlstd{,}\hlkwc{mu}\hlstd{=}\hlnum{0.005}\hlstd{,}\hlkwc{mu_dec}\hlstd{=}\hlnum{0.1}\hlstd{,}
-\hlkwc{mu_inc}\hlstd{=}\hlnum{10}\hlstd{,}\hlkwc{mu_max}\hlstd{=}\hlnum{1e10}\hlstd{,}\hlkwc{min_grad}\hlstd{=}\hlnum{1e-10}\hlstd{,}\hlkwc{change} \hlstd{=} \hlnum{0.001}\hlstd{,}\hlkwc{cores}\hlstd{=}\hlnum{1}\hlstd{,}
-\hlkwc{verbose}\hlstd{=}\hlnum{FALSE}\hlstd{,}\hlkwc{Monte_Carlo} \hlstd{=} \hlnum{FALSE}\hlstd{,}\hlkwc{tol} \hlstd{=} \hlnum{1e-06}\hlstd{,} \hlkwc{samples} \hlstd{=} \hlnum{40}\hlstd{,...)}
+\hlkwd{brnn}\hlstd{(X,Y,}
+      \hlkwc{neurons}\hlstd{=}\hlnum{2}\hlstd{,}
+      \hlkwc{normalize}\hlstd{=}\hlnum{TRUE}\hlstd{,}
+      \hlkwc{epochs}\hlstd{=}\hlnum{1000}\hlstd{,}
+      \hlkwc{mu}\hlstd{=}\hlnum{0.005}\hlstd{,}
+      \hlkwc{mu_dec}\hlstd{=}\hlnum{0.1}\hlstd{,}
+      \hlkwc{mu_inc}\hlstd{=}\hlnum{10}\hlstd{,}
+      \hlkwc{mu_max}\hlstd{=}\hlnum{1e10}\hlstd{,}
+      \hlkwc{min_grad}\hlstd{=}\hlnum{1e-10}\hlstd{,}
+      \hlkwc{change} \hlstd{=} \hlnum{0.001}\hlstd{,}
+      \hlkwc{cores}\hlstd{=}\hlnum{1}\hlstd{,}
+      \hlkwc{verbose}\hlstd{=}\hlnum{FALSE}\hlstd{,}
+      \hlkwc{Monte_Carlo} \hlstd{=} \hlnum{FALSE}
+      \hlstd{,}\hlkwc{tol} \hlstd{=} \hlnum{1e-06}\hlstd{,}
+      \hlkwc{samples} \hlstd{=} \hlnum{40}\hlstd{)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
+    \caption{Training function}
+  \end{subfigure}
+  \begin{subfigure}{0.5\textwidth}
+    \centering
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{#' @param X,}
+\hlcom{#' @param Y}
+\hlcom{#' @param neurons=2}
+\hlcom{#' @param normalize=TRUE}
+\hlcom{#' @param epochs=1000}
+\hlcom{#' @param mu=0.005}
+\hlcom{#' @param mu_dec=0.1}
+\hlcom{#' @param mu_inc=10}
+\hlcom{#' @param mu_max=1e10}
+\hlcom{#' @param min_grad=1e-10}
+\hlcom{#' @param change = 0.001}
+\hlcom{#' @param cores=1,}
+\hlcom{#' @param verbose=FALSE}
+\hlcom{#' @param Monte_Carlo = FALSE}
+\hlcom{#' @param tol = 1e-06}
+\hlcom{#' @param samples = 40}
+\hlcom{#' @return a brnn model}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+    \caption{Parameters}
+  \end{subfigure}
+    \caption{nnet package}
+\end{figure}
+
+
+
 \paragraph{Pros}
 \begin{itemize}
 \item Allows to add Additive and Dominance effects in the neural networks models.
@@ -584,14 +714,7 @@ H2o is a "scalable open source machine learning platform that offers parallelize
 %%%%%%%%%%%%%%%%%% Examples    %%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Examples}
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 
-
-{\ttfamily\noindent\color{warningcolor}{\#\# Warning in readChar(con, 5L, useBytes = TRUE): cannot open compressed file 'C:/Users/adrie/OneDrive/Desktop/Git/Deep\_learning\_r/DeepLearninginR/FNN\_save.RData', probable reason 'No such file or directory'}}
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in readChar(con, 5L, useBytes = TRUE): cannot open the connection}}\end{kframe}
-\end{knitrout}
 \label{sec:examples}
 In order to give concrete deep learning examples, four resources were selected for tutorials; Neuralnet, Keras using Tensorflow backend, H2O, rTorch and MXNET.
 %%%%%%%%%%%%%%%% Neuralnet %%%%%%%%%%%%%%%% 
@@ -789,24 +912,26 @@ This package of the possibility to store the training history :
 \begin{alltt}
 \hlkwd{plot}\hlstd{(history)}
 \end{alltt}
+\end{kframe}
+\includegraphics[width=4in]{figure/unnamed-chunk-25-1} 
 
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in .External2(C\_savehistory, file): 'savehistory' can only be used in Rgui and Rterm}}\end{kframe}
 \end{knitrout}
 
 The accuracy of this resources is
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in mean(pred.label.keras != as.vector(data\_df\$test\$Species)): object 'pred.label.keras' not found}}\end{kframe}
+\begin{verbatim}
+## [1] 0.9333333
+\end{verbatim}
+\end{kframe}
 \end{knitrout}
 and the time it took to train is :
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): object 'time\_fnn\_keras' not found}}\end{kframe}
+\begin{verbatim}
+## Time difference of 1.213505 mins
+\end{verbatim}
+\end{kframe}
 \end{knitrout}
 
 \subsubsection{CNN}
@@ -1053,16 +1178,18 @@ By default, H2O Deep Learning uses an adaptive learning rate (ADADELTA) for its 
 The accuracy of this resources is
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): object 'acc\_h2o' not found}}\end{kframe}
+\begin{verbatim}
+## [1] 0.9333333
+\end{verbatim}
+\end{kframe}
 \end{knitrout}
 and the time it took to train is :
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): object 'time\_fnn\_h2o' not found}}\end{kframe}
+\begin{verbatim}
+## Time difference of 7.731083 secs
+\end{verbatim}
+\end{kframe}
 \end{knitrout}
 \subsubsection{CNN}
 \subsubsection{RNN}
@@ -1119,16 +1246,18 @@ For CPU :
 The accuracy of this resources is
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in mean(pred.label.mxnet != as.vector(data\_df\$test\$Species)): object 'pred.label.mxnet' not found}}\end{kframe}
+\begin{verbatim}
+## [1] 0.9333333
+\end{verbatim}
+\end{kframe}
 \end{knitrout}
 and the time it took to train is :
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): object 'time\_fnn\_mxnet' not found}}\end{kframe}
+\begin{verbatim}
+## Time difference of 6.597001 secs
+\end{verbatim}
+\end{kframe}
 \end{knitrout}
 
 
