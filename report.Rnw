@@ -627,6 +627,7 @@ This API is really popular in the Python world because it acts like a wrapper of
 \begin{itemize}
 \item Give a lot of flexibility since can basically be use to create all type of deep learning algorithms.
 \item Easy and fast prototyping
+\item Allows to use ReLu activation function which is not available in R packages from CRAN.
 \item Construct models exactly the same way as in python with a minimalist philosphy.
 \item Give the possibility to save everything on the workspace (model, training history, etc.)
 \end{itemize}
@@ -1276,9 +1277,9 @@ time_fnn_mxnet
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Discussion}
 \subsection{FNN}
+The CRAN platform includes a lot of packages allowing to use different types of FNN, going from one hidden layers FNN to deep FNN. Vanilla FNN and deep FNN can be easily implemented and plotted with the package \textbf{neuralnet}, while more advanced architecture such as bayesian regularized neural networks are available with the package \textbf{brnn}. If you decide to use one of the package available on CRAN, we highly recommend to read the package documentation, as default parameters, backpropagation algorthms, activation functions may vary from one package to another. However, for building deep FNN in R, we highly suggest to use Keras API, as it will give you much more flexibility and will allow you to use the latest deep FNN architectures. Keras has a lot of advantages such as building your model layer by layer and using different types of hidden activation functions such as Relu, and different output activation functions such as softmax. However, we discovered some bugs while using Keras, especially while downloading datasets and we recommend therefore to carefully check your data at each step of the model construction.
 \subsection{CNN}
 \subsection{RNN}
-\section{RNN}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%% Biblio      %%%%%%%%%%%%%%%%%%%%
