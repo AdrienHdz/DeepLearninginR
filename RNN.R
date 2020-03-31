@@ -19,9 +19,10 @@ maxlen = 45
 # Loads the dataset which is already split in train and test
 # For some reason there is a bug. When adding the parameter Max len the function don't
 # return test data if not above maxlen 180 
-imdb <- dataset_imdb(maxlen = maxlen )
-imdb_hack <- dataset_imdb(maxlen = 150 )
-imdb$test
+imdb <- dataset_imdb(maxlen = maxlen, seed = 123 )
+imdb_hack <- dataset_imdb(maxlen = 180 , seed = 123)
+imdb$train
+imdb_hack$test
 # Seperate the labels and the data for train and test
 c(train_data, train_labels) %<-% imdb$train
 c(test_data, test_labels) %<-% imdb_hack$test
@@ -122,8 +123,3 @@ time_rnn_keras = end_time - start_time
 
 results <- model %>% evaluate(test_pad, test_labels)
 results
-
-
-
-
-

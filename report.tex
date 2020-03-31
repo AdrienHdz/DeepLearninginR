@@ -998,7 +998,7 @@ First of all we need to load the data and in order to do so we will use the data
 \hlcom{# Here is another way, to split the data to }
 \hlstd{spec} \hlkwb{=} \hlkwd{c}\hlstd{(}\hlkwc{train} \hlstd{=} \hlnum{.7}\hlstd{,}\hlkwc{test} \hlstd{=} \hlnum{.3}\hlstd{)}
 \hlcom{# Set a seed in order to be repreductible}
-\hlkwd{set.seed}\hlstd{()}
+\hlkwd{set.seed}\hlstd{(}\hlnum{123}\hlstd{)}
 \hlcom{# Sample through the dataframe using the sample and cut.}
 \hlcom{# The variable "g" returns a list of rows for train and}
 \hlcom{# test}
@@ -1021,7 +1021,7 @@ First of all we need to load the data and in order to do so we will use the data
 \end{kframe}
 \end{knitrout}
 
-When the the is ready, it is time to create the FFN. As an analogy, the keras model should be constructed like a Lego toy game. It starts from the input and goes all the way to the output.
+When the data is ready, it is time to create the FFN. As an analogy, the keras model should be constructed like a Lego toy game. It starts from the input and goes all the way to the output.
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
@@ -1045,25 +1045,17 @@ Here is a quick evaluation of the model created.
 \begin{alltt}
 \hlkwd{summary}(model_keras)
 Model: \hlstr{"sequential"}
-__________________________________________________________________________
-\hlkwd{Layer} (type)                     Output Shape                 Param \hlcom{#     }
-==========================================================================
-\hlkwd{dense} (Dense)                    (None, 8)                    32          
-__________________________________________________________________________
-\hlkwd{dense_1} (Dense)                  (None, 3)                    27          
-__________________________________________________________________________
-\hlkwd{dense_2} (Dense)                  (None, 8)                    32          
-__________________________________________________________________________
-\hlkwd{dense_3} (Dense)                  (None, 3)                    27          
-__________________________________________________________________________
-\hlkwd{dense_4} (Dense)                  (None, 8)                    32          
-__________________________________________________________________________
-\hlkwd{dense_5} (Dense)                  (None, 3)                    27          
-==========================================================================
-Total params: 177
-Trainable params: 177
+________________________________________________________
+\hlkwd{Layer} (type)             Output Shape          Param \hlcom{#  }
+========================================================
+\hlkwd{dense_1} (Dense)          (None, 8)             40       
+________________________________________________________
+\hlkwd{dense_2} (Dense)          (None, 4)             36       
+========================================================
+Total params: 76
+Trainable params: 76
 Non-trainable params: 0
-__________________________________________________________________________
+________________________________________________________
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -1109,10 +1101,6 @@ The final step is just to provide an accuracy of the model.
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlcom{# For the }
-\hlstd{model_keras} \hlopt{%>%} \hlkwd{evaluate}\hlstd{(X}\hlopt{$}\hlstd{test,} \hlkwd{to_categorical}\hlstd{(Y}\hlopt{$}\hlstd{test))}
-\hlstd{model_keras} \hlopt{%>%} \hlkwd{predict}\hlstd{(X}\hlopt{$}\hlstd{test,} \hlkwd{to_categorical}\hlstd{(Y}\hlopt{$}\hlstd{test))}
-
 \hlstd{preds} \hlkwb{=} \hlkwd{predict}\hlstd{(model_keras,}\hlkwd{as.array}\hlstd{(X}\hlopt{$}\hlstd{test))}
 \hlstd{pred.label.keras} \hlkwb{<-} \hlkwd{max.col}\hlstd{((preds))} \hlopt{-} \hlnum{1}
 \hlnum{1}\hlopt{-}\hlkwd{mean}\hlstd{(pred.label.keras} \hlopt{!=} \hlkwd{as.vector}\hlstd{(data_df}\hlopt{$}\hlstd{test}\hlopt{$}\hlstd{Species))}
@@ -1124,9 +1112,9 @@ The final step is just to provide an accuracy of the model.
 The accuracy of this resources is
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{verbatim}
-## [1] 0.9333333
-\end{verbatim}
+\begin{alltt}
+[1] 0.9555556
+\end{alltt}
 \end{kframe}
 \end{knitrout}
 and the time it took to train is :
@@ -1144,7 +1132,9 @@ The first step consists of loading the CIFAR-10 dataset and creating a train and
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlkwd{library}\hlstd{(keras)}
-\hlstd{cifar10} \hlkwb{=} \hlkwd{dataset_cifar10}\hlstd{()}
+\hlcom{# We set the seed to get all the outputs reproductible.}
+\hlkwd{set.seed}\hlstd{(}\hlnum{123}\hlstd{)}
+\hlstd{cifar_10} \hlkwb{=} \hlkwd{dataset_cifar10}\hlstd{()}
 \hlcom{# RGB values are usually encoded between 0 and 255.}
 \hlcom{# A good practice is to scale them to a value from 0 and 1 b dividing the RGB values by 255.}
 \hlstd{X_train} \hlkwb{<-} \hlstd{cifar_10}\hlopt{$}\hlstd{train}\hlopt{$}\hlstd{x}\hlopt{/}\hlnum{255}
@@ -1262,14 +1252,14 @@ ______________________________________________________________________________
 \end{kframe}
 \end{knitrout}
 
-We then set our hyperparameters to use RMSprop as the optimizater with a learning rate of 1e-3 and a decay of 1e-6. We set our batch size to 64 to use train our model with 64 images per iteration. We set epoch to 10, our model will go trough the entire training set 10 times. 20\% of the training set will be used as validation set, in order to tune the parameters without biais.
+We then set our hyperparameters to use RMSprop as the optimizater with a learning rate of 1e-3 and a decay of 1e-6. We set our batch size to 64 to use train our model with 64 images per iteration. We set epoch to 10, our model will go trough the entire training set 5 times. 20\% of the training set will be used as validation set, in order to tune the parameters without biais.
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlstd{opt} \hlkwb{<-} \hlkwd{optimizer_rmsprop}\hlstd{(}\hlkwc{lr} \hlstd{=} \hlnum{1e-3}\hlstd{,} \hlkwc{decay} \hlstd{=} \hlnum{1e-6}\hlstd{)}
 
 \hlstd{batch_size} \hlkwb{<-} \hlnum{64}
-\hlstd{epochs} \hlkwb{<-} \hlnum{10}
+\hlstd{epochs} \hlkwb{<-} \hlnum{5}
 \hlstd{validation} \hlkwb{<-} \hlnum{0.2}
 \end{alltt}
 \end{kframe}
@@ -1288,12 +1278,15 @@ Now, we will train our model, and we will store it into a list called \textbf{hi
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{history} \hlkwb{<-} \hlstd{model} \hlopt{%>%} \hlkwd{fit}\hlstd{(}
+\hlstd{start_time} \hlkwb{<-} \hlkwd{Sys.time}\hlstd{()}
+\hlstd{history_cnn_keras} \hlkwb{<-} \hlstd{model} \hlopt{%>%} \hlkwd{fit}\hlstd{(}
     \hlstd{X_train, Y_train,}
     \hlkwc{batch_size} \hlstd{= batch_size,}
     \hlkwc{epochs} \hlstd{= epochs,}
     \hlkwc{validation_split} \hlstd{= validation,}
     \hlkwc{shuffle} \hlstd{=} \hlnum{TRUE}\hlstd{)}
+\hlstd{end_time} \hlkwb{<-} \hlkwd{Sys.time}\hlstd{()}
+\hlstd{time_cnn_keras} \hlkwb{=} \hlstd{end_time} \hlopt{-} \hlstd{start_time}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -1301,7 +1294,7 @@ By default keras plot our model loss and accuracy per epoch on the training set 
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.7]{figure/CNN_keras_graph.png}
+\includegraphics[width=\textwidth]{figure/CNN_keras_graph.png}
 \end{figure}
 Then, we will evaluate our model performance on our test set.
 \begin{knitrout}
@@ -1310,14 +1303,23 @@ Then, we will evaluate our model performance on our test set.
 model %>% \hlkwd{evaluate}(X_test, Y_test,verbose = 0)
 
 $loss
-[1] 1.091844
+[1] 1.70912
 
 $accuracy
-[1] 0.6255
+[1] 0.598
 \end{alltt}
 \end{kframe}
 \end{knitrout}
-We can see that our accuracy is 62.55\%.\\
+We can see that our accuracy is 59.8\%.\\
+And the time it took to train is:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+model %>% \hlkwd{evaluate}(X_test, Y_test,verbose = 0)
+Time difference of 19.25289 mins
+\end{alltt}
+\end{kframe}
+\end{knitrout}
 
 In order to predict with our model on a new dataset, we can you Keras\'s \textbf{predict\_classes} function.
 \begin{knitrout}
@@ -1329,6 +1331,11 @@ In order to predict with our model on a new dataset, we can you Keras\'s \textbf
 \end{knitrout}
 
 \subsubsection{RNN}
+
+
+This is an example that the keras package uses for text classification. However it is not an RNN or in this case an LSTM algorithm.
+
+As a first step it is important to download the data from keras.
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
@@ -1343,12 +1350,20 @@ In order to predict with our model on a new dataset, we can you Keras\'s \textbf
 
 \hlcom{# cut texts after this number of words (among top max_features most common words)}
 \hlstd{maxlen} \hlkwb{=} \hlnum{45}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+Unfortunately, not everything is perfect with the package and some bugs can be found such as this one. The function \textit{dataset\_imdb()} normally returns the dataset with some filter that we pass as parameter. However, the bug\cite{bugRNNkeras} found doing this tutorial is that when the parameter maxlen is less than 150 it returns a null for the test data.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
 \hlcom{# Loads the dataset which is already split in train and test}
 \hlcom{# For some reason there is a bug. When adding the parameter Max len the function don't}
 \hlcom{# return test data if not above maxlen 180 }
-\hlstd{imdb} \hlkwb{<-} \hlkwd{dataset_imdb}\hlstd{(}\hlkwc{maxlen} \hlstd{= maxlen )}
-\hlstd{imdb_hack} \hlkwb{<-} \hlkwd{dataset_imdb}\hlstd{(}\hlkwc{maxlen} \hlstd{=} \hlnum{150} \hlstd{)}
-\hlstd{imdb}\hlopt{$}\hlstd{test}
+\hlstd{imdb} \hlkwb{<-} \hlkwd{dataset_imdb}\hlstd{(}\hlkwc{maxlen} \hlstd{= maxlen,} \hlkwc{seed} \hlstd{=} \hlnum{123} \hlstd{)}
+\hlstd{imdb_hack} \hlkwb{<-} \hlkwd{dataset_imdb}\hlstd{(}\hlkwc{maxlen} \hlstd{=} \hlnum{180} \hlstd{,} \hlkwc{seed} \hlstd{=} \hlnum{123}\hlstd{)}
+\hlstd{imdb}\hlopt{$}\hlstd{train}
+\hlstd{imdb_hack}\hlopt{$}\hlstd{test}
 \hlcom{# Seperate the labels and the data for train and test}
 \hlkwd{c}\hlstd{(train_data, train_labels)} \hlopt{%<-%} \hlstd{imdb}\hlopt{$}\hlstd{train}
 \hlkwd{c}\hlstd{(test_data, test_labels)} \hlopt{%<-%} \hlstd{imdb_hack}\hlopt{$}\hlstd{test}
@@ -1395,8 +1410,9 @@ In order to predict with our model on a new dataset, we can you Keras\'s \textbf
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-> \hlkwd{decode_review}(train_data[[5]])
-[1] \hlstr{"<START> real cool smart movie i loved sheedy\hlstr{'s colors especially the purple car alice drummond is wise and wonderful as stella i liked sheedy'}s reference to how her face had gotten fatter the roadside dance scene is brilliant really liked this one"}
+\hlkwd{decode_review}(train_data[[5]])
+[1] "<START> excellent episode movie ala pulp fiction 7 days 7 suicides it doesnt get more
+depressing than this movie rating 8 10 music rating 10 10"
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -1461,8 +1477,34 @@ In order to predict with our model on a new dataset, we can you Keras\'s \textbf
 \hlstd{time_rnn_keras} \hlkwb{=} \hlstd{end_time} \hlopt{-} \hlstd{start_time}
 
 \hlstd{results} \hlkwb{<-} \hlstd{model} \hlopt{%>%} \hlkwd{evaluate}\hlstd{(test_pad, test_labels)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+The training history can be plot by calling the history :
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{plot}\hlstd{(history_rnn_keras)}
+\end{alltt}
+
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# `geom\_smooth()` using formula 'y \textasciitilde{} x'}}\end{kframe}
+\includegraphics[width=6in]{figure/unnamed-chunk-49-1} 
+
+\end{knitrout}
+The accuracy of the model is as follow :
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
 \hlstd{results}
 \end{alltt}
+\begin{verbatim}
+## $loss
+## [1] 0.6962709
+## 
+## $accuracy
+## [1] 0.6293246
+\end{verbatim}
 \end{kframe}
 \end{knitrout}
 %%%%%%%%%%%%%%%% H2o %%%%%%%%%%%%%%%% 

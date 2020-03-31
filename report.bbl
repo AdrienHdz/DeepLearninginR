@@ -1,4 +1,4 @@
-\begin{thebibliography}{19}
+\begin{thebibliography}{20}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -10,6 +10,11 @@ What is the difference between ai, machine learning and deep learning?
 \newblock
   \url{https://www.geospatialworld.net/blogs/difference-between-ai%EF%BB%BF-machine-learning-and-deep-learning/}.
 \newblock Accessed: 2020-02-15.
+
+\bibitem[bug()]{bugRNNkeras}
+Test data not present when adding parameter maxlen.
+\newblock URL \url{https://github.com/rstudio/keras/issues/1007}.
+\newblock Accessed: 2020-03-28.
 
 \bibitem[per()]{perfomancelink}
 Various ways to evaluate a machine learning model’s performance.

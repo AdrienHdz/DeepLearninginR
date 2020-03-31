@@ -858,7 +858,7 @@ iris$Species = sapply(as.character(iris$Species),
 # Here is another way, to split the data to 
 spec = c(train = .7,test = .3)
 # Set a seed in order to be repreductible
-set.seed()
+set.seed(123)
 # Sample through the dataframe using the sample and cut.
 # The variable "g" returns a list of rows for train and
 # test
@@ -879,7 +879,7 @@ Y$train = as.matrix(data_df$train[,ncol(data_df$train)])
 Y$test = as.matrix(data_df$test[,ncol(data_df$test)],)
 @
 
-When the the is ready, it is time to create the FFN. As an analogy, the keras model should be constructed like a Lego toy game. It starts from the input and goes all the way to the output.
+When the data is ready, it is time to create the FFN. As an analogy, the keras model should be constructed like a Lego toy game. It starts from the input and goes all the way to the output.
 <<eval=FALSE>>=
 # load the library 
 library(keras)
@@ -897,25 +897,17 @@ Here is a quick evaluation of the model created.
 <<eval=FALSE>>=
 summary(model_keras)
 Model: "sequential"
-__________________________________________________________________________
-Layer (type)                     Output Shape                 Param #     
-==========================================================================
-dense (Dense)                    (None, 8)                    32          
-__________________________________________________________________________
-dense_1 (Dense)                  (None, 3)                    27          
-__________________________________________________________________________
-dense_2 (Dense)                  (None, 8)                    32          
-__________________________________________________________________________
-dense_3 (Dense)                  (None, 3)                    27          
-__________________________________________________________________________
-dense_4 (Dense)                  (None, 8)                    32          
-__________________________________________________________________________
-dense_5 (Dense)                  (None, 3)                    27          
-==========================================================================
-Total params: 177
-Trainable params: 177
+________________________________________________________
+Layer (type)             Output Shape          Param #  
+========================================================
+dense_1 (Dense)          (None, 8)             40       
+________________________________________________________
+dense_2 (Dense)          (None, 4)             36       
+========================================================
+Total params: 76
+Trainable params: 76
 Non-trainable params: 0
-__________________________________________________________________________
+________________________________________________________
 @
 
 The next steps, is the compilation. In this example, it is important to keep in mind that not all the parameters are use. The loss function, the optimizer and the metrics are the most basic characteristic of an FNN.
@@ -941,10 +933,6 @@ plot(history)
 
 The final step is just to provide an accuracy of the model.
 <<eval=FALSE>>=
-# For the 
-model_keras %>% evaluate(X$test, to_categorical(Y$test))
-model_keras %>% predict(X$test, to_categorical(Y$test))
-
 preds = predict(model_keras,as.array(X$test))
 pred.label.keras <- max.col((preds)) - 1
 1-mean(pred.label.keras != as.vector(data_df$test$Species))
@@ -952,8 +940,8 @@ pred.label.keras <- max.col((preds)) - 1
 
 
 The accuracy of this resources is
-<<eval=TRUE, echo=FALSE>>=
-1-mean(pred.label.keras != as.vector(data_df$test$Species))
+<<eval=FALSE, echo=TRUE>>=
+[1] 0.9555556
 @
 and the time it took to train is :
 <<eval=TRUE, echo=FALSE>>=
@@ -964,7 +952,9 @@ time_fnn_keras
 The first step consists of loading the CIFAR-10 dataset and creating a train and a test set.
 <<eval= FALSE, message = FALSE>>=
 library(keras)
-cifar10 = dataset_cifar10()
+# We set the seed to get all the outputs reproductible.
+set.seed(123)
+cifar_10 = dataset_cifar10()
 # RGB values are usually encoded between 0 and 255.
 # A good practice is to scale them to a value from 0 and 1 b dividing the RGB values by 255.
 X_train <- cifar_10$train$x/255
@@ -1068,12 +1058,12 @@ Non-trainable params: 192
 ______________________________________________________________________________
 @
 
-We then set our hyperparameters to use RMSprop as the optimizater with a learning rate of 1e-3 and a decay of 1e-6. We set our batch size to 64 to use train our model with 64 images per iteration. We set epoch to 10, our model will go trough the entire training set 10 times. 20\% of the training set will be used as validation set, in order to tune the parameters without biais.
+We then set our hyperparameters to use RMSprop as the optimizater with a learning rate of 1e-3 and a decay of 1e-6. We set our batch size to 64 to use train our model with 64 images per iteration. We set epoch to 10, our model will go trough the entire training set 5 times. 20\% of the training set will be used as validation set, in order to tune the parameters without biais.
 <<eval= FALSE, message = FALSE>>=
 opt <- optimizer_rmsprop(lr = 1e-3, decay = 1e-6)
 
 batch_size <- 64
-epochs <- 10
+epochs <- 5
 validation <- 0.2
 @
 We will us as loss function the categorical\_crossentropy that works very well with our softmax activaction function in order to peform multi label classification. We will look at the accuracy as the final metric to check the performance of our model on the test dataset.
@@ -1084,30 +1074,38 @@ model %>%
 @
 Now, we will train our model, and we will store it into a list called \textbf{history}. 
 <<eval= FALSE, message = FALSE>>=
-history <- model %>% fit(
+start_time <- Sys.time()
+history_cnn_keras <- model %>% fit(
     X_train, Y_train,
     batch_size = batch_size,
     epochs = epochs,
     validation_split = validation,
     shuffle = TRUE)
+end_time <- Sys.time() 
+time_cnn_keras = end_time - start_time
 @
 By default keras plot our model loss and accuracy per epoch on the training set and on the validation set.\\
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.7]{figure/CNN_keras_graph.png}
+\includegraphics[width=\textwidth]{figure/CNN_keras_graph.png}
 \end{figure}
 Then, we will evaluate our model performance on our test set.
 <<eval= FALSE, message = FALSE>>=
 model %>% evaluate(X_test, Y_test,verbose = 0)
 
 $loss
-[1] 1.091844
+[1] 1.70912
 
 $accuracy
-[1] 0.6255
+[1] 0.598
 @
-We can see that our accuracy is 62.55\%.\\
+We can see that our accuracy is 59.8\%.\\
+And the time it took to train is:
+<<eval= FALSE, message = FALSE>>=
+model %>% evaluate(X_test, Y_test,verbose = 0)
+Time difference of 19.25289 mins
+@
 
 In order to predict with our model on a new dataset, we can you Keras\'s \textbf{predict\_classes} function.
 <<eval= FALSE, message = FALSE>>=
@@ -1115,6 +1113,13 @@ Y_predicted <- model %>% predict_classes(X_test)
 @
 
 \subsubsection{RNN}
+<<echo=FALSE>>=
+load(paste0(getwd(),"/RNN_save.RData"))
+@
+
+This is an example that the keras package uses for text classification. However it is not an RNN or in this case an LSTM algorithm.
+
+As a first step it is important to download the data from keras.
 <<eval=FALSE, echo=TRUE>>=
 library(keras)
 library(dplyr)
@@ -1127,12 +1132,16 @@ max_features = length(word_index)
 
 # cut texts after this number of words (among top max_features most common words)
 maxlen = 45
+@
+Unfortunately, not everything is perfect with the package and some bugs can be found such as this one. The function \textit{dataset\_imdb()} normally returns the dataset with some filter that we pass as parameter. However, the bug\cite{bugRNNkeras} found doing this tutorial is that when the parameter maxlen is less than 150 it returns a null for the test data.
+<<eval=FALSE, echo=TRUE>>=
 # Loads the dataset which is already split in train and test
 # For some reason there is a bug. When adding the parameter Max len the function don't
 # return test data if not above maxlen 180 
-imdb <- dataset_imdb(maxlen = maxlen )
-imdb_hack <- dataset_imdb(maxlen = 150 )
-imdb$test
+imdb <- dataset_imdb(maxlen = maxlen, seed = 123 )
+imdb_hack <- dataset_imdb(maxlen = 180 , seed = 123)
+imdb$train
+imdb_hack$test
 # Seperate the labels and the data for train and test
 c(train_data, train_labels) %<-% imdb$train
 c(test_data, test_labels) %<-% imdb_hack$test
@@ -1177,8 +1186,9 @@ decode_review <- function(text){
 load(paste0(getwd(),"/RNN_save.RData"))
 @
 <<eval=FALSE, echo=TRUE>>=
-> decode_review(train_data[[5]])
-[1] "<START> real cool smart movie i loved sheedy's colors especially the purple car alice drummond is wise and wonderful as stella i liked sheedy's reference to how her face had gotten fatter the roadside dance scene is brilliant really liked this one"
+decode_review(train_data[[5]])
+[1] "<START> excellent episode movie ala pulp fiction 7 days 7 suicides it doesnt get more
+depressing than this movie rating 8 10 music rating 10 10"
 @
 
 <<eval=FALSE, echo=TRUE>>=
@@ -1239,8 +1249,14 @@ end_time <- Sys.time()
 time_rnn_keras = end_time - start_time
 
 results <- model %>% evaluate(test_pad, test_labels)
+@
+The training history can be plot by calling the history :
+<<eval=TRUE, echo=TRUE,out.width='6in'>>=
+plot(history_rnn_keras)
+@
+The accuracy of the model is as follow :
+<<eval=TRUE, echo=TRUE>>=
 results
-
 @
 %%%%%%%%%%%%%%%% H2o %%%%%%%%%%%%%%%% 
 \subsection{h2o}
