@@ -1,0 +1,70 @@
+This is BibTeX, Version 0.99d (TeX Live 2019/W32TeX)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: report.aux
+The style file: plainnat.bst
+Illegal, another \bibstyle command---line 19 of file report.aux
+ : \bibstyle
+ :          {ksfh_nat}
+I'm skipping whatever remains of this command
+Database file #1: global.bib
+I was expecting a `,' or a `}'---line 257 of file global.bib
+ :   
+ :   year = {2019},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--to sort, need author or key in aivsdeepvsml
+Warning--to sort, need author or key in perfomancelink
+Too many commas in name 1 of "Tianqi Chen, Qiang Kou, Tong He, Anirudh Acharya" for entry mxnet2020
+while executing---line 1347 of file plainnat.bst
+Too many commas in name 1 of "Tianqi Chen, Qiang Kou, Tong He, Anirudh Acharya" for entry mxnet2020
+while executing---line 1347 of file plainnat.bst
+Warning--empty year in aivsdeepvsml
+Warning--empty year in perfomancelink
+Warning--empty year in nnheca2019
+Warning--empty publisher in Ciaburro2017NeuralNW
+Too many commas in name 1 of "Tianqi Chen, Qiang Kou, Tong He, Anirudh Acharya" for entry mxnet2020
+while executing---line 1429 of file plainnat.bst
+Too many commas in name 1 of "Tianqi Chen, Qiang Kou, Tong He, Anirudh Acharya" for entry mxnet2020
+while executing---line 1429 of file plainnat.bst
+You've used 19 entries,
+            2773 wiz_defined-function locations,
+            695 strings with 8219 characters,
+and the built_in function-call counts, 6393 in all, are:
+= -- 583
+> -- 316
+< -- 15
++ -- 112
+- -- 93
+* -- 434
+:= -- 1000
+add.period$ -- 72
+call.type$ -- 19
+change.case$ -- 73
+chr.to.int$ -- 19
+cite$ -- 46
+duplicate$ -- 328
+empty$ -- 538
+format.name$ -- 126
+if$ -- 1319
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 7
+newline$ -- 118
+num.names$ -- 68
+pop$ -- 185
+preamble$ -- 1
+purify$ -- 69
+quote$ -- 0
+skip$ -- 266
+stack$ -- 0
+substring$ -- 40
+swap$ -- 32
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 194
+warning$ -- 6
+while$ -- 51
+width$ -- 0
+write$ -- 261
+(There were 6 error messages)

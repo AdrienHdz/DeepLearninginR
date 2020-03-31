@@ -982,19 +982,35 @@ If you want to take advantage of your GPU (Ensure that you have the hardware pre
 \end{knitrout}
 \subsubsection{FNN}
 
-
+First of all we need to load the data and in order to do so we will use the datasets packages. We the data is in the workspace it will be divided into train and test.
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlkwd{library}\hlstd{(datasets)}
-\hlstd{library}
+\hlcom{# Download the Iris data to workspace}
 \hlkwd{data}\hlstd{(iris)}
-\hlkwd{set.seed}\hlstd{(}\hlnum{123}\hlstd{)}
+\hlcom{# Change the data Iris output for string }
 \hlstd{iris}\hlopt{$}\hlstd{Species} \hlkwb{=} \hlkwd{sapply}\hlstd{(}\hlkwd{as.character}\hlstd{(iris}\hlopt{$}\hlstd{Species),}
-                      \hlstd{switch,} \hlstr{"setosa"} \hlstd{=} \hlnum{1}\hlstd{,} \hlstr{"versicolor"} \hlstd{=} \hlnum{2}\hlstd{,} \hlstr{"virginica"} \hlstd{=} \hlnum{3}\hlstd{,} \hlkwc{USE.NAMES} \hlstd{= F)}
+                      \hlstd{switch,} \hlstr{"setosa"} \hlstd{=} \hlnum{1}\hlstd{,}
+                      \hlstr{"versicolor"} \hlstd{=} \hlnum{2}\hlstd{,}
+                      \hlstr{"virginica"} \hlstd{=} \hlnum{3}\hlstd{,}
+                      \hlkwc{USE.NAMES} \hlstd{= F)}
+\hlcom{# Here is another way, to split the data to }
 \hlstd{spec} \hlkwb{=} \hlkwd{c}\hlstd{(}\hlkwc{train} \hlstd{=} \hlnum{.7}\hlstd{,}\hlkwc{test} \hlstd{=} \hlnum{.3}\hlstd{)}
-\hlstd{g} \hlkwb{=} \hlkwd{sample}\hlstd{(}\hlkwd{cut}\hlstd{(}\hlkwd{seq}\hlstd{(}\hlkwd{nrow}\hlstd{(iris)),}\hlkwd{nrow}\hlstd{(iris)}\hlopt{*}\hlkwd{cumsum}\hlstd{(}\hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,spec)),}\hlkwc{labels} \hlstd{=} \hlkwd{names}\hlstd{(spec)))}
+\hlcom{# Set a seed in order to be repreductible}
+\hlkwd{set.seed}\hlstd{()}
+\hlcom{# Sample through the dataframe using the sample and cut.}
+\hlcom{# The variable "g" returns a list of rows for train and}
+\hlcom{# test}
+\hlstd{g} \hlkwb{=} \hlkwd{sample}\hlstd{(}\hlkwd{cut}\hlstd{(}\hlkwd{seq}\hlstd{(}\hlkwd{nrow}\hlstd{(iris)),}
+               \hlkwd{nrow}\hlstd{(iris)}\hlopt{*}\hlkwd{cumsum}\hlstd{(}\hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,spec)),}
+               \hlkwc{labels} \hlstd{=} \hlkwd{names}\hlstd{(spec)}
+               \hlstd{)}
+           \hlstd{)}
+\hlcom{# Use the data and the row information to select rows}
 \hlstd{data_df} \hlkwb{=} \hlkwd{split}\hlstd{(iris, g)}
+\hlcom{# Create vector that will contain X (Features variable)}
+\hlcom{# and Y the target variable}
 \hlstd{X} \hlkwb{=} \hlkwd{c}\hlstd{()}
 \hlstd{Y} \hlkwb{=} \hlkwd{c}\hlstd{()}
 \hlstd{X}\hlopt{$}\hlstd{train} \hlkwb{=} \hlkwd{as.matrix}\hlstd{(data_df}\hlopt{$}\hlstd{train[,}\hlopt{-}\hlkwd{ncol}\hlstd{(data_df}\hlopt{$}\hlstd{train)])}
@@ -1004,36 +1020,74 @@ If you want to take advantage of your GPU (Ensure that you have the hardware pre
 \end{alltt}
 \end{kframe}
 \end{knitrout}
+
+When the the is ready, it is time to create the FFN. As an analogy, the keras model should be constructed like a Lego toy game. It starts from the input and goes all the way to the output.
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
+\hlcom{# load the library }
 \hlkwd{library}\hlstd{(keras)}
-
-\hlcom{# create model}
+\hlcom{# Create a sequential model}
 \hlstd{model_keras} \hlkwb{=} \hlkwd{keras_model_sequential}\hlstd{()}
+\hlcom{# Start assembling the model with the first layer as the input.}
+\hlcom{# A softmax was use in the output because of the }
 \hlstd{model_keras} \hlopt{%>%}
   \hlkwd{layer_dense}\hlstd{(}\hlkwc{units} \hlstd{=} \hlnum{8}\hlstd{,} \hlkwc{activation} \hlstd{=} \hlstr{'relu'}\hlstd{,} \hlkwc{input_shape} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{4}\hlstd{))} \hlopt{%>%}
-  \hlkwd{layer_dense}\hlstd{(}\hlkwc{units} \hlstd{=} \hlnum{3}\hlstd{,} \hlkwc{activation} \hlstd{=} \hlstr{'softmax'}\hlstd{)}
+  \hlkwd{layer_dense}\hlstd{(}\hlkwc{units} \hlstd{=} \hlnum{4}\hlstd{,} \hlkwc{activation} \hlstd{=} \hlstr{'softmax'}\hlstd{)}
 \hlcom{# Compile model}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+Here is a quick evaluation of the model created.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{summary}(model_keras)
+Model: \hlstr{"sequential"}
+__________________________________________________________________________
+\hlkwd{Layer} (type)                     Output Shape                 Param \hlcom{#     }
+==========================================================================
+\hlkwd{dense} (Dense)                    (None, 8)                    32          
+__________________________________________________________________________
+\hlkwd{dense_1} (Dense)                  (None, 3)                    27          
+__________________________________________________________________________
+\hlkwd{dense_2} (Dense)                  (None, 8)                    32          
+__________________________________________________________________________
+\hlkwd{dense_3} (Dense)                  (None, 3)                    27          
+__________________________________________________________________________
+\hlkwd{dense_4} (Dense)                  (None, 8)                    32          
+__________________________________________________________________________
+\hlkwd{dense_5} (Dense)                  (None, 3)                    27          
+==========================================================================
+Total params: 177
+Trainable params: 177
+Non-trainable params: 0
+__________________________________________________________________________
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+The next steps, is the compilation. In this example, it is important to keep in mind that not all the parameters are use. The loss function, the optimizer and the metrics are the most basic characteristic of an FNN.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
 \hlstd{model_keras} \hlopt{%>%} \hlkwd{compile}\hlstd{(}
   \hlkwc{loss} \hlstd{=} \hlstr{'categorical_crossentropy'}\hlstd{,}
   \hlkwc{optimizer} \hlstd{=} \hlkwd{optimizer_adam}\hlstd{(),}
   \hlkwc{metrics} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{'accuracy'}\hlstd{)}
 \hlstd{)}
-\hlstd{start_time} \hlkwb{<-} \hlkwd{Sys.time}\hlstd{()}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+The next step is really important because it is the training part.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
 \hlstd{history} \hlkwb{<-} \hlstd{model_keras} \hlopt{%>%} \hlkwd{fit}\hlstd{(}
   \hlkwd{as.matrix}\hlstd{(X}\hlopt{$}\hlstd{train),}\hlkwd{to_categorical}\hlstd{(Y}\hlopt{$}\hlstd{train),}
    \hlkwc{epochs}\hlstd{=}\hlnum{200}\hlstd{,} \hlkwc{batch_size}\hlstd{=}\hlnum{5}\hlstd{)}
-\hlstd{end_time} \hlkwb{<-} \hlkwd{Sys.time}\hlstd{()}
-
-\hlcom{#Benchmark}
-\hlstd{time_fnn_keras} \hlkwb{=} \hlstd{end_time} \hlopt{-} \hlstd{start_time}
-\hlstd{model_keras} \hlopt{%>%} \hlkwd{evaluate}\hlstd{(X}\hlopt{$}\hlstd{test,} \hlkwd{to_categorical}\hlstd{(Y}\hlopt{$}\hlstd{test))}
-\hlstd{model_keras} \hlopt{%>%} \hlkwd{predict}\hlstd{(X}\hlopt{$}\hlstd{test,} \hlkwd{to_categorical}\hlstd{(Y}\hlopt{$}\hlstd{test))}
-
-\hlstd{preds} \hlkwb{=} \hlkwd{predict}\hlstd{(model_keras,}\hlkwd{as.array}\hlstd{(X}\hlopt{$}\hlstd{test))}
-\hlstd{pred.label.keras} \hlkwb{<-} \hlkwd{max.col}\hlstd{((preds))} \hlopt{-} \hlnum{1}
-\hlnum{1}\hlopt{-}\hlkwd{mean}\hlstd{(pred.label.keras} \hlopt{!=} \hlkwd{as.vector}\hlstd{(data_df}\hlopt{$}\hlstd{test}\hlopt{$}\hlstd{Species))}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -1047,9 +1101,25 @@ This package of the possibility to store the training history :
 
 
 {\ttfamily\noindent\itshape\color{messagecolor}{\#\# `geom\_smooth()` using formula 'y \textasciitilde{} x'}}\end{kframe}
-\includegraphics[width=4in]{figure/unnamed-chunk-26-1} 
+\includegraphics[width=4in]{figure/unnamed-chunk-29-1} 
 
 \end{knitrout}
+
+The final step is just to provide an accuracy of the model.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# For the }
+\hlstd{model_keras} \hlopt{%>%} \hlkwd{evaluate}\hlstd{(X}\hlopt{$}\hlstd{test,} \hlkwd{to_categorical}\hlstd{(Y}\hlopt{$}\hlstd{test))}
+\hlstd{model_keras} \hlopt{%>%} \hlkwd{predict}\hlstd{(X}\hlopt{$}\hlstd{test,} \hlkwd{to_categorical}\hlstd{(Y}\hlopt{$}\hlstd{test))}
+
+\hlstd{preds} \hlkwb{=} \hlkwd{predict}\hlstd{(model_keras,}\hlkwd{as.array}\hlstd{(X}\hlopt{$}\hlstd{test))}
+\hlstd{pred.label.keras} \hlkwb{<-} \hlkwd{max.col}\hlstd{((preds))} \hlopt{-} \hlnum{1}
+\hlnum{1}\hlopt{-}\hlkwd{mean}\hlstd{(pred.label.keras} \hlopt{!=} \hlkwd{as.vector}\hlstd{(data_df}\hlopt{$}\hlstd{test}\hlopt{$}\hlstd{Species))}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
 
 The accuracy of this resources is
 \begin{knitrout}

@@ -844,17 +844,33 @@ install_keras(tensorflow = "gpu")
 @
 \subsubsection{FNN}
 
-
+First of all we need to load the data and in order to do so we will use the datasets packages. We the data is in the workspace it will be divided into train and test.
 <<eval= FALSE, message = FALSE>>=
 library(datasets)
-library
+# Download the Iris data to workspace
 data(iris)
-set.seed(123)
+# Change the data Iris output for string 
 iris$Species = sapply(as.character(iris$Species), 
-                      switch, "setosa" = 1, "versicolor" = 2, "virginica" = 3, USE.NAMES = F)
+                      switch, "setosa" = 1, 
+                      "versicolor" = 2, 
+                      "virginica" = 3, 
+                      USE.NAMES = F)
+# Here is another way, to split the data to 
 spec = c(train = .7,test = .3)
-g = sample(cut(seq(nrow(iris)),nrow(iris)*cumsum(c(0,spec)),labels = names(spec)))
+# Set a seed in order to be repreductible
+set.seed()
+# Sample through the dataframe using the sample and cut.
+# The variable "g" returns a list of rows for train and
+# test
+g = sample(cut(seq(nrow(iris)),
+               nrow(iris)*cumsum(c(0,spec)),
+               labels = names(spec)
+               )
+           )
+# Use the data and the row information to select rows
 data_df = split(iris, g)
+# Create vector that will contain X (Features variable)
+# and Y the target variable
 X = c()
 Y = c()
 X$train = as.matrix(data_df$train[,-ncol(data_df$train)])
@@ -862,28 +878,70 @@ X$test = as.matrix(data_df$test[,-ncol(data_df$test)])
 Y$train = as.matrix(data_df$train[,ncol(data_df$train)])
 Y$test = as.matrix(data_df$test[,ncol(data_df$test)],)
 @
-<<eval=FALSE>>=
-library(keras)
 
-# create model
+When the the is ready, it is time to create the FFN. As an analogy, the keras model should be constructed like a Lego toy game. It starts from the input and goes all the way to the output.
+<<eval=FALSE>>=
+# load the library 
+library(keras)
+# Create a sequential model
 model_keras = keras_model_sequential()
+# Start assembling the model with the first layer as the input.
+# A softmax was use in the output because of the 
 model_keras %>% 
   layer_dense(units = 8, activation = 'relu', input_shape = c(4)) %>% 
-  layer_dense(units = 3, activation = 'softmax')
+  layer_dense(units = 4, activation = 'softmax')
 # Compile model
+@
+
+Here is a quick evaluation of the model created.
+<<eval=FALSE>>=
+summary(model_keras)
+Model: "sequential"
+__________________________________________________________________________
+Layer (type)                     Output Shape                 Param #     
+==========================================================================
+dense (Dense)                    (None, 8)                    32          
+__________________________________________________________________________
+dense_1 (Dense)                  (None, 3)                    27          
+__________________________________________________________________________
+dense_2 (Dense)                  (None, 8)                    32          
+__________________________________________________________________________
+dense_3 (Dense)                  (None, 3)                    27          
+__________________________________________________________________________
+dense_4 (Dense)                  (None, 8)                    32          
+__________________________________________________________________________
+dense_5 (Dense)                  (None, 3)                    27          
+==========================================================================
+Total params: 177
+Trainable params: 177
+Non-trainable params: 0
+__________________________________________________________________________
+@
+
+The next steps, is the compilation. In this example, it is important to keep in mind that not all the parameters are use. The loss function, the optimizer and the metrics are the most basic characteristic of an FNN.
+<<eval=FALSE>>=
 model_keras %>% compile(
   loss = 'categorical_crossentropy',
   optimizer = optimizer_adam(),
   metrics = c('accuracy')
 )
-start_time <- Sys.time()
+@
+
+The next step is really important because it is the training part.
+<<eval=FALSE>>=
 history <- model_keras %>% fit(
   as.matrix(X$train),to_categorical(Y$train), 
    epochs=200, batch_size=5)
-end_time <- Sys.time()
+@
 
-#Benchmark
-time_fnn_keras = end_time - start_time
+This package of the possibility to store the training history :
+<<eval=TRUE, echo=TRUE,out.width='4in'>>=
+plot(history)
+@
+
+The final step is just to provide an accuracy of the model.
+<<eval=FALSE>>=
+# For the 
 model_keras %>% evaluate(X$test, to_categorical(Y$test))
 model_keras %>% predict(X$test, to_categorical(Y$test))
 
@@ -892,10 +950,6 @@ pred.label.keras <- max.col((preds)) - 1
 1-mean(pred.label.keras != as.vector(data_df$test$Species))
 @
 
-This package of the possibility to store the training history :
-<<eval=TRUE, echo=TRUE,out.width='4in'>>=
-plot(history)
-@
 
 The accuracy of this resources is
 <<eval=TRUE, echo=FALSE>>=
