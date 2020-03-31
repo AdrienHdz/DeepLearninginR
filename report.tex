@@ -738,6 +738,7 @@ This API is really popular in the Python world because it acts like a wrapper of
 \item It is an encapsulation of a program inside a python environment.
 \item For some, it might be to high level and limit the customization.
 \item It can only work on top Tensorflow, CNTK and Theano backend.
+\item Not able to set a seed to get reproductible results as it has to be controlled in keras for python running in backend.
 \end{itemize}
 
 %%%%%%%%%%%%%%%% Tensorflow %%%%%%%%%%%%%%%% 
@@ -771,6 +772,7 @@ MXNet is an open source Deep Learning framework created by Apache. The framework
 \begin{itemize}
 \item It has a smaller community compared to other popular framework.
 \item A package more use in the industrial projects and not so much in the research community.
+\item No built in fucntion for data/tensor manipulation
 \end{itemize}
 
 
@@ -1321,7 +1323,7 @@ Time difference of 19.25289 mins
 \end{kframe}
 \end{knitrout}
 
-In order to predict with our model on a new dataset, we can you Keras\'s \textbf{predict\_classes} function.
+In order to predict with our model on a new dataset, we can use Keras \textbf{predict\_classes} function.
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
@@ -1507,6 +1509,14 @@ The accuracy of the model is as follow :
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
+and the time it took to train is :
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+## Time difference of 20.01908 secs
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 %%%%%%%%%%%%%%%% H2o %%%%%%%%%%%%%%%% 
 \subsection{h2o}
 \subsubsection{Installation}
@@ -1522,23 +1532,68 @@ The accuracy of the model is as follow :
 By default, H2O Deep Learning uses an adaptive learning rate (ADADELTA) for its stochastic gradient descent optimization.
 \textbf{Prerequisites to launch H2o}, 64 bit Java 6+ if you want to open a h2o model that s more than 1 GB. 
 \subsubsection{FNN}
+
+First of all we need to load the data and in order to do so we will use the datasets packages. We the data is in the workspace it will be divided into train and test.
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
+\hlkwd{library}\hlstd{(datasets)}
+\hlcom{# Download the Iris data to workspace}
+\hlkwd{data}\hlstd{(iris)}
+\hlcom{# Change the data Iris output for string }
+\hlstd{iris}\hlopt{$}\hlstd{Species} \hlkwb{=} \hlkwd{sapply}\hlstd{(}\hlkwd{as.character}\hlstd{(iris}\hlopt{$}\hlstd{Species),}
+                      \hlstd{switch,} \hlstr{"setosa"} \hlstd{=} \hlnum{1}\hlstd{,}
+                      \hlstr{"versicolor"} \hlstd{=} \hlnum{2}\hlstd{,}
+                      \hlstr{"virginica"} \hlstd{=} \hlnum{3}\hlstd{,}
+                      \hlkwc{USE.NAMES} \hlstd{= F)}
+\hlcom{# Here is another way, to split the data to }
+\hlstd{spec} \hlkwb{=} \hlkwd{c}\hlstd{(}\hlkwc{train} \hlstd{=} \hlnum{.7}\hlstd{,}\hlkwc{test} \hlstd{=} \hlnum{.3}\hlstd{)}
+\hlcom{# Set a seed in order to be repreductible}
+\hlkwd{set.seed}\hlstd{(}\hlnum{123}\hlstd{)}
+\hlcom{# Sample through the dataframe using the sample and cut.}
+\hlcom{# The variable "g" returns a list of rows for train and}
+\hlcom{# test}
+\hlstd{g} \hlkwb{=} \hlkwd{sample}\hlstd{(}\hlkwd{cut}\hlstd{(}\hlkwd{seq}\hlstd{(}\hlkwd{nrow}\hlstd{(iris)),}
+               \hlkwd{nrow}\hlstd{(iris)}\hlopt{*}\hlkwd{cumsum}\hlstd{(}\hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,spec)),}
+               \hlkwc{labels} \hlstd{=} \hlkwd{names}\hlstd{(spec)}
+               \hlstd{)}
+           \hlstd{)}
+\hlcom{# Use the data and the row information to select rows}
+\hlstd{data_df} \hlkwb{=} \hlkwd{split}\hlstd{(iris, g)}
+\hlcom{# Create vector that will contain X (Features variable)}
+\hlcom{# and Y the target variable}
+\hlstd{X} \hlkwb{=} \hlkwd{c}\hlstd{()}
+\hlstd{Y} \hlkwb{=} \hlkwd{c}\hlstd{()}
+\hlstd{X}\hlopt{$}\hlstd{train} \hlkwb{=} \hlkwd{as.matrix}\hlstd{(data_df}\hlopt{$}\hlstd{train[,}\hlopt{-}\hlkwd{ncol}\hlstd{(data_df}\hlopt{$}\hlstd{train)])}
+\hlstd{X}\hlopt{$}\hlstd{test} \hlkwb{=} \hlkwd{as.matrix}\hlstd{(data_df}\hlopt{$}\hlstd{test[,}\hlopt{-}\hlkwd{ncol}\hlstd{(data_df}\hlopt{$}\hlstd{test)])}
+\hlstd{Y}\hlopt{$}\hlstd{train} \hlkwb{=} \hlkwd{as.matrix}\hlstd{(data_df}\hlopt{$}\hlstd{train[,}\hlkwd{ncol}\hlstd{(data_df}\hlopt{$}\hlstd{train)])}
+\hlstd{Y}\hlopt{$}\hlstd{test} \hlkwb{=} \hlkwd{as.matrix}\hlstd{(data_df}\hlopt{$}\hlstd{test[,}\hlkwd{ncol}\hlstd{(data_df}\hlopt{$}\hlstd{test)],)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# First we need to load the library}
 \hlkwd{library}\hlstd{(h2o)}
 \hlkwd{h2o.init}\hlstd{()}
 \hlcom{# Identify predictors and response}
 
-
+\hlcom{# We this package we need to convert everything in }
+\hlcom{# h2o format by casting.}
 \hlstd{h2o_df_train} \hlkwb{=} \hlkwd{as.h2o}\hlstd{(data_df}\hlopt{$}\hlstd{train)}
 \hlstd{h2o_df_test} \hlkwb{=} \hlkwd{as.h2o}\hlstd{(data_df}\hlopt{$}\hlstd{test)}
 
+\hlcom{# Labeling the target is optional but helpful to debug}
 \hlstd{y} \hlkwb{<-} \hlstr{"Species"}
 \hlstd{x} \hlkwb{<-} \hlkwd{setdiff}\hlstd{(}\hlkwd{names}\hlstd{(h2o_df_train), y)}
 \hlcom{# For binary classification, response should be a factor}
 \hlstd{h2o_df_train[,y]} \hlkwb{<-} \hlkwd{as.factor}\hlstd{(h2o_df_train[,y])}
 \hlstd{h2o_df_test[,y]} \hlkwb{<-} \hlkwd{as.factor}\hlstd{(h2o_df_test[,y])}
 
+\hlcom{# The deeplearning is kept simple in order to give a high level of the user with }
+\hlcom{# minimal interaction}
 \hlstd{start_time} \hlkwb{<-} \hlkwd{Sys.time}\hlstd{()}
 \hlstd{model_h2o} \hlkwb{<-} \hlkwd{h2o.deeplearning}\hlstd{(}\hlkwc{x} \hlstd{= x,}
                               \hlkwc{y} \hlstd{= y,}
@@ -1572,9 +1627,6 @@ and the time it took to train is :
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
-\subsubsection{CNN}
-\subsubsection{RNN}
-
 
 %%%%%%%%%%%%%%%% MXNET %%%%%%%%%%%%%%%% 
 \subsection{MXNET}
@@ -1585,16 +1637,38 @@ For CPU :
 \begin{alltt}
 \hlkwd{install.packages}\hlstd{(}\hlstr{"https://s3.ca-central-1.amazonaws.com/jeremiedb/share/mxnet/CPU/mxnet.zip"}\hlstd{,}
                  \hlkwc{repos} \hlstd{=} \hlkwa{NULL}\hlstd{)}
-\hlkwd{library}\hlstd{(mxnet)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
 
 \subsubsection{FNN}
+
+First of all we need to load the data and in order to do so we will use the datasets packages. We the data is in the workspace it will be divided into train and test.
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{install.packages}\hlstd{(}\hlstr{"https://s3.ca-central-1.amazonaws.com/jeremiedb/share/mxnet/CPU/mxnet.zip"}\hlstd{,} \hlkwc{repos} \hlstd{=} \hlkwa{NULL}\hlstd{)}
+\hlkwd{library}\hlstd{(datasets)}
+\hlstd{library}
+\hlkwd{data}\hlstd{(iris)}
+\hlkwd{set.seed}\hlstd{(}\hlnum{123}\hlstd{)}
+\hlstd{iris}\hlopt{$}\hlstd{Species} \hlkwb{=} \hlkwd{as.numeric}\hlstd{(iris}\hlopt{$}\hlstd{Species)} \hlopt{-} \hlnum{1}
+\hlstd{spec} \hlkwb{=} \hlkwd{c}\hlstd{(}\hlkwc{train} \hlstd{=} \hlnum{.7}\hlstd{,}\hlkwc{test} \hlstd{=} \hlnum{.3}\hlstd{)}
+\hlstd{g} \hlkwb{=} \hlkwd{sample}\hlstd{(}\hlkwd{cut}\hlstd{(}\hlkwd{seq}\hlstd{(}\hlkwd{nrow}\hlstd{(iris)),}\hlkwd{nrow}\hlstd{(iris)}\hlopt{*}\hlkwd{cumsum}\hlstd{(}\hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,spec)),}\hlkwc{labels} \hlstd{=} \hlkwd{names}\hlstd{(spec)))}
+\hlstd{data_df} \hlkwb{=} \hlkwd{split}\hlstd{(iris, g)}
+\hlstd{X} \hlkwb{=} \hlkwd{c}\hlstd{()}
+\hlstd{Y} \hlkwb{=} \hlkwd{c}\hlstd{()}
+\hlstd{X}\hlopt{$}\hlstd{train} \hlkwb{=} \hlkwd{as.matrix}\hlstd{(data_df}\hlopt{$}\hlstd{train[,}\hlopt{-}\hlkwd{ncol}\hlstd{(data_df}\hlopt{$}\hlstd{train)])}
+\hlstd{X}\hlopt{$}\hlstd{test} \hlkwb{=} \hlkwd{as.matrix}\hlstd{(data_df}\hlopt{$}\hlstd{test[,}\hlopt{-}\hlkwd{ncol}\hlstd{(data_df}\hlopt{$}\hlstd{test)])}
+\hlstd{Y}\hlopt{$}\hlstd{train} \hlkwb{=} \hlstd{data_df}\hlopt{$}\hlstd{train[,}\hlkwd{ncol}\hlstd{(data_df}\hlopt{$}\hlstd{train)]}
+\hlstd{Y}\hlopt{$}\hlstd{test} \hlkwb{=} \hlstd{data_df}\hlopt{$}\hlstd{test[,}\hlkwd{ncol}\hlstd{(data_df}\hlopt{$}\hlstd{test)]}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+Then the model creation can start. As one can see, the encapsulation is also present with this package (The lego toy analogy).
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
 \hlkwd{library}\hlstd{(mxnet)}
 \hlstd{data} \hlkwb{<-} \hlkwd{mx.symbol.Variable}\hlstd{(}\hlstr{"data"}\hlstd{)}
 \hlstd{fc1} \hlkwb{<-} \hlkwd{mx.symbol.FullyConnected}\hlstd{(data,} \hlkwc{name}\hlstd{=}\hlstr{"fc1"}\hlstd{,} \hlkwc{num_hidden}\hlstd{=}\hlnum{8}\hlstd{)}
@@ -1612,7 +1686,8 @@ For CPU :
   \hlkwc{num.round}\hlstd{=}\hlnum{200}\hlstd{,}
   \hlkwc{verbose} \hlstd{=} \hlnum{TRUE}\hlstd{,}
   \hlkwc{eval.metric} \hlstd{= mx.metric.accuracy,}
-  \hlkwc{array.batch.size}\hlstd{=}\hlnum{5}\hlstd{)}
+  \hlkwc{array.batch.size}\hlstd{=}\hlnum{5}\hlstd{,}
+  \hlkwc{learning.rate}\hlstd{=}\hlnum{0.07}\hlstd{)}
 \hlstd{end_time} \hlkwb{<-} \hlkwd{Sys.time}\hlstd{()}
 \hlstd{time_fnn_mxnet} \hlkwb{=} \hlstd{end_time} \hlopt{-} \hlstd{start_time}
 
@@ -1647,9 +1722,14 @@ and the time it took to train is :
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Discussion}
 \subsection{FNN}
-The CRAN platform includes a lot of packages allowing to use different types of FNN, going from one hidden layers FNN to deep FNN. Vanilla FNN and deep FNN can be easily implemented and plotted with the package \textbf{neuralnet}, while more advanced architecture such as bayesian regularized neural networks are available with the package \textbf{brnn}. If you decide to use one of the package available on CRAN, we highly recommend to read the package documentation, as default parameters, backpropagation algorthms, activation functions may vary from one package to another. However, for building deep FNN in R, we highly suggest to use Keras API, as it will give you much more flexibility and will allow you to use the latest deep FNN architectures. Keras has a lot of advantages such as building your model layer by layer and using different types of hidden activation functions such as Relu, and different output activation functions such as softmax. However, we discovered some bugs while using Keras, especially while downloading datasets and we recommend therefore to carefully check your data at each step of the model construction.
+The CRAN platform includes a lot of packages allowing to use different types of FNN, going from one hidden layers FNN to deep FNN. Vanilla FNN and deep FNN can be easily implemented and plotted with the package \textbf{neuralnet}, while more advanced architecture such as bayesian regularized neural networks are available with the package \textbf{brnn}. If you decide to use one of the package available on CRAN, we highly recommend to read the package documentation since default parameters, backpropagation algorthms and activation functions may vary from one package to another. However, for building deep FNN in R, we highly suggest to use Keras API, as it will give you much more flexibility and will allow you to use the latest deep FNN architectures. Keras has a lot of advantages such as building your model layer by layer (Lego toy analogy) and using different types of hidden activation functions, and different output activation functions such as softmax.The h2o package was a really nice discovery because of it simplicity. It offers a minimal interface but can easily be tune with more than 100 parameters. The documentatation and community is pretty healthy and an exploration of this enviromnent is strongly suggested. Last but not least, the MXnet was a bit dissapointing for many reason. First of all, the documentation is not helpful in most of the case and it feel almost unatural to use this package with R. Like we explain before, the package was mainly intented to be portable and cloud base for the industry deployement which could explain the lack of community.
 \subsection{CNN}
 \subsection{RNN}
+The RNN was only tested on one package which sincerally was not bad nor good. Some bugs were discover while using Keras, especially while downloading datasets. Therefore, it is recommended to carefully check the data at each step of the model construction. On the other hand,
+the data manipulation, the text embedding and the model training were simple to implement and visualize. Even if the data had to be padded in order to have a fix length everything that can be done in python felt pretty natural in R aswell. The complexity of the package is the same. At the end of the day, if someone feels more comfortable in R stay assure that this tool can provide everything you need for RNN. The cran package rnn \cite{rnn2019} had some promising architecture for LSTM ,GRU and/or simple vanilla RNN. However, the example were minimal and the package seems deprecated with the lacks of update on the GitHub repositories.
+
+\section{Conclusion}
+What is the conclusion on having deep learning in R? We tought it was going to be something way more thrilling and up to date. Yet, the best recommandation that we can provide to someone starting on FNN, CNN or RNN from is to do it in Python. There is minimal gain in switching to R for this topic. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%% Biblio      %%%%%%%%%%%%%%%%%%%%

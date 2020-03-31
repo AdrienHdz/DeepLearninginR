@@ -651,6 +651,7 @@ This API is really popular in the Python world because it acts like a wrapper of
 \item It is an encapsulation of a program inside a python environment.
 \item For some, it might be to high level and limit the customization.
 \item It can only work on top Tensorflow, CNTK and Theano backend.
+\item Not able to set a seed to get reproductible results as it has to be controlled in keras for python running in backend.
 \end{itemize}
 
 %%%%%%%%%%%%%%%% Tensorflow %%%%%%%%%%%%%%%% 
@@ -684,6 +685,7 @@ MXNet is an open source Deep Learning framework created by Apache. The framework
 \begin{itemize}
 \item It has a smaller community compared to other popular framework.
 \item A package more use in the industrial projects and not so much in the research community.
+\item No built in fucntion for data/tensor manipulation
 \end{itemize}
 
 
@@ -1107,7 +1109,7 @@ model %>% evaluate(X_test, Y_test,verbose = 0)
 Time difference of 19.25289 mins
 @
 
-In order to predict with our model on a new dataset, we can you Keras\'s \textbf{predict\_classes} function.
+In order to predict with our model on a new dataset, we can use Keras \textbf{predict\_classes} function.
 <<eval= FALSE, message = FALSE>>=
 Y_predicted <- model %>% predict_classes(X_test)
 @
@@ -1258,6 +1260,10 @@ The accuracy of the model is as follow :
 <<eval=TRUE, echo=TRUE>>=
 results
 @
+and the time it took to train is :
+<<eval=TRUE, echo=FALSE>>=
+time_rnn_keras
+@
 %%%%%%%%%%%%%%%% H2o %%%%%%%%%%%%%%%% 
 \subsection{h2o}
 \subsubsection{Installation}
@@ -1269,21 +1275,62 @@ h2o.init()
 By default, H2O Deep Learning uses an adaptive learning rate (ADADELTA) for its stochastic gradient descent optimization.
 \textbf{Prerequisites to launch H2o}, 64 bit Java 6+ if you want to open a h2o model that s more than 1 GB. 
 \subsubsection{FNN}
+
+First of all we need to load the data and in order to do so we will use the datasets packages. We the data is in the workspace it will be divided into train and test.
+<<eval= FALSE, message = FALSE>>=
+library(datasets)
+# Download the Iris data to workspace
+data(iris)
+# Change the data Iris output for string 
+iris$Species = sapply(as.character(iris$Species), 
+                      switch, "setosa" = 1, 
+                      "versicolor" = 2, 
+                      "virginica" = 3, 
+                      USE.NAMES = F)
+# Here is another way, to split the data to 
+spec = c(train = .7,test = .3)
+# Set a seed in order to be repreductible
+set.seed(123)
+# Sample through the dataframe using the sample and cut.
+# The variable "g" returns a list of rows for train and
+# test
+g = sample(cut(seq(nrow(iris)),
+               nrow(iris)*cumsum(c(0,spec)),
+               labels = names(spec)
+               )
+           )
+# Use the data and the row information to select rows
+data_df = split(iris, g)
+# Create vector that will contain X (Features variable)
+# and Y the target variable
+X = c()
+Y = c()
+X$train = as.matrix(data_df$train[,-ncol(data_df$train)])
+X$test = as.matrix(data_df$test[,-ncol(data_df$test)])
+Y$train = as.matrix(data_df$train[,ncol(data_df$train)])
+Y$test = as.matrix(data_df$test[,ncol(data_df$test)],)
+@
+
 <<eval=FALSE>>=
+# First we need to load the library
 library(h2o)
 h2o.init()
 # Identify predictors and response
 
-
+# We this package we need to convert everything in 
+# h2o format by casting.
 h2o_df_train = as.h2o(data_df$train)
 h2o_df_test = as.h2o(data_df$test)
 
+# Labeling the target is optional but helpful to debug
 y <- "Species"
 x <- setdiff(names(h2o_df_train), y)
 # For binary classification, response should be a factor
 h2o_df_train[,y] <- as.factor(h2o_df_train[,y])
 h2o_df_test[,y] <- as.factor(h2o_df_test[,y])
 
+# The deeplearning is kept simple in order to give a high level of the user with 
+# minimal interaction
 start_time <- Sys.time()
 model_h2o <- h2o.deeplearning(x = x, 
                               y = y,
@@ -1307,9 +1354,6 @@ and the time it took to train is :
 <<eval=TRUE, echo=FALSE>>=
 time_fnn_h2o
 @
-\subsubsection{CNN}
-\subsubsection{RNN}
-
 
 %%%%%%%%%%%%%%%% MXNET %%%%%%%%%%%%%%%% 
 \subsection{MXNET}
@@ -1318,12 +1362,30 @@ For CPU :
 <<eval=FALSE>>=
 install.packages("https://s3.ca-central-1.amazonaws.com/jeremiedb/share/mxnet/CPU/mxnet.zip", 
                  repos = NULL)
-library(mxnet)
 @
 
 \subsubsection{FNN}
+
+First of all we need to load the data and in order to do so we will use the datasets packages. We the data is in the workspace it will be divided into train and test.
+<<eval= FALSE, message = FALSE>>=
+library(datasets)
+library
+data(iris)
+set.seed(123)
+iris$Species = as.numeric(iris$Species) - 1
+spec = c(train = .7,test = .3)
+g = sample(cut(seq(nrow(iris)),nrow(iris)*cumsum(c(0,spec)),labels = names(spec)))
+data_df = split(iris, g)
+X = c()
+Y = c()
+X$train = as.matrix(data_df$train[,-ncol(data_df$train)])
+X$test = as.matrix(data_df$test[,-ncol(data_df$test)])
+Y$train = data_df$train[,ncol(data_df$train)]
+Y$test = data_df$test[,ncol(data_df$test)]
+@
+
+Then the model creation can start. As one can see, the encapsulation is also present with this package (The lego toy analogy).
 <<eval=FALSE>>=
-install.packages("https://s3.ca-central-1.amazonaws.com/jeremiedb/share/mxnet/CPU/mxnet.zip", repos = NULL)
 library(mxnet)
 data <- mx.symbol.Variable("data")
 fc1 <- mx.symbol.FullyConnected(data, name="fc1", num_hidden=8)
@@ -1341,7 +1403,8 @@ model_mx <- mx.model.FeedForward.create(
   num.round=200,
   verbose = TRUE,
   eval.metric = mx.metric.accuracy, 
-  array.batch.size=5)
+  array.batch.size=5,
+  learning.rate=0.07)
 end_time <- Sys.time()
 time_fnn_mxnet = end_time - start_time
 
@@ -1366,9 +1429,14 @@ time_fnn_mxnet
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Discussion}
 \subsection{FNN}
-The CRAN platform includes a lot of packages allowing to use different types of FNN, going from one hidden layers FNN to deep FNN. Vanilla FNN and deep FNN can be easily implemented and plotted with the package \textbf{neuralnet}, while more advanced architecture such as bayesian regularized neural networks are available with the package \textbf{brnn}. If you decide to use one of the package available on CRAN, we highly recommend to read the package documentation, as default parameters, backpropagation algorthms, activation functions may vary from one package to another. However, for building deep FNN in R, we highly suggest to use Keras API, as it will give you much more flexibility and will allow you to use the latest deep FNN architectures. Keras has a lot of advantages such as building your model layer by layer and using different types of hidden activation functions such as Relu, and different output activation functions such as softmax. However, we discovered some bugs while using Keras, especially while downloading datasets and we recommend therefore to carefully check your data at each step of the model construction.
+The CRAN platform includes a lot of packages allowing to use different types of FNN, going from one hidden layers FNN to deep FNN. Vanilla FNN and deep FNN can be easily implemented and plotted with the package \textbf{neuralnet}, while more advanced architecture such as bayesian regularized neural networks are available with the package \textbf{brnn}. If you decide to use one of the package available on CRAN, we highly recommend to read the package documentation since default parameters, backpropagation algorthms and activation functions may vary from one package to another. However, for building deep FNN in R, we highly suggest to use Keras API, as it will give you much more flexibility and will allow you to use the latest deep FNN architectures. Keras has a lot of advantages such as building your model layer by layer (Lego toy analogy) and using different types of hidden activation functions, and different output activation functions such as softmax.The h2o package was a really nice discovery because of it simplicity. It offers a minimal interface but can easily be tune with more than 100 parameters. The documentatation and community is pretty healthy and an exploration of this enviromnent is strongly suggested. Last but not least, the MXnet was a bit dissapointing for many reason. First of all, the documentation is not helpful in most of the case and it feel almost unatural to use this package with R. Like we explain before, the package was mainly intented to be portable and cloud base for the industry deployement which could explain the lack of community.
 \subsection{CNN}
 \subsection{RNN}
+The RNN was only tested on one package which sincerally was not bad nor good. Some bugs were discover while using Keras, especially while downloading datasets. Therefore, it is recommended to carefully check the data at each step of the model construction. On the other hand,
+the data manipulation, the text embedding and the model training were simple to implement and visualize. Even if the data had to be padded in order to have a fix length everything that can be done in python felt pretty natural in R aswell. The complexity of the package is the same. At the end of the day, if someone feels more comfortable in R stay assure that this tool can provide everything you need for RNN. The cran package rnn \cite{rnn2019} had some promising architecture for LSTM ,GRU and/or simple vanilla RNN. However, the example were minimal and the package seems deprecated with the lacks of update on the GitHub repositories.
+
+\section{Conclusion}
+What is the conclusion on having deep learning in R? We tought it was going to be something way more thrilling and up to date. Yet, the best recommandation that we can provide to someone starting on FNN, CNN or RNN from is to do it in Python. There is minimal gain in switching to R for this topic. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%% Biblio      %%%%%%%%%%%%%%%%%%%%
