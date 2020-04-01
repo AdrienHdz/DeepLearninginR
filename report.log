@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/W32TeX) (preloaded format=xelatex 2020.3.17)  31 MAR 2020 00:27
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/W32TeX) (preloaded format=xelatex 2020.3.17)  31 MAR 2020 21:33
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -938,7 +938,7 @@ tim
 LaTeX Warning: Unused global option(s):
     [letter,8pt].
 
-No file report.aux.
+(./report.aux)
 \openout1 = `report.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 114.
@@ -952,6 +952,7 @@ LaTeX Font Info:    ... okay on input line 114.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 114.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 1
 14.
+
 (c:/Users/apabl/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
@@ -993,12 +994,10 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 114.
 LaTeX Info: Redefining \pageref on input line 114.
 LaTeX Info: Redefining \nameref on input line 114.
+ (./report.out) (./report.out)
 \@outlinefile=\write6
 \openout6 = `report.out'.
 
-
-
-Package hyperref Warning: Rerun to get /PageLabels entry.
 
 ABD: EveryShipout initializing macros
 LaTeX Font Info:    Trying to load font information for U+msa on input line 134
@@ -1027,461 +1026,332 @@ File: figure/deep learning.PNG Graphic file (type bmp)
 <figure/deep learning.PNG>
 
 
-Package natbib Warning: Citation `aivsdeepvsml' on page 1 undefined on input li
-ne 178.
-
-
-Package natbib Warning: Citation `aivsdeepvsml' on page 1 undefined on input li
-ne 178.
-
-
-Package natbib Warning: Citation `Goodfellow-et-al-2016' on page 1 undefined on
- input line 184.
+Package wrapfig Warning: Stationary wrapfigure forced to float on input line 18
+4.
 
 File: figure/feedforward_neural_networks.png Graphic file (type bmp)
 <figure/feedforward_neural_networks.png>
-
-Package natbib Warning: Citation `Goodfellow-et-al-2016' on page 1 undefined on
- input line 196.
-
-
-LaTeX Warning: Reference `fig:attention' on page 1 undefined on input line 198.
-
-
-
-LaTeX Warning: Reference `LastPage' on page 1 undefined on input line 199.
-
 [1]
-
-Package wrapfig Warning: Collision between wrapping environments on input line 
-216.
-
 File: figure/activation_function_output.png Graphic file (type bmp)
 <figure/activation_function_output.png>
 
-Package natbib Warning: Citation `nnheca2019' on page 2 undefined on input line
- 220.
-
-
-Package natbib Warning: Citation `nnheca2019' on page 2 undefined on input line
- 220.
-
-
-Package wrapfig Warning: Stationary wrapfigure forced to float on input line 22
-3.
-
-
-Package natbib Warning: Citation `Goodfellow-et-al-2016' on page 2 undefined on
- input line 228.
-
 
 Package wrapfig Warning: Collision between wrapping environments on input line 
-233.
+237.
 
 File: figure/CNN_process.png Graphic file (type bmp)
 <figure/CNN_process.png>
 
-Underfull \hbox (badness 10000) in paragraph at lines 232--238
+Underfull \hbox (badness 10000) in paragraph at lines 236--242
 
  []
-
-
-Package wrapfig Warning: Stationary wrapfigure forced to float on input line 23
-8.
-
-
-Package wrapfig Warning: Stationary wrapfigure forced to float on input line 24
-1.
 
 
 Package wrapfig Warning: Stationary wrapfigure forced to float on input line 24
 2.
 
 
-LaTeX Warning: Reference `LastPage' on page 2 undefined on input line 243.
-
-[2]
-
 Package wrapfig Warning: Stationary wrapfigure forced to float on input line 24
-3.
-
-
-Package wrapfig Warning: Stationary wrapfigure forced to float on input line 24
-4.
+5.
 
 
 Package wrapfig Warning: Stationary wrapfigure forced to float on input line 24
 6.
 
 
-Package natbib Warning: Citation `Goodfellow-et-al-2016' on page 3 undefined on
- input line 249.
+Package wrapfig Warning: Stationary wrapfigure forced to float on input line 24
+7.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 249--250
+Package wrapfig Warning: Stationary wrapfigure forced to float on input line 24
+8.
+
+
+Package wrapfig Warning: Stationary wrapfigure forced to float on input line 25
+0.
+
+[2]
+Underfull \hbox (badness 1365) in paragraph at lines 253--254
+\TU/lmr/m/n/10 ral networks we recommend to read [[], Chapter
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 253--254
 
  []
 
 
 Package wrapfig Warning: Collision between wrapping environments on input line 
-253.
+258.
 
 File: figure/RNN_process.png Graphic file (type bmp)
 <figure/RNN_process.png>
 
-Package wrapfig Warning: Stationary wrapfigure forced to float on input line 25
-9.
+Underfull \hbox (badness 1616) in paragraph at lines 257--264
+\TU/lmr/m/n/10 of deep learning architecture having proven state-
+ []
 
 
-Package natbib Warning: Citation `Goodfellow-et-al-2016' on page 3 undefined on
- input line 270.
+Underfull \hbox (badness 1168) in paragraph at lines 257--264
+\TU/lmr/m/n/10 of-art performance for solving tasks related to se-
+ []
 
 
-Package natbib Warning: Citation `olah_2015' on page 3 undefined on input line 
-270.
+Underfull \hbox (badness 1895) in paragraph at lines 257--264
+\TU/lmr/m/n/10 a key differentiator from feedfoward neural networks is that RNN
+s use feedback loops connections in-
+ []
 
 
-LaTeX Warning: Reference `LastPage' on page 3 undefined on input line 276.
-
-[3]
-
-LaTeX Warning: Reference `avail_ressour' on page 4 undefined on input line 279.
-
+Underfull \hbox (badness 1681) in paragraph at lines 257--264
+\TU/lmr/m/n/10 stead of feedforward connections and get an internal memory. Ind
+eed, that take as input each step
+ []
 
 
-LaTeX Warning: Reference `examples' on page 4 undefined on input line 279.
+Underfull \hbox (badness 1796) in paragraph at lines 257--264
+\TU/lmr/m/n/10 of the sequential data as well as what they have learned over ti
+me. One of their other advantage
+ []
 
 
-LaTeX Warning: Reference `LastPage' on page 4 undefined on input line 302.
-
-[4]
-
-Package natbib Warning: Citation `perfomancelink' on page 5 undefined on input 
-line 310.
+Underfull \hbox (badness 1122) in paragraph at lines 257--264
+\TU/lmr/m/n/10 is to be able to handle input and output sequences with differen
+t sizes. ”A recurrent neural network
+ []
 
 
-LaTeX Warning: Reference `sec:deepinR' on page 5 undefined on input line 323.
+Underfull \hbox (badness 1005) in paragraph at lines 257--264
+\TU/lmr/m/n/10 can be thought of as multiple copies of the same network, each p
+assing a message to a successor”[[]].
+ []
 
 
-Package natbib Warning: Citation `neuralnet2019' on page 5 undefined on input l
-ine 333.
+Package wrapfig Warning: Stationary wrapfigure forced to float on input line 26
+4.
 
 
-Package xcolor Warning: Incompatible color definition on input line 339.
+LaTeX Warning: Reference `avail_ressour' on page 3 undefined on input line 285.
+
+
+
+LaTeX Warning: Reference `examples' on page 3 undefined on input line 285.
+
+[3] [4]
+
+Package xcolor Warning: Incompatible color definition on input line 351.
 
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 341.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 353.
 
-Package xcolor Warning: Incompatible color definition on input line 361.
+Package xcolor Warning: Incompatible color definition on input line 373.
 
 
-Overfull \hbox (4.30501pt too wide) in paragraph at lines 385--385
+Overfull \hbox (4.30501pt too wide) in paragraph at lines 397--397
 [][]\TU/lmtt/m/it/10 #         that is #used for smoothing the result [][] 
  []
 
 
-Overfull \hbox (20.05501pt too wide) in paragraph at lines 390--390
+Overfull \hbox (20.05501pt too wide) in paragraph at lines 402--402
 [][]\TU/lmtt/m/it/10 #         linear output to TRUE, otherwise to FALSE.[][] 
  []
 
 
-Overfull \hbox (2.21999pt too wide) in paragraph at lines 337--397
+Overfull \hbox (2.21999pt too wide) in paragraph at lines 349--409
 []$[]$ $[]$ 
  []
 
+[5] [6]
 
-LaTeX Warning: Reference `LastPage' on page 5 undefined on input line 398.
-
-[5]
-
-LaTeX Warning: Reference `LastPage' on page 6 undefined on input line 412.
-
-[6]
-
-Package natbib Warning: Citation `nnet2020' on page 7 undefined on input line 4
-18.
+Package xcolor Warning: Incompatible color definition on input line 437.
 
 
-Package xcolor Warning: Incompatible color definition on input line 424.
+Package xcolor Warning: Incompatible color definition on input line 454.
 
 
-Package xcolor Warning: Incompatible color definition on input line 441.
-
-
-Overfull \hbox (4.585pt too wide) in paragraph at lines 445--445
+Overfull \hbox (4.585pt too wide) in paragraph at lines 458--458
 []  []\TU/lmtt/m/it/10 #[] @param size : number of units in the hidden [][] 
  []
 
 
-Overfull \hbox (2.21999pt too wide) in paragraph at lines 422--459
+Overfull \hbox (2.21999pt too wide) in paragraph at lines 435--472
 []$[]$ $[]$ 
  []
 
-
-Package natbib Warning: Citation `NeuralNetTools2018' on page 7 undefined on in
-put line 479.
-
-
-LaTeX Warning: Reference `LastPage' on page 7 undefined on input line 480.
-
-[7]
 File: figure/plotnet.png Graphic file (type bmp)
 <figure/plotnet.png>
 File: figure/garson_algorithm.png Graphic file (type bmp)
 <figure/garson_algorithm.png>
 
-Overfull \hbox (2.21999pt too wide) in paragraph at lines 483--491
+Overfull \hbox (2.21999pt too wide) in paragraph at lines 496--504
 []$[]$ $[]$ 
  []
 
+[7]
 
-Package natbib Warning: Citation `Ciaburro2017NeuralNW' on page 8 undefined on 
-input line 491.
-
-
-Package natbib Warning: Citation `Ciaburro2017NeuralNW' on page 8 undefined on 
-input line 491.
+Package xcolor Warning: Incompatible color definition on input line 532.
 
 
-Package natbib Warning: Citation `deepnet2015' on page 8 undefined on input lin
-e 512.
+Package xcolor Warning: Incompatible color definition on input line 553.
 
 
-Package xcolor Warning: Incompatible color definition on input line 517.
-
-
-Package xcolor Warning: Incompatible color definition on input line 538.
-
-
-Overfull \hbox (9.55501pt too wide) in paragraph at lines 549--549
+Overfull \hbox (9.55501pt too wide) in paragraph at lines 564--564
 [][]\TU/lmtt/m/it/10 #[] @param momentum : momentum for gradient descent[][] 
  []
 
 
-Overfull \hbox (282.835pt too wide) in paragraph at lines 550--550
+Overfull \hbox (282.835pt too wide) in paragraph at lines 565--565
 [][]\TU/lmtt/m/it/10 #[] @param learningrate_scale :learning rate will be      
     #         mutiplied after every iteration[][] 
  []
 
 
-Overfull \hbox (9.595pt too wide) in paragraph at lines 551--551
+Overfull \hbox (9.595pt too wide) in paragraph at lines 566--566
 [][]\TU/lmtt/m/it/10 #[] @param output : function of output unit, can be[][] 
  []
 
 
-Overfull \hbox (2.21999pt too wide) in paragraph at lines 515--566
+Overfull \hbox (2.21999pt too wide) in paragraph at lines 530--581
 []$[]$ $[]$ 
  []
 
-
-LaTeX Warning: Reference `LastPage' on page 8 undefined on input line 568.
-
 [8]
 
-Package natbib Warning: Citation `brnnarticle' on page 9 undefined on input lin
-e 586.
+Package xcolor Warning: Incompatible color definition on input line 608.
 
 
-Package natbib Warning: Citation `brnn2020' on page 9 undefined on input line 5
-86.
+Package xcolor Warning: Incompatible color definition on input line 631.
 
 
-Package xcolor Warning: Incompatible color definition on input line 591.
-
-
-Package xcolor Warning: Incompatible color definition on input line 614.
-
-
-Overfull \hbox (4.30501pt too wide) in paragraph at lines 619--619
+Overfull \hbox (4.30501pt too wide) in paragraph at lines 636--636
 [][]\TU/lmtt/m/it/10 #[] @param normalize : normalize inputs and output[][] 
  []
 
 
-Overfull \hbox (2.21999pt too wide) in paragraph at lines 589--640
+Overfull \hbox (2.21999pt too wide) in paragraph at lines 606--657
 []$[]$ $[]$ 
  []
 
-
-LaTeX Warning: Reference `LastPage' on page 9 undefined on input line 642.
-
 [9]
-
-Package natbib Warning: Citation `rnn2019' on page 10 undefined on input line 6
-62.
-
-
-Package xcolor Warning: Incompatible color definition on input line 669.
-
 
 Package xcolor Warning: Incompatible color definition on input line 686.
 
 
-Overfull \hbox (4.845pt too wide) in paragraph at lines 692--692
+Package xcolor Warning: Incompatible color definition on input line 703.
+
+
+Overfull \hbox (4.845pt too wide) in paragraph at lines 709--709
 [][]\TU/lmtt/m/it/10 #[] @param hidden_dim : dimension of hidden layer [][] 
  []
 
 
-Overfull \hbox (2.21999pt too wide) in paragraph at lines 667--702
+Overfull \hbox (2.21999pt too wide) in paragraph at lines 684--719
+[]$[]$ $[]$ 
+ []
+
+[10] [11] [12]
+
+Package xcolor Warning: Incompatible color definition on input line 822.
+
+
+Package xcolor Warning: Incompatible color definition on input line 837.
+
+
+Overfull \hbox (2.21999pt too wide) in paragraph at lines 820--849
 []$[]$ $[]$ 
  []
 
 
-LaTeX Warning: Reference `LastPage' on page 10 undefined on input line 704.
-
-[10]
-
-Package natbib Warning: Citation `chollet2018deep' on page 11 undefined on inpu
-t line 726.
-
-
-Package natbib Warning: Citation `keras2019' on page 11 undefined on input line
- 726.
-
-
-LaTeX Warning: Reference `LastPage' on page 11 undefined on input line 742.
-
-[11]
-
-Package natbib Warning: Citation `tensorflow2019' on page 12 undefined on input
- line 747.
-
-
-Package natbib Warning: Citation `mxnet2020' on page 12 undefined on input line
- 763.
-
-
-Package natbib Warning: Citation `rTorch2019' on page 12 undefined on input lin
-e 782.
-
-
-LaTeX Warning: Reference `LastPage' on page 12 undefined on input line 783.
-
-[12]
-
-Package natbib Warning: Citation `h2o2020' on page 13 undefined on input line 7
-97.
-
-
-Package xcolor Warning: Incompatible color definition on input line 803.
-
-
-Package xcolor Warning: Incompatible color definition on input line 818.
-
-
-Overfull \hbox (2.21999pt too wide) in paragraph at lines 801--830
-[]$[]$ $[]$ 
- []
-
-
-LaTeX Warning: Reference `LastPage' on page 13 undefined on input line 845.
+Package xcolor Warning: Incompatible color definition on input line 878.
 
 [13]
 
-LaTeX Warning: Reference `sec:avail_ressour' on page 14 undefined on input line
- 853.
+Package xcolor Warning: Incompatible color definition on input line 892.
 
 
-Package xcolor Warning: Incompatible color definition on input line 859.
+Package xcolor Warning: Incompatible color definition on input line 912.
 
 
-Package xcolor Warning: Incompatible color definition on input line 873.
-
-
-Package xcolor Warning: Incompatible color definition on input line 893.
-
-
-LaTeX Warning: Reference `LastPage' on page 14 undefined on input line 906.
-
-[14]
-
-Package xcolor Warning: Incompatible color definition on input line 910.
+Package xcolor Warning: Incompatible color definition on input line 929.
 
 File: figure/neuralnet_model.png Graphic file (type bmp)
 <figure/neuralnet_model.png>
 
-Underfull \hbox (badness 10000) in paragraph at lines 920--921
+Underfull \hbox (badness 10000) in paragraph at lines 939--940
 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 924.
+Package xcolor Warning: Incompatible color definition on input line 943.
+
+[14]
+
+Package xcolor Warning: Incompatible color definition on input line 960.
 
 
-Package xcolor Warning: Incompatible color definition on input line 941.
+Package xcolor Warning: Incompatible color definition on input line 968.
 
 
-Package xcolor Warning: Incompatible color definition on input line 949.
+Package xcolor Warning: Incompatible color definition on input line 980.
 
 
-Package xcolor Warning: Incompatible color definition on input line 961.
+Package xcolor Warning: Incompatible color definition on input line 988.
 
 
-Package xcolor Warning: Incompatible color definition on input line 969.
+Package xcolor Warning: Incompatible color definition on input line 998.
 
 
-LaTeX Warning: Reference `LastPage' on page 15 undefined on input line 969.
+Package xcolor Warning: Incompatible color definition on input line 1008.
+
+
+Overfull \vbox (1.07071pt too high) detected at line 1042
+ []
 
 [15]
 
-Package xcolor Warning: Incompatible color definition on input line 979.
+Package xcolor Warning: Incompatible color definition on input line 1047.
 
 
-Package xcolor Warning: Incompatible color definition on input line 989.
+Package xcolor Warning: Incompatible color definition on input line 1065.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1028.
+Package xcolor Warning: Incompatible color definition on input line 1086.
 
 
-LaTeX Warning: Reference `LastPage' on page 16 undefined on input line 1028.
+Package xcolor Warning: Incompatible color definition on input line 1099.
 
 [16]
 
-Package xcolor Warning: Incompatible color definition on input line 1046.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1067.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1080.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1091.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1097.
-
-File: figure/unnamed-chunk-29-1.pdf Graphic file (type pdf)
-<use figure/unnamed-chunk-29-1.pdf>
-
-LaTeX Warning: Reference `LastPage' on page 17 undefined on input line 1102.
-
-[17]
-
-Package xcolor Warning: Incompatible color definition on input line 1104.
+Package xcolor Warning: Incompatible color definition on input line 1110.
 
 
 Package xcolor Warning: Incompatible color definition on input line 1116.
 
+File: figure/unnamed-chunk-29-1.pdf Graphic file (type pdf)
+<use figure/unnamed-chunk-29-1.pdf>
 
-Package xcolor Warning: Incompatible color definition on input line 1124.
+Package xcolor Warning: Incompatible color definition on input line 1123.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1134.
+Package xcolor Warning: Incompatible color definition on input line 1135.
 
 
-LaTeX Warning: Reference `LastPage' on page 18 undefined on input line 1150.
+Package xcolor Warning: Incompatible color definition on input line 1143.
 
-[18]
 
-Package xcolor Warning: Incompatible color definition on input line 1154.
+Package xcolor Warning: Incompatible color definition on input line 1153.
+
+[17]
+
+Package xcolor Warning: Incompatible color definition on input line 1173.
 
 File: figure/Cifar_10_data_images.png Graphic file (type bmp)
 <figure/Cifar_10_data_images.png>
 
-Package xcolor Warning: Incompatible color definition on input line 1170.
+Package xcolor Warning: Incompatible color definition on input line 1189.
 
 
-Overfull \hbox (13.86pt too wide) in paragraph at lines 1181--1181
+Overfull \hbox (13.86pt too wide) in paragraph at lines 1200--1200
 []  []\TU/lmtt/b/n/10 layer_conv_2d[][]\TU/lmtt/m/n/10 ([][]filter[] []=[] []32
 [][],[] []kernel_size[] []=[] []\TU/lmtt/b/n/10 c[][]\TU/lmtt/m/n/10 ([][]3[][]
 ,[][]3[][]),[] []padding[] []=[] []"same"[][],[][]input_shape[] []=[] []\TU/lmt
@@ -1489,36 +1359,22 @@ t/b/n/10 c[][]\TU/lmtt/m/n/10 ([][]32[][],[] []32[][],[] []3[][]))[] []%>%[][]
 
  []
 
+[18]
 
-Overfull \vbox (1.52618pt too high) detected at line 1209
- []
+Package xcolor Warning: Incompatible color definition on input line 1232.
 
 
-LaTeX Warning: Reference `LastPage' on page 19 undefined on input line 1209.
+Package xcolor Warning: Incompatible color definition on input line 1278.
 
 [19]
 
-Package xcolor Warning: Incompatible color definition on input line 1213.
+Package xcolor Warning: Incompatible color definition on input line 1290.
 
 
-Underfull \vbox (badness 2790) detected at line 1254
- []
+Package xcolor Warning: Incompatible color definition on input line 1300.
 
 
-LaTeX Warning: Reference `LastPage' on page 20 undefined on input line 1254.
-
-[20]
-
-Package xcolor Warning: Incompatible color definition on input line 1259.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1271.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1281.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1295--1296
+Underfull \hbox (badness 10000) in paragraph at lines 1314--1315
 
  []
 
@@ -1528,176 +1384,123 @@ File: figure/CNN_keras_graph.png Graphic file (type bmp)
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1303.
+Package xcolor Warning: Incompatible color definition on input line 1322.
 
 
-LaTeX Warning: Reference `LastPage' on page 21 undefined on input line 1313.
+Package xcolor Warning: Incompatible color definition on input line 1337.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1347.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1361.
+
+[20]
+
+Package xcolor Warning: Incompatible color definition on input line 1379.
+
+
+Overfull \vbox (0.96991pt too high) detected at line 1427
+ []
 
 [21]
 
-Package xcolor Warning: Incompatible color definition on input line 1318.
+Package xcolor Warning: Incompatible color definition on input line 1432.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1328.
+Package xcolor Warning: Incompatible color definition on input line 1442.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1342.
-
-
-LaTeX Warning: Reference `LastPage' on page 22 undefined on input line 1356.
+Underfull \vbox (badness 10000) detected at line 1469
+ []
 
 [22]
 
-Package natbib Warning: Citation `bugRNNkeras' on page 23 undefined on input li
-ne 1358.
+Package xcolor Warning: Incompatible color definition on input line 1474.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1360.
+Package xcolor Warning: Incompatible color definition on input line 1495.
 
 
-LaTeX Warning: Reference `LastPage' on page 23 undefined on input line 1408.
+Package xcolor Warning: Incompatible color definition on input line 1513.
 
+
+Package xcolor Warning: Incompatible color definition on input line 1519.
+
+File: figure/unnamed-chunk-51-1.pdf Graphic file (type pdf)
+<use figure/unnamed-chunk-51-1.pdf>
 [23]
 
-Package xcolor Warning: Incompatible color definition on input line 1413.
+Package xcolor Warning: Incompatible color definition on input line 1525.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1423.
+Package xcolor Warning: Incompatible color definition on input line 1540.
 
 
-Underfull \vbox (badness 10000) detected at line 1483
- []
-
-
-LaTeX Warning: Reference `LastPage' on page 24 undefined on input line 1483.
+Package xcolor Warning: Incompatible color definition on input line 1550.
 
 [24]
 
-Package xcolor Warning: Incompatible color definition on input line 1487.
+Package xcolor Warning: Incompatible color definition on input line 1564.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1493.
-
-File: figure/unnamed-chunk-49-1.pdf Graphic file (type pdf)
-<use figure/unnamed-chunk-49-1.pdf>
-
-LaTeX Warning: Reference `LastPage' on page 25 undefined on input line 1497.
+Package xcolor Warning: Incompatible color definition on input line 1602.
 
 [25]
 
-Package xcolor Warning: Incompatible color definition on input line 1499.
+Package xcolor Warning: Incompatible color definition on input line 1642.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1514.
+Package xcolor Warning: Incompatible color definition on input line 1650.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1524.
+Package xcolor Warning: Incompatible color definition on input line 1662.
 
 
-LaTeX Warning: Reference `LastPage' on page 26 undefined on input line 1524.
+Package xcolor Warning: Incompatible color definition on input line 1674.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1696.
 
 [26]
 
-Package xcolor Warning: Incompatible color definition on input line 1538.
+Package xcolor Warning: Incompatible color definition on input line 1730.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1576.
+Package xcolor Warning: Incompatible color definition on input line 1738.
 
-
-LaTeX Warning: Reference `LastPage' on page 27 undefined on input line 1612.
-
-[27]
-
-Package xcolor Warning: Incompatible color definition on input line 1616.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1624.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1636.
-
-
-LaTeX Warning: Reference `LastPage' on page 28 undefined on input line 1636.
-
-[28]
-
-Package xcolor Warning: Incompatible color definition on input line 1648.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1670.
-
-
-LaTeX Warning: Reference `LastPage' on page 29 undefined on input line 1700.
-
-[29]
-
-Package xcolor Warning: Incompatible color definition on input line 1704.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1712.
-
-
-Package natbib Warning: Citation `rnn2019' on page 30 undefined on input line 1
-729.
-
-
-LaTeX Warning: Reference `LastPage' on page 30 undefined on input line 1733.
-
-[30]
-
-LaTeX Warning: Reference `LastPage' on page 31 undefined on input line 1737.
-
-[31] (./report.bbl
+[27] [28]
+File: figure/deep_learning_r_trend.png Graphic file (type bmp)
+<figure/deep_learning_r_trend.png>
+ [29] (./report.bbl
 Underfull \hbox (badness 10000) in paragraph at lines 86--89
 []\TU/lmr/m/n/10 Christopher Olah.  colah’s blog, Aug 2015.  URL []$[][][][][] 
 [] [] [] [][][][][] [] [][][][][][] [] [][] [] [][][][][] []
  []
 
-[32])
-
-Package lastpage Warning: Rerun to get the references right on input line 1740.
-
-
-
+) 
 AED: lastpage setting LastPage
-[33]
+[30]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1775.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1775.
+ (./report.aux)
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1775.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1775.
 
-Package natbib Warning: There were undefined citations.
+Package rerunfilecheck Info: File `report.out' has not changed.
+(rerunfilecheck)             Checksum: C1C34DA97638A9826FA4B0A4F87AD8DC;3178.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1740.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1740.
-(./report.aux
-
-Package natbib Warning: Citation(s) may have changed.
-(natbib)                Rerun to get citations correct.
-
-)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1740.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1740.
-
-
-
-Package rerunfilecheck Warning: File `report.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `report.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  C1C34DA97638A9826FA4B0A4F87AD8DC;3178.
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
- 24423 strings out of 481765
- 449007 string characters out of 5934263
- 706675 words of memory out of 5000000
- 40934 multiletter control sequences out of 15000+600000
- 534509 words of font info for 47 fonts, out of 8000000 for 9000
+ 24448 strings out of 481765
+ 449408 string characters out of 5934263
+ 710033 words of memory out of 5000000
+ 40954 multiletter control sequences out of 15000+600000
+ 534501 words of font info for 46 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 68i,12n,83p,1614b,620s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 68i,12n,83p,1617b,620s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on report.pdf (34 pages).
+Output written on report.pdf (31 pages).

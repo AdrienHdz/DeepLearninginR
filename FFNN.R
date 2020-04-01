@@ -141,7 +141,8 @@ model_mx <- mx.model.FeedForward.create(
   num.round=200,
   verbose = TRUE,
   eval.metric = mx.metric.accuracy, 
-  array.batch.size=5)
+  array.batch.size=5,
+  learning.rate=0.007)
 end_time <- Sys.time()
 time_fnn_mxnet = end_time - start_time
 

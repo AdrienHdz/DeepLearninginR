@@ -1,5 +1,5 @@
 
-save.image("C:/Users/apabl/Desktop/Git/DeepLearninginR/DeepLearninginR/RNN_save.RData")
+#save.image("C:/Users/apabl/Desktop/Git/DeepLearninginR/DeepLearninginR/RNN_save.RData")
 
 
 #############################
@@ -82,8 +82,8 @@ test_pad <- pad_sequences(
   padding = "post",
   maxlen = maxlen
 )
-
-
+library(keras)
+use_session_with_seed(123)
 model <- keras_model_sequential()
 model %>% 
   layer_embedding(input_dim = max_features, output_dim = 32) %>%
