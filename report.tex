@@ -163,7 +163,7 @@
 %Antidote done
 \section{Introduction}
 These days, "deep learning" buzz word is part of multiple repositories projects and companies around the world. Most projects are built around the programming language python. That being said it will be interesting to see if this trend is viable in the R studio environment.
-To start, a literature review covers the neural networks and deep learner’s algorithms, focusing on different types of neural networks architectures and describing for which kind tasks each neural network architecture has been designed for. Furthermore, the methodology section will try to describe briefly the workflow of deep learning training and predictions, the dataset that could be used for different algorithms and finally some characteristic use to compare different packages. Then, an exhaustive list of the R libraries allowing to build neural networks and deep learners models. Correspondingly, the advantages and disadvantages of each library, their capabilities as well as what you can expect when using them. To sum up, the last section will give concrete examples on how to implement the neural networks and deep learners models with these libraries, using the example data of the methodology section.
+To start, a literature review covers the neural networks and deep learner’s algorithms, focusing on different types of neural networks architectures and describing for which kind of tasks each neural network architecture has been designed for. Furthermore, the methodology section will try to describe briefly the workflow of deep learning training and predictions, the dataset that could be used for different algorithms and finally some characteristic in order to compare different packages. Then, an exhaustive list of the R libraries allowing to build neural networks and deep learners models. Correspondingly, the advantages and disadvantages of each library, their capabilities as well as what you can expect when using them. To sum up, the last section will give concrete examples on how to implement the neural networks and deep learners models with these libraries, using the example data of the methodology section.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%% Litterature %%%%%%%%%%%%%%%%%%%%
@@ -181,7 +181,7 @@ To start, a literature review covers the neural networks and deep learner’s al
      \caption{Artificial Intelligence vs Machine Learning vs Deep Learning \cite{aivsdeepvsml}}
      \label{fig:simule}
 \end{wrapfigure}
-\subsubsection{Feed Forward Neural Network}
+\subsubsection{FeedForward Neural Network (FNN)}
 
 Deep learning is a subset field of artificial intelligence and can be seen as a specific way of doing machine learning. Deep learning algorithms can be seen as feature representation learning. Indeed, by applying to the data multiple non-linear transformations through the use of hidden layers, deep learning models have their own trainable feature extraction capability making it possible to learn specific features from the data without needing a specific human domain expert. This means that deep learning models won't require the features extraction step that is essential for classic machine learning models. However, increasing the model’s capacity by adding hidden layers, requires increasingly computing power and slow down the training process of the model. The choice of hyperparameters, programming languages and memory management will therefore be important criteria to take into account while building deep learning models\\
 Since the last decade, deep learning models have shown notable predictive power and have been revolutionizing an important number of domains such as computer vision, natural language understanding, fraud detection, health and much more.\\
@@ -217,7 +217,7 @@ where:
 \end{conditions}
 
 
-Here, \textbf{the bias term  b} and \textbf{the weights or parameter w} will be learned by the model in order for the minimize a cost function, through the use of the gradient descent method. Then, the network will use the backpropagation algorithm where the error is backpropagated from the output to the input layers and the bias and weighted are then updated accordingly.\\
+Here, \textbf{the bias term  b} and \textbf{the weights or parameter w} will be learned by the model in order to minimize a cost function, through the use of the gradient descent method. Then, the network will use the backpropagation algorithm where the error is backpropagated from the output to the input layers and the bias and weighted are then updated accordingly.\\
 Regarding the \textbf{activation function g(...)}, the common practice is to use a ReLu (rectified linear unit) as the activation function for the neurons of the hidden layers. Regarding the neurons of the last layer, the activation function will be chosen accordingly to the task we want our model to perform:
 
 \begin{wrapfigure}[14]{r}{0.5\textwidth}
@@ -231,7 +231,7 @@ Regarding the \textbf{activation function g(...)}, the common practice is to use
 A detailed explanation of the theory of feedforward neural networks can be found in \cite[Chapter 6]{Goodfellow-et-al-2016}
 
 
-\subsubsection{CNN}
+\subsubsection{Convolutional Neural Network (CNN)}
 
 The CNN are a modified architecture of FNN that leverages the feature engineering that used to be hand made by domain experts. This class of deep neural network are commonly used for image recognition and classification that can serve different applications such as facial recognition, document analysis and speech recognition. The original FNN are not suited analyzing large size images since the weights increase exponentially and, at the end, don't perform very well.\\
 \begin{wrapfigure}[10]{r}{0.5\textwidth}
@@ -253,7 +253,7 @@ CNN parameters are trained with the \textbf{backpropagation} algorithm where the
 To get a detailed explanation of convolutional neural networks we recommend to read \cite[Chapter 9]{Goodfellow-et-al-2016}.\\
 
 
-\subsubsection{RNN}
+\subsubsection{Recurrent Neural Network}
 Recurrent neural networks are a more advanced type of deep learning architecture having proven state-of-art performance for solving tasks related to sequential data such as Natural Language Processing (NLP), anomaly detection and event forecasting. As a key differentiator from feedfoward neural networks is that RNNs use feedback loops connections instead of feedforward connections and get an internal memory. Indeed, that take as input each step of the sequential data as well as what they have learned over time. One of their other advantage is to be able to handle input and output sequences with different sizes. "A recurrent neural network can be thought of as multiple copies of the same network, each passing a message to a successor"\cite{olah_2015}.
 \begin{wrapfigure}[9]{r}{0.5\textwidth}
     \begin{center}
@@ -282,7 +282,7 @@ The integration of deep learning in R can be separate in two parts ; (1) The API
 \item The API will give the possibility to control externally through R an existing installation. In other words, a software translator for an already-known software installation. This approach is not always trivial to install nor to manipulate but in the long term will probably give the best flexibility in terms of Deep Learning projects.
 \item The standalone R packages will be packages that require no third party software in order to create the deep learning projects. This approach is relatively fast to install but is restrained in terms deep learning architecture.
 \end{enumerate}
-A list of the available resources with installation and examples tutorials can be found in section \ref{avail_ressour} and \ref{examples} .
+A list of the available resources with installation and examples tutorials can be found in section \ref{sec:avail_ressour} and \ref{sec:examples} .
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%% Description %%%%%%%%%%%%%%%%%%%%
@@ -524,7 +524,7 @@ This package is a complement to R's neural networks packages as it allows to vis
 %%%%%%%%%%%%%%%% Deepnet %%%%%%%%%%%%%%%% 
 \subsubsection{Deepnet package}
 \paragraph{Description}
-This package is available on the CRAN platform and has been written specifically written for R. It allows to "implement some deep learning architectures and neural network algorithms, including backpropagation, Restricted Boltzmann Machine (RBM), Deep Belief Network (DBN) and Deep autoencoder". More information can be found on the package source \cite{deepnet2015}.\\
+This package is available on the CRAN platform and has been written specifically for R. It allows to "implement some deep learning architectures and neural network algorithms, including backpropagation, Restricted Boltzmann Machine (RBM), Deep Belief Network (DBN) and Deep autoencoder". More information can be found on the package source \cite{deepnet2015}.\\
 \textit{Important default parameters of a deep FNN model with weights initialized by DBN:}
 \begin{figure}[H]
   \begin{subfigure}{0.5\textwidth}
@@ -1315,7 +1315,7 @@ By default keras plot our model loss and accuracy per epoch on the training set 
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=\textwidth]{figure/CNN_keras_graph.png}
+\includegraphics[width=0.5\textwidth]{figure/CNN_keras_graph.png}
 \end{figure}
 Then, we will evaluate our model performance on our test set.
 \begin{knitrout}
@@ -1757,7 +1757,7 @@ The RNN was only tested on one package which sincerely was not bad nor good. Som
 the data manipulation, the text embedding and the model training was simple to implement and visualize. Even if the data had to be padded in order to have a fix length everything that can be done in python felt pretty natural in R as well. The complexity of the package is the same. At the end of the day, if someone feels more comfortable in R stay assure that this tool can provide everything you need for RNN. The cran package rnn \cite{rnn2019} had some promising architecture for LSTM ,GRU and/or simple vanilla RNN. However, the available examples were minimal and the package seems deprecated with the lacks of update on the GitHub repositories.
 \newpage
 \section{Conclusion}
-In the light of the discoveries we made while building this deep learning tutorial in R, we can conclude that deep learning in R is a new research area as this field was still emerging these last few years (figure \ref{fig:conclusion}). Even though R has been recognized as a major statistical software and has been used by data scientists around the world, building the latest and more advanced models can be limited compared to other programming languages such as Python. However, as these models will be built through APIs such as Keras that can be implemented on different programming languages, the skills that are developed in R while building these models, we still useful as they can always be leveraged.
+In the light of the discoveries we made while building this deep learning tutorial in R, we can conclude that deep learning in R is a new research area as this field was still emerging these last few years (figure \ref{fig:conclusion}). Even though R has been recognized as a major statistical software and has been used by data scientists around the world, building the latest and more advanced models can be limited compared to other programming languages such as Python. However, as these models will be built through APIs such as Keras that can be implemented on different programming languages, the skills that are developed in R while building these models, we still be useful as they can always be leveraged.
 
 \begin{figure}[!h]
 \centering

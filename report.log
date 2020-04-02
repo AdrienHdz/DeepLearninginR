@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/W32TeX) (preloaded format=xelatex 2020.3.17)  31 MAR 2020 21:33
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/W32TeX) (preloaded format=xelatex 2020.3.17)  1 APR 2020 20:55
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1035,6 +1035,10 @@ File: figure/feedforward_neural_networks.png Graphic file (type bmp)
 File: figure/activation_function_output.png Graphic file (type bmp)
 <figure/activation_function_output.png>
 
+Overfull \hbox (10.53505pt too wide) in paragraph at lines 234--234
+[]\TU/lmr/bx/n/10 Convolutional Neural Network (CNN) 
+ []
+
 
 Package wrapfig Warning: Collision between wrapping environments on input line 
 237.
@@ -1129,13 +1133,6 @@ assing a message to a successor”[[]].
 
 Package wrapfig Warning: Stationary wrapfigure forced to float on input line 26
 4.
-
-
-LaTeX Warning: Reference `avail_ressour' on page 3 undefined on input line 285.
-
-
-
-LaTeX Warning: Reference `examples' on page 3 undefined on input line 285.
 
 [3] [4]
 
@@ -1381,11 +1378,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 1314--1315
 File: figure/CNN_keras_graph.png Graphic file (type bmp)
 <figure/CNN_keras_graph.png>
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
 Package xcolor Warning: Incompatible color definition on input line 1322.
 
+[20]
 
 Package xcolor Warning: Incompatible color definition on input line 1337.
 
@@ -1395,13 +1390,8 @@ Package xcolor Warning: Incompatible color definition on input line 1347.
 
 Package xcolor Warning: Incompatible color definition on input line 1361.
 
-[20]
 
 Package xcolor Warning: Incompatible color definition on input line 1379.
-
-
-Overfull \vbox (0.96991pt too high) detected at line 1427
- []
 
 [21]
 
@@ -1411,7 +1401,7 @@ Package xcolor Warning: Incompatible color definition on input line 1432.
 Package xcolor Warning: Incompatible color definition on input line 1442.
 
 
-Underfull \vbox (badness 10000) detected at line 1469
+Underfull \vbox (badness 2970) detected at line 1469
  []
 
 [22]
@@ -1488,17 +1478,13 @@ Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1775.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1775.
 
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: C1C34DA97638A9826FA4B0A4F87AD8DC;3178.
-
-
-LaTeX Warning: There were undefined references.
-
+(rerunfilecheck)             Checksum: 839D1F6618095292DF6D76CF3E70AFAA;3254.
  ) 
 Here is how much of TeX's memory you used:
- 24448 strings out of 481765
- 449408 string characters out of 5934263
+ 24446 strings out of 481765
+ 449383 string characters out of 5934263
  710033 words of memory out of 5000000
- 40954 multiletter control sequences out of 15000+600000
+ 40952 multiletter control sequences out of 15000+600000
  534501 words of font info for 46 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  68i,12n,83p,1617b,620s stack positions out of 5000i,500n,10000p,200000b,80000s
