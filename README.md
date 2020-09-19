@@ -3,14 +3,14 @@ For the course of Avanced Statistical Learning in HEC, I created with my colleag
 
 Created a report with 30 pages called **report.pdf** organized as followed:
 * Litterature review
- * FeedForward Neural Network
- * Convolutional Neural Network
- * Recurrent Neural Network
+  * FeedForward Neural Network
+  * Convolutional Neural Network
+  * Recurrent Neural Network
 * Deep Learning Integration in R
 * Methodology
- * Workflow
- * Dataset
- * Characteristic
+  * Workflow
+  * Dataset
+  * Characteristic
 * Available ressources
  * R packages
  * API packages
