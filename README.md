@@ -20,5 +20,4 @@ For the course of Avanced Statistical Learning in HEC, I created with my colleag
 * Modify model's hyperparameters and experiment changes in the model architecture in order to improve accuracy
 * Evaluate and compare your models on the test data 
 
- 
 ## Example: Building a Convolutional Neural Network with Keras (report part 5.2.3)
