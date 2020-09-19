@@ -1,4 +1,7 @@
-# DeepLearninginR
-For the course MATH80619 in HEC, we were ask to guided tutorial for deep learning in R. We tried as much as possible to test the latest package and best practice in this field.
+# Tutorial on Deep Learning in R: Project Overview
+For the course of Avanced Statistical Learning in HEC, I created with my colleague a guided tutorial for deep learning in R. We tried as much as possible to test the latest packagez and best practices in this field.
 
-This folder contains also the report .
+* Create a report with 30 pages organized as followed:
+  * Litterature review
+    * What is deep learning?
+    
