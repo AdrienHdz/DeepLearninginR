@@ -21,4 +21,4 @@ For the course of Avanced Statistical Learning in HEC, I created with my colleag
 * Evaluate and compare your models on the test data 
 
 ## Example: Building a Convolutional Neural Network with Keras (report part 5.2.3)
-![CNN_1](/figure/CNN_5.2.3_1.png)
+![CNN_1](https://github.com/AdrienHdz/DeepLearninginR/blob/master/figure/CNN_5.2.3_1.PNG)
