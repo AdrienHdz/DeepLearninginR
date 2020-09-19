@@ -12,13 +12,13 @@ Created a report with 30 pages called **report.pdf** organized as followed:
   * Dataset
   * Characteristic
 * Available ressources
- * R packages
- * API packages
+  * R packages
+  * API packages
 * Examples
- * Neuralnet
- * Keras
- * h20
- * MXNET
+  * Neuralnet
+  * Keras
+  * h20
+  * MXNET
 * Discussion
 * Conclusion
  
