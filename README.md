@@ -22,4 +22,4 @@ For the course of Avanced Statistical Learning in HEC, I created with my colleag
 
 ## Example: Building a Convolutional Neural Network with Keras (report part 5.2.3)
 ![alt text]
-(https://github.com/AdrienHdz/DeepLearninginR/blob/master/figure/CNN_5.2.3_1.PNG "Example_CNN_1)
+(https://github.com/AdrienHdz/DeepLearninginR/blob/master/figure/CNN_5.2.3_1.PNG "Example_CNN_1")
