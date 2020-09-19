@@ -13,7 +13,7 @@ For the course of Avanced Statistical Learning in HEC, I created with my colleag
 **datasets:** Iris, CIFAR-10, IMDB, 
 **Course description:** https://www.hec.ca/en/courses/detail/?cours=MATH80619A 
 
-## Workflow for building a model we recommand
+## Workflow for building a model we recommend
 * Collection, pre-processing and cleaning of the data. Partition of the data: training/test/validation; cross-validation)
 * Choose the right model according to the task to perform. Example: CNN for image classification
 * Train the selected models with the training data by checking the validation accuracy evolving through the training process
@@ -21,4 +21,4 @@ For the course of Avanced Statistical Learning in HEC, I created with my colleag
 * Evaluate and compare your models on the test data 
 
  
-    
+## Example: Building a Convolutional Neural Network with Keras (report part 5.2.3)
