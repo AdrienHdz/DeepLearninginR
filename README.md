@@ -8,7 +8,7 @@ For the course of Avanced Statistical Learning in HEC, I created with my colleag
 * Gave a comparaison of the computation time between the different packages 
 
 ## Code and Resources Used
-**R Version:** 3.6.2
+**R Version:** 3.6.2 <br />
 **Packages:** tensorflow, keras, rtorch, h2o, mxnet, rnn, brnn, deepnet, neuralnettools, nnet, neuralnet
 **datasets:** Iris, CIFAR-10, IMDB
 **Course description:** https://www.hec.ca/en/courses/detail/?cours=MATH80619A 
