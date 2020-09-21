@@ -10,7 +10,7 @@ For the course of Avanced Statistical Learning in HEC, I created with my colleag
 ## Code and Resources Used
 **R Version:** 3.6.2
 **Packages:** tensorflow, keras, rtorch, h2o, mxnet, rnn, brnn, deepnet, neuralnettools, nnet, neuralnet
-**datasets:** Iris, CIFAR-10, IMDB, 
+**datasets:** Iris, CIFAR-10, IMDB
 **Course description:** https://www.hec.ca/en/courses/detail/?cours=MATH80619A 
 
 ## Workflow for building a model we recommend
