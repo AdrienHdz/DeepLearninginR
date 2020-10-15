@@ -1,5 +1,5 @@
 # Tutorial on Deep Learning in R: Project Overview
-For the course of Avanced Statistical Learning in HEC, I created with my colleague a guided tutorial for deep learning in R. We tried as much as possible to test the latest packagez and best practices in this field.
+For the course of Avanced Statistical Learning in HEC, I created with my colleague a guided tutorial for deep learning in R. We tried as much as possible to test the latest packages and best practices in this field.
 
 * Created a tutorial with 30 pages called **report.pdf** to help other students building quick deep learning models in R
 * Did an extansive research of 11 R tools, packages and API to build the most used deep learning models (FNN, CNN, RNN), and explained their pros and cons
